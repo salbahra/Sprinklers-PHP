@@ -33,7 +33,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#logs">View Log</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider">System Settings</li>
+            <li data-role="list-divider">System Control</li>
             <li data-role="fieldcontain">
                 <label for="en"><b>Operation</b></label>
                 <select name="en" id="en" data-role="slider">
