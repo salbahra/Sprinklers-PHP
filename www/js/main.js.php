@@ -67,6 +67,7 @@ $("select[data-role='slider']").change(function(){
             }
             if (type === "mm" || type === "mmm") {
                 $.get("index.php","action=mm_off");
+                $("#manual a.green").removeClass("green");
                 $("#mm,#mmm").val("off").slider("refresh");
             }
         }
@@ -357,6 +358,7 @@ function submit_program(id) {
     } else {
         $.get("index.php","action=update_program&pid="+id+"&data="+program,function(data){
             $.mobile.hidePageLoadingMsg()
+            showerror("Program has been updated.")
         });
     }
 }
@@ -393,9 +395,11 @@ function raindelay() {
 }
 
 function rbt() {
+    if(!confirm("Are you sure you want to restart the device?")) return false;
     $.get("index.php","action=rbt");
 }
 
 function rsn() {
     $.get("index.php","action=rsn");
+    showerror("All stations have been stopped")
 }
