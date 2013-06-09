@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Opensprinkler-controller : A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), view status, adjust rain delay, and view logs." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Opensprinkler-controller</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/salbahra/OpenSprinkler-Controller">View on GitHub</a>
+
+          <h1 id="project_title">Opensprinkler-controller</h1>
+          <h2 id="project_tagline">A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), view status, adjust rain delay, and view logs.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/salbahra/OpenSprinkler-Controller/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/salbahra/OpenSprinkler-Controller/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="opensprinkler-controller" class="anchor" href="#opensprinkler-controller"><span class="octicon octicon-link"></span></a><a href="http://salbahra.github.io/OpenSprinkler-Controller">OpenSprinkler-Controller</a>
+</h1>
+
+<p>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), view status, adjust rain delay, and view logs.</p>
+
+<h2>
+<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions:</h2>
+
+<ul>
+<li><p>You first need a working OpenSprinkler setup</p></li>
+<li>
+<p>Install prerequisites as needed</p>
+
+<ul>
+<li>
+<code>apt-get install apache2 php5 libapache2-mod-php5</code> </li>
+</ul>
+</li>
+<li>
+<p>Download the files</p>
+
+<ul>
+<li><code>git clone https://github.com/salbahra/OpenSprinkler-Controller.git</code></li>
+<li><code>mv opensprinkler-controller/sprinklers /var/</code></li>
+<li><code>mv opensprinkler-controller/www/sprinklers /var/www/</code></li>
+</ul>
+</li>
+<li>
+<p>Fill in the OpenSprinkler local IP, password and other settings.</p>
+
+<ul>
+<li><code>nano /var/www/sprinklers/config.php</code></li>
+</ul>
+</li>
+<li>
+<p>Add the poller to crontab every 1 minutes for logging:</p>
+
+<ul>
+<li><code>* * * * *     /usr/bin/php /var/sprinklers/SprinklerWatcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
+</ul>
+</li>
+<li>
+<p>Add a user to the configuration. There is no user management system yet, so this is done manually</p>
+
+<ul>
+<li>First generate a hased version of your password</li>
+<li><code>/usr/bin/php -r "echo base64_encode(sha1('PASSWORD'));"</code></li>
+<li>Then add it to the htpasswd file</li>
+<li><code>nano /var/sprinklers/htpasswd</code></li>
+<li>Example:</li>
+<li><code>username:ZGM3MjRhZjE4ZmJkZDRlNTkxODlmNWZlNzY4YTVmODMxMTUyNzA1MA==</code></li>
+</ul>
+</li>
+<li><p>From there you may attempt to access the front end.</p></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Opensprinkler-controller maintained by <a href="https://github.com/salbahra">salbahra</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40111352-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
