@@ -6,9 +6,9 @@ A mobile frontend for the OpenSprinkler irrigation device. Designed to allow man
 Instructions:
 -------------
 
-+ You first need a working OpenSprinkler setup
++ You first need a working OpenSprinkler setup 
 
-+ Install prerequisites as needed
++ Install prerequisites as needed (example for Debian)
   + ```apt-get install apache2 php5 libapache2-mod-php5``` 
 
 + Download the files
