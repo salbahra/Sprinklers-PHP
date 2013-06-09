@@ -361,6 +361,15 @@ function submit_program(id) {
     }
 }
 
+function submit_runonce() {
+    runonce = []
+    $("#runonce").find(":input[data-type='range']").each(function(a,b){
+        runonce.push(parseInt($(b).val()))
+    })
+    $.get("index.php","action=runonce&data="+JSON.stringify(runonce))
+    gohome();
+}
+
 function toggle() {
     if ($("#mm").val() == "off") return;
     var $list = $("#mm_list");
