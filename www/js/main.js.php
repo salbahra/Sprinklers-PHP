@@ -241,6 +241,14 @@ function get_programs() {
         $("#programs [id^='submit-']").click(function(){
             submit_program($(this).attr("id").split("-")[1]);
         })
+        $("#programs [id^='s_checkall-']").click(function(){
+            id = $(this).attr("id").split("-")[1]
+            $("[id^='station_'][id$='-"+id+"']").prop("checked",true).checkboxradio("refresh");
+        })
+        $("#programs [id^='s_uncheckall-']").click(function(){
+            id = $(this).attr("id").split("-")[1]
+            $("[id^='station_'][id$='-"+id+"']").prop("checked",false).checkboxradio("refresh");
+        })
         $("#programs [id^='delete-']").click(function(){
             delete_program($(this).attr("id").split("-")[1]);
         })
@@ -270,6 +278,12 @@ function add_program() {
         //Stupidest bug fix ever but it works...
         $("#addprogram [type='checkbox']").change(function(){
             window.scrollTo(1,1)
+        })
+        $("#addprogram [id^='s_checkall-']").click(function(){
+            $("[id^='station_'][id$='-new']").prop("checked",true).checkboxradio("refresh");
+        })
+        $("#addprogram [id^='s_uncheckall-']").click(function(){
+            $("[id^='station_'][id$='-new']").prop("checked",false).checkboxradio("refresh");
         })
         $("#addprogram [id^='submit-']").click(function(){
             submit_program("new");

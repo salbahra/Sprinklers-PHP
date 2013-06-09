@@ -99,7 +99,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="addprogram">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Add Program</h3>
-        <a href="javascript:gohome()" data-icon="back">Back</a>
+        <a href="javascript:get_programs()" data-icon="back">Back</a>
         <a href="javascript:submit_program('new')">Submit</a>
     </div>
     <div data-role="content" id="newprogram">

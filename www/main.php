@@ -246,16 +246,16 @@ function make_list_programs() {
         $list .= "<fieldset id='program-".$n."' data-inset='false' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
 
         $list .= "<input type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
-        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><div style='width: 200px; margin: 0 auto;'>";
+        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
         $list .= "<input type='radio' name='rad_days-".$n."' id='days_week-".$n."' value='days_week-".$n."' ".(($program["is_interval"]) ? "" : "checked='checked'")."><label for='days_week-".$n."'>Weekly</label>";
         $list .= "<input type='radio' name='rad_days-".$n."' id='days_n-".$n."' value='days_n-".$n."' ".(($program["is_interval"]) ? "checked='checked'" : "")."><label for='days_n-".$n."'>Interval</label>";
-        $list .= "</div></fieldset><div id='input_days_week-".$n."' ".(($program["is_interval"]) ? "style='display:none'" : "").">";
+        $list .= "</fieldset><div id='input_days_week-".$n."' ".(($program["is_interval"]) ? "style='display:none'" : "").">";
 
-        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p><div style='width: 250px; margin: 0 auto;'>";
+        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p>";
         $list .= "<input type='radio' name='rad_rst-".$n."' id='days_norst-".$n."' value='days_norst-".$n."' ".((!$program["is_even"] && !$program["is_odd"]) ? "checked='checked'" : "")."><label for='days_norst-".$n."'>None</label>";
         $list .= "<input type='radio' name='rad_rst-".$n."' id='days_odd-".$n."' value='days_odd-".$n."' ".((!$program["is_even"] && $program["is_odd"]) ? "checked='checked'" : "")."><label for='days_odd-".$n."'>Odd</label>";
         $list .= "<input type='radio' name='rad_rst-".$n."' id='days_even-".$n."' value='days_even-".$n."' ".((!$program["is_odd"] && $program["is_even"]) ? "checked='checked'" : "")."><label for='days_even-".$n."'>Even</label>";
-        $list .= "</div></fieldset>";
+        $list .= "</fieldset>";
 
         $list .= "<fieldset data-role='controlgroup'><legend>Days:</legend>";
         $j = 0;            
@@ -269,6 +269,7 @@ function make_list_programs() {
         $list .= "<div class='ui-block-a'><label for='every-".$n."'>Day Interval</label><input type='number' name='every-".$n."' pattern='[0-9]*' id='every-".$n."' value='".$days[0]."'></div>";
         $list .= "<div class='ui-block-b'><label for='starting-".$n."'>Starting In</label><input type='number' name='starting-".$n."' pattern='[0-9]*' id='starting-".$n."' value='".$days[1]."'></div>";
         $list .= "</div>";
+
         $list .= "<fieldset data-role='controlgroup'><legend>Stations:</legend>";
         $j = 0;
         foreach ($stations as $station) {
@@ -276,6 +277,11 @@ function make_list_programs() {
             $list .= "<input type='checkbox' ".(($set_stations[$j]) ? "checked='checked'" : "")." name='station_".$j."-".$n."' id='station_".$j."-".$n."'><label for='station_".$j."-".$n."'>".$station."</label>";
             $j++;
         }
+        $list .= "</fieldset>";
+
+        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
+        $list .= "<input type='reset' name='s_checkall-".$n."' id='s_checkall-".$n."' value='Check All' />";
+        $list .= "<input type='reset' name='s_uncheckall-".$n."' id='s_uncheckall-".$n."' value='Uncheck All' />";
         $list .= "</fieldset>";
 
         $list .= "<div class='ui-grid-a'>";
@@ -298,16 +304,16 @@ function fresh_program() {
     $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
 
     $list = "<fieldset id='program-new' data-theme='b' data-content-theme='d'><input type='checkbox' name='en-new' id='en-new'><label for='en-new'>Enabled</label>";
-    $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><div style='width: 200px; margin: 0 auto;'>";
+    $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
     $list .= "<input type='radio' name='rad_days-new' id='days_week-new' value='days_week-new' checked='checked'><label for='days_week-new'>Weekly</label>";
     $list .= "<input type='radio' name='rad_days-new' id='days_n-new' value='days_n-new'><label for='days_n-new'>Interval</label>";
-    $list .= "</div></fieldset><div id='input_days_week-new'>";
+    $list .= "</fieldset><div id='input_days_week-new'>";
 
-    $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p><div style='width: 250px; margin: 0 auto;'>";
+    $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p>";
     $list .= "<input type='radio' name='rad_rst-new' id='days_norst-new' value='days_norst-new' checked='checked'><label for='days_norst-new'>None</label>";
     $list .= "<input type='radio' name='rad_rst-new' id='days_odd-new' value='days_odd-new'><label for='days_odd-new'>Odd</label>";
     $list .= "<input type='radio' name='rad_rst-new' id='days_even-new' value='days_even-new'><label for='days_even-new'>Even</label>";
-    $list .= "</div></fieldset>";
+    $list .= "</fieldset>";
 
     $list .= "<fieldset data-role='controlgroup'><legend>Days:</legend>";
     $j = 0;            
@@ -328,6 +334,11 @@ function fresh_program() {
         $list .= "<input type='checkbox' name='station_".$j."-new' id='station_".$j."-new'><label for='station_".$j."-new'>".$station."</label>";
         $j++;
     }
+    $list .= "</fieldset>";
+
+    $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
+    $list .= "<input type='reset' name='s_checkall-new' id='s_checkall-new' value='Check All' />";
+    $list .= "<input type='reset' name='s_uncheckall-new' id='s_uncheckall-new' value='Uncheck All' />";
     $list .= "</fieldset>";
 
     $list .= "<div class='ui-grid-a'>";
