@@ -6,7 +6,7 @@ date_default_timezone_set('US/Central');
 #WebApp Title
 $webtitle = "Sprinkler System";
 
-#Set IP of OpenSprinkler
+#Set IP of OpenSprinkler, if using a custom port just append it to the IP. ex: 192.168.1.102:8080
 $os_ip = "192.168.1.102";
 
 #Set OpenSprinkler password, leave blank for none
