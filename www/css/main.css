@@ -1,3 +1,12 @@
+#addprogram .ui-input-text, #programs .ui-input-text {
+    margin: 0.1em !important;
+}
+@media only screen and (min-device-width: 481px) {
+    #os-settings .ui-input-text {
+        margin: 0.1em !important;        
+    }
+}
+
 div.ui-slider-switch {
     position: absolute;
     right: 5px;
@@ -63,12 +72,12 @@ div[data-role="page"] div[data-role="footer"] {
     min-height: 50px;
     padding-left: 110px;
 }
-#status div[data-role="content"], #manual div[data-role="content"] {
+#os-settings div[data-role="content"], #status div[data-role="content"], #manual div[data-role="content"] {
     top: 41px;
 }
 #logs div[data-role="content"] {
     top: 5px;
 }
-#addprogram div[data-role="content"], #programs div[data-role="content"] {
+#runonce div[data-role="content"], #addprogram div[data-role="content"], #programs div[data-role="content"] {
     top: 28px;
 }

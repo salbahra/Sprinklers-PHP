@@ -206,6 +206,23 @@ function gohome() {
     $.mobile.changePage($('#sprinklers'), {reverse: true, transition: "slidefade"});
 }
 
+function show_settings() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_settings_list",function(items){
+        container = $("#os-settings div[data-role='content']");
+        container.html(items);
+        container.children().trigger("create")
+        if (container.hasClass("ui-content")) {
+            container.find("ul").each(function(a,b){
+                list = $(b)
+                list.listview();
+            })
+        }
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#os-settings"));
+    })    
+}
+
 function get_status() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_status",function(items){
@@ -361,6 +378,43 @@ function submit_program(id) {
             showerror("Program has been updated.")
         });
     }
+}
+
+function submit_settings() {
+    var opt = {}
+    var names = {}
+    $("#os-settings").find(":input").each(function(a,b){
+        $item = $(b)
+        id = $item.attr('id')
+        data = $item.val()
+        switch (id) {
+            case "o1":
+                tz = data.split(":")
+                tz[0] = parseInt(tz[0],10);
+                tz[1] = parseInt(tz[1],10);
+                tz[1]=(tz[1]/15>>0)/4.0;tz[0]=tz[0]+(tz[0]>=0?tz[1]:-tz[1]);
+                data = ((tz[0]+12)*4)>>0
+                break;
+            case "o21":
+            case "o22":
+            case "o25":
+                data = $item.is(":checked")
+                if (!data) return true
+                break;
+            case "edit_station_" + id.slice("edit_station_".length):
+                id = "s" + id.split("_")[2]
+                names[id] = encodeURIComponent(data)
+                return true;
+                break;
+        }
+        opt[id] = data
+    })
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names),function(data){
+        $.mobile.hidePageLoadingMsg();
+        gohome();
+        showerror("Settings Have Been Saved")
+    })
 }
 
 function submit_runonce() {

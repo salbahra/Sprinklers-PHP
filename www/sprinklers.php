@@ -49,7 +49,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 </select>
             </li>
             <li><a href="javascript:rsn()">Stop All Stations</a></li>
-            <li><a href="javascript:rbt()">Reboot OpenSprinkler</a></li>
         </ul>
     </div>
     <?php echo make_panel("sprinklers"); ?>
@@ -140,5 +139,15 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div data-role="content">
         <?php echo show_logs(); ?>
+    </div>
+</div>
+
+<div data-role="page" id="os-settings">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>OS Settings</h3>
+        <a href="javascript:gohome()" data-icon="back">Back</a>
+        <a href="javascript:submit_settings()">Submit</a>
+    </div>
+    <div data-role="content">
     </div>
 </div>

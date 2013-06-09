@@ -95,6 +95,21 @@ function delete_program() {
     file_get_contents("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
 }
 
+function get_options() {
+    global $os_ip;
+    $data = file_get_contents("http://".$os_ip."/vo");
+    preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
+    preg_match("/var opts=\[(.*)\];var nopts=(\d+),loc=\"(\d+)\";/", $matches[1],$matches);
+    $data = explode(",", $matches[1]);
+    $newdata["nopts"] = $matches[2];
+    $newdata["loc"] = $matches[3];
+    for ($i=3; $i <= count($data); $i=$i+4) {
+        $o = intval($data[$i]);
+        if (in_array($o, array(1,12,13,15,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
+    }
+    return $newdata;
+}
+
 function get_settings() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip);
@@ -113,6 +128,12 @@ function get_settings() {
         $newdata[$tmp[0]] = $tmp[1];
     }
     return $newdata;
+}
+
+function submit_options() {
+    global $os_ip, $os_pw;
+    file_get_contents("http://".$os_ip."/cs?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["names"])));
+    file_get_contents("http://".$os_ip."/co?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["options"])));
 }
 
 function runonce() {
@@ -416,8 +437,76 @@ function make_list_status() {
     echo $list;
 }
 
+function make_settings_list() {
+    $options = get_options();
+    $stations = get_stations();
+    $list = "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Primary Settings</li><li><div data-role='fieldcontain'><fieldset>";
+    foreach ($options as $key => $data) {
+        if (!is_int($key)) continue;
+        switch ($key) {
+            case 1:
+                $timezones = array("-12:00","-11:30","-11:00","-10:00","-09:30","-09:00","-08:30","-08:00","-07:00","-06:00","-05:00","-04:30","-04:00","-03:30","-03:00","-02:30","-02:00","+00:00","+01:00","+02:00","+03:00","+03:30","+04:00","+04:30","+05:00","+05:30","+05:45","+06:00","+06:30","+07:00","+08:00","+08:45","+09:00","+09:30","+10:00","+10:30","+11:00","+11:30","+12:00","+12:45","+13:00","+13:45","+14:00");
+                $tz = $data["val"]-48;
+                $tz = (($tz>=0) ? "+" : "-").sprintf("%02d", strval(abs($tz)/4)).":".strval(((abs($tz)%4)*15/10).((abs($tz)%4)*15%10));
+                $list .= "<label for='o1' class='select'>Timezone</label><select id='o1'>";
+                foreach ($timezones as $timezone) {
+                    $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
+                }
+                $list .= "</select>";
+                continue 2;
+            case 12:
+#                $http = $options[13]["val"]*256+$data["val"];
+#                $list .= "<label for='o12'>HTTP Port</label><input type='number' pattern='[0-9]*' id='o12' value='".$http."' />";
+                continue 2;
+            case 15:
+                $list .= "<label for='o15'>Extension Boards</label><input type='number' pattern='[0-9]*' id='o15' value='".$data["val"]."' />";
+                continue 2;
+            case 17:
+                $list .= "<label for='o17'>Station Delay (seconds)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
+                continue 2;
+            case 18:
+                $list .= "<label for='o18'>Master Station Index</label><input type='number' pattern='[0-9]*' id='o18' value='".$data["val"]."' />";
+                continue 2;
+            case 19:
+                $list .= "<label for='o19'>Master On Delay</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
+                continue 2;
+            case 20:
+                $list .= "<label for='o20'>Master Off Delay</label><input type='number' pattern='[0-9]*' data-type='range' min='-60' max='60' id='o20' value='".$data["val"]."' />";
+                continue 2;
+            case 21:
+                $list .= "<input id='o21' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o21'>Use Rain Sensor</label>";
+                continue 2;
+            case 22:
+                $list .= "<input id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (rain sensor)</label>";
+                continue 2;
+            case 23:
+                $list .= "<label for='o23'>Water Level</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
+                continue 2;
+            case 25:
+                $list .= "<input id='o25' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o25'>Ignore Password</label>";
+                continue 2;
+        }
+    }
+    $list .= "<label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' /></fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
+    $i = 0;
+    foreach ($stations as $station) {
+        if ($station == "") continue;
+        $list .= "<input id='edit_station_".$i."' type='text' value='".$station."' />";
+        $i++;
+    }
+    echo $list."</fieldset></li></ul>";
+}
+
 function make_panel($page) {
     $buttons = array(
+        "Settings" => array(
+            "icon" => "gear",
+            "url" => "javascript:show_settings()"
+        ),
+        "Reboot OpenSprinkler" => array(
+            "icon" => "alert",
+            "url" => "javascript:rbt()"
+        ),
         "Logout" => array(
             "icon" => "delete",
             "url" => "javascript:logout()"
