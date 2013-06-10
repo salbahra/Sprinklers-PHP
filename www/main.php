@@ -472,7 +472,7 @@ function make_settings_list() {
                 foreach ($timezones as $timezone) {
                     $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
                 }
-                $list .= "</select><label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' />";
+                $list .= "</select>";
                 continue 2;
             case 12:
 #                $http = $options[13]["val"]*256+$data["val"];
@@ -488,7 +488,14 @@ function make_settings_list() {
                 $list .= "<label for='o17'>Station Delay (seconds)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
                 continue 2;
             case 18:
-                $list .= "<label for='o18'>Master Station Index</label><input type='number' pattern='[0-9]*' id='o18' value='".$data["val"]."' />";
+                $list .= "<label for='o18' class='select'>Master Station</label><select id='o18'><option value='0'>None</option>";
+                $i = 1;
+                foreach ($stations as $station) {
+                    if ($station === "") continue;
+                    $list .= "<option ".(($i == $data["val"]) ? "selected" : "")." value='".$i."'>".$station."</option>";
+                    $i++;
+                }
+                $list .= "</select><label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' />";
                 continue 2;
             case 19:
                 $list .= "<label for='o19'>Master On Delay</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
