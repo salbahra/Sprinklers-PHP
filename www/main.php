@@ -35,9 +35,11 @@ function get_programs() {
     $data = file_get_contents("http://".$os_ip."/gp?d=0");
     preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
     preg_match("/var nprogs=(\d+),nboards=(\d+),ipas=\d+,mnp=\d+,pd=\[\];(.*);/", $matches[1], $matches);
+    if (empty($matches)) return $matches;
     $newdata = array("nprogs" => $matches[1], "nboards" => $matches[2]);
     $progs = explode(";", $matches[3]);
     $i = 0;
+
     foreach ($progs as $prog) {
         $tmp = explode("=", $prog);
         $tmp2 = str_replace("[", "", $tmp[1]);
@@ -286,7 +288,8 @@ function make_list_programs() {
     $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     $n = 0;
     if (count($data["programs"]) == 0) {
-        $list = "<p align='center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
+        echo "<p align='center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
+        return;
     }
     foreach ($data["programs"] as $program) {
         if (is_array($program["days"])) {
