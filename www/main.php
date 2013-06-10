@@ -493,6 +493,7 @@ function make_settings_list() {
                 foreach ($stations as $station) {
                     if ($station === "") continue;
                     $list .= "<option ".(($i == $data["val"]) ? "selected" : "")." value='".$i."'>".$station."</option>";
+                    if ($i == 8) break;
                     $i++;
                 }
                 $list .= "</select><label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' />";
