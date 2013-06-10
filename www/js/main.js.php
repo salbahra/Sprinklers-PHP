@@ -344,9 +344,7 @@ function submit_program(id) {
 
     if(!(program[3]<program[4])) {showerror("Error: Start time must be prior to end time.");return;}
 
-    //Do not understand what this does so I have not displayed it and just set it to the default for now (come back later...)
-    program[5] = 240
-
+    program[5] = parseInt($("#interval-"+id).val())
     program[6] = $("#duration-"+id).val() * 60
 
     sel = $("[id^=station_][id$=-"+id+"]")

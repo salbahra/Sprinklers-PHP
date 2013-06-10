@@ -345,6 +345,7 @@ function make_list_programs() {
         $list .= "</div>";
 
         $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='30' id='duration-".$n."' value='".($program["duration"]/60)."'>";
+        $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1440' id='interval-".$n."' value='".($program["interval"])."'>";
 
         $list .= "<input type='submit' name='submit-".$n."' id='submit-".$n."' value='Save Changes to Program ".($n + 1)."'>";
         $list .= "<input data-theme='a' type='submit' name='delete-".$n."' id='delete-".$n."' value='Delete Program ".($n + 1)."'></fieldset>";
@@ -402,6 +403,7 @@ function fresh_program() {
     $list .= "</div>";
 
     $list .= "<label for='duration-new'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-new' min='0' max='30' id='duration-new'>";
+    $list .= "<label for='interval-new'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-new' min='0' max='1440' id='interval-new'>";
 
     $list .= "<input type='submit' name='submit-new' id='submit-new' value='Save New Program'>";
     echo $list;
