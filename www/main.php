@@ -105,9 +105,20 @@ function get_options() {
     $newdata["loc"] = $matches[3];
     for ($i=3; $i <= count($data); $i=$i+4) {
         $o = intval($data[$i]);
-        if (in_array($o, array(1,12,13,15,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
+        if (in_array($o, array(1,12,13,15,16,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
     }
+    $newdata = move_keys(array(17,19,20,23),$newdata);
+    $newdata = move_keys(array(16,21,22,25),$newdata);
     return $newdata;
+}
+
+function move_keys($keys,$array) {
+    foreach ($keys as $key) {
+        $t = $array[$key];
+        unset($array[$key]);
+        $array[$key] = $t;
+    }
+    return $array;    
 }
 
 function get_settings() {
@@ -452,7 +463,7 @@ function make_settings_list() {
                 foreach ($timezones as $timezone) {
                     $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
                 }
-                $list .= "</select>";
+                $list .= "</select><label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' />";
                 continue 2;
             case 12:
 #                $http = $options[13]["val"]*256+$data["val"];
@@ -460,6 +471,9 @@ function make_settings_list() {
                 continue 2;
             case 15:
                 $list .= "<label for='o15'>Extension Boards</label><input type='number' pattern='[0-9]*' id='o15' value='".$data["val"]."' />";
+                continue 2;
+            case 16:
+                $list .= "<input id='o16' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o16'>Sequential</label>";
                 continue 2;
             case 17:
                 $list .= "<label for='o17'>Station Delay (seconds)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
@@ -477,7 +491,7 @@ function make_settings_list() {
                 $list .= "<input id='o21' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o21'>Use Rain Sensor</label>";
                 continue 2;
             case 22:
-                $list .= "<input id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (rain sensor)</label>";
+                $list .= "<input id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (Rain Sensor)</label>";
                 continue 2;
             case 23:
                 $list .= "<label for='o23'>Water Level</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
@@ -487,7 +501,7 @@ function make_settings_list() {
                 continue 2;
         }
     }
-    $list .= "<label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' /></fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
+    $list .= "</fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
     $i = 0;
     foreach ($stations as $station) {
         if ($station == "") continue;
