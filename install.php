@@ -1,6 +1,8 @@
 <?php
 ini_set('default_socket_timeout', 5);
 
+if (file_exists("config.php")) header("Location: index.php");
+
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
     new_config();
     exit();
