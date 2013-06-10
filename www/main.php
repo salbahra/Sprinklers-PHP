@@ -109,7 +109,7 @@ function get_options() {
         $o = intval($data[$i]);
         if (in_array($o, array(1,12,13,15,16,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
     }
-    $newdata = move_keys(array(17,19,20,23),$newdata);
+    $newdata = move_keys(array(15,17,19,20,23),$newdata);
     $newdata = move_keys(array(16,21,22,25),$newdata);
     return $newdata;
 }
@@ -479,7 +479,7 @@ function make_settings_list() {
 #                $list .= "<label for='o12'>HTTP Port</label><input type='number' pattern='[0-9]*' id='o12' value='".$http."' />";
                 continue 2;
             case 15:
-                $list .= "<label for='o15'>Extension Boards</label><input type='number' pattern='[0-9]*' id='o15' value='".$data["val"]."' />";
+                $list .= "<label for='o15'>Extension Boards</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='3' id='o15' value='".$data["val"]."' />";
                 continue 2;
             case 16:
                 $list .= "<input id='o16' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o16'>Sequential</label>";
