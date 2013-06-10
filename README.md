@@ -11,7 +11,7 @@ Instructions:
 + Install prerequisites as needed (example for Debian)
   + ```apt-get install apache2 php5 libapache2-mod-php5``` 
 
-+ Download the files to your web directory
++ Download the files to your web directory (ex. http://yourwebsite/sprinklers)
   + ```mkdir -m 777 /var/www/sprinklers```
   + ```cd /var/www/sprinklers```
   + ```git clone https://github.com/salbahra/OpenSprinkler-Controller.git```
