@@ -6,7 +6,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
 
 #New config setup
 function new_config() {
-    $config = "";
+    $config = "<?php\n";
     $needed = array("webtitle","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
     foreach ($needed as $key) {
         if (!isset($_REQUEST[$key])) fail();
@@ -31,7 +31,7 @@ function new_config() {
     }
     $file = fopen("config.php", 'w');
     if (!$file) fail();
-    $r = fwrite($file,$config);
+    $r = fwrite($file,$config."?>");
     if (!$r) fail();
 
     $output = shell_exec('crontab -l');
