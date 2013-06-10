@@ -1,6 +1,8 @@
 <?php 
 // Written by David B. Gustavson, dbg@SCIzzL.com , starting October 2012.
 
+if (!file_exists("config.php")) return;
+
 #Include configuration
 require_once("config.php");
 
