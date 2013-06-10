@@ -20,7 +20,7 @@ Instructions:
   + ```nano /var/www/sprinklers/config.php```
 
 + Add the poller to crontab every 1 minute for logging:
-  + ```* * * * *     /usr/bin/php /var/sprinklers/SprinklerWatcher.php >/dev/null 2>&1```
+  + ```* * * * *     /usr/bin/php /var/www/watcher.php >/dev/null 2>&1```
 
 + Add a user to the configuration. There is no user management system yet, so this is done manually
   + First generate a hased version of your password
