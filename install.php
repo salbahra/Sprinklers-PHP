@@ -26,7 +26,7 @@ function new_config() {
         if ($key == "timezone") {
             $config .= "date_default_timezone_set('".$data."');\n";
         } else {
-            $config .= $key." = '".$data."';\n";            
+            $config .= "$".$key." = '".$data."';\n";            
         }
     }
     $file = fopen("config.php", 'w');
