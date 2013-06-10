@@ -381,6 +381,7 @@ function submit_program(id) {
 function submit_settings() {
     var opt = {}
     var names = {}
+    invalid = false
     $("#os-settings").find(":input").each(function(a,b){
         $item = $(b)
         id = $item.attr('id')
@@ -402,12 +403,19 @@ function submit_settings() {
                 break;
             case "edit_station_" + id.slice("edit_station_".length):
                 id = "s" + id.split("_")[2]
+                if (data.length > 16) {
+                    invalid = true
+                    $item.focus()
+                    showerror("Station name must be 16 characters or less")
+                    return false
+                }
                 names[id] = encodeURIComponent(data)
                 return true;
                 break;
         }
         opt[id] = data
     })
+    if (invalid) return
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names),function(data){
         $.mobile.hidePageLoadingMsg();
