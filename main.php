@@ -3,7 +3,7 @@
 #Refuse if a direct call has been made
 if(!defined('Sprinklers')){echo $denied;exit();}
 
-if (!file_exists("config.php")) readfile("install.php"); 
+if (!file_exists("config.php")) header("Location: install.php"); 
 
 #Include configuration
 require_once("config.php");
