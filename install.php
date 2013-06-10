@@ -78,6 +78,10 @@ function fail() {
                     if (data) {
                         $.mobile.hidePageLoadingMsg()
                         showerror("Settings have been saved. Be sure to delete install.php! After, reload the page.")
+                    } else {
+                        $.mobile.hidePageLoadingMsg()
+                        showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")    
+                        setTimeout( function(){$.mobile.loading('hide')}, 2500);                    
                     }
                 })
             }
