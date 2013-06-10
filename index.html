@@ -51,38 +51,11 @@
 </ul>
 </li>
 <li>
-<p>Download the files</p>
+<p>Download the files to your web directory (ex. http://yourwebsite/sprinklers)</p>
 
 <ul>
-<li><code>git clone https://github.com/salbahra/OpenSprinkler-Controller.git</code></li>
-<li><code>mv opensprinkler-controller/sprinklers /var/</code></li>
-<li><code>mv opensprinkler-controller/www/sprinklers /var/www/</code></li>
-</ul>
-</li>
-<li>
-<p>Fill in the OpenSprinkler local IP, password and other settings.</p>
-
-<ul>
-<li><code>nano /var/www/sprinklers/config.php</code></li>
-</ul>
-</li>
-<li>
-<p>Add the poller to crontab every 1 minute for logging:</p>
-
-<ul>
-<li><code>* * * * *     /usr/bin/php /var/sprinklers/SprinklerWatcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
-</ul>
-</li>
-<li>
-<p>Add a user to the configuration. There is no user management system yet, so this is done manually</p>
-
-<ul>
-<li>First generate a hased version of your password</li>
-<li><code>/usr/bin/php -r "echo base64_encode(sha1('PASSWORD'));"</code></li>
-<li>Then add it to the htpasswd file</li>
-<li><code>nano /var/sprinklers/htpasswd</code></li>
-<li>Example:</li>
-<li><code>username:ZGM3MjRhZjE4ZmJkZDRlNTkxODlmNWZlNzY4YTVmODMxMTUyNzA1MA==</code></li>
+<li><code>mkdir -m 777 /var/www/sprinklers</code></li>
+<li><code>git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers</code></li>
 </ul>
 </li>
 <li><p>From there you may attempt to access the front end.</p></li>
