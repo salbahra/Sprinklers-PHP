@@ -19,7 +19,7 @@ Instructions:
 + Fill in the OpenSprinkler local IP, password and other settings.
   + ```nano /var/www/sprinklers/config.php```
 
-+ Add the poller to crontab every 1 minutes for logging:
++ Add the poller to crontab every 1 minute for logging:
   + ```* * * * *     /usr/bin/php /var/sprinklers/SprinklerWatcher.php >/dev/null 2>&1```
 
 + Add a user to the configuration. There is no user management system yet, so this is done manually
