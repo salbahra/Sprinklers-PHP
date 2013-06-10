@@ -115,9 +115,9 @@ function fail() {
                                 <label for="timezone">Timezone:</label>
                                 <input type="text" name="timezone" id="timezone" value="US/Central" />
                                 <label for="pass_file">Pass File Location:</label>
-                                <input type="text" name="pass_file" id="pass_file" value="/var/sprinklers/.htpasswd" />
+                                <input type="text" name="pass_file" id="pass_file" value="/var/www/sprinklers/.htpasswd" />
                                 <label for="cache_file">Cache File Location:</label>
-                                <input type="text" name="cache_file" id="cache_file" value="/var/sprinklers/.cache" />
+                                <input type="text" name="cache_file" id="cache_file" value="/var/www/sprinklers/.cache" />
                             </div>
                         </li>
                     </ul>
@@ -128,9 +128,9 @@ function fail() {
                                 <label for="timeViewWindow">How Far Back to Log:</label>
                                 <input type="text" name="timeViewWindow" id="timeViewWindow" value="7 days" />
                                 <label for="log_file">Sprinkler Log File:</label>
-                                <input type="text" name="log_file" id="log_file" value="/var/sprinklers/SprinklerChanges.txt" />
+                                <input type="text" name="log_file" id="log_file" value="/var/www/sprinklers/SprinklerChanges.txt" />
                                 <label for="log_previous">Sprinkler Previous Status File:</label>
-                                <input type="text" name="log_previous" id="log_previous" value="/var/sprinklers/SprinklerPrevious.txt" />
+                                <input type="text" name="log_previous" id="log_previous" value="/var/www/sprinklers/SprinklerPrevious.txt" />
                             </div>
                         </li>
                     </ul>
