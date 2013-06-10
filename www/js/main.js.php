@@ -450,7 +450,13 @@ function raindelay() {
 
 function rbt() {
     if(!confirm("Are you sure you want to restart the device?")) return false;
-    $.get("index.php","action=rbt");
+    $.mobile.showPageLoadingMsg()
+    $.get("index.php","action=rbt",function(){
+        $.mobile.hidePageLoadingMsg()
+        $("#sprinklers-settings").panel("close")
+        showerror("OpenSprinkler was rebooted.")
+    });
+
 }
 
 function rsn() {
