@@ -1,5 +1,5 @@
 <?php
-if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config") {
+if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
     new_config();
     exit();
 }
