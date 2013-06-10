@@ -1,11 +1,6 @@
 #addprogram .ui-input-text, #programs .ui-input-text {
     margin: 0.1em !important;
 }
-@media only screen and (min-device-width: 481px) {
-    #os-settings .ui-input-text {
-        margin: 0.1em !important;        
-    }
-}
 
 div.ui-slider-switch {
     position: absolute;
