@@ -1,4 +1,6 @@
 <?php
+ini_set('default_socket_timeout', 5);
+
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
     new_config();
     exit();
@@ -11,6 +13,9 @@ function new_config() {
     foreach ($needed as $key) {
         if (!isset($_REQUEST[$key])) fail();
         $data = $_REQUEST[$key];
+        if ($key == "os_ip" && !isValidUrl("http://".$data)) {
+            echo 2; exit();
+        }
         if ($key == "pass_file") {
             if (!isset($_REQUEST["username"]) || !isset($_REQUEST["password"])) fail();
             $file = fopen($data, 'w');
@@ -39,6 +44,13 @@ function new_config() {
     exec('crontab /tmp/crontab.txt');
 
     echo 1;
+}
+
+function isValidUrl($url) {
+    $header = get_headers($url, 1);
+    $pos = stripos($header[0], "200 OK");
+    if ($pos === false) return false;
+    return true;
 }
 
 function make_file($data) {
@@ -79,12 +91,16 @@ function fail() {
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
-                    if (data) {
+                    if (data == 1) {
                         $.mobile.hidePageLoadingMsg()
                         showerror("Settings have been saved. Be sure to delete install.php! After, reload the page.")
                     } else {
                         $.mobile.hidePageLoadingMsg()
-                        showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")    
+                        if (data == 2) {
+                            showerror("Settings have NOT been saved. Check IP and Port settings and try again.")
+                        } else {
+                            showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")
+                        }
                         setTimeout( function(){$.mobile.loading('hide')}, 2500);                    
                     }
                 })
