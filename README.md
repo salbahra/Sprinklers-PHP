@@ -26,7 +26,7 @@ Instructions:
   + First generate a hased version of your password
   + ```/usr/bin/php -r "echo base64_encode(sha1('PASSWORD'));"```
   + Then add it to the htpasswd file
-  + ```nano /var/sprinklers/htpasswd```
+  + ```nano /var/sprinklers/.htpasswd```
   + Example:
   + ```username:ZGM3MjRhZjE4ZmJkZDRlNTkxODlmNWZlNzY4YTVmODMxMTUyNzA1MA==```
 
