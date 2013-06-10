@@ -285,6 +285,9 @@ function make_list_programs() {
     $list = "";
     $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     $n = 0;
+    if (count($data["programs"]) == 0) {
+        $list = "<p align='center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
+    }
     foreach ($data["programs"] as $program) {
         if (is_array($program["days"])) {
             $days = $program["days"];
@@ -292,7 +295,7 @@ function make_list_programs() {
             $days = str_split($program["days"]);
         }
         $set_stations = str_split($program["stations"]);
-        $list .= "<fieldset id='program-".$n."' data-inset='false' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
+        $list .= "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><fieldset id='program-".$n."' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
 
         $list .= "<input type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
         $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";

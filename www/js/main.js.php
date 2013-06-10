@@ -239,7 +239,7 @@ function get_programs() {
     $.get("index.php","action=make_list_programs",function(items){
         list = $("#programs_list");
         list.html(items);
-        $("input[name^='rad_days']").change(function(){
+        $("#programs input[name^='rad_days']").change(function(){
             progid = $(this).attr('id').split("-")[1];
             type = $(this).val().split("-")[0];
             type = type.split("_")[1];
