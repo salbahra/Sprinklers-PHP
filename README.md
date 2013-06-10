@@ -11,24 +11,10 @@ Instructions:
 + Install prerequisites as needed (example for Debian)
   + ```apt-get install apache2 php5 libapache2-mod-php5``` 
 
-+ Download the files
++ Download the files to your web directory
+  + ```mkdir -m 777 /var/www/sprinklers```
+  + ```cd /var/www/sprinklers```
   + ```git clone https://github.com/salbahra/OpenSprinkler-Controller.git```
-  + ```mv opensprinkler-controller/sprinklers /var/```
-  + ```mv opensprinkler-controller/www/sprinklers /var/www/```
-
-+ Fill in the OpenSprinkler local IP, password and other settings.
-  + ```nano /var/www/sprinklers/config.php```
-
-+ Add the poller to crontab every 1 minute for logging:
-  + ```* * * * *     /usr/bin/php /var/www/watcher.php >/dev/null 2>&1```
-
-+ Add a user to the configuration. There is no user management system yet, so this is done manually
-  + First generate a hased version of your password
-  + ```/usr/bin/php -r "echo base64_encode(sha1('PASSWORD'));"```
-  + Then add it to the htpasswd file
-  + ```nano /var/sprinklers/.htpasswd```
-  + Example:
-  + ```username:ZGM3MjRhZjE4ZmJkZDRlNTkxODlmNWZlNzY4YTVmODMxMTUyNzA1MA==```
 
 + From there you may attempt to access the front end.
 
