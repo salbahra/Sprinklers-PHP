@@ -74,7 +74,6 @@ function fail() {
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
-                    console.log(data);
                     if (data) {
                         $.mobile.hidePageLoadingMsg()
                         showerror("Settings have been saved. Be sure to delete install.php! After, reload the page.")
