@@ -8,14 +8,17 @@ div.ui-slider-switch {
     top: 5px;
     width: 44%;
 }
-
 .red {
     background-color: #C96161;
-    background: #C96161
+    background: #C96161;
+    color: #FFFFFF;
+    font-weight: normal;
 }
 .green {
-    background-color: #61C995;
-    background: #61C995;    
+    background-color: #426746;
+    background: #426746;
+    color: #FFFFFF !important;
+    font-weight: normal;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
 /* Link to the Google webfont is in the head */
