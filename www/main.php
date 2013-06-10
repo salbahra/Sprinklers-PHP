@@ -284,7 +284,7 @@ function make_runonce() {
 function make_list_programs() {
     $data = get_programs();
     $stations = get_stations();
-    $list = "";
+    $list = "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
     $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     $n = 0;
     if (count($data["programs"]) == 0) {
@@ -298,7 +298,7 @@ function make_list_programs() {
             $days = str_split($program["days"]);
         }
         $set_stations = str_split($program["stations"]);
-        $list .= "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><fieldset id='program-".$n."' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
+        $list .= "<fieldset id='program-".$n."' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
 
         $list .= "<input type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
         $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
@@ -351,7 +351,7 @@ function make_list_programs() {
 
         $n++;
     }
-    echo $list;
+    echo $list."</div>";
 }
 
 function fresh_program() {
