@@ -95,7 +95,8 @@ function fail() {
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
                     if (data == 1) {
                         $.mobile.hidePageLoadingMsg()
-                        showerror("Settings have been saved. Reload/reopen the app to get started!")
+                        showerror("Settings have been saved. Please wait while your redirected to the login screen!")
+                        setTimeout(function(){location.reload()},2500);
                     } else {
                         $.mobile.hidePageLoadingMsg()
                         if (data == 2) {
@@ -103,7 +104,7 @@ function fail() {
                         } else {
                             showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")
                         }
-                        setTimeout( function(){$.mobile.loading('hide')}, 2500);                    
+                        setTimeout(function(){$.mobile.loading('hide')}, 2500);                    
                     }
                 })
             }
