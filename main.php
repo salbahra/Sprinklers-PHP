@@ -29,6 +29,7 @@ function get_stations() {
     $stations = substr($stations, 12, strlen($stations) - 15);
     $stations = str_replace("'", "", $stations);
     $stations = explode(",", $stations);
+    array_pop($stations);
     return $stations;
 }
 
@@ -282,7 +283,6 @@ function make_runonce() {
     $n = 0;
     $stations = get_stations();
     foreach ($stations as $station) {
-        if ($station === "") continue;
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
         $n++;
     }
@@ -337,7 +337,6 @@ function make_list_programs() {
         $list .= "<fieldset data-role='controlgroup'><legend>Stations:</legend>";
         $j = 0;
         foreach ($stations as $station) {
-            if ($station === "") continue;
             $list .= "<input type='checkbox' ".(($set_stations[$j]) ? "checked='checked'" : "")." name='station_".$j."-".$n."' id='station_".$j."-".$n."'><label for='station_".$j."-".$n."'>".$station."</label>";
             $j++;
         }
@@ -395,7 +394,6 @@ function fresh_program() {
     $list .= "<fieldset data-role='controlgroup'><legend>Stations:</legend>";
     $j = 0;
     foreach ($stations as $station) {
-        if ($station === "") continue;
         $list .= "<input type='checkbox' name='station_".$j."-new' id='station_".$j."-new'><label for='station_".$j."-new'>".$station."</label>";
         $j++;
     }
@@ -423,7 +421,6 @@ function make_list_manual() {
     $list = '<li data-role="list-divider">Sprinkler Stations</li>';
     $stations = get_stations();
     foreach ($stations as $station) {
-        if ($station === "") continue;
         $list .= '<li><a href="javascript:toggle()">'.$station.'</a></li>';
     }
     return $list;
@@ -453,7 +450,6 @@ function make_list_status() {
     $status = str_split(file_get_contents("http://".$os_ip."/sn0"));
     $i = 0;
     foreach ($stations as $station) {
-        if ($station === "") continue;
         if ($status[$i]) {
             $color = "green";
         } else {
@@ -499,7 +495,6 @@ function make_settings_list() {
                 $list .= "<label for='o18' class='select'>Master Station</label><select id='o18'><option value='0'>None</option>";
                 $i = 1;
                 foreach ($stations as $station) {
-                    if ($station === "") continue;
                     $list .= "<option ".(($i == $data["val"]) ? "selected" : "")." value='".$i."'>".$station."</option>";
                     if ($i == 8) break;
                     $i++;
