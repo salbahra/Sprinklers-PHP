@@ -58,6 +58,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Current Status</h3>
         <a href="javascript:gohome()" data-icon="back">Back</a>
+        <a href="javascript:get_status()" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true" id="status_list">
