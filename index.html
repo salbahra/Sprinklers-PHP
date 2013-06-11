@@ -41,9 +41,9 @@
 <a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions:</h2>
 
 <ul>
-<li><p>You first need a working OpenSprinkler setup </p></li>
+<li><p>You first need a working OpenSprinkler setup</p></li>
 <li>
-<p>Install prerequisites as needed (example for Debian)</p>
+<p>Install prerequisites as needed (example for Debian using Apache web server)</p>
 
 <ul>
 <li>
@@ -51,11 +51,26 @@
 </ul>
 </li>
 <li>
-<p>Download the files to your web directory (ex. http://yourwebsite/sprinklers)</p>
+<p>Create the directory you wish to place the files in (ex. /var/www/sprinklers for http://yourwebsite/sprinklers)</p>
 
 <ul>
 <li><code>mkdir -m 777 /var/www/sprinklers</code></li>
+</ul>
+</li>
+<li>
+<p>Download the files to your web directory using git (less steps but requires git to be installed)</p>
+
+<ul>
 <li><code>git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers</code></li>
+</ul>
+</li>
+<li>
+<p>OR download the zip file and extract the contents (more steps but also universal)</p>
+
+<ul>
+<li><code>wget https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip</code></li>
+<li><code>unzip master.zip -d /var/www/sprinklers</code></li>
+<li><code>mv /var/www/sprinklers/OpenSprinkler-Controller-master/* /var/www/sprinklers/</code></li>
 </ul>
 </li>
 <li><p>From there you may attempt to access the front end.</p></li>
