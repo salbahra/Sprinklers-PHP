@@ -6,14 +6,21 @@ A mobile frontend for the OpenSprinkler irrigation device. Designed to allow man
 Instructions:
 -------------
 
-+ You first need a working OpenSprinkler setup 
++ You first need a working OpenSprinkler setup
 
-+ Install prerequisites as needed (example for Debian)
++ Install prerequisites as needed (example for Debian using Apache web server)
   + ```apt-get install apache2 php5 libapache2-mod-php5``` 
 
-+ Download the files to your web directory (ex. http://yourwebsite/sprinklers)
++ Create the directory you wish to place the files in (ex. /var/www/sprinklers for http://yourwebsite/sprinklers)
   + ```mkdir -m 777 /var/www/sprinklers```
+
++ Download the files to your web directory using git (less steps but requires git to be installed)
   + ```git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers```
+
++ OR download the zip file and extract the contents (more steps but also universal)
+  + ```wget https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip```
+  + ```unzip master.zip -d /var/www/sprinklers```
+  + ```mv /var/www/sprinklers/OpenSprinkler-Controller-master/* /var/www/sprinklers/```
 
 + From there you may attempt to access the front end.
 
