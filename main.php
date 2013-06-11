@@ -442,8 +442,7 @@ function make_list_status() {
 
     $list .= '<li data-role="list-divider">Time Zone</li><li>GMT '.$tz.'</li>';
 
-    $ver = $settings["ver"];
-    $ver = ($ver/100>>0).".".(($ver/10>>0)%10).".".($ver%10);
+    $ver = join(".",str_split($settings["ver"]));
     
     $list .= '<li data-role="list-divider">Firmware Version</li><li>'.$ver.'</li>';
 
