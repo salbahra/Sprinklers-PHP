@@ -91,12 +91,12 @@ function get_programs() {
 
 function update_program() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cp?pw=".$os_pw."&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
+    send_to_os("http://".$os_ip."/cp?pw=".$os_pw."&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
 }
 
 function delete_program() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
+    send_to_os("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
 }
 
 function get_options() {
@@ -145,60 +145,66 @@ function get_settings() {
     return $newdata;
 }
 
+function send_to_os($url) {
+    $result = file_get_contents($url);
+    if ($result === false) { echo 0; exit(); }
+    echo 1;
+}
+
 function submit_options() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cs?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["names"])));
-    file_get_contents("http://".$os_ip."/co?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["options"])));
+    send_to_os("http://".$os_ip."/cs?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["names"])));
+    send_to_os("http://".$os_ip."/co?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["options"])));
 }
 
 function runonce() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cr?pw=".$os_pw."&t=".$_REQUEST["data"]);    
+    send_to_os("http://".$os_ip."/cr?pw=".$os_pw."&t=".$_REQUEST["data"]);    
 }
 
 function raindelay() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&rd=".$_REQUEST["delay"]);
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rd=".$_REQUEST["delay"]);
 }
 
 function rsn() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&rsn=1");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rsn=1");
 }
 
 function rbt() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&rbt=1");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rbt=1");
 }
 
 function en_on() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&en=1");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=1");
 }
 
 function en_off() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&en=0");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=0");
 }
 
 function mm_on() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&mm=1");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=1");
 }
 
 function mm_off() {
     global $os_ip, $os_pw;
-    file_get_contents("http://".$os_ip."/cv?pw=".$os_pw."&mm=0");
+    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=0");
 }
 
 function spon() {
     global $os_ip;
-    file_get_contents("http://".$os_ip."/sn".$_REQUEST["zone"]."=1");
+    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=1");
 }
 
 function spoff() {
     global $os_ip;
-    file_get_contents("http://".$os_ip."/sn".$_REQUEST["zone"]."=0");
+    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=0");
 }
 
 #Content generation functions

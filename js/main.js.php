@@ -52,10 +52,20 @@ $("select[data-role='slider']").change(function(){
                 $.mobile.changePage($("#login"));
             }
             if (type === "en") {
-                $.get("index.php","action=en_on");
+                $.get("index.php","action=en_on",function(result){
+                    if (result == 0) {
+                        comm_error()
+                        $("#en").val("off").slider("refresh")
+                    }
+                });
             }
             if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_on");
+                $.get("index.php","action=mm_on",function(result){
+                    if (result == 0) {
+                        comm_error()
+                        $("#mm,#mmm").val("off").slider("refresh")
+                    }
+                });
                 $("#mm,#mmm").val("on").slider("refresh");
             }
         } else {
@@ -63,16 +73,30 @@ $("select[data-role='slider']").change(function(){
                 localStorage.removeItem(typeToKey(type));
             }
             if (type === "en") {
-                $.get("index.php","action=en_off");
+                $.get("index.php","action=en_off",function(result){
+                    if (result == 0) {
+                        comm_error()
+                        $("#en").val("on").slider("refresh")
+                    }
+                });
             }
             if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_off");
+                $.get("index.php","action=mm_off",function(result){
+                    if (result == 0) {
+                        comm_error()
+                        $("#mm,#mmm").val("on").slider("refresh")
+                    }
+                });
                 $("#manual a.green").removeClass("green");
                 $("#mm,#mmm").val("off").slider("refresh");
             }
         }
     }
 });
+
+function comm_error() {
+    showerror("Error communicating with OpenSprinkler. Please check your password is correct.")
+}
 
 $("#sprinklers,#status").on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
@@ -314,7 +338,9 @@ function add_program() {
 
 function delete_program(id) {
     if(!confirm("Are you sure you want to delete program "+(parseInt(id)+1)+"?")) return false;
-    $.get("index.php","action=delete_program&pid="+id)
+    $.get("index.php","action=delete_program&pid="+id,function(result){
+        if (result == 0) comm_error()
+    })
     get_programs()
 }
 
@@ -366,14 +392,19 @@ function submit_program(id) {
     program = JSON.stringify(program.concat(stations))
     $.mobile.showPageLoadingMsg()
     if (id == "new") {
-        $.get("index.php","action=update_program&pid=-1&data="+program,function(data){
+        $.get("index.php","action=update_program&pid=-1&data="+program,function(result){
             $.mobile.hidePageLoadingMsg()
+            if (result == 0) comm_error()
             get_programs()
         });
     } else {
-        $.get("index.php","action=update_program&pid="+id+"&data="+program,function(data){
+        $.get("index.php","action=update_program&pid="+id+"&data="+program,function(result){
             $.mobile.hidePageLoadingMsg()
-            showerror("Program has been updated.")
+            if (result == 0) {
+                comm_error()
+            } else {
+                showerror("Program has been updated.")
+            }
         });
     }
 }
@@ -429,7 +460,13 @@ function submit_runonce() {
     $("#runonce").find(":input[data-type='range']").each(function(a,b){
         runonce.push(parseInt($(b).val()))
     })
-    $.get("index.php","action=runonce&data="+JSON.stringify(runonce))
+    $.get("index.php","action=runonce&data="+JSON.stringify(runonce),function(result){
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("Run-once program has been scheduled")
+        }
+    })
     gohome();
 }
 
@@ -442,31 +479,54 @@ function toggle() {
     var currPos = $listitems.index($item) + 1;
     var total = $listitems.length;
     if ($anchor.hasClass("green")) {
-        $.get("index.php","action=spoff&zone="+currPos)
+        $.get("index.php","action=spoff&zone="+currPos,function(result){
+            if (result == 0) {
+                $anchor.addClass("green");
+                comm_error()
+            }
+        })
         $anchor.removeClass("green");
     } else {
-        $.get("index.php","action=spon&zone="+currPos)
+        $.get("index.php","action=spon&zone="+currPos,function(result){
+            if (result == 0) {
+                $anchor.removeClass("green");
+                comm_error()
+            }
+        })
         $anchor.addClass("green");
     }
 }
 
 function raindelay() {
-    $.get("index.php","action=raindelay&delay="+$("#delay").val());
+    $.get("index.php","action=raindelay&delay="+$("#delay").val(),function(result){
+        if (result == 0) comm_error()
+    });
     gohome();
 }
 
 function rbt() {
     if(!confirm("Are you sure you want to restart the device?")) return false;
     $.mobile.showPageLoadingMsg()
-    $.get("index.php","action=rbt",function(){
+    $.get("index.php","action=rbt",function(result){
         $.mobile.hidePageLoadingMsg()
         $("#sprinklers-settings").panel("close")
-        showerror("OpenSprinkler was rebooted.")
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("OpenSprinkler was rebooted.")
+        }
     });
 
 }
 
 function rsn() {
-    $.get("index.php","action=rsn");
-    showerror("All stations have been stopped")
+    $.mobile.showPageLoadingMsg()
+    $.get("index.php","action=rsn",function(result){
+        $.mobile.hidePageLoadingMsg()
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("All stations have been stopped")
+        }
+    });
 }
