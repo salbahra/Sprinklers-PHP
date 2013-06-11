@@ -451,6 +451,8 @@ function make_list_status() {
 
     $list .= '<li data-role="list-divider">Rain Delay</li><li>'.(($settings["rd"]==0) ? "No" : "Until ".gmdate("D, d M Y H:i:s",$settings["rdst"])).'</li>';
 
+    $list .= '<li data-role="list-divider">Rain Sensor</li><li>'.($settings["urs"] ? ($settings["rs"] ? "Rain Detected" : "No Rain Detected" ) : "Not Enabled").'</li>';
+
     $lrpid = $settings["lrun"][1]; $lrdur = $settings["lrun"][2];
     $pname="from program "+(intval($lrpid) + 1);
     if($lrpid==255||$lrpid==99) $pname="from manual mode";
