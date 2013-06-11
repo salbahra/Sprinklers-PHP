@@ -95,7 +95,7 @@ function fail() {
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
                     if (data == 1) {
                         $.mobile.hidePageLoadingMsg()
-                        showerror("Settings have been saved. Be sure to delete install.php! After, reload the page.")
+                        showerror("Settings have been saved. Reload/reopen the app to get started!")
                     } else {
                         $.mobile.hidePageLoadingMsg()
                         if (data == 2) {
