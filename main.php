@@ -26,8 +26,8 @@ if (isset($_REQUEST['action'])) {
 function get_stations() {
     global $os_ip;
     $stations = file_get_contents("http://".$os_ip."/pn.js");
-    $stations = substr($stations, 12, strlen($stations) - 15);
-    $stations = str_replace("'", "", $stations);
+    preg_match("/var snames=\[(.*)\];/", $stations, $matches);
+    $stations = str_replace("'", "", $matches[1]);
     $stations = explode(",", $stations);
     array_pop($stations);
     return $stations;
@@ -133,11 +133,13 @@ function get_settings() {
     $data = str_replace("var ", "", $matches[1]);
     $data = preg_replace("/ps=.*;/", "", $data);
     $data = preg_replace("/sbits=.*;/", "", $data);
+    preg_match("/lrun=\[(.*)\]/", $data, $lrun);
+    $lrun = explode(",", $lrun[1]);
     $data = preg_replace("/lrun=\[.*\]/", "", $data);
     $data = str_replace(";", ",", $data);
     $data = str_replace("\n", "", $data);
     $data = explode(",", $data);
-    $newdata = array();
+    $newdata = array("lrun" => $lrun);
     foreach ($data as $variable) {
         if ($variable === "") continue;
         $tmp = explode("=", $variable);
@@ -430,6 +432,8 @@ function make_list_status() {
     global $os_ip;
 
     $settings = get_settings();
+    $stations = get_stations();
+    $status = str_split(file_get_contents("http://".$os_ip."/sn0"));
 
     $tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4).":".((abs($tz)%4)*15/10).((abs($tz)%4)*15%10);
@@ -445,9 +449,15 @@ function make_list_status() {
 
     $list .= '<li data-role="list-divider">Rain Delay</li><li>'.(($settings["rd"]==0) ? "No" : "Until ".gmdate("D, d M Y H:i:s",$settings["rdst"])).'</li>';
 
+    $lrpid = $settings["lrun"][1]; $lrdur = $settings["lrun"][2];
+    $pname="from program "+(intval($lrpid) + 1);
+    if($lrpid==255||$lrpid==99) $pname="from manual mode";
+    if($lrpid==254||$lrpid==98) $pname="from a run-once program";
+
+    $list .= '<li data-role="list-divider">Last Run</li>';
+    $list .= '<li>'.$stations[$settings["lrun"][0]].' ran '.$pname.' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</li>';
+
     $list .= '<li data-role="list-divider">Sprinkler Stations</li>';
-    $stations = get_stations();
-    $status = str_split(file_get_contents("http://".$os_ip."/sn0"));
     $i = 0;
     foreach ($stations as $station) {
         if ($status[$i]) {
