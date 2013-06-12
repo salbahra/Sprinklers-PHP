@@ -453,7 +453,7 @@ function make_list_status() {
     $list .= '<li data-role="list-divider">Rain Sensor</li><li>'.($settings["urs"] ? ($settings["rs"] ? "Rain Detected" : "No Rain Detected" ) : "Not Enabled").'</li>';
 
     $lrpid = $settings["lrun"][1]; $lrdur = $settings["lrun"][2];
-    $pname="from program "+(intval($lrpid) + 1);
+    $pname="from program ".$lrpid;
     if($lrpid==255||$lrpid==99) $pname="from manual mode";
     if($lrpid==254||$lrpid==98) $pname="from a run-once program";
 
