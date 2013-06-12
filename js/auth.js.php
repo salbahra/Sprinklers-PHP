@@ -9,24 +9,32 @@ if(!defined('Sprinklers')) {
 
     #Required files
     require_once "../main.php";
-    
+
+    #Set required header for javascript file    
     header("Content-type: application/x-javascript");
 }
 ?>
+
+//After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
 	$.mobile.pageContainer = $('#container');
     $.mobile.defaultPageTransition = 'fade';
     $.mobile.hashListeningEnabled = false;
 });
+
+//When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
 $("#start").on("pageinit",function(e){
     $("body").show();
 });
+
+//On intial load check if a valid token exists, for auto login
 $("#start").on("pageshow",function(e){
     if (!check_token()) {
         $.mobile.changePage($("#login"));
     }
 });
 
+//Insert the startup images for iOS
 (function(){
     var p, l, r = window.devicePixelRatio, h = window.screen.height;
     if (navigator.platform === "iPad") {
@@ -40,6 +48,8 @@ $("#start").on("pageshow",function(e){
 })()
 
 //Authentication functions
+
+//Check token, and if valid load the main page
 function check_token() {
     var token = localStorage.getItem('token');
     var parameters = "action=checktoken&token=" + token;
@@ -62,6 +72,7 @@ function check_token() {
     return true;
 }
 
+//Submit login information to server
 function dologin() {
     var parameters = "action=login&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=" + $('#remember').is(':checked');
     $("#username, #password").val('');
@@ -77,8 +88,8 @@ function dologin() {
     },"html");
 }
 
+// show error message
 function showerror(msg) {
-	// show error message
         $.mobile.loading( 'show', {
             text: msg,
             textVisible: true,

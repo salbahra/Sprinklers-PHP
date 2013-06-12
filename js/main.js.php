@@ -19,33 +19,46 @@ if (!is_auth()) {exit();}
 #Echo token so browser can cache it for automatic logins
 if (isset($_SESSION['sendtoken']) && $_SESSION['sendtoken']) { echo "localStorage.setItem('token', '".$_SESSION['token']."');\n"; $_SESSION['sendtoken'] = false; }
 ?>
+//After main page is processed, hide loading message and change to the page
 $(document).one("pageinit","#sprinklers", function(){
     $.mobile.hidePageLoadingMsg();
     $.mobile.changePage($("#sprinklers"));
 });
+
+//Event bind swipe actions to show/hide side panel
 $(document).on("swiperight swipeleft", function(e){
+    //Define specific action triggered
     eventtype = e.type;
+    //Grab the calling page
     page = $(e.target).closest(".ui-page-active");
+    //Save the calling page's ID
     pageid = page.attr("id");
+    //Grab the panel associated with the calling page
     panel = page.find("[id$=settings]");
 
+    //If the panel is open then close the panel
     if (panel.length != 0 && !panel.hasClass("ui-panel-closed")) {
         return false;
     }
 
+    //If the action is swiperight and where on the main page then expose the panel
     if (eventtype == "swiperight" && pageid == "sprinklers") {
+        //If the panel is not found ignore
         if (panel.length == 0) return;
         panel.panel("open");
     }
 });
 
+//Bind changes to the flip switches
 $("select[data-role='slider']").change(function(){
     var slide = $(this);
     var type = this.name;
     var pageid = slide.closest(".ui-page-active").attr("id");
+    //Find out what the switch was changed to
     var changedTo = slide.val();
     if(window.sliders[type]!==changedTo){
         if (changedTo=="on") {
+            //If chanegd to on
             if (type === "autologin") {
                 if (localStorage.getItem("token") != null) return;
                 $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
@@ -53,6 +66,7 @@ $("select[data-role='slider']").change(function(){
             }
             if (type === "en") {
                 $.get("index.php","action=en_on",function(result){
+                    //If switch failed then change the switch back and show error
                     if (result == 0) {
                         comm_error()
                         $("#en").val("off").slider("refresh")
@@ -69,6 +83,7 @@ $("select[data-role='slider']").change(function(){
                 $("#mm,#mmm").val("on").slider("refresh");
             }
         } else {
+            //If chanegd to off
             if (type === "autologin") {
                 localStorage.removeItem(typeToKey(type));
             }
@@ -87,6 +102,7 @@ $("select[data-role='slider']").change(function(){
                         $("#mm,#mmm").val("on").slider("refresh")
                     }
                 });
+                //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
                 $("#manual a.green").removeClass("green");
                 $("#mm,#mmm").val("off").slider("refresh");
             }
@@ -102,10 +118,12 @@ $("#sprinklers,#status").on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
      
     if (newpage == "sprinklers") {
+        //Add a new tip to the header of main page on each page load
         new_tip();
     }
 });
 
+//This bind intercepts most links to remove the 300ms delay iOS adds
 $(document).on('pageinit', function (e, data) {
     var newpage = e.target.id;
 
@@ -140,6 +158,7 @@ $(document).on("pageshow",function(e,data){
     newpage = e.target.id;
 
     if (newpage == "sprinklers") {
+        //Automatically update sliders on page load in settings panel
         check_auto($("#"+newpage+" select[data-role='slider']"));
     }
 
