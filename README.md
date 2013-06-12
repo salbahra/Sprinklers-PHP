@@ -19,7 +19,7 @@ Raspberry Pi Users:
 
 + The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  [Ray's Blog Post](http://rayshobby.net/?p=6339).
 
-+ The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Rasbian which is based on Debian.
++ The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.
 
 Instructions:
 -------------
