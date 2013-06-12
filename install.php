@@ -1,8 +1,12 @@
 <?php
+
+#Change time out to 5 seconds (default is 60)
 ini_set('default_socket_timeout', 5);
 
+#If config exists then redirect to the app
 if (file_exists("config.php")) header("Location: index.php");
 
+#If an action is new_config and config file does not exist then process the information
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
     new_config();
     exit();
@@ -10,17 +14,34 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
 
 #New config setup
 function new_config() {
+    #Begin creation of config.php
     $config = "<?php\n";
+
+    #Define all the required variables for config.php
     $needed = array("webtitle","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+
+    #Cycle through each needed key
     foreach ($needed as $key) {
+
+        #If required variable is not submitted then fail
         if (!isset($_REQUEST[$key])) fail();
+
         $data = $_REQUEST[$key];
+
+        #If processing OS IP then check if the IP is valid and if not, fail with error code 2
         if ($key == "os_ip" && !isValidUrl("http://".$data)) {
             echo 2; exit();
         }
+
+        #If processing password file then go ahead and generate it with proper username/password hash
         if ($key == "pass_file") {
+
+            #If username or password is not submitted fail
             if (!isset($_REQUEST["username"]) || !isset($_REQUEST["password"])) fail();
+
             $file = fopen($data, 'w');
+
+            #If unable to open the pass file fail
             if (!$file) {
                 fail();
             } else {
@@ -29,25 +50,42 @@ function new_config() {
                 fclose($file);
             }
         }
+
+        #Attempt to make the cache file, log file, and previous station status file
         if ($key == "cache_file" || $key == "log_file" || $key == "log_previous") make_file($data);
+
+        #Append current key/data pair to config.php string.
         if ($key == "timezone") {
+            #If timezone prepare line using php function date_default_timezone_set
             $config .= "date_default_timezone_set('".$data."');\n";
         } else {
+            #Otherwise, prepare line using $key = '$value';
             $config .= "$".$key." = '".$data."';\n";            
         }
     }
+
+    #Attempt to open config.php for writing
     $file = fopen("config.php", 'w');
+
+    #If unable, fail
     if (!$file) fail();
+
+    #Write the config out
     $r = fwrite($file,$config."?>");
+
+    #If unable to write the config, fail
     if (!$r) fail();
 
+    #Add the watcher for logs to crontab
     $output = shell_exec('crontab -l');
     file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
     exec('crontab /tmp/crontab.txt');
 
+    #Tell javascript action was succesful
     echo 1;
 }
 
+#Check if URL is valid by grabbing headers and verifying reply is: 200 OK
 function isValidUrl($url) {
     $header = get_headers($url, 1);
     $pos = stripos($header[0], "200 OK");
@@ -55,12 +93,14 @@ function isValidUrl($url) {
     return true;
 }
 
+#Attempt to make file or fail if unable
 function make_file($data) {
     $file = fopen($data, "w");
     if (!$file) fail();
     fclose($file);    
 }
 
+#Fail by returning error code 0
 function fail() {
     echo 0;
     exit();
@@ -92,16 +132,21 @@ function fail() {
             }
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
+                //Submit form data to the server
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
                     if (data == 1) {
+                        //If successful
                         $.mobile.hidePageLoadingMsg()
                         showerror("Settings have been saved. Please wait while your redirected to the login screen!")
                         setTimeout(function(){location.reload()},2500);
                     } else {
+                        //If unsuccesful
                         $.mobile.hidePageLoadingMsg()
                         if (data == 2) {
+                            //URL Invalid
                             showerror("Settings have NOT been saved. Check IP and Port settings and try again.")
                         } else {
+                            //Probably permission error or required key not submitted
                             showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")
                         }
                         setTimeout(function(){$.mobile.loading('hide')}, 2500);                    
