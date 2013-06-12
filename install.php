@@ -42,7 +42,7 @@ function new_config() {
     if (!$r) fail();
 
     $output = shell_exec('crontab -l');
-    file_put_contents('/tmp/crontab.txt', $output.'* * * * * php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
+    file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
     exec('crontab /tmp/crontab.txt');
 
     echo 1;
