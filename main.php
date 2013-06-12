@@ -3,11 +3,13 @@
 #Refuse if a direct call has been made
 if(!defined('Sprinklers')){echo $denied;exit();}
 
+#Check if config exists, if not redirect to install
 if (!file_exists("config.php")) header("Location: install.php"); 
 
 #Include configuration
 require_once("config.php");
 
+#Get Base URL of Site
 if (isset($_SERVER['SERVER_NAME'])) $base_url = "https://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
 #Call action if requested and allowed
@@ -23,16 +25,21 @@ if (isset($_REQUEST['action'])) {
 }
 
 #OpenSprinkler functions
+
+#Get station names
 function get_stations() {
     global $os_ip;
     $stations = file_get_contents("http://".$os_ip."/pn.js");
     preg_match("/var snames=\[(.*)\];/", $stations, $matches);
     $stations = str_replace("'", "", $matches[1]);
     $stations = explode(",", $stations);
+
+    #Pop the last element off the array which is always an extra empty string
     array_pop($stations);
     return $stations;
 }
 
+#Get program information
 function get_programs() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip."/gp?d=0");
@@ -65,11 +72,11 @@ function get_programs() {
         $newdata["programs"][$i]["stations"] = $stations;
 
         if(($days0&0x80)&&($days1>1)){
-            // this is an interval program
+            #This is an interval program
             $days=array($days1,$days0&0x7f);
             $interval = true;
         } else {
-            // this is a weekly program 
+            #This is a weekly program 
             for($d=0;$d<7;$d++) {
                 if ($days0&(1<<$d)) {
                     $days .= "1";
@@ -90,16 +97,7 @@ function get_programs() {
     return $newdata;
 }
 
-function update_program() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cp?pw=".$os_pw."&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
-}
-
-function delete_program() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
-}
-
+#Get OpenSprinkler options
 function get_options() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip."/vo");
@@ -117,15 +115,7 @@ function get_options() {
     return $newdata;
 }
 
-function move_keys($keys,$array) {
-    foreach ($keys as $key) {
-        $t = $array[$key];
-        unset($array[$key]);
-        $array[$key] = $t;
-    }
-    return $array;    
-}
-
+#Get OpenSprinkler settings
 function get_settings() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip);
@@ -148,81 +138,108 @@ function get_settings() {
     return $newdata;
 }
 
+#Check if operation is enabled
+function is_en() {
+    $settings = get_settings();
+    if ($settings["en"] == 1) return "selected";
+}
+
+#Check if manual mode is enabled
+function is_mm() {
+    $settings = get_settings();
+    if ($settings["mm"] == 1) return "selected";
+}
+
+#Send command to OpenSprinkler
 function send_to_os($url) {
     $result = file_get_contents($url);
     if ($result === false) { echo 0; exit(); }
     echo 1;
 }
 
+#Updates a program
+function update_program() {
+    global $os_ip, $os_pw;
+    send_to_os("http://".$os_ip."/cp?pw=".$os_pw."&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
+}
+
+#Deletes a program
+function delete_program() {
+    global $os_ip, $os_pw;
+    send_to_os("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
+}
+
+#Submit updated options
 function submit_options() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cs?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["names"])));
     send_to_os("http://".$os_ip."/co?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["options"])));
 }
 
+#Submit run-once program
 function runonce() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cr?pw=".$os_pw."&t=".$_REQUEST["data"]);    
 }
 
+#Submit rain delay
 function raindelay() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rd=".$_REQUEST["delay"]);
 }
 
+#Reset all stations (turn-off)
 function rsn() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rsn=1");
 }
 
+#Reboot OpenSprinkler
 function rbt() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rbt=1");
 }
 
+#Change operation to on
 function en_on() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=1");
 }
 
+#Change operation to off
 function en_off() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=0");
 }
 
+#Switch manual mode on
 function mm_on() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=1");
 }
 
+#Switch manual mode off
 function mm_off() {
     global $os_ip, $os_pw;
     send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=0");
 }
 
+#Turn specific station on
 function spon() {
     global $os_ip;
     send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=1");
 }
 
+#Turn specific station off
 function spoff() {
     global $os_ip;
     send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=0");
 }
 
+
 #Content generation functions
-function is_en() {
-    $settings = get_settings();
-    if ($settings["en"] == 1) return "selected";
-}
-
-function is_mm() {
-    $settings = get_settings();
-    if ($settings["mm"] == 1) return "selected";
-}
-
 function show_logs() {
-#Adapted from the script written by David B. Gustavson, 20121021
+    #Adapted from the script written by David B. Gustavson, 20121021
     global $timeViewWindow, $log_file;
 
     $ValveName = get_stations();
@@ -280,6 +297,7 @@ function show_logs() {
     return $logtable;
 }
 
+#Make run-once list
 function make_runonce() {
     $list = "<p align='center'>Value is in minutes. Zero means the station will be excluded from the run-once program.</p><div data-role='fieldcontain'>";
     $n = 0;
@@ -291,6 +309,7 @@ function make_runonce() {
     return $list."</div><button onclick='submit_runonce()'>Submit</button>";
 }
 
+#Make the list of all programs
 function make_list_programs() {
     $data = get_programs();
     $stations = get_stations();
@@ -365,6 +384,7 @@ function make_list_programs() {
     echo $list."</div>";
 }
 
+#Generate a new program view
 function fresh_program() {
     $stations = get_stations();
     $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
@@ -418,7 +438,7 @@ function fresh_program() {
     echo $list;
 }
 
-
+#Make the manual list
 function make_list_manual() {
     $list = '<li data-role="list-divider">Sprinkler Stations</li>';
     $stations = get_stations();
@@ -428,6 +448,7 @@ function make_list_manual() {
     return $list;
 }
 
+#Generate status page
 function make_list_status() {
     global $os_ip;
 
@@ -474,6 +495,7 @@ function make_list_status() {
     echo $list;
 }
 
+#Generate settings page
 function make_settings_list() {
     $options = get_options();
     $stations = get_stations();
@@ -544,6 +566,7 @@ function make_settings_list() {
     echo $list."</fieldset></li></ul>";
 }
 
+#Make slide panel
 function make_panel($page) {
     $buttons = array(
         "Settings" => array(
@@ -621,6 +644,8 @@ function http_authenticate($user,$pass,$crypt_type='SHA'){
         return FALSE;
     }
 }
+
+#Sends the token to the app
 function gettoken() {
     if (is_auth() && isset($_SESSION["token"])) {
         echo $_SESSION["token"];
@@ -629,6 +654,7 @@ function gettoken() {
     login("token");
 }
 
+#Authenticate user
 function login($tosend = "sprinklers") {
     global $denied, $webtitle, $cache_file;
 
@@ -657,6 +683,8 @@ function login($tosend = "sprinklers") {
         }
     }
 }
+
+#Remove token from cache file
 function remove_token() {
     global $cache_file;
     $hashs = file($cache_file);
@@ -674,6 +702,8 @@ function remove_token() {
     }
     unset($hashs);
 }
+
+#Logs out the user
 function logout() {
     global $denied, $base_url;
     remove_token();
@@ -681,6 +711,8 @@ function logout() {
     session_destroy();
     header('Location: '.$base_url);
 }
+
+#Check if token is valid
 function check_localstorage($token) {
     global $cache_file;
     $starttime = explode(' ', microtime()); 
@@ -708,11 +740,15 @@ function check_localstorage($token) {
 
     return FALSE;
 }
+
+#Check if current user is authenticated
 function is_auth() {
     is_ssl();
     if (isset($_SESSION['isauth']) && $_SESSION['isauth'] === 1) { return TRUE; }
     return FALSE;   
 }
+
+#Check if protocol is SSL and redirect if not
 function is_ssl() {
     if(empty($_SERVER['HTTPS'])) {
         $newurl = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
@@ -721,6 +757,8 @@ function is_ssl() {
     }
     return TRUE;
 }
+
+#Check if token is valid and if not reject
 function checktoken() {
     global $webtitle;
 
@@ -732,6 +770,9 @@ function checktoken() {
     exit();
 }
 
+#Supplemental functions
+
+#Delete a line from a file
 function delLineFromFile($fileName, $lineNum){
     $arr = file($fileName);
     $lineToDelete = $lineNum;
@@ -740,4 +781,14 @@ function delLineFromFile($fileName, $lineNum){
     foreach($arr as $line) { fwrite($fp,$line); }
     fclose($fp);
     return TRUE;
+}
+
+#Rearrange array by move the keys in $keys array to the end of $array
+function move_keys($keys,$array) {
+    foreach ($keys as $key) {
+        $t = $array[$key];
+        unset($array[$key]);
+        $array[$key] = $t;
+    }
+    return $array;    
 }
