@@ -8,7 +8,7 @@ Overview:
 
 + This application interfaces with the interval program on the OpenSprinkler which is the default software available. The application has been tested on firmware version 2.0.0 but should be compatible with 1.8.x and newer.
 
-+ There is an authentication system in place and a guide on first run will assist in adding a new user.
++ There is an authentication system in place and a guide on first run will assist in adding a new user along with the other required settings.
 
 + The provided interface does not rely on the javascript files hosted by Ray therefore will work on a locally hosted server even without an internet connection. However an internet connection (with a properly configured web server and port forwarding) will allow you to access the application from anywhere.
 
