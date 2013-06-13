@@ -2,6 +2,12 @@
     margin: 0.1em !important;
 }
 
+@media (max-width: 480px) {
+    #logs_list .ui-li-aside {
+        width: 30% !important;
+    }
+}
+
 div.ui-slider-switch {
     position: absolute;
     right: 5px;
