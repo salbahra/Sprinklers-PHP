@@ -288,7 +288,7 @@ function make_list_logs() {
         $list .= "<li data-role='list-divider'>".$ValveName[$j]."<span class='ui-li-count'>".$ct.(($ct == 1) ? " run" : " runs" )."</span></li>";
         if ($ct>0) {
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
-                $theTime=date_format(date_create($ValveHistory[$j][$k][0]), 'D, M j, Y, g:i A');
+                $theTime=date_format(date_create($ValveHistory[$j][$k][0]), 'n/j/Y g:i A');
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
                 $list .= "<li>".$theTime.$ValveHistory[$j][$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
