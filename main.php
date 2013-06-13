@@ -138,6 +138,11 @@ function get_settings() {
     return $newdata;
 }
 
+function get_station_status() {
+    global $os_ip;
+    return str_split(file_get_contents("http://".$os_ip."/sn0"));
+}
+
 #Check if operation is enabled
 function is_en() {
     $settings = get_settings();
@@ -442,8 +447,12 @@ function fresh_program() {
 function make_list_manual() {
     $list = '<li data-role="list-divider">Sprinkler Stations</li>';
     $stations = get_stations();
+    $status = get_station_status();
+    $i = 0;
+
     foreach ($stations as $station) {
-        $list .= '<li><a href="javascript:toggle()">'.$station.'</a></li>';
+        $list .= '<li><a '.(($status[$i]) ? 'class="green" ' : '').'href="javascript:toggle()">'.$station.'</a></li>';
+        $i++;
     }
     return $list;
 }
@@ -454,7 +463,7 @@ function make_list_status() {
 
     $settings = get_settings();
     $stations = get_stations();
-    $status = str_split(file_get_contents("http://".$os_ip."/sn0"));
+    $status = get_station_status();
 
     $tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4).":".((abs($tz)%4)*15/10).((abs($tz)%4)*15%10);
