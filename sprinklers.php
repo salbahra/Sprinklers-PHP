@@ -30,7 +30,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#runonce">Run-Once Program</a></li>
             <li><a href="javascript:get_programs()">View/Change Programs</a></li>
             <li><a href="#raindelay" data-rel="dialog">Rain Delay</a></li>
-            <li><a href="#logs">View Log</a></li>
+            <li><a href="javascript:get_logs()">View Log</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
@@ -137,9 +137,11 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Logs</h3>
         <a href="javascript:gohome()" data-icon="back">Back</a>
+        <a href="javascript:get_logs()" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
-        <?php echo show_logs(); ?>
+        <ul data-role="listview" data-inset="true" id="logs_list">
+        </ul>
     </div>
 </div>
 

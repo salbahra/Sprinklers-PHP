@@ -277,6 +277,17 @@ function get_status() {
     })
 }
 
+function get_logs() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_list_logs",function(items){
+        list = $("#logs_list");
+        list.html(items);
+        if (list.hasClass("ui-listview")) list.listview("refresh");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#logs"));
+    })
+}
+
 function get_programs() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_programs",function(items){

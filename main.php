@@ -238,10 +238,11 @@ function spoff() {
 
 
 #Content generation functions
-function show_logs() {
+function make_list_logs() {
     #Adapted from the script written by David B. Gustavson, 20121021
     global $timeViewWindow, $log_file;
 
+    $list = "";
     $ValveName = get_stations();
 
     $SprinklerValveHistory=file_get_contents($log_file);
@@ -281,20 +282,19 @@ function show_logs() {
             };
         };
     };
-    $logtable = "<table data-mode='reflow' class='ui-responsive table-stroke' data-role='table'><thead><tr><th data-priority='1'>Zone</th><th data-priority='2'>Duration</th><th data-priority='3'>Run Time</th></tr></thead><tbody>";
     for ($j=0;$j<16;$j++) {
         if (!isset($ValveHistory[$j])) continue;
         $ct=count($ValveHistory[$j]);
+        $list .= "<li data-role='list-divider'>".$ValveName[$j]."<span class='ui-li-count'>".$ct.(($ct == 1) ? " run" : " runs" )."</span></li>";
         if ($ct>0) {
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
                 $theTime=date_format(date_create($ValveHistory[$j][$k][0]), 'D, M j, Y, g:i A');
-                $logtable .= "<tr><th>".$ValveName[$j]."</th><td>".number_format(($ValveHistory[$j][$k][1]/60), 1, '.', ',')." min</td><td>".$theTime.$ValveHistory[$j][$k][2]."</td></tr>";
+                $mins = ceil($ValveHistory[$j][$k][1]/60);
+                $list .= "<li>".$theTime.$ValveHistory[$j][$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
         };
     };
-
-    $logtable .= "</tbody></table>";
-    return $logtable;
+    echo $list;
 }
 
 #Make run-once list
