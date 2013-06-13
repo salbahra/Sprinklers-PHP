@@ -4,7 +4,8 @@
 
 @media (max-width: 480px) {
     #logs_list .ui-li-aside {
-        width: 30% !important;
+        width: 25% !important;
+        font-size: smaller;
     }
 }
 
