@@ -49,6 +49,11 @@ $(document).on("swiperight swipeleft", function(e){
     }
 });
 
+$("#preview_date").change(function(){
+    id = $(".ui-page-active").attr("id");
+    if (id == "preview") get_preview()
+});
+
 //Bind changes to the flip switches
 $("select[data-role='slider']").change(function(){
     var slide = $(this);
@@ -285,6 +290,17 @@ function get_logs() {
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
+    })
+}
+
+function get_preview() {
+    $.mobile.showPageLoadingMsg();
+    date = $("#preview_date").val().split("-");
+    $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
+        list = $("#preview div[data-role='content']");
+        list.html(items);
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#preview"));
     })
 }
 

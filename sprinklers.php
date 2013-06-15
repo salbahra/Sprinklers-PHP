@@ -29,6 +29,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#manual">Manual Control</a></li>
             <li><a href="#runonce">Run-Once Program</a></li>
             <li><a href="javascript:get_programs()">View/Change Programs</a></li>
+            <li><a href="javascript:get_preview()">Preview Programs</a></li>
             <li><a href="#raindelay" data-rel="dialog">Rain Delay</a></li>
             <li><a href="javascript:get_logs()">View Log</a></li>
         </ul>
@@ -151,6 +152,16 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3>OS Settings</h3>
         <a href="javascript:gohome()" data-icon="back">Back</a>
         <a href="javascript:submit_settings()">Submit</a>
+    </div>
+    <div data-role="content">
+    </div>
+</div>
+
+<div data-role="page" id="preview">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>Program Preview</h3>
+        <a href="javascript:gohome()" data-icon="back">Back</a>
+        <input style="text-align:center" type="date" name="preview_date" id="preview_date" value="<?php echo date("Y-m-d"); ?>" />
     </div>
     <div data-role="content">
     </div>
