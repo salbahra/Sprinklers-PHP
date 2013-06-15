@@ -182,8 +182,6 @@ function fail() {
                             <div data-role="fieldcontain">
                                 <label for="webtitle">Site Title:</label>
                                 <input type="text" name="webtitle" id="webtitle" value="Sprinkler System" />
-                                <label for="force_ssl">Force SSL:</label>
-                                <input type="checkbox" name="force_ssl" id="force_ssl" checked />
                                 <label for="os_ip">Open Sprinkler IP:</label>
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
                                 <label for="os_pw">Open Sprinkler Password:</label>
@@ -194,6 +192,8 @@ function fail() {
                                 <input type="text" name="pass_file" id="pass_file" value="/var/www/sprinklers/.htpasswd" />
                                 <label for="cache_file">Cache File Location:</label>
                                 <input type="text" name="cache_file" id="cache_file" value="/var/www/sprinklers/.cache" />
+                                <label for="force_ssl">Force SSL:</label>
+                                <input type="checkbox" name="force_ssl" id="force_ssl" checked />
                             </div>
                         </li>
                     </ul>
