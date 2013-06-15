@@ -384,10 +384,15 @@ function add_program() {
 
 function delete_program(id) {
     if(!confirm("Are you sure you want to delete program "+(parseInt(id)+1)+"?")) return false;
+    $.mobile.showPageLoadingMsg();
     $.get("index.php","action=delete_program&pid="+id,function(result){
-        if (result == 0) comm_error()
+        $.mobile.hidePageLoadingMsg();
+        if (result == 0) {
+            comm_error()
+        } else {
+            get_programs()
+        }
     })
-    get_programs()
 }
 
 function submit_program(id) {

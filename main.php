@@ -104,6 +104,10 @@ function get_preview() {
 function process_programs($month,$day,$year) {
     global $os_ip;
     $newdata = array();
+
+    $newdata["settings"] = get_settings();
+    $newdata["stations"] = get_stations();
+
     $data = file_get_contents("http://".$os_ip."/gp?d=".$day."&m=".$month."&y=".$year);
     preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
     preg_match("/var seq=(\d),mas=(\d),wl=(\d+),sdt=(\d+),mton=(\d+),mtoff=(\d+),devday=(\d+),devmin=(\d+),dd=(\d+),mm=(\d+),yy=(\d+);var masop=\[([\d|,]+)\];var nprogs=(\d+),nboards=(\d+),ipas=\d+,mnp=\d+,pd=\[\];(.*);/", $matches[1], $matches);
@@ -122,6 +126,7 @@ function process_programs($month,$day,$year) {
     $newdata["nprogs"] = $matches[13];
     $newdata["nboards"] = $matches[14];
     $progs = explode(";", $matches[15]);
+
     $i = 0;
 
     foreach ($progs as $prog) {
@@ -129,11 +134,12 @@ function process_programs($month,$day,$year) {
         $tmp2 = str_replace("[", "", $tmp[1]);
         $tmp2 = str_replace("]", "", $tmp2);
         $newdata["programs"][$i] = explode(",",$tmp2);
+        $i++;
     }
     $simminutes=0;
     $simt=strtotime($newdata["mm"]."/".$newdata["dd"]."/".$newdata["yy"]);
     $simdate=date(DATE_RSS,$simt);
-    $simday = ($simt/1000/3600/24)>>0;
+    $simday = ($simt/3600/24)>>0;
     $match=array(0,0);
     $st_array=array($newdata["nboards"]*8);
     $pid_array=array($newdata["nboards"]*8);
@@ -146,7 +152,7 @@ function process_programs($month,$day,$year) {
         $match_found=0;
         for($pid=0;$pid<$newdata["nprogs"];$pid++) {
           $prog=$newdata["programs"][$pid];
-          if(check_match($prog,$simminutes,$simdate,$simday)) {
+          if(check_match($prog,$simminutes,$simdate,$simday,$newdata)) {
             for($sid=0;$sid<$newdata["nboards"]*8;$sid++) {
               $bid=$sid>>3;$s=$sid%8;
               if($newdata["mas"]==($sid+1)) continue; // skip master station
@@ -178,7 +184,7 @@ function process_programs($month,$day,$year) {
           }
         }
         if ($busy) {
-          $endminutes=run_sched($simminutes*60,$st_array,$pid_array,$et_array,$newdata)/60>>0;
+          $endminutes=run_sched($simminutes*60,$st_array,$pid_array,$et_array,$newdata,$simt)/60>>0;
           if($newdata["seq"]&&$simminutes!=$endminutes) $simminutes=$endminutes;
           else $simminutes++;
           for($sid=0;$sid<$newdata["nboards"]*8;$sid++) {$st_array[$sid]=0;$pid_array[$sid]=0;$et_array[$sid]=0;}
@@ -188,11 +194,11 @@ function process_programs($month,$day,$year) {
     } while($simminutes<24*60);
 }
 
-function check_match($prog,$simminutes,$simdate,$simday) {
+function check_match($prog,$simminutes,$simdate,$simday,$data) {
     if($prog[0]==0) return 0;
     if (($prog[1]&0x80)&&($prog[2]>1)) {
         $dn=$prog[2];$drem=$prog[1]&0x7f;
-        if(($simday%$dn)!=(($devday+$drem)%$dn)) return 0;
+        if(($simday%$dn)!=(($data["devday"]+$drem)%$dn)) return 0;
     } else {
         $wd=(date("w",strtotime($simdate))+6)%7;
         if(($prog[1]&(1<<$wd))==0)  return 0;
@@ -212,17 +218,19 @@ function check_match($prog,$simminutes,$simdate,$simday) {
         return 0;
 }
 
-function run_sched($simseconds,$st_array,$pid_array,$et_array,$data) {
+function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
   $endtime=$simseconds;
   for($sid=0;$sid<$data["nboards"]*8;$sid++) {
     if($pid_array[$sid]) {
       if($data["seq"]==1) {
-        echo "Station: ".$sid.", Start Time: ".$st_array[$sid].", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
+        time_to_text($sid,$st_array[$sid],$pid_array[$sid],$et_array[$sid],$data,$simt);
+//        echo "Station: ".$sid.", Start Time: ".$st_array[$sid].", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
         if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
             echo "Master Start: ".$st_array[$sid]+$data["mton"].", Master End: ".($et_array[$sid]+$data["mtoff"]-60)."\n<br>";
             $endtime=$et_array[$sid];
       } else {
-        echo "Station: ".$sid.", Start Time: ".$simseconds.", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
+        time_to_text($sid,$simseconds,$pid_array[$sid],$et_array[$sid],$data,$simt);
+//        echo "Station: ".$sid.", Start Time: ".$simseconds.", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
         if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
           $endtime=($endtime>$et_array[$sid])?$endtime:$et_array[$sid];
       }
@@ -231,6 +239,31 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data) {
   if($data["seq"]==0&&$data["mas"]>0) echo "Master Start: ".$simseconds.", Master End: ".$endtime."\n<br>";
   return $endtime;
 }
+
+function time_to_text($sid,$start,$pid,$end,$data,$simt) {
+    if (($data["settings"]["rd"]!=0)&&($simt+$start+($data["settings"]["tz"]-48)*900<=$data["settings"]["rdst"])) {
+        $rain_color="red";
+        $rain_skip="Skip";
+    } else {
+        $rain_color="black";
+        $rain_skip="";
+    }
+    echo $data["stations"][$sid]." ".getrunstr($start,$end)." P".$pid." ".(($end-$start)/60>>0)."minutes ".$rain_skip."\n<br><br>";
+}
+
+function getrunstr($start,$end){
+    $h=$start/3600>>0;
+    $m=($start/60>>0)%60;
+    $s=$start%60;
+
+    $str=($h/10>>0).($h%10).":".($m/10>>0).($m%10).":".($s/10>>0).($s%10);
+
+    $h=$end/3600>>0;
+    $m=($end/60>>0)%60;
+    $s=$end%60;
+    $str = $str."->".($h/10>>0).($h%10).":".($m/10>>0).($m%10).":".($s/10>>0).($s%10);
+    return $str;
+} 
 
 #Get OpenSprinkler options
 function get_options() {
