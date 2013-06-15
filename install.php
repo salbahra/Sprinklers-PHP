@@ -64,10 +64,10 @@ function new_config() {
         }
     }
 
-    if (!isset($_REQUEST["force_ssl"])) {
-        $config .= "$force_ssl=1;\n";
+    if (isset($_REQUEST["force_ssl"])) {
+        $config .= "\$force_ssl=1;\n";
     } else {
-        $config .= "$force_ssl=0;\n";        
+        $config .= "\$force_ssl=0;\n";        
     }
 
     #Attempt to open config.php for writing
