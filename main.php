@@ -1,7 +1,7 @@
 <?php
 
 #Refuse if a direct call has been made
-if(!defined('Sprinklers')){echo $denied;exit();}
+if(!defined('Sprinklers')){header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404);exit();}
 
 #Check if config exists, if not redirect to install
 if (!file_exists("config.php")) header("Location: install.php"); 
@@ -833,7 +833,7 @@ function gettoken() {
 
 #Authenticate user
 function login($tosend = "sprinklers") {
-    global $denied, $webtitle, $cache_file;
+    global $webtitle, $cache_file;
 
     $starttime = explode(' ', microtime()); 
     $starttime = $starttime[1] + $starttime[0]; 
@@ -882,7 +882,7 @@ function remove_token() {
 
 #Logs out the user
 function logout() {
-    global $denied, $base_url;
+    global $base_url;
     remove_token();
     $_SESSION = array();
     session_destroy();

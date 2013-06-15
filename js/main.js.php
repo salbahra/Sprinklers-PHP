@@ -14,7 +14,7 @@ if(!defined('Sprinklers')) {
 }
 
 #Kick if not authenticated
-if (!is_auth()) {exit();}
+if (!is_auth()) {header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404);exit();}
 
 #Echo token so browser can cache it for automatic logins
 if (isset($_SESSION['sendtoken']) && $_SESSION['sendtoken']) { echo "localStorage.setItem('token', '".$_SESSION['token']."');\n"; $_SESSION['sendtoken'] = false; }
