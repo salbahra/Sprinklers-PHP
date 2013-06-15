@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("webtitle","force_ssl","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+    $needed = array("webtitle","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -63,6 +63,8 @@ function new_config() {
             $config .= "$".$key." = '".$data."';\n";            
         }
     }
+
+    if (!isset($_REQUEST["force_ssl"])) $config .= "$force_ssl=1";
 
     #Attempt to open config.php for writing
     $file = fopen("config.php", 'w');
@@ -132,10 +134,8 @@ function fail() {
             }
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
-                force_ssl = "&force_ssl=" + (($("#force_ssl").is(':checked')) ? 1 : 0);
                 //Submit form data to the server
-                console.log("action=new_config&"+$("#options").find(":input").serialize()+force_ssl)
-                $.get("install.php","action=new_config&"+$("#options").find(":input").serialize()+force_ssl,function(data){
+                $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
                     if (data == 1) {
                         //If successful
                         $.mobile.hidePageLoadingMsg()
@@ -192,7 +192,7 @@ function fail() {
                                 <input type="text" name="pass_file" id="pass_file" value="/var/www/sprinklers/.htpasswd" />
                                 <label for="cache_file">Cache File Location:</label>
                                 <input type="text" name="cache_file" id="cache_file" value="/var/www/sprinklers/.cache" />
-                                <label for="force_ssl">Force SSL:</label>
+                                <label for="force_ssl">Force SSL</label>
                                 <input type="checkbox" name="force_ssl" id="force_ssl" checked />
                             </div>
                         </li>
