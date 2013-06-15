@@ -298,7 +298,11 @@ function get_preview() {
     date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
         list = $("#preview div[data-role='content']");
-        list.html(items);
+        if (items == "") {
+            list.html("<p align='center'>No stations set to run on this day.</p>")
+        } else {
+            list.html(items);
+        }
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#preview"));
     })
