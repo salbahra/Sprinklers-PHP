@@ -12,6 +12,9 @@ $os_ip = "192.168.1.30";
 #Set OpenSprinkler password
 $os_pw = "opendoor";
 
+#Force SSL
+$force_ssl = 1;
+
 #How far back to show logs ex. '24 hours' or '14 days'
 $timeViewWindow="7 days";
 

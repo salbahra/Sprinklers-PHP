@@ -10,7 +10,7 @@ if (!file_exists("config.php")) header("Location: install.php");
 require_once("config.php");
 
 #Get Base URL of Site
-if (isset($_SERVER['SERVER_NAME'])) $base_url = "https://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
+if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "http://").$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
 #Call action if requested and allowed
 if (isset($_REQUEST['action'])) {
@@ -894,7 +894,8 @@ function is_auth() {
 
 #Check if protocol is SSL and redirect if not
 function is_ssl() {
-    if(empty($_SERVER['HTTPS'])) {
+    global $force_ssl;
+    if($force_ssl && empty($_SERVER['HTTPS'])) {
         $newurl = 'https://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
         header("Location: ".$newurl);
         exit();

@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("webtitle","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+    $needed = array("webtitle","force_ssl","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -132,8 +132,9 @@ function fail() {
             }
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
+                force_ssl = "force_ssl=" + (($("#force_ssl").is(':checked')) ? 1 : 0);
                 //Submit form data to the server
-                $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
+                $.get("install.php","action=new_config&"+$("#options").find(":input").serialize()+force_ssl,function(data){
                     if (data == 1) {
                         //If successful
                         $.mobile.hidePageLoadingMsg()
@@ -180,6 +181,8 @@ function fail() {
                             <div data-role="fieldcontain">
                                 <label for="webtitle">Site Title:</label>
                                 <input type="text" name="webtitle" id="webtitle" value="Sprinkler System" />
+                                <label for="force_ssl">Force SSL:</label>
+                                <input type="checkbox" name="force_ssl" id="force_ssl" checked />
                                 <label for="os_ip">Open Sprinkler IP:</label>
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
                                 <label for="os_pw">Open Sprinkler Password:</label>
