@@ -132,8 +132,9 @@ function fail() {
             }
             function submit_config() {
                 $.mobile.showPageLoadingMsg()
-                force_ssl = "force_ssl=" + (($("#force_ssl").is(':checked')) ? 1 : 0);
+                force_ssl = "&force_ssl=" + (($("#force_ssl").is(':checked')) ? 1 : 0);
                 //Submit form data to the server
+                console.log("action=new_config&"+$("#options").find(":input").serialize()+force_ssl)
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize()+force_ssl,function(data){
                     if (data == 1) {
                         //If successful
