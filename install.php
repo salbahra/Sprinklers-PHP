@@ -174,12 +174,13 @@ function fail() {
                         <li>
                             <div data-role="fieldcontain">
                                 <label for="username">Username:</label>
-                                <input type="text" name="username" id="username" value="" />
+                                <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" />
                                 <label for="password">Password:</label>
                                 <input type="password" name="password" id="password" value="" />
                             </div>
                         </li>
                     </ul>
+                    <p align='center'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
                     <ul data-inset="true" data-role="listview">
                         <li data-role="list-divider">Intial Configuration</li>
                         <li>

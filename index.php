@@ -37,7 +37,7 @@ is_auth();
                     <form action="javascript:dologin()" method="post">
                         <fieldset>
                             <label for="username" class="ui-hidden-accessible">Username:</label>
-                            <input type="text" name="username" id="username" value="" placeholder="username" data-theme="a" />
+                            <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" placeholder="username" data-theme="a" />
                             <label for="password" class="ui-hidden-accessible">Password:</label>
                             <input type="password" name="password" id="password" value="" placeholder="password" data-theme="a" />
                             <label><input type="checkbox" id="remember" name="remember" />Remember Me</label>
