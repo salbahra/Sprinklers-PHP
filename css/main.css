@@ -83,6 +83,16 @@ div[data-role="page"] div[data-role="footer"] {
 #os-settings div[data-role="content"], #status div[data-role="content"], #manual div[data-role="content"] {
     top: 41px;
 }
-#logs div[data-role="content"], #runonce div[data-role="content"], #addprogram div[data-role="content"], #programs div[data-role="content"] {
+#logs div[data-role="content"], #logs div[data-role="content"], #runonce div[data-role="content"], #addprogram div[data-role="content"], #programs div[data-role="content"] {
     top: 28px;
+}
+@-moz-document url-prefix() {
+    #sprinklers div[data-role="content"] {
+        top: 28px;
+    }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    #sprinklers div[data-role="content"] {
+        top: 28px;
+    }
 }
