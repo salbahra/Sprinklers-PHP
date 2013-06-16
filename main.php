@@ -308,7 +308,10 @@ function get_settings() {
 
 function get_station_status() {
     global $os_ip;
-    return str_split(file_get_contents("http://".$os_ip."/sn0"));
+    $data = file_get_contents("http://".$os_ip."/sn0");
+    $data = str_replace("<!DOCTYPE html>\n", "", $data);
+
+    return str_split($data);
 }
 
 #Check if operation is enabled
