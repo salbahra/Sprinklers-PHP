@@ -43,13 +43,20 @@ function get_stations() {
 function get_programs() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip."/gp?d=0");
-    preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
-    preg_match("/var nprogs=(\d+),nboards=(\d+),ipas=\d+,mnp=\d+,pd=\[\];(.*);/", $matches[1], $matches);
-    if (empty($matches)) return $matches;
-    $newdata = array("nprogs" => $matches[1], "nboards" => $matches[2]);
-    $progs = explode(";", $matches[3]);
-    $i = 0;
 
+    preg_match_all("/(nprogs|nboards|ipas|mnp)=[\w|\d|.\"]+/", $data, $opts);
+
+    foreach ($opts[0] as $variable) {
+        if ($variable === "") continue;
+        $tmp = str_replace('"','',explode("=", $variable));
+        $newdata[$tmp[0]] = $tmp[1];
+    }
+
+    preg_match("/pd=\[\];(.*);/", $data, $progs);
+    if (empty($progs)) return $progs;
+    $progs = explode(";", $progs[1]);
+
+    $i = 0;
     foreach ($progs as $prog) {
         $tmp = explode("=", $prog);
         $tmp2 = str_replace("[", "", $tmp[1]);
@@ -109,26 +116,18 @@ function process_programs($month,$day,$year) {
     $newdata["stations"] = get_stations();
 
     $data = file_get_contents("http://".$os_ip."/gp?d=".$day."&m=".$month."&y=".$year);
-    preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
-    preg_match("/var seq=(\d),mas=(\d),wl=(\d+),sdt=(\d+),mton=(\d+),mtoff=(\d+),devday=(\d+),devmin=(\d+),dd=(\d+),mm=(\d+),yy=(\d+);var masop=\[([\d|,]+)\];var nprogs=(\d+),nboards=(\d+),ipas=\d+,mnp=\d+,pd=\[\];(.*);/", $matches[1], $matches);
-    $newdata["seq"] = $matches[1];
-    $newdata["mas"] = $matches[2];
-    $newdata["wl"] = $matches[3];
-    $newdata["sdt"] = $matches[4];
-    $newdata["mton"] = $matches[5];
-    $newdata["mtoff"] = $matches[6];
-    $newdata["devday"] = $matches[7];
-    $newdata["devmin"] = $matches[8];
-    $newdata["dd"] = $matches[9];
-    $newdata["mm"] = $matches[10];
-    $newdata["yy"] = $matches[11];
-    $newdata["masop"] = explode(",",$matches[12]);
-    $newdata["nprogs"] = $matches[13];
-    $newdata["nboards"] = $matches[14];
-    $progs = explode(";", $matches[15]);
+    preg_match_all("/(seq|mas|wl|sdt|mton|mtoff|devday|devmin|dd|mm|yy|nprogs|nboards|ipas|mnp)=[\w|\d|.\"]+/", $data, $opts);
+
+    foreach ($opts[0] as $variable) {
+        if ($variable === "") continue;
+        $tmp = str_replace('"','',explode("=", $variable));
+        $newdata[$tmp[0]] = $tmp[1];
+    }
+
+    preg_match("/pd=\[\];(.*);/", $data, $progs);
+    $progs = explode(";", $progs[1]);
 
     $i = 0;
-
     foreach ($progs as $prog) {
         $tmp = explode("=", $prog);
         $tmp2 = str_replace("[", "", $tmp[1]);
@@ -136,6 +135,7 @@ function process_programs($month,$day,$year) {
         $newdata["programs"][$i] = explode(",",$tmp2);
         $i++;
     }
+
     $simminutes=0;
     $simt=strtotime($newdata["mm"]."/".$newdata["dd"]."/".$newdata["yy"]);
     $simdate=date(DATE_RSS,$simt);
@@ -269,15 +269,22 @@ function getrunstr($start,$end){
 function get_options() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip."/vo");
-    preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
-    preg_match("/var opts=\[(.*)\];var nopts=(\d+),loc=\"(\d+)\";/", $matches[1],$matches);
-    $data = explode(",", $matches[1]);
-    $newdata["nopts"] = $matches[2];
-    $newdata["loc"] = $matches[3];
+    preg_match("/var opts=\[(.*)\];/", $data,$opts);
+    preg_match_all("/(nopts|loc)=[\w|\d|.\"]+/", $data, $other);
+
+    foreach ($other[0] as $variable) {
+        if ($variable === "") continue;
+        $tmp = str_replace('"','',explode("=", $variable));
+        $newdata[$tmp[0]] = $tmp[1];
+    }
+
+    $data = explode(",", $opts[1]);
+
     for ($i=3; $i <= count($data); $i=$i+4) {
         $o = intval($data[$i]);
         if (in_array($o, array(1,12,13,15,16,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
     }
+
     $newdata = move_keys(array(15,17,19,20,23),$newdata);
     $newdata = move_keys(array(16,21,22,25),$newdata);
     return $newdata;
@@ -287,20 +294,13 @@ function get_options() {
 function get_settings() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip);
-    preg_match("/<script>([\w\W]*?)<\/script>/", $data, $matches);
-    $data = str_replace("var ", "", $matches[1]);
-    $data = preg_replace("/ps=.*;/", "", $data);
-    $data = preg_replace("/sbits=.*;/", "", $data);
+    preg_match_all("/(ver|devt|nbrd|tz|en|rd|rs|mm|rdst|mas|urs|wl|ipas|loc)=[\w|\d|.\"]+/", $data, $matches);
     preg_match("/lrun=\[(.*)\]/", $data, $lrun);
     $lrun = explode(",", $lrun[1]);
-    $data = preg_replace("/lrun=\[.*\]/", "", $data);
-    $data = str_replace(";", ",", $data);
-    $data = str_replace("\n", "", $data);
-    $data = explode(",", $data);
     $newdata = array("lrun" => $lrun);
-    foreach ($data as $variable) {
+    foreach ($matches[0] as $variable) {
         if ($variable === "") continue;
-        $tmp = explode("=", $variable);
+        $tmp = str_replace('"','',explode("=", $variable));
         $newdata[$tmp[0]] = $tmp[1];
     }
     return $newdata;
