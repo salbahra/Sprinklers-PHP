@@ -29,8 +29,8 @@ if (isset($_REQUEST['action'])) {
 #Get station names
 function get_stations() {
     global $os_ip;
-    $stations = file_get_contents("http://".$os_ip."/pn.js");
-    preg_match("/var snames=\[(.*)\];/", $stations, $matches);
+    $stations = file_get_contents("http://".$os_ip."/vs");
+    preg_match("/snames=\[(.*)\];/", $stations, $matches);
     $stations = str_replace("'", "", $matches[1]);
     $stations = explode(",", $stations);
 
