@@ -400,7 +400,7 @@ function mm_off() {
 #Turn specific station on
 function spon() {
     global $os_ip;
-    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=1");
+    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=1&t=0");
 }
 
 #Turn specific station off
