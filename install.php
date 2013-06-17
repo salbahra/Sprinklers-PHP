@@ -82,7 +82,7 @@ function new_config() {
         file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
         exec('crontab /tmp/crontab.txt');
     } catch (Exception $e) {
-        echo 3;                
+        echo 3; exit();        
     }
 
     #Tell javascript action was succesful
