@@ -330,7 +330,6 @@ function get_options() {
         $o = intval($data[$i]);
         if (in_array($o, array(1,12,13,15,16,17,18,19,20,21,22,23,25))) $newdata[$o] = array("en" => $data[$i-2],"val" => $data[$i-1]);
     }
-
     $newdata = move_keys(array(15,17,19,20,23),$newdata);
     $newdata = move_keys(array(16,21,22,25),$newdata);
     return $newdata;
@@ -1022,6 +1021,7 @@ function delLineFromFile($fileName, $lineNum){
 #Rearrange array by move the keys in $keys array to the end of $array
 function move_keys($keys,$array) {
     foreach ($keys as $key) {
+        if (!isset($array[$key])) continue;
         $t = $array[$key];
         unset($array[$key]);
         $array[$key] = $t;
