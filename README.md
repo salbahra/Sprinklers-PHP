@@ -41,6 +41,24 @@ Install Instructions:
 
 + From there you may attempt to access the front end which will guide you through the rest of the install process.
 
+PHP Safe Mode:
+--------------
+
++ If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example:
+  +  ```crontab -e```
+  +  ```* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php >/dev/null 2>&1```
+
+Synology Specific:
+------------------
+
++ There is no crontab script on Synology, you have to edit /etc/crontab file manually.
+
++ The cron line parameters (* * * * *) must be separated by tabs, example:
+  + ```*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php >/dev/null 2>&1```
+
++ Cron service has to be restarted manually after updating the crontab by running
+  + ```/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh```
+
 Update Instructions:
 --------------------
 
