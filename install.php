@@ -76,10 +76,14 @@ function new_config() {
     #If unable to write the config, fail
     if (!$r) fail();
 
-    #Add the watcher for logs to crontab
-    $output = shell_exec('crontab -l');
-    file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
-    exec('crontab /tmp/crontab.txt');
+    try {
+        #Add the watcher for logs to crontab
+        $output = shell_exec('crontab -l');
+        file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
+        exec('crontab /tmp/crontab.txt');
+    } catch (Exception $e) {
+        echo 3;                
+    }
 
     #Tell javascript action was succesful
     echo 1;
@@ -134,14 +138,16 @@ function fail() {
                 $.mobile.showPageLoadingMsg()
                 //Submit form data to the server
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
+                    $.mobile.hidePageLoadingMsg()
                     if (data == 1) {
                         //If successful
-                        $.mobile.hidePageLoadingMsg()
                         showerror("Settings have been saved. Please wait while your redirected to the login screen!")
                         setTimeout(function(){location.reload()},2500);
+                    } else if (data == 3) {
+                        //Crontab not added but everything else went fine
+                        showerror("Settings have been saved. However, crontab was not added and must be added manually.")
+                        setTimeout(function(){location.reload()},2500);
                     } else {
-                        //If unsuccesful
-                        $.mobile.hidePageLoadingMsg()
                         if (data == 2) {
                             //URL Invalid
                             showerror("Settings have NOT been saved. Check IP and Port settings and try again.")
