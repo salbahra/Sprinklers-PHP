@@ -293,6 +293,28 @@ function get_logs() {
     })
 }
 
+function get_manual() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_list_manual",function(items){
+        list = $("#mm_list");
+        list.html(items);
+        if (list.hasClass("ui-listview")) list.listview("refresh");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#manual"));
+    })
+}
+
+function get_runonce() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_runonce",function(items){
+        list = $("#runonce_list");
+        list.html(items);
+        list.trigger("create");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#runonce"));
+    })
+}
+
 function get_preview() {
     $.mobile.showPageLoadingMsg();
     date = $("#preview_date").val().split("-");

@@ -482,7 +482,7 @@ function make_runonce() {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
         $n++;
     }
-    return $list."</div><button onclick='submit_runonce()'>Submit</button>";
+    echo $list."</div><button onclick='submit_runonce()'>Submit</button>";
 }
 
 #Make the list of all programs
@@ -625,7 +625,7 @@ function make_list_manual() {
         $list .= '<li><a '.(($status[$i]) ? 'class="green" ' : '').'href="javascript:toggle()">'.$station.'</a></li>';
         $i++;
     }
-    return $list;
+    echo $list;
 }
 
 #Generate status page

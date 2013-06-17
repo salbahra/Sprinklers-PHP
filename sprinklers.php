@@ -26,8 +26,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Main Menu</li>
             <li><a href="javascript:get_status()">Current Status</a></li>
-            <li><a href="#manual">Manual Control</a></li>
-            <li><a href="#runonce">Run-Once Program</a></li>
+            <li><a href="javascript:get_manual()">Manual Control</a></li>
+            <li><a href="javascript:get_runonce()">Run-Once Program</a></li>
             <li><a href="javascript:get_programs()">View/Change Programs</a></li>
             <li><a href="javascript:get_preview()">Preview Programs</a></li>
             <li><a href="#raindelay" data-rel="dialog">Rain Delay</a></li>
@@ -83,7 +83,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             </li>
         </ul>
         <ul data-role="listview" data-inset="true" id="mm_list">
-            <?php echo make_list_manual(); ?>
         </ul>
     </div>
 </div>
@@ -95,7 +94,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="javascript:submit_runonce()">Submit</a>
     </div>
     <div data-role="content" id="runonce_list">
-        <?php echo make_runonce(); ?>
     </div>
 </div>
 
