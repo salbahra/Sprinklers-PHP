@@ -612,8 +612,13 @@ function export_config() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=export_config",function(data){
         $.mobile.hidePageLoadingMsg();
-        localStorage.setItem("backup", data);
-        showerror("Backup saved to your device");
+        $("#sprinklers-settings").panel("close")
+        if (data === "") {
+            comm_error()
+        } else {
+            localStorage.setItem("backup", data);
+            showerror("Backup saved to your device");
+        }
     })
 }
 
@@ -623,10 +628,15 @@ function import_config() {
         showerror("No backup available on this device");
         return;
     }
+    if(!confirm("Are you sure you want to restore the configuration?")) return false;
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=import_config&data="+data,function(reply){
-    console.log(reply)
         $.mobile.hidePageLoadingMsg();
-        showerror("Backup restored to your device");
+        $("#sprinklers-settings").panel("close")
+        if (reply == 0) {
+            comm_error()
+        } else {
+            showerror("Backup restored to your device");
+        }
     })
 }
