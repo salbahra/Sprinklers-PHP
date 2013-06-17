@@ -43,6 +43,7 @@ Update Instructions:
 
 + Navigate to the web directory where the files are stored
   + ```cd /var/www/sprinklers```
+
 + Trigger a remote update using git
   + ```git remote update```
 
