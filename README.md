@@ -21,26 +21,29 @@ Raspberry Pi Users:
 
 + The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.
 
-Instructions:
--------------
+Install Instructions:
+---------------------
 
 + You first need a working OpenSprinkler setup that you can access via a browser
   + For further information please refer to the OpenSprinkler online user manual available on [Ray's Website](http://rayshobby.net/?page_id=192)
 
 + Install prerequisites as needed (example for Debian using Apache web server)
-  + ```apt-get install apache2 php5 libapache2-mod-php5``` 
+  + ```apt-get install apache2 php5 libapache2-mod-php5 git``` 
 
 + Create the directory you wish to place the files in (ex. /var/www/sprinklers for http://yourwebsite/sprinklers)
   + ```mkdir -m 777 /var/www/sprinklers```
 
-+ Download the files to your web directory using git (less steps but requires git to be installed)
++ Download the files to your web directory using git
   + ```git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers```
 
-+ OR download the zip file and extract the contents (more steps but also universal)
-  + ```wget https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip```
-  + ```unzip master.zip -d /var/www/sprinklers```
-  + ```mv /var/www/sprinklers/OpenSprinkler-Controller-master/* /var/www/sprinklers/```
-
 + From there you may attempt to access the front end which will guide you through the rest of the install process.
+
+Update Instructions:
+--------------------
+
++ Navigate to the web directory where the files are stored
+  + ```cd /var/www/sprinklers```
++ Trigger a remote update using git
+  + ```git remote update```
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/87d3c8783710e88024be2bf608fe8195 "githalytics.com")](http://githalytics.com/salbahra/OpenSprinkler-Controller)
