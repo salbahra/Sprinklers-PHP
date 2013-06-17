@@ -53,7 +53,7 @@ function import_config() {
     if (is_null($data)) echo 0;
     $start = "http://".$os_ip; $cs = "/cs?pw=".$os_pw; $co = "/co?pw=".$os_pw; $cp_start = "/cp?pw=".$os_pw; $i = 0;
     foreach ($data["stations"] as $station) {
-        $cs .= "&s".$i."=".$station;
+        $cs .= "&s".$i."=".urlencode($station);
         $i++;
     }
     send_to_os($start.$cs);
