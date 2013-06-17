@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("webtitle","os_ip","os_pw","timezone","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+    $needed = array("webtitle","os_ip","os_pw","timeViewWindow","pass_file","cache_file","log_file","log_previous");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -55,13 +55,7 @@ function new_config() {
         if ($key == "cache_file" || $key == "log_file" || $key == "log_previous") make_file($data);
 
         #Append current key/data pair to config.php string.
-        if ($key == "timezone") {
-            #If timezone prepare line using php function date_default_timezone_set
-            $config .= "date_default_timezone_set('".$data."');\n";
-        } else {
-            #Otherwise, prepare line using $key = '$value';
-            $config .= "$".$key." = '".$data."';\n";            
-        }
+        $config .= "$".$key." = '".$data."';\n";            
     }
 
     if (isset($_REQUEST["force_ssl"])) {
@@ -77,7 +71,7 @@ function new_config() {
     if (!$file) fail();
 
     #Write the config out
-    $r = fwrite($file,$config."?>");
+    $r = fwrite($file,$config."date_default_timezone_set('UTC');\n?>");
 
     #If unable to write the config, fail
     if (!$r) fail();
@@ -191,8 +185,6 @@ function fail() {
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
                                 <label for="os_pw">Open Sprinkler Password:</label>
                                 <input type="password" name="os_pw" id="os_pw" value="" />
-                                <label for="timezone">Timezone:</label>
-                                <input type="text" name="timezone" id="timezone" value="US/Central" />
                                 <label for="pass_file">Pass File Location:</label>
                                 <input type="text" name="pass_file" id="pass_file" value="/var/www/sprinklers/.htpasswd" />
                                 <label for="cache_file">Cache File Location:</label>
