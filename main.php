@@ -704,9 +704,10 @@ function make_list_status() {
     if($lrpid==255||$lrpid==99) $pname="from manual mode";
     if($lrpid==254||$lrpid==98) $pname="from a run-once program";
 
-    $list .= '<li data-role="list-divider">Last Run</li>';
-    $list .= '<li>'.$stations[$settings["lrun"][0]].' ran '.$pname.' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</li>';
-
+    if ($lrdur != 0) {
+        $list .= '<li data-role="list-divider">Last Run</li>';
+        $list .= '<li>'.$stations[$settings["lrun"][0]].' ran '.$pname.' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</li>';
+    }
     $list .= '<li data-role="list-divider">Sprinkler Stations</li>';
     $i = 0;
     foreach ($stations as $station) {
