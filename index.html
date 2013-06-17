@@ -55,7 +55,14 @@
 
 <ul>
 <li><p>The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  <a href="http://rayshobby.net/?p=6339">Ray's Blog Post</a>.</p></li>
-<li><p>The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.</p></li>
+<li>
+<p>The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.</p>
+
+<ul>
+<li>In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The OSPi defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080</li>
+</ul>
+</li>
+<li><p>In order for the interval program to be 100% compatibile with the web app a patch needs to be applied to the python code. More information regarding the patch and what is being changed specifically can be found on the <a href="http://rayshobby.net/phpBB3/viewtopic.php?f=2&amp;t=154&amp;start=40#p781">forum's here</a></p></li>
 </ul><h2>
 <a name="install-instructions" class="anchor" href="#install-instructions"><span class="octicon octicon-link"></span></a>Install Instructions:</h2>
 
