@@ -270,13 +270,11 @@ function get_options() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip."/vo");
     preg_match("/var opts=\[(.*)\];/", $data,$opts);
-    preg_match_all("/(nopts|loc)=[\w|\d|.\"]+/", $data, $other);
+    preg_match("/loc=\"(.*)\"/",$data,$loc);
+    preg_match("/nopts=(\d+)/", $data, $nopts);
 
-    foreach ($other[0] as $variable) {
-        if ($variable === "") continue;
-        $tmp = str_replace('"','',explode("=", $variable));
-        $newdata[$tmp[0]] = $tmp[1];
-    }
+    $newdata["loc"] = $loc[1];
+    $newdata["nopts"] = $nopts[1];
 
     $data = explode(",", $opts[1]);
 
@@ -294,10 +292,10 @@ function get_options() {
 function get_settings() {
     global $os_ip;
     $data = file_get_contents("http://".$os_ip);
-    preg_match_all("/(ver|devt|nbrd|tz|en|rd|rs|mm|rdst|mas|urs|wl|ipas|loc)=[\w|\d|.\"]+/", $data, $matches);
+    preg_match_all("/(ver|devt|nbrd|tz|en|rd|rs|mm|rdst|mas|urs|wl|ipas)=[\w|\d|.\"]+/", $data, $matches);
+    preg_match("/loc=\"(.*)\"/",$data,$loc);
     preg_match("/lrun=\[(.*)\]/", $data, $lrun);
-    $lrun = explode(",", $lrun[1]);
-    $newdata = array("lrun" => $lrun);
+    $newdata = array("lrun" => explode(",", $lrun[1]), "loc" => $loc[1]);
     foreach ($matches[0] as $variable) {
         if ($variable === "") continue;
         $tmp = str_replace('"','',explode("=", $variable));
