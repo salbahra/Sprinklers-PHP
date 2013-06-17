@@ -9,7 +9,8 @@ if (!file_exists("config.php")) return;
 require_once("config.php");
 
 $datetime=Date("Y-m-d H:i:s",time());
-$newSprinklerValveSettings=str_replace("<!DOCTYPE html>\n", "", file_get_contents('http://'.$os_ip.'/sn0'));
+preg_match("/\d+/", file_get_contents("http://".$os_ip."/sn0"), $newSprinklerValveSettings);
+$newSprinklerValveSettings=$newSprinklerValveSettings[0];
 $oldSprinklerValveSettings=file_get_contents($log_previous);
 if ($newSprinklerValveSettings!=$oldSprinklerValveSettings) {
 	file_put_contents ($log_file, $newSprinklerValveSettings."--".$datetime."\n",FILE_APPEND);
