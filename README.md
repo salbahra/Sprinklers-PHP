@@ -45,6 +45,6 @@ Update Instructions:
   + ```cd /var/www/sprinklers```
 
 + Trigger a remote update using git
-  + ```git remote update```
+  + ```git pull```
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/87d3c8783710e88024be2bf608fe8195 "githalytics.com")](http://githalytics.com/salbahra/OpenSprinkler-Controller)
