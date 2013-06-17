@@ -24,6 +24,55 @@ if (isset($_REQUEST['action'])) {
 	}
 }
 
+#Export/Import
+function export_config() {
+    global $os_ip;
+
+    $data = file_get_contents("http://".$os_ip."/gp?d=0");
+
+    preg_match("/pd=\[\];(.*);/", $data, $progs);
+    $progs = explode(";", $progs[1]);
+
+    $i = 0;
+    foreach ($progs as $prog) {
+        $tmp = explode("=", $prog);
+        $newdata["programs"][$i] = $tmp[1];
+        $i++;
+    }
+    $newdata["options"] = get_options();
+    $newdata["stations"] = get_stations();
+
+    echo json_encode($newdata);
+}
+
+function import_config() {
+    global $os_ip,$os_pw;
+
+    if (!isset($_REQUEST["data"])) echo 0;
+    $data = json_decode($_REQUEST["data"],true);
+    if (is_null($data)) echo 0;
+    $start = "http://".$os_ip; $cs = "/cs?pw=".$os_pw; $co = "/co?pw=".$os_pw; $cp_start = "/cp?pw=".$os_pw; $i = 0;
+    foreach ($data["stations"] as $station) {
+        $cs .= "&s".$i."=".$station;
+        $i++;
+    }
+    $cs = http_build_query($cs);
+    send_to_os($start.$cs);
+    $i = 0;
+    foreach ($data["programs"] as $prog) {
+        send_to_os($start.$cp_start."&pid=".$i."&v=".$prog);
+    }
+    foreach ($data["options"] as $key => $data) {
+        if (is_array($data)) {
+            if (in_array($key, array(16,21,22,25)) && $data["val"] == 0) continue; 
+            $co .= "&o".$key."=".$data["val"];
+        } else if ($key == "loc") {
+            $co .= "&".$key."=".$data;
+        }
+    }
+    send_to_os($start.$co);
+}
+
 #OpenSprinkler functions
 
 #Get station names
@@ -750,6 +799,14 @@ function make_panel($page) {
         "Settings" => array(
             "icon" => "gear",
             "url" => "javascript:show_settings()"
+        ),
+        "Export Configuration" => array(
+            "icon" => "forward",
+            "url" => "javascript:export_config()"
+        ),
+        "Import Configuration" => array(
+            "icon" => "back",
+            "url" => "javascript:import_config()"
         ),
         "Reboot OpenSprinkler" => array(
             "icon" => "alert",

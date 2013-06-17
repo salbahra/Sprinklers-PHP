@@ -607,3 +607,26 @@ function rsn() {
         }
     });
 }
+
+function export_config() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=export_config",function(data){
+        $.mobile.hidePageLoadingMsg();
+        localStorage.setItem("backup", data);
+        showerror("Backup saved to your device");
+    })
+}
+
+function import_config() {
+    var data = localStorage.getItem("backup");
+    if (data === null) {
+        showerror("No backup available on this device");
+        return;
+    }
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=import_config&data="+data,function(reply){
+    console.log(reply)
+        $.mobile.hidePageLoadingMsg();
+        showerror("Backup restored to your device");
+    })
+}
