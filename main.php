@@ -463,7 +463,8 @@ function make_list_logs() {
 
     $list = "";
     $ValveName = get_stations();
-    $tz = get_settings()["tz"] - 48;
+    $settings = get_settings();
+    $tz = $settings["tz"] - 48;
     $tz = (($tz>=0) ? "+" : "-").((abs($tz)/4)*60*60)+(((abs($tz)%4)*15/10).((abs($tz)%4)*15%10) * 60);
 
     $SprinklerValveHistory=file_get_contents($log_file);
