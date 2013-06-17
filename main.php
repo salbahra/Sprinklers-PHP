@@ -56,7 +56,6 @@ function import_config() {
         $cs .= "&s".$i."=".$station;
         $i++;
     }
-    $cs = http_build_query($cs);
     send_to_os($start.$cs);
     $i = 0;
     foreach ($data["programs"] as $prog) {
