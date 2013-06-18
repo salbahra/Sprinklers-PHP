@@ -99,6 +99,38 @@
 </li>
 <li><p>From there you may attempt to access the front end which will guide you through the rest of the install process.</p></li>
 </ul><h2>
+<a name="php-safe-mode" class="anchor" href="#php-safe-mode"><span class="octicon octicon-link"></span></a>PHP Safe Mode:</h2>
+
+<ul>
+<li>If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example:
+
+<ul>
+<li> <code>crontab -e</code>
+</li>
+<li> <code>* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code>
+</li>
+</ul>
+</li>
+</ul><h2>
+<a name="synology-specific" class="anchor" href="#synology-specific"><span class="octicon octicon-link"></span></a>Synology Specific:</h2>
+
+<ul>
+<li><p>There is no crontab script on Synology, you have to edit /etc/crontab file manually.</p></li>
+<li>
+<p>The cron line parameters (* * * * *) must be separated by tabs, example:</p>
+
+<ul>
+<li><code>*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
+</ul>
+</li>
+<li>
+<p>Cron service has to be restarted manually after updating the crontab by running</p>
+
+<ul>
+<li><code>/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh</code></li>
+</ul>
+</li>
+</ul><h2>
 <a name="update-instructions" class="anchor" href="#update-instructions"><span class="octicon octicon-link"></span></a>Update Instructions:</h2>
 
 <ul>
