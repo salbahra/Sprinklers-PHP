@@ -121,9 +121,11 @@ function get_programs() {
         $newdata["programs"][$i]["duration"] = $program[6];
 
         for ($n=0; $n < $newdata["nboards"]; $n++) {
-            $stations .= strval(decbin($program[7+$n]));
+            $bits = $program[7+$n];
+            for ($s=0; $s < 8; $s++) { 
+                $stations .= ($bits&(1<<$s)) ? "1" : "0";
+            }
         }
-
         $newdata["programs"][$i]["stations"] = $stations;
 
         if(($days0&0x80)&&($days1>1)){
