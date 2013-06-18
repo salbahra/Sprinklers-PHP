@@ -487,7 +487,7 @@ function make_list_logs() {
 
     for ($i=0;$i<count($SprinklerPattern);$i++){
         $ResultLine=" ";
-        for ($j=0;$j<16;$j++){
+        for ($j=0;$j<count($ValveName);$j++){
             if (($i>0) && ($SprinklerPattern[$i-1][$j]=="1") && ($SprinklerPattern[$i][$j]=="0")|| ($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) {
                 $TimeNow = $SprinklerTimeConverted[$i];
                 $TimeBegin = $TimeNow;
@@ -506,7 +506,7 @@ function make_list_logs() {
             };
         };
     };
-    for ($j=0;$j<16;$j++) {
+    for ($j=0;$j<count($ValveName);$j++) {
         if (!isset($ValveHistory[$j])) continue;
         $ct=count($ValveHistory[$j]);
         $list .= "<li data-role='list-divider'>".$ValveName[$j]."<span class='ui-li-count'>".$ct.(($ct == 1) ? " run" : " runs" )."</span></li>";
