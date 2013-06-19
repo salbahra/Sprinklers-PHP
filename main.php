@@ -28,9 +28,7 @@ if (isset($_REQUEST['action'])) {
 
 #Export/Import
 function export_config() {
-    global $os_ip;
-
-    $data = file_get_contents("http://".$os_ip."/gp?d=0");
+    $data = get_from_os("/gp?d=0");
 
     preg_match("/pd=\[\];(.*);/", $data, $progs);
     $progs = explode(";", $progs[1]);
@@ -48,20 +46,18 @@ function export_config() {
 }
 
 function import_config() {
-    global $os_ip,$os_pw;
-
     if (!isset($_REQUEST["data"])) echo 0;
     $data = json_decode($_REQUEST["data"],true);
     if (is_null($data)) echo 0;
-    $start = "http://".$os_ip; $cs = "/cs?pw=".$os_pw; $co = "/co?pw=".$os_pw; $cp_start = "/cp?pw=".$os_pw; $i = 0;
+    $cs = "/cs?pw="; $co = "/co?pw="; $cp_start = "/cp?pw="; $i = 0;
     foreach ($data["stations"] as $station) {
         $cs .= "&s".$i."=".urlencode($station);
         $i++;
     }
-    send_to_os($start.$cs);
+    send_to_os($cs);
     $i = 0;
     foreach ($data["programs"] as $prog) {
-        send_to_os($start.$cp_start."&pid=".$i."&v=".$prog);
+        send_to_os($cp_start."&pid=".$i."&v=".$prog);
     }
     foreach ($data["options"] as $key => $data) {
         if (is_array($data)) {
@@ -71,15 +67,14 @@ function import_config() {
             $co .= "&".$key."=".$data;
         }
     }
-    send_to_os($start.$co);
+    send_to_os($co);
 }
 
 #OpenSprinkler functions
 
 #Get station names
 function get_stations() {
-    global $os_ip;
-    $stations = file_get_contents("http://".$os_ip."/vs");
+    $stations = get_from_os("/vs");
     preg_match("/snames=\[(.*)\];/", $stations, $matches);
     $stations = str_replace("'", "", $matches[1]);
     $stations = explode(",", $stations);
@@ -91,8 +86,7 @@ function get_stations() {
 
 #Get program information
 function get_programs() {
-    global $os_ip;
-    $data = file_get_contents("http://".$os_ip."/gp?d=0");
+    $data = get_from_os("/gp?d=0");
 
     preg_match_all("/(nprogs|nboards|ipas|mnp)=[\w|\d|.\"]+/", $data, $opts);
 
@@ -161,13 +155,12 @@ function get_preview() {
 }
 
 function process_programs($month,$day,$year) {
-    global $os_ip;
     $newdata = array();
 
     $newdata["settings"] = get_settings();
     $newdata["stations"] = get_stations();
 
-    $data = file_get_contents("http://".$os_ip."/gp?d=".$day."&m=".$month."&y=".$year);
+    $data = get_from_os("/gp?d=".$day."&m=".$month."&y=".$year);
     preg_match_all("/(seq|mas|wl|sdt|mton|mtoff|devday|devmin|dd|mm|yy|nprogs|nboards|ipas|mnp)=[\w|\d|.\"]+/", $data, $opts);
 
     foreach ($opts[0] as $variable) {
@@ -319,8 +312,7 @@ function getrunstr($start,$end){
 
 #Get OpenSprinkler options
 function get_options() {
-    global $os_ip;
-    $data = file_get_contents("http://".$os_ip."/vo");
+    $data = get_from_os("/vo");
     preg_match("/var opts=\[(.*)\];/", $data,$opts);
     preg_match("/loc=\"(.*)\"/",$data,$loc);
     preg_match("/nopts=(\d+)/", $data, $nopts);
@@ -341,8 +333,7 @@ function get_options() {
 
 #Get OpenSprinkler settings
 function get_settings() {
-    global $os_ip;
-    $data = file_get_contents("http://".$os_ip);
+    $data = get_from_os("");
     preg_match_all("/(ver|devt|nbrd|tz|en|rd|rs|mm|rdst|mas|urs|wl|ipas)=[\w|\d|.\"]+/", $data, $matches);
     preg_match("/loc=\"(.*)\"/",$data,$loc);
     preg_match("/lrun=\[(.*)\]/", $data, $lrun);
@@ -356,8 +347,7 @@ function get_settings() {
 }
 
 function get_station_status() {
-    global $os_ip;
-    preg_match("/\d+/", file_get_contents("http://".$os_ip."/sn0"), $data);
+    preg_match("/\d+/", get_from_os("/sn0"), $data);
     return str_split($data[0]);
 }
 
@@ -375,88 +365,83 @@ function is_mm() {
 
 #Send command to OpenSprinkler
 function send_to_os($url) {
-    $result = file_get_contents($url);
+    global $os_ip, $os_pw;
+    $url = str_replace("pw=", "pw=".$os_pw, $url);
+    $result = file_get_contents("http://".$os_ip.$url);
     if ($result === false) { echo 0; exit(); }
     echo 1;
 }
 
+function get_from_os($url) {
+    global $os_ip, $os_pw;
+    $url = str_replace("pw=", "pw=".$os_pw, $url);
+    return file_get_contents("http://".$os_ip.$url);
+}
+
 #Updates a program
 function update_program() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cp?pw=".$os_pw."&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
+    send_to_os("/cp?pw=&pid=".$_REQUEST["pid"]."&v=".$_REQUEST["data"]);
 }
 
 #Deletes a program
 function delete_program() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/dp?pw=".$os_pw."&pid=".$_REQUEST["pid"]);
+    send_to_os("/dp?pw=&pid=".$_REQUEST["pid"]);
 }
 
 #Submit updated options
 function submit_options() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cs?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["names"])));
-    send_to_os("http://".$os_ip."/co?pw=".$os_pw."&".http_build_query(json_decode($_REQUEST["options"])));
+    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
+    send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
 }
 
 #Submit run-once program
 function runonce() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cr?pw=".$os_pw."&t=".$_REQUEST["data"]);    
+    send_to_os("/cr?pw=&t=".$_REQUEST["data"]);    
 }
 
 #Submit rain delay
 function raindelay() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rd=".$_REQUEST["delay"]);
+    send_to_os("/cv?pw=&rd=".$_REQUEST["delay"]);
 }
 
 #Reset all stations (turn-off)
 function rsn() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rsn=1");
+    send_to_os("/cv?pw=&rsn=1");
 }
 
 #Reboot OpenSprinkler
 function rbt() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&rbt=1");
+    send_to_os("/cv?pw=&rbt=1");
 }
 
 #Change operation to on
 function en_on() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=1");
+    send_to_os("/cv?pw=&en=1");
 }
 
 #Change operation to off
 function en_off() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&en=0");
+    send_to_os("/cv?pw=&en=0");
 }
 
 #Switch manual mode on
 function mm_on() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=1");
+    send_to_os("/cv?pw=&mm=1");
 }
 
 #Switch manual mode off
 function mm_off() {
-    global $os_ip, $os_pw;
-    send_to_os("http://".$os_ip."/cv?pw=".$os_pw."&mm=0");
+    send_to_os("/cv?pw=&mm=0");
 }
 
 #Turn specific station on
 function spon() {
-    global $os_ip;
-    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=1&t=0");
+    send_to_os("/sn".$_REQUEST["zone"]."=1&t=0");
 }
 
 #Turn specific station off
 function spoff() {
-    global $os_ip;
-    send_to_os("http://".$os_ip."/sn".$_REQUEST["zone"]."=0");
+    send_to_os("/sn".$_REQUEST["zone"]."=0");
 }
 
 
@@ -680,8 +665,6 @@ function make_list_manual() {
 
 #Generate status page
 function make_list_status() {
-    global $os_ip;
-
     $settings = get_settings();
     $stations = get_stations();
     $status = get_station_status();
