@@ -8,6 +8,8 @@ if (!file_exists("config.php")) return;
 #Include configuration
 require_once("config.php");
 
+date_default_timezone_set('UTC');
+
 $datetime=Date("Y-m-d H:i:s",time());
 preg_match("/\d+/", file_get_contents("http://".$os_ip."/sn0"), $newSprinklerValveSettings);
 $newSprinklerValveSettings=$newSprinklerValveSettings[0];
