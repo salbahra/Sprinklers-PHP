@@ -910,8 +910,8 @@ function login($tosend = "sprinklers") {
             fwrite($fh, $starttime." ".$auth." ".$_POST['username']."\n");
             fclose($fh);
             $_SESSION['sendtoken'] = true;
+            $_SESSION['token'] = $auth;
         }
-        $_SESSION['token'] = $auth;
         $_SESSION['isauth'] = 1;
         $_SESSION['username'] = $_POST['username'];
         
