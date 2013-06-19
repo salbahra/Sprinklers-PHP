@@ -1,8 +1,5 @@
 <?php
 
-#Set timezone
-date_default_timezone_set('UTC');
-
 #WebApp Title
 $webtitle = "Sprinkler System";
 

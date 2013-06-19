@@ -71,7 +71,7 @@ function new_config() {
     if (!$file) fail();
 
     #Write the config out
-    $r = fwrite($file,$config."date_default_timezone_set('UTC');\n?>");
+    $r = fwrite($file,$config."?>");
 
     #If unable to write the config, fail
     if (!$r) fail();

@@ -9,6 +9,8 @@ if (!file_exists("config.php")) header("Location: install.php");
 #Include configuration
 require_once("config.php");
 
+date_default_timezone_set('UTC');
+
 #Get Base URL of Site
 if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "http://").$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
