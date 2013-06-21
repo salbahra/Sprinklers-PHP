@@ -822,9 +822,6 @@ function make_panel($page) {
 function http_authenticate($user,$pass,$crypt_type='SHA'){
     global $pass_file;
 
-    if (!ctype_alnum($user)) return FALSE;
-    if (!ctype_alnum($pass)) return FALSE;
-
     if(file_exists($pass_file) && is_readable($pass_file)){
         if($fp=fopen($pass_file,'r')){
             while($line=fgets($fp)){
