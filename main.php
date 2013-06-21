@@ -670,7 +670,7 @@ function make_list_status() {
     $status = get_station_status();
 
     $tz = $settings['tz']-48;
-    $tz = (($tz>=0) ? "+" : "-").intval(abs($tz)/4).":".((abs($tz)%4)*15/10).((abs($tz)%4)*15%10);
+    $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
 
     $list = '<li data-role="list-divider">Device Time</li><li>'.gmdate("D, d M Y H:i:s",$settings["devt"]).'</li>';
 
