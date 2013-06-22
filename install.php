@@ -121,9 +121,9 @@ function fail() {
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="css/jquery.mobile-1.3.0.min.css" />
+    	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="js/jquery.mobile-1.3.0.min.js"></script>
+        <script src="js/jquery.mobile-1.3.1.min.js"></script>
         <script>
             function showerror(msg) {
                 // show error message
