@@ -459,7 +459,7 @@ function make_list_logs() {
     $SprinklerValveHistory=file_get_contents($log_file);
     $timeEarliest=strtotime(Date("Y-m-d H:i:s",strtotime("-".$timeViewWindow,time())));
     $Lines=explode("\n",$SprinklerValveHistory);
-
+    
     for ($i=0;$i<count($Lines);$i++){
         $ELines[$i]=explode("--",$Lines[$i]);
         if (count($ELines[$i])>1){
@@ -468,27 +468,27 @@ function make_list_logs() {
                 $SprinklerPattern[]=str_split($ELines[$i][0]);
                 $SprinklerTime[]=$ELines[$i][1];
                 $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
-                $RainSensor[]=$ELines[$i][2];
+                if (isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
             };
         };
     };
-
     for ($i=0;$i<count($SprinklerPattern);$i++){
-        if (($i>0) && ($RainSensor[$i-1]=="1") && ($RainSensor[$i]=="0") || ($i==count($RainSensor)-1) && ($RainSensor[$i]=="1")) {
-                $TimeNow = $SprinklerTimeConverted[$i];
-                $TimeBegin = $TimeNow;
+        if (isset($RainHistory)) {
+            if (($i>0) && ($RainSensor[$i-1]=="1") && ($RainSensor[$i]=="0") || ($i==count($RainSensor)-1) && ($RainSensor[$i]=="1")) {
+                    $TimeNow = $SprinklerTimeConverted[$i];
+                    $TimeBegin = $TimeNow;
 
-                for ($k=1;$k<$i;$k++) {
-                    if ($RainSensor[$i-$k]=="1"){
-                        $TimeBegin=$SprinklerTimeConverted[$i-$k];
-                    } else { break; };
-                };
+                    for ($k=1;$k<$i;$k++) {
+                        if ($RainSensor[$i-$k]=="1"){
+                            $TimeBegin=$SprinklerTimeConverted[$i-$k];
+                        } else { break; };
+                    };
 
-                $TimeElapsed=$TimeNow-$TimeBegin;
+                    $TimeElapsed=$TimeNow-$TimeBegin;
 
-                $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
+                    $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
+            }
         }
-
         for ($j=0;$j<count($ValveName);$j++){
             if (($i>0) && ($SprinklerPattern[$i-1][$j]=="1") && ($SprinklerPattern[$i][$j]=="0")|| ($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) {
                 $TimeNow = $SprinklerTimeConverted[$i];
