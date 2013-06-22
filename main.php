@@ -468,12 +468,27 @@ function make_list_logs() {
                 $SprinklerPattern[]=str_split($ELines[$i][0]);
                 $SprinklerTime[]=$ELines[$i][1];
                 $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
+                $RainSensor[]=$ELines[$i][2];
             };
         };
     };
 
     for ($i=0;$i<count($SprinklerPattern);$i++){
-        $ResultLine=" ";
+        if (($i>0) && ($RainSensor[$i-1]=="1") && ($RainSensor[$i]=="0") || ($i==count($RainSensor)-1) && ($RainSensor[$i]=="1")) {
+                $TimeNow = $SprinklerTimeConverted[$i];
+                $TimeBegin = $TimeNow;
+
+                for ($k=1;$k<$i;$k++) {
+                    if ($RainSensor[$i-$k]=="1"){
+                        $TimeBegin=$SprinklerTimeConverted[$i-$k];
+                    } else { break; };
+                };
+
+                $TimeElapsed=$TimeNow-$TimeBegin;
+
+                $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
+        }
+
         for ($j=0;$j<count($ValveName);$j++){
             if (($i>0) && ($SprinklerPattern[$i-1][$j]=="1") && ($SprinklerPattern[$i][$j]=="0")|| ($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) {
                 $TimeNow = $SprinklerTimeConverted[$i];
@@ -487,8 +502,6 @@ function make_list_logs() {
 
                 $TimeElapsed=$TimeNow-$TimeBegin;
 
-                $ResultLine.=" ".$ValveName[$j].((($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) ? " has been on for ":" was on for ").$TimeElapsed." seconds.  ";
-                 
                 $ValveHistory[$j][]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) ? " Running Now" : ""));
             };
         };
@@ -505,6 +518,17 @@ function make_list_logs() {
             };
         };
     };
+    if (isset($RainHistory)) {
+        $ct=count($RainHistory);
+        $list .= "<li data-role='list-divider'>Rain Sensor<span class='ui-li-count'>".$ct.(($ct == 1) ? " switch" : " switches" )."</span></li>";
+        if ($ct>0) {
+            for ($k=0;$k<count($RainHistory);$k++){
+                $theTime=date('D, n/j/Y g:i A',strtotime($RainHistory[$k][0])+$tz);
+                $mins = ceil($RainHistory[$k][1]/60);
+                $list .= "<li>".$theTime.$RainHistory[$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
+            };
+        };        
+    }
     echo $list;
 }
 
