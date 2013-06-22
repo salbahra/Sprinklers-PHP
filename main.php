@@ -169,6 +169,9 @@ function process_programs($month,$day,$year) {
         $newdata[$tmp[0]] = $tmp[1];
     }
 
+    #Fix for missing sequential option on RPi interval program
+    if (!isset($newdata["seq"])) $newdata["seq"] = 1;
+
     preg_match("/pd=\[\];(.*);/", $data, $progs);
     $progs = explode(";", $progs[1]);
 
@@ -180,7 +183,7 @@ function process_programs($month,$day,$year) {
         $newdata["programs"][$i] = explode(",",$tmp2);
         $i++;
     }
-
+    
     $simminutes=0;
     $simt=strtotime($newdata["mm"]."/".$newdata["dd"]."/".$newdata["yy"]);
     $simdate=date(DATE_RSS,$simt);
