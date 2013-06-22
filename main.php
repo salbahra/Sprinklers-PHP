@@ -468,12 +468,12 @@ function make_list_logs() {
                 $SprinklerPattern[]=str_split($ELines[$i][0]);
                 $SprinklerTime[]=$ELines[$i][1];
                 $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
-                if (isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
+                if ($settings["urs"] == 1 && isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
             };
         };
     };
     for ($i=0;$i<count($SprinklerPattern);$i++){
-        if (isset($RainSensor)) {
+        if (isset($RainSensor[$i])) {
             if (($i>0) && ($RainSensor[$i-1]=="1") && ($RainSensor[$i]=="0") || ($i==count($RainSensor)-1) && ($RainSensor[$i]=="1")) {
                     $TimeNow = $SprinklerTimeConverted[$i];
                     $TimeBegin = $TimeNow;
