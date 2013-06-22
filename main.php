@@ -473,7 +473,7 @@ function make_list_logs() {
         };
     };
     for ($i=0;$i<count($SprinklerPattern);$i++){
-        if (isset($RainHistory)) {
+        if (isset($RainSensor)) {
             if (($i>0) && ($RainSensor[$i-1]=="1") && ($RainSensor[$i]=="0") || ($i==count($RainSensor)-1) && ($RainSensor[$i]=="1")) {
                     $TimeNow = $SprinklerTimeConverted[$i];
                     $TimeBegin = $TimeNow;
