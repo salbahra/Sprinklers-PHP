@@ -25,6 +25,17 @@ $(document).one("pageinit","#sprinklers", function(){
     $.mobile.changePage($("#sprinklers"));
 });
 
+$(window).bind("resize",function(e){
+    var content_height = $.mobile.activePage.children('[data-role="content"]').height(),
+        header_height  = $.mobile.activePage.children('[data-role="header"]').height(),
+        window_height  = $(this).height(),
+        total          = content_height + header_height;
+
+    if (window_height > total) total = window_height;
+    $.mobile.activePage.css('min-height', total);
+    e.stopImmediatePropagation();
+})
+
 //Event bind swipe actions to show/hide side panel
 $(document).on("swiperight swipeleft", function(e){
     //Define specific action triggered
