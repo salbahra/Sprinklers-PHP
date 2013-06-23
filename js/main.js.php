@@ -130,15 +130,6 @@ function comm_error() {
     showerror("Error communicating with OpenSprinkler. Please check your password is correct.")
 }
 
-$("#sprinklers,#status").on("pagebeforeshow",function(e,data){
-    var newpage = e.target.id;
-     
-    if (newpage == "sprinklers") {
-        //Add a new tip to the header of main page on each page load
-        new_tip();
-    }
-});
-
 //This bind intercepts most links to remove the 300ms delay iOS adds
 $(document).on('pageinit', function (e, data) {
     var newpage = e.target.id;
@@ -183,7 +174,10 @@ $(document).on("pageshow",function(e,data){
 $(document).on("pagebeforeshow",function(e,data){
     newpage = e.target.id;
 
-    if (newpage != "sprinklers") {
+    if (newpage == "sprinklers") {
+        //Add a new tip to the header of main page on each page load
+        new_tip();
+    } else {
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
     }    
