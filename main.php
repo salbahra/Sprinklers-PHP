@@ -50,6 +50,15 @@ function import_config() {
     $data = json_decode($_REQUEST["data"],true);
     if (is_null($data)) echo 0;
     $cs = "/cs?pw="; $co = "/co?pw="; $cp_start = "/cp?pw="; $i = 0;
+    foreach ($data["options"] as $key => $value) {
+        if (is_array($value)) {
+            if (in_array($key, array(16,21,22,25)) && $value["val"] == 0) continue; 
+            $co .= "&o".$key."=".$value["val"];
+        } else if ($key == "loc") {
+            $co .= "&".$key."=".$value;
+        }
+    }
+    send_to_os($co);
     foreach ($data["stations"] as $station) {
         $cs .= "&s".$i."=".urlencode($station);
         $i++;
@@ -59,15 +68,6 @@ function import_config() {
     foreach ($data["programs"] as $prog) {
         send_to_os($cp_start."&pid=".$i."&v=".$prog);
     }
-    foreach ($data["options"] as $key => $data) {
-        if (is_array($data)) {
-            if (in_array($key, array(16,21,22,25)) && $data["val"] == 0) continue; 
-            $co .= "&o".$key."=".$data["val"];
-        } else if ($key == "loc") {
-            $co .= "&".$key."=".$data;
-        }
-    }
-    send_to_os($co);
 }
 
 #OpenSprinkler functions
