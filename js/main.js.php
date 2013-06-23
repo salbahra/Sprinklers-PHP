@@ -180,6 +180,15 @@ $(document).on("pageshow",function(e,data){
 
 });
 
+$(document).on("pagebeforeshow",function(e,data){
+    newpage = e.target.id;
+
+    if (newpage != "sprinklers") {
+        var title = document.title;
+        document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
+    }    
+})
+
 function check_auto(sliders){
     if (typeof(window.sliders) !== "object") window.sliders = [];
     sliders.each(function(i){
