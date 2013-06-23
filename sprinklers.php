@@ -164,3 +164,33 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-role="content">
     </div>
 </div>
+
+<div data-role="page" id="about">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>About</h3>
+        <a href="javascript:gohome()" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <div data-role="collapsible-set" data-content-theme="d">
+            <div data-role="collapsible" data-collapsed="false">
+                <h3>Background</h3>
+                <p>I, Samer Albahra, am a medical school graduate, currently doing a pathology residency at UTHSCSA. I enjoy making mobile applications in my spare time and was excited when I first discovered the OpenSprinkler, an open-source Internet based sprinkler system, which lacked a truly mobile interface.</p>
+                <p>I decided to add a mobile front-end using jQuery Mobile. There were a few things I wanted to accomplish:</p>
+                <ul><li>Large on/off buttons in manual mode</li><li>Easy slider inputs for any duration input</li><li>Compatibility between many/all devices</li><li>Easy feedback of current status</li><li>Easy program input/modification</li></ul>
+                <p>Fortunately, I had a lot of feedback on Ray's forums and now have an application that has been tested across many devices and installed in many unique environments.</p>
+                <p>I fully support every feature of the OpenSprinkler and also the OpenSprinkler Pi (using the interval program).</p>
+                <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
+            </div>
+            <div data-role="collapsible">
+                <h3>Donate</h3>
+                    <p align='center' style="overflow: visible;white-space: normal;">This web app has been developed by Samer Albahra. If you find it useful please donate to him by clicking the button below.<br>
+                    <form align='center' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="89M484QR2TCFJ">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form></p>
+            </div>
+        </div>
+    </div>
+</div>

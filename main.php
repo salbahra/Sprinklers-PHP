@@ -829,6 +829,10 @@ function make_panel($page) {
         "Logout" => array(
             "icon" => "delete",
             "url" => "javascript:logout()"
+        ),
+        "About" => array(
+            "icon" => "info",
+            "url" => "#about"
         )
     );
     $opts = '';
