@@ -22,7 +22,7 @@ Raspberry Pi Users:
 + The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.
   + In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The OSPi defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080
 
-+ In order for the interval program to be 100% compatibile with the web app a patch needs to be applied to the python code. More information regarding the patch and what is being changed specifically can be found on the [forum's here](http://rayshobby.net/phpBB3/viewtopic.php?f=2&t=154&start=40#p781)
++ In order for the interval program to be 100% compatibile with the web app you must be using OSPi built on or after June 22, 2013.
 
 Install Instructions:
 ---------------------
