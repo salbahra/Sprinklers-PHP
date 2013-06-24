@@ -39,13 +39,13 @@ $(window).bind("resize",function(e){
 //Event bind swipe actions to show/hide side panel
 $(document).on("swiperight swipeleft", function(e){
     //Define specific action triggered
-    eventtype = e.type;
+    var eventtype = e.type;
     //Grab the calling page
-    page = $(e.target).closest(".ui-page-active");
+    var page = $(e.target).closest(".ui-page-active");
     //Save the calling page's ID
-    pageid = page.attr("id");
+    var pageid = page.attr("id");
     //Grab the panel associated with the calling page
-    panel = page.find("[id$=settings]");
+    var panel = page.find("[id$=settings]");
 
     //If the panel is open then close the panel
     if (panel.length != 0 && !panel.hasClass("ui-panel-closed")) {
@@ -61,7 +61,7 @@ $(document).on("swiperight swipeleft", function(e){
 });
 
 $("#preview_date").change(function(){
-    id = $(".ui-page-active").attr("id");
+    var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
 });
 
@@ -135,7 +135,7 @@ $(document).on('pageinit', function (e, data) {
     var newpage = e.target.id;
 
     if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs") {
-        currpage = $(e.target);
+        var currpage = $(e.target);
 
         currpage.find("a[data-rel=back]").bind('vclick', function (e) {
             e.preventDefault(); e.stopImmediatePropagation();
@@ -162,7 +162,7 @@ $(document).on('pageinit', function (e, data) {
 });
 
 $(document).on("pageshow",function(e,data){
-    newpage = e.target.id;
+    var newpage = e.target.id;
 
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
@@ -172,7 +172,7 @@ $(document).on("pageshow",function(e,data){
 });
 
 $(document).on("pagebeforeshow",function(e,data){
-    newpage = e.target.id;
+    var newpage = e.target.id;
 
     if (newpage == "sprinklers") {
         //Add a new tip to the header of main page on each page load
@@ -271,13 +271,12 @@ function gohome() {
 function show_settings() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_settings_list",function(items){
-        container = $("#os-settings div[data-role='content']");
+        var container = $("#os-settings div[data-role='content']");
         container.html(items);
         container.children().trigger("create")
         if (container.hasClass("ui-content")) {
             container.find("ul").each(function(a,b){
-                list = $(b)
-                list.listview();
+                $(b).listview();
             })
         }
         $.mobile.hidePageLoadingMsg();
@@ -288,7 +287,7 @@ function show_settings() {
 function get_status() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_status",function(items){
-        list = $("#status_list");
+        var list = $("#status_list");
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
@@ -299,7 +298,7 @@ function get_status() {
 function get_logs() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_logs",function(items){
-        list = $("#logs_list");
+        var list = $("#logs_list");
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
@@ -310,7 +309,7 @@ function get_logs() {
 function get_manual() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_manual",function(items){
-        list = $("#mm_list");
+        var list = $("#mm_list");
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
@@ -321,7 +320,7 @@ function get_manual() {
 function get_runonce() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_runonce",function(items){
-        list = $("#runonce_list");
+        var list = $("#runonce_list");
         list.html(items);
         list.trigger("create");
         $.mobile.hidePageLoadingMsg();
@@ -331,9 +330,9 @@ function get_runonce() {
 
 function get_preview() {
     $.mobile.showPageLoadingMsg();
-    date = $("#preview_date").val().split("-");
+    var date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
-        list = $("#preview div[data-role='content']");
+        var list = $("#preview div[data-role='content']");
         if (items == "") {
             list.html("<p align='center'>No stations set to run on this day.</p>")
         } else {
@@ -347,11 +346,10 @@ function get_preview() {
 function get_programs() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_programs",function(items){
-        list = $("#programs_list");
+        var list = $("#programs_list");
         list.html(items);
         $("#programs input[name^='rad_days']").change(function(){
-            progid = $(this).attr('id').split("-")[1];
-            type = $(this).val().split("-")[0];
+            var progid = $(this).attr('id').split("-")[1], type = $(this).val().split("-")[0], old;
             type = type.split("_")[1];
             if (type == "n") {
                 old = "week"
@@ -370,11 +368,11 @@ function get_programs() {
             submit_program($(this).attr("id").split("-")[1]);
         })
         $("#programs [id^='s_checkall-']").click(function(){
-            id = $(this).attr("id").split("-")[1]
+            var id = $(this).attr("id").split("-")[1]
             $("[id^='station_'][id$='-"+id+"']").prop("checked",true).checkboxradio("refresh");
         })
         $("#programs [id^='s_uncheckall-']").click(function(){
-            id = $(this).attr("id").split("-")[1]
+            var id = $(this).attr("id").split("-")[1]
             $("[id^='station_'][id$='-"+id+"']").prop("checked",false).checkboxradio("refresh");
         })
         $("#programs [id^='delete-']").click(function(){
@@ -389,11 +387,10 @@ function get_programs() {
 function add_program() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=fresh_program",function(items){
-        list = $("#newprogram");
+        var list = $("#newprogram");
         list.html(items);
         $("#addprogram input[name^='rad_days']").change(function(){
-            progid = "new";
-            type = $(this).val().split("-")[0];
+            var progid = "new", type = $(this).val().split("-")[0], old;
             type = type.split("_")[1];
             if (type == "n") {
                 old = "week"
@@ -436,8 +433,7 @@ function delete_program(id) {
 }
 
 function submit_program(id) {
-    program = []
-    days=[0,0]
+    var program = [], days=[0,0]
     program[0] = ($("#en-"+id).is(':checked')) ? 1 : 0
 
     if($("#days_week-"+id).is(':checked')) {
@@ -454,9 +450,9 @@ function submit_program(id) {
     program[1] = days[0]
     program[2] = days[1]
 
-    start = $("#start-"+id).val().split(":")
+    var start = $("#start-"+id).val().split(":")
     program[3] = parseInt(start[0])*60+parseInt(start[1])
-    end = $("#end-"+id).val().split(":")
+    var end = $("#end-"+id).val().split(":")
     program[4] = parseInt(end[0])*60+parseInt(end[1])
 
     if(!(program[3]<program[4])) {showerror("Error: Start time must be prior to end time.");return;}
@@ -464,12 +460,12 @@ function submit_program(id) {
     program[5] = parseInt($("#interval-"+id).val())
     program[6] = $("#duration-"+id).val() * 60
 
-    sel = $("[id^=station_][id$=-"+id+"]")
-    total = sel.length
-    nboards = total / 8
+    var sel = $("[id^=station_][id$=-"+id+"]")
+    var total = sel.length
+    var nboards = total / 8
 
 
-    var stations=[0],station_selected=0,bid;
+    var stations=[0],station_selected=0,bid, sid;
     for(bid=0;bid<nboards;bid++) {
         stations[bid]=0;
         for(s=0;s<8;s++) {
@@ -501,16 +497,12 @@ function submit_program(id) {
 }
 
 function submit_settings() {
-    var opt = {}
-    var names = {}
-    invalid = false
+    var opt = {}, names = {}, invalid = false;
     $("#os-settings").find(":input").each(function(a,b){
-        $item = $(b)
-        id = $item.attr('id')
-        data = $item.val()
+        var $item = $(b), id = $item.attr('id'), data = $item.val();
         switch (id) {
             case "o1":
-                tz = data.split(":")
+                var tz = data.split(":")
                 tz[0] = parseInt(tz[0],10);
                 tz[1] = parseInt(tz[1],10);
                 tz[1]=(tz[1]/15>>0)/4.0;tz[0]=tz[0]+(tz[0]>=0?tz[1]:-tz[1]);
@@ -547,7 +539,7 @@ function submit_settings() {
 }
 
 function submit_runonce() {
-    runonce = []
+    var runonce = []
     $("#runonce").find(":input[data-type='range']").each(function(a,b){
         runonce.push(parseInt($(b).val())*60)
     })
@@ -564,9 +556,9 @@ function submit_runonce() {
 function toggle() {
     if ($("#mm").val() == "off") return;
     var $list = $("#mm_list");
-    $anchor = $list.find(".ui-btn-active");
-    $listitems = $list.children("li:not(li.ui-li-divider)");
-    $item = $anchor.closest("li:not(li.ui-li-divider)");
+    var $anchor = $list.find(".ui-btn-active");
+    var $listitems = $list.children("li:not(li.ui-li-divider)");
+    var $item = $anchor.closest("li:not(li.ui-li-divider)");
     var currPos = $listitems.index($item) + 1;
     var total = $listitems.length;
     if ($anchor.hasClass("green")) {
