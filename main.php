@@ -64,6 +64,7 @@ function import_config() {
         $i++;
     }
     send_to_os($cs);
+    send_to_os("/dp?pw=&pid=-1");
     $i = 0;
     foreach ($data["programs"] as $prog) {
         send_to_os($cp_start."&pid=".$i."&v=".$prog);
