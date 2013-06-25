@@ -181,6 +181,8 @@ $(document).on("pageshow",function(e,data){
 $(document).on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
 
+    $.mobile.silentScroll(0);
+
     if (newpage == "sprinklers") {
         //Add a new tip to the header of main page on each page load
         new_tip();
@@ -336,15 +338,15 @@ function get_runonce() {
 }
 
 function get_preview() {
+    $("#timeline").html("");
     $.mobile.showPageLoadingMsg();
     var date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
-        var list = $("#timeline"), empty = true;
+        var empty = true;
         if (items == "") {
-            list.html("<p align='center'>No stations set to run on this day.</p>")
+            $("#timeline").html("<p align='center'>No stations set to run on this day.</p>")
         } else {
             empty = false
-            list.html("");
             var date = $("#preview_date").val().split("-");
             var data = eval("["+items.substring(0, items.length - 1)+"]");
             $.each(data, function(){
