@@ -370,6 +370,7 @@ function get_preview() {
             window.addEventListener("resize",timeline_redraw);
             timeline.draw(data, options);
         }
+        $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#preview"));
     })
 }
