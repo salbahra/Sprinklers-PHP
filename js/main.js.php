@@ -259,16 +259,16 @@ function new_tip() {
 }
 
 function logout(){
-    if (confirm('Are you sure you want to logout?')) {
+    areYouSure("Are you sure you want to logout?", "", function() {
+        $.mobile.changePage($("#login"));
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
             $("#container div[data-role='page']:not('.ui-page-active')").remove();
             $('.ui-page-active').one("pagehide",function(){
                 $(this).remove();
             })
-            $.mobile.changePage($("#login"));
         });
-    }
+    },gohome);
 }
 
 function gohome() {
@@ -627,18 +627,18 @@ function raindelay() {
 }
 
 function rbt() {
-    if(!confirm("Are you sure you want to restart the device?")) return false;
-    $.mobile.showPageLoadingMsg()
-    $.get("index.php","action=rbt",function(result){
-        $.mobile.hidePageLoadingMsg()
-        $("#sprinklers-settings").panel("close")
-        if (result == 0) {
-            comm_error()
-        } else {
-            showerror("OpenSprinkler was rebooted.")
-        }
-    });
-
+    areYouSure("Are you sure you want to reboot OpenSprinkler?", "", function() {
+        $.mobile.showPageLoadingMsg()
+        $.get("index.php","action=rbt",function(result){
+            $.mobile.hidePageLoadingMsg()
+            gohome();
+            if (result == 0) {
+                comm_error()
+            } else {
+                showerror("OpenSprinkler was rebooted.")
+            }
+        });
+    },gohome);
 }
 
 function rsn() {
@@ -673,15 +673,29 @@ function import_config() {
         showerror("No backup available on this device");
         return;
     }
-    if(!confirm("Are you sure you want to restore the configuration?")) return false;
-    $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=import_config&data="+data,function(reply){
-        $.mobile.hidePageLoadingMsg();
-        $("#sprinklers-settings").panel("close")
-        if (reply == 0) {
-            comm_error()
-        } else {
-            showerror("Backup restored to your device");
-        }
-    })
+
+    areYouSure("Are you sure you want to restore the configuration?", "", function() {
+        $.mobile.showPageLoadingMsg();
+        $.get("index.php","action=import_config&data="+data,function(reply){
+            $.mobile.hidePageLoadingMsg();
+            gohome();
+            if (reply == 0) {
+                comm_error()
+            } else {
+                showerror("Backup restored to your device");
+            }
+        })
+    },gohome);
+}
+
+function areYouSure(text1, text2, callback, callback2) {
+    $("#sure .sure-1").text(text1);
+    $("#sure .sure-2").text(text2);
+    $("#sure .sure-do").unbind("click.sure").on("click.sure", function() {
+        callback();
+    });
+    $("#sure .sure-dont").unbind("click.sure").on("click.sure", function() {
+        callback2();
+    });
+    $.mobile.changePage("#sure");
 }
