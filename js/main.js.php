@@ -79,11 +79,13 @@ $("select[data-role='slider']").change(function(){
     //Find out what the switch was changed to
     var changedTo = slide.val();
     if(window.sliders[type]!==changedTo){
+        window.sliders[type] = changedTo;
         if (changedTo=="on") {
             //If chanegd to on
             if (type === "autologin") {
-                if (localStorage.getItem("token") != null) return;
+                if (localStorage.getItem("token") !== null) return;
                 $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
+                $("#login .ui-checkbox").hide();
                 $.mobile.changePage($("#login"));
             }
             if (type === "en") {
@@ -135,37 +137,6 @@ $("select[data-role='slider']").change(function(){
 function comm_error() {
     showerror("Error communicating with OpenSprinkler. Please check your password is correct.")
 }
-
-//This bind intercepts most links to remove the 300ms delay iOS adds
-$(document).on('pageinit', function (e, data) {
-    var newpage = e.target.id;
-
-    if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs") {
-        var currpage = $(e.target);
-
-        currpage.find("a[data-rel=back]").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            highlight(this);
-            history.back();
-        })
-        currpage.find("a[data-rel=close]").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            highlight(this);
-            $(".ui-page-active [id$=settings]").panel("close");
-        })
-        currpage.find("a[href='#"+currpage.attr('id')+"-settings']").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            highlight(this);
-            $(".ui-page-active [id$=settings]").panel("open");
-        });
-        currpage.find("a[href^=javascript\\:]").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            var func = $(this).attr("href").split("javascript:")[1];
-            highlight(this);
-            eval(func);
-        });
-    }
-});
 
 $(document).on("pageshow",function(e,data){
     var newpage = e.target.id;
@@ -225,18 +196,13 @@ function highlight(button) {
 
 function grab_token(pageid){
     $.mobile.showPageLoadingMsg();
-    var parameters = "action=gettoken&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=" + $('#remember').is(':checked');
-    if (!$('#remember').is(':checked')) {
-        $("#"+pageid+"-autologin").val("off").slider("refresh");
-        window.sliders["autologin"] = "off";
-        $.mobile.changePage($("#"+pageid));
-        return;
-    }
+    var parameters = "action=gettoken&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=true";
+    $("#username, #password").val('');
     $.post("index.php",parameters,function(reply){
         $.mobile.hidePageLoadingMsg();
         if (reply == 0) {
-            showerror("Invalid Login");
             $.mobile.changePage($("#"+pageid));
+            showerror("Invalid Login");
         } else if (reply === "") {
             $("#"+pageid+"-autologin").val("off").slider("refresh");
             window.sliders["autologin"] = "off";
@@ -245,8 +211,9 @@ function grab_token(pageid){
             localStorage.setItem('token',reply);
             $.mobile.changePage($("#"+pageid));
         }
+        $("#login .ui-checkbox").show()
+        $("#login form").attr("action","javascript:dologin()");
     }, "text");
-    $("#login form").attr("action","javascript:dologin()");
 }
 
 function new_tip() {
@@ -586,10 +553,10 @@ function submit_runonce() {
     gohome();
 }
 
-function toggle() {
+function toggle(anchor) {
     if ($("#mm").val() == "off") return;
     var $list = $("#mm_list");
-    var $anchor = $list.find(".ui-btn-active");
+    var $anchor = $(anchor);
     var $listitems = $list.children("li:not(li.ui-li-divider)");
     var $item = $anchor.closest("li:not(li.ui-li-divider)");
     var currPos = $listitems.index($item) + 1;
@@ -614,10 +581,16 @@ function toggle() {
 }
 
 function raindelay() {
+    $.mobile.showPageLoadingMsg();
     $.get("index.php","action=raindelay&delay="+$("#delay").val(),function(result){
-        if (result == 0) comm_error()
+        $.mobile.hidePageLoadingMsg();
+        gohome();
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("Rain delay successfully set.")
+        }
     });
-    gohome();
 }
 
 function rbt() {
