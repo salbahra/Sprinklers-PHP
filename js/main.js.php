@@ -511,7 +511,7 @@ function submit_program(id) {
             if (result == 0) {
                 comm_error()
             } else {
-                showerror("Program has been updated.")
+                showerror("Program has been updated")
             }
         });
     }
@@ -609,7 +609,7 @@ function raindelay() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Rain delay successfully set.")
+            showerror("Rain delay has been successfully set")
         }
     });
 }
@@ -623,7 +623,7 @@ function rbt() {
             if (result == 0) {
                 comm_error()
             } else {
-                showerror("OpenSprinkler was rebooted.")
+                showerror("OpenSprinkler is rebooting now")
             }
         });
     },gohome);
