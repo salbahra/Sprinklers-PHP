@@ -29,7 +29,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="javascript:get_manual()">Manual Control</a></li>
             <li><a href="javascript:get_runonce()">Run-Once Program</a></li>
             <li><a href="javascript:get_programs()">View/Change Programs</a></li>
-            <li><a href="javascript:get_preview()">Preview Programs</a></li>
+            <li><a href="#preview">Preview Programs</a></li>
             <li><a href="#raindelay" data-rel="dialog">Rain Delay</a></li>
             <li><a href="javascript:get_logs()">View Log</a></li>
         </ul>
