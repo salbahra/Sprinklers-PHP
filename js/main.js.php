@@ -374,7 +374,7 @@ function timeline_redraw() {
 
 function get_programs() {
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=make_list_programs",function(items){
+    $.get("index.php","action=make_all_programs",function(items){
         var list = $("#programs_list");
         list.html(items);
         $("#programs input[name^='rad_days']").change(function(){

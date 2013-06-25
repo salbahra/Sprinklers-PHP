@@ -18,7 +18,9 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-			call_user_func($_REQUEST['action']);
+            if (in_array($_REQUEST["action"], array("make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+    			call_user_func($_REQUEST['action']);
+            }
 		}
 		exit();
 	} else {
@@ -547,75 +549,18 @@ function make_runonce() {
 }
 
 #Make the list of all programs
-function make_list_programs() {
+function make_all_programs() {
     $data = get_programs();
-    $stations = get_stations();
-    $list = "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
-    $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-    $n = 0;
     $total = count($data["programs"]);
     if ($total == 0) {
         echo "<p align='center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
         return;
     }
+    $stations = get_stations();
+    $n = 0;
+    $list = "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
     foreach ($data["programs"] as $program) {
-        if (is_array($program["days"])) {
-            $days = $program["days"];
-        } else {
-            $days = str_split($program["days"]);
-        }
-        $set_stations = str_split($program["stations"]);
-        $list .= "<fieldset ".((!$n && $total == 1) ? "data-collapsed='false'" : "")." id='program-".$n."' data-role='collapsible' data-theme='b' data-content-theme='d'><legend>Program ".($n + 1)."</legend>";
-
-        $list .= "<input type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
-        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
-        $list .= "<input type='radio' name='rad_days-".$n."' id='days_week-".$n."' value='days_week-".$n."' ".(($program["is_interval"]) ? "" : "checked='checked'")."><label for='days_week-".$n."'>Weekly</label>";
-        $list .= "<input type='radio' name='rad_days-".$n."' id='days_n-".$n."' value='days_n-".$n."' ".(($program["is_interval"]) ? "checked='checked'" : "")."><label for='days_n-".$n."'>Interval</label>";
-        $list .= "</fieldset><div id='input_days_week-".$n."' ".(($program["is_interval"]) ? "style='display:none'" : "").">";
-
-        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p>";
-        $list .= "<input type='radio' name='rad_rst-".$n."' id='days_norst-".$n."' value='days_norst-".$n."' ".((!$program["is_even"] && !$program["is_odd"]) ? "checked='checked'" : "")."><label for='days_norst-".$n."'>None</label>";
-        $list .= "<input type='radio' name='rad_rst-".$n."' id='days_odd-".$n."' value='days_odd-".$n."' ".((!$program["is_even"] && $program["is_odd"]) ? "checked='checked'" : "")."><label for='days_odd-".$n."'>Odd</label>";
-        $list .= "<input type='radio' name='rad_rst-".$n."' id='days_even-".$n."' value='days_even-".$n."' ".((!$program["is_odd"] && $program["is_even"]) ? "checked='checked'" : "")."><label for='days_even-".$n."'>Even</label>";
-        $list .= "</fieldset>";
-
-        $list .= "<fieldset data-role='controlgroup'><legend>Days:</legend>";
-        $j = 0;            
-        foreach ($week as $day) {
-            $list .= "<input type='checkbox' ".((!$program["is_interval"] && $days[$j]) ? "checked='checked'" : "")." name='d".$j."-".$n."' id='d".$j."-".$n."'><label for='d".$j."-".$n."'>".$day."</label>";
-            $j++;
-        }
-        $list .= "</fieldset></div>";
-
-        $list .= "<div ".(($program["is_interval"]) ? "" : "style='display:none'")." id='input_days_n-".$n."' class='ui-grid-a'>";
-        $list .= "<div class='ui-block-a'><label for='every-".$n."'>Day Interval</label><input type='number' name='every-".$n."' pattern='[0-9]*' id='every-".$n."' value='".$days[0]."'></div>";
-        $list .= "<div class='ui-block-b'><label for='starting-".$n."'>Starting In</label><input type='number' name='starting-".$n."' pattern='[0-9]*' id='starting-".$n."' value='".$days[1]."'></div>";
-        $list .= "</div>";
-
-        $list .= "<fieldset data-role='controlgroup'><legend>Stations:</legend>";
-        $j = 0;
-        foreach ($stations as $station) {
-            $list .= "<input type='checkbox' ".(($set_stations[$j]) ? "checked='checked'" : "")." name='station_".$j."-".$n."' id='station_".$j."-".$n."'><label for='station_".$j."-".$n."'>".$station."</label>";
-            $j++;
-        }
-        $list .= "</fieldset>";
-
-        $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
-        $list .= "<input type='reset' name='s_checkall-".$n."' id='s_checkall-".$n."' value='Check All' />";
-        $list .= "<input type='reset' name='s_uncheckall-".$n."' id='s_uncheckall-".$n."' value='Uncheck All' />";
-        $list .= "</fieldset>";
-
-        $list .= "<div class='ui-grid-a'>";
-        $list .= "<div class='ui-block-a'><label for='start-".$n."'>Start Time</label><input type='time' name='start-".$n."' id='start-".$n."' value='".gmdate("H:i", $program["start"]*60)."'></div>";
-        $list .= "<div class='ui-block-b'><label for='end-".$n."'>End Time</label><input type='time' name='end-".$n."' id='end-".$n."' value='".gmdate("H:i", $program["end"]*60)."'></div>";
-        $list .= "</div>";
-
-        $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='30' id='duration-".$n."' value='".($program["duration"]/60)."'>";
-        $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1439' id='interval-".$n."' value='".($program["interval"])."'>";
-
-        $list .= "<input type='submit' name='submit-".$n."' id='submit-".$n."' value='Save Changes to Program ".($n + 1)."'>";
-        $list .= "<input data-theme='a' type='submit' name='delete-".$n."' id='delete-".$n."' value='Delete Program ".($n + 1)."'></fieldset>";
-
+        $list .= make_program($n,$total,$stations,$program);
         $n++;
     }
     echo $list."</div>";
@@ -624,55 +569,75 @@ function make_list_programs() {
 #Generate a new program view
 function fresh_program() {
     $stations = get_stations();
-    $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    echo make_program("new",1,$stations);
+}
 
-    $list = "<fieldset id='program-new' data-theme='b' data-content-theme='d'><input type='checkbox' name='en-new' id='en-new'><label for='en-new'>Enabled</label>";
+function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>0,"is_even"=>0,"is_odd"=>0,"duration"=>0,"interval"=>0,"start"=>0,"end"=>0)) {
+    $week = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    if (isset($program["days"])) {
+        if (is_array($program["days"])) {
+            $days = $program["days"];
+        } else {
+            $days = str_split($program["days"]);
+        }
+    } else {
+        $days = array(0,0,0,0,0,0,0);
+    }
+    if (isset($program["stations"])) $set_stations = str_split($program["stations"]);
+    $list = "<fieldset ".((!$n && $total == 1) ? "data-collapsed='false'" : "")." id='program-".$n."' ".(($n === "new") ? "" : "data-role='collapsible'")." data-theme='b' data-content-theme='d'>";
+    if ($n !== "new") $list .= "<legend>Program ".($n + 1)."</legend>";
+    $list .= "<input type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
     $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
-    $list .= "<input type='radio' name='rad_days-new' id='days_week-new' value='days_week-new' checked='checked'><label for='days_week-new'>Weekly</label>";
-    $list .= "<input type='radio' name='rad_days-new' id='days_n-new' value='days_n-new'><label for='days_n-new'>Interval</label>";
-    $list .= "</fieldset><div id='input_days_week-new'>";
+    $list .= "<input type='radio' name='rad_days-".$n."' id='days_week-".$n."' value='days_week-".$n."' ".(($program["is_interval"]) ? "" : "checked='checked'")."><label for='days_week-".$n."'>Weekly</label>";
+    $list .= "<input type='radio' name='rad_days-".$n."' id='days_n-".$n."' value='days_n-".$n."' ".(($program["is_interval"]) ? "checked='checked'" : "")."><label for='days_n-".$n."'>Interval</label>";
+    $list .= "</fieldset><div id='input_days_week-".$n."' ".(($program["is_interval"]) ? "style='display:none'" : "").">";
 
     $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'><p>Restrictions</p>";
-    $list .= "<input type='radio' name='rad_rst-new' id='days_norst-new' value='days_norst-new' checked='checked'><label for='days_norst-new'>None</label>";
-    $list .= "<input type='radio' name='rad_rst-new' id='days_odd-new' value='days_odd-new'><label for='days_odd-new'>Odd</label>";
-    $list .= "<input type='radio' name='rad_rst-new' id='days_even-new' value='days_even-new'><label for='days_even-new'>Even</label>";
+    $list .= "<input type='radio' name='rad_rst-".$n."' id='days_norst-".$n."' value='days_norst-".$n."' ".((!$program["is_even"] && !$program["is_odd"]) ? "checked='checked'" : "")."><label for='days_norst-".$n."'>None</label>";
+    $list .= "<input type='radio' name='rad_rst-".$n."' id='days_odd-".$n."' value='days_odd-".$n."' ".((!$program["is_even"] && $program["is_odd"]) ? "checked='checked'" : "")."><label for='days_odd-".$n."'>Odd</label>";
+    $list .= "<input type='radio' name='rad_rst-".$n."' id='days_even-".$n."' value='days_even-".$n."' ".((!$program["is_odd"] && $program["is_even"]) ? "checked='checked'" : "")."><label for='days_even-".$n."'>Even</label>";
     $list .= "</fieldset>";
 
     $list .= "<fieldset data-role='controlgroup'><legend>Days:</legend>";
     $j = 0;            
     foreach ($week as $day) {
-        $list .= "<input type='checkbox' name='d".$j."-new' id='d".$j."-new'><label for='d".$j."-new'>".$day."</label>";
+        $list .= "<input type='checkbox' ".((!$program["is_interval"] && $days[$j]) ? "checked='checked'" : "")." name='d".$j."-".$n."' id='d".$j."-".$n."'><label for='d".$j."-".$n."'>".$day."</label>";
         $j++;
     }
     $list .= "</fieldset></div>";
 
-    $list .= "<div style='display:none' id='input_days_n-new' class='ui-grid-a'>";
-    $list .= "<div class='ui-block-a'><label for='every-new'>Day Interval</label><input type='number' name='every-new' pattern='[0-9]*' id='every-new'></div>";
-    $list .= "<div class='ui-block-b'><label for='starting-new'>Starting In</label><input type='number' name='starting-new' pattern='[0-9]*' id='starting-new'></div>";
+    $list .= "<div ".(($program["is_interval"]) ? "" : "style='display:none'")." id='input_days_n-".$n."' class='ui-grid-a'>";
+    $list .= "<div class='ui-block-a'><label for='every-".$n."'>Day Interval</label><input type='number' name='every-".$n."' pattern='[0-9]*' id='every-".$n."' value='".$days[0]."'></div>";
+    $list .= "<div class='ui-block-b'><label for='starting-".$n."'>Starting In</label><input type='number' name='starting-".$n."' pattern='[0-9]*' id='starting-".$n."' value='".$days[1]."'></div>";
     $list .= "</div>";
+
     $list .= "<fieldset data-role='controlgroup'><legend>Stations:</legend>";
     $j = 0;
     foreach ($stations as $station) {
-        $list .= "<input type='checkbox' name='station_".$j."-new' id='station_".$j."-new'><label for='station_".$j."-new'>".$station."</label>";
+        $list .= "<input type='checkbox' ".((isset($set_stations) && $set_stations[$j]) ? "checked='checked'" : "")." name='station_".$j."-".$n."' id='station_".$j."-".$n."'><label for='station_".$j."-".$n."'>".$station."</label>";
         $j++;
     }
     $list .= "</fieldset>";
 
     $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
-    $list .= "<input type='reset' name='s_checkall-new' id='s_checkall-new' value='Check All' />";
-    $list .= "<input type='reset' name='s_uncheckall-new' id='s_uncheckall-new' value='Uncheck All' />";
+    $list .= "<input type='reset' name='s_checkall-".$n."' id='s_checkall-".$n."' value='Check All' />";
+    $list .= "<input type='reset' name='s_uncheckall-".$n."' id='s_uncheckall-".$n."' value='Uncheck All' />";
     $list .= "</fieldset>";
 
     $list .= "<div class='ui-grid-a'>";
-    $list .= "<div class='ui-block-a'><label for='start-new'>Start Time</label><input type='time' name='start-new' id='start-new'></div>";
-    $list .= "<div class='ui-block-b'><label for='end-new'>End Time</label><input type='time' name='end-new' id='end-new'></div>";
+    $list .= "<div class='ui-block-a'><label for='start-".$n."'>Start Time</label><input type='time' name='start-".$n."' id='start-".$n."' value='".gmdate("H:i", $program["start"]*60)."'></div>";
+    $list .= "<div class='ui-block-b'><label for='end-".$n."'>End Time</label><input type='time' name='end-".$n."' id='end-".$n."' value='".gmdate("H:i", $program["end"]*60)."'></div>";
     $list .= "</div>";
 
-    $list .= "<label for='duration-new'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-new' min='0' max='30' id='duration-new'>";
-    $list .= "<label for='interval-new'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-new' min='0' max='1439' id='interval-new'>";
-
-    $list .= "<input type='submit' name='submit-new' id='submit-new' value='Save New Program'>";
-    echo $list;
+    $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='30' id='duration-".$n."' value='".($program["duration"]/60)."'>";
+    $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1439' id='interval-".$n."' value='".($program["interval"])."'>";
+    if ($n === "new") {
+        $list .= "<input type='submit' name='submit-".$n."' id='submit-".$n."' value='Save New Program'></fieldset>";
+    } else {
+        $list .= "<input type='submit' name='submit-".$n."' id='submit-".$n."' value='Save Changes to Program ".($n + 1)."'>";
+        $list .= "<input data-theme='a' type='submit' name='delete-".$n."' id='delete-".$n."' value='Delete Program ".($n + 1)."'></fieldset>";
+    }
+    return $list;
 }
 
 #Make the manual list
