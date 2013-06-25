@@ -173,8 +173,6 @@ $(document).on("pageshow",function(e,data){
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
         check_auto($("#"+newpage+" select[data-role='slider']"));
-    } else if (newpage == "preview") {
-        timeline_redraw();
     }
 });
 
@@ -336,6 +334,7 @@ function get_runonce() {
 }
 
 function get_preview() {
+    $.mobile.changePage($("#preview"));
     $.mobile.showPageLoadingMsg();
     var date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
@@ -369,9 +368,12 @@ function get_preview() {
             window.timeline = new links.Timeline(document.getElementById('timeline'));
             window.addEventListener("resize",timeline_redraw);
             timeline.draw(data, options);
+            if ($(window).width() <= 480) {
+                var currRange = timeline.getVisibleChartRange();
+                if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
+            }
         }
         $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#preview"));
     })
 }
 
