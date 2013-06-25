@@ -28,7 +28,7 @@ $(document).one("pageinit","#sprinklers", function(){
     if (m.length == 1) m = "0"+m;
     var d = date.getDate();
     $("#preview_date").val(y+"-"+m+"-"+d);
-    $.mobile.changePage($("#sprinklers"));
+    $.mobile.changePage($("#sprinklers"),{transition:"none"});
 });
 
 $(window).bind("resize",function(e){
@@ -272,7 +272,7 @@ function logout(){
 }
 
 function gohome() {
-    $.mobile.changePage($('#sprinklers'), {reverse: true, transition: "slidefade"});
+    $.mobile.changePage($('#sprinklers'), {reverse: true});
 }
 
 function show_settings() {

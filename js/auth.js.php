@@ -17,7 +17,7 @@ if(!defined('Sprinklers')) {
 
 //After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
-    $.mobile.defaultPageTransition = 'fade';
+    $.mobile.defaultPageTransition = 'pop';
     $.mobile.hashListeningEnabled = false;
 });
 
