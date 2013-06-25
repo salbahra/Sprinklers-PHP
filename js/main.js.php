@@ -31,6 +31,27 @@ $(document).one("pageinit","#sprinklers", function(){
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
 });
 
+//This bind intercepts most links to remove the 300ms delay iOS adds
+$(document).on('pageinit', function (e, data) {
+    var newpage = e.target.id;
+
+    if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs") {
+        var currpage = $(e.target);
+
+        currpage.find("a[href='#"+currpage.attr('id')+"-settings']").bind('vclick', function (e) {
+            e.preventDefault(); e.stopImmediatePropagation();
+            highlight(this);
+            $(".ui-page-active [id$=settings]").panel("open");
+        });
+        currpage.find("a[onclick]").bind('vclick', function (e) {
+            e.preventDefault(); e.stopImmediatePropagation();
+            var func = $(this).attr("onclick").split(";")[0];
+            highlight(this);
+            eval(func);
+        });
+    }
+});
+
 $(window).bind("resize",function(e){
     var content_height = $.mobile.activePage.children('[data-role="content"]').height(),
         header_height  = $.mobile.activePage.children('[data-role="header"]').height(),
