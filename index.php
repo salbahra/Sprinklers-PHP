@@ -22,7 +22,6 @@ is_auth();
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
     	<link rel="apple-touch-icon" href="img/icon.png">
     	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/timeline.css">
         <link rel="stylesheet" href="css/main.css" />
     </head> 
     <body style="display:none">
