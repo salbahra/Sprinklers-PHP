@@ -543,7 +543,7 @@ function make_runonce() {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
         $n++;
     }
-    echo $list."</div><button onclick='submit_runonce()'>Submit</button>";
+    echo $list."</div><button onclick='submit_runonce(); return false'>Submit</button>";
 }
 
 #Make the list of all programs
@@ -683,7 +683,7 @@ function make_list_manual() {
     $i = 0;
 
     foreach ($stations as $station) {
-        $list .= '<li><a '.(($status[$i]) ? 'class="green" ' : '').'href="#" onclick="toggle(this)">'.$station.'</a></li>';
+        $list .= '<li><a '.(($status[$i]) ? 'class="green" ' : '').'href="#" onclick="toggle(this); return false;">'.$station.'</a></li>';
         $i++;
     }
     echo $list;
@@ -843,7 +843,7 @@ function make_panel($page) {
     $opts = '';
     $panel = '<div data-role="panel" id="'.$page.'-settings" data-position-fixed="true" data-theme="a"'.$opts.'><ul data-role="listview" data-theme="a"><li>Logged in as: '.$_SESSION["username"].'</li><li><div class="ui-grid-a"><div class="ui-block-a"><br><label for="autologin">Auto Login</label></div><div class="ui-block-b"><select name="autologin" id="'.$page.'-autologin" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div></li>';
     foreach ($buttons as $button => $data) {
-        $panel .= '<li data-icon="'.$data["icon"].'"><a href="'.$data["url"].'" onclick="'.$data["script"].'">'.$button.'</a></li>';
+        $panel .= '<li data-icon="'.$data["icon"].'"><a href="'.$data["url"].'" onclick="'.$data["script"].'; return false;">'.$button.'</a></li>';
     }
     $panel .= '</ul></div>';
     return $panel;

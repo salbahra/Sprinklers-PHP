@@ -25,13 +25,13 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <p style="text-align:center" id="tip"></p>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Main Menu</li>
-            <li><a href="#status" onclick="get_status()">Current Status</a></li>
-            <li><a href="#manual" onclick="get_manual()">Manual Control</a></li>
-            <li><a href="#runonce" onclick="get_runonce()">Run-Once Program</a></li>
-            <li><a href="#programs" onclick="get_programs()">View/Change Programs</a></li>
+            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
+            <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>
+            <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
+            <li><a href="#programs" onclick="get_programs(); return false;">View/Change Programs</a></li>
             <li><a href="#preview">Preview Programs</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
-            <li><a href="#logs" onclick="get_logs()">View Log</a></li>
+            <li><a href="#logs" onclick="get_logs(); return false;">View Log</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
@@ -49,7 +49,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     <option <?php echo is_mm(); ?> value="on">On</option>
                 </select>
             </li>
-            <li><a href="#" onclick="rsn()">Stop All Stations</a></li>
+            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
         </ul>
     </div>
     <?php echo make_panel("sprinklers"); ?>
@@ -58,8 +58,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="status">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Current Status</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
-        <a href="#" onclick="get_status()" data-icon="refresh">Refresh</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="get_status(); return false;" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true" id="status_list">
@@ -70,7 +70,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="manual">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Manual Control</h3>
-        <a href="#" onclick="gohome()" data-icon="back">Back</a>
+        <a href="#" onclick="gohome(); return false;" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
@@ -90,8 +90,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="runonce">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Run-Once Program</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
-        <a href="#" onclick="submit_runonce()">Submit</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="submit_runonce(); return false;">Submit</a>
     </div>
     <div data-role="content" id="runonce_list">
     </div>
@@ -100,8 +100,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="programs">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Programs</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
-        <a href="#" onclick="add_program()" data-icon="plus">Add</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="add_program(); return false;" data-icon="plus">Add</a>
     </div>
     <div data-role="content" id="programs_list">
     </div>
@@ -110,8 +110,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="addprogram">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Add Program</h3>
-        <a href="#programs" onclick="get_programs()" data-icon="back">Back</a>
-        <a href="#" onclick="submit_program('new')">Submit</a>
+        <a href="#programs" onclick="get_programs(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="submit_program('new'); return false;">Submit</a>
     </div>
     <div data-role="content" id="newprogram">
     </div>
@@ -128,15 +128,15 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <input type="number" name="delay" pattern="[0-9]*" id="delay" value="0">
             <input type="submit" data-mini="true" value="Submit" />
         </form>
-        <a href="#sprinklers" onclick="gohome()" data-role="button" data-mini="true" data-theme="a">Cancel</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-role="button" data-mini="true" data-theme="a">Cancel</a>
     </div>
 </div>
 
 <div data-role="page" id="logs">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Logs</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
-        <a href="#" onclick="get_logs()" data-icon="refresh">Refresh</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="get_logs(); return false;" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
         <p align='center'>Viewing data for the last <?php global $timeViewWindow;echo strtolower($timeViewWindow); ?>.</p>
@@ -148,8 +148,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="os-settings">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>OS Settings</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
-        <a href="#" onclick="submit_settings()">Submit</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" onclick="submit_settings(); return false;">Submit</a>
     </div>
     <div data-role="content">
     </div>
@@ -158,7 +158,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="preview">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Program Preview</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
         <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
     </div>
     <div data-role="content" id="timeline">
@@ -168,7 +168,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="about">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>About</h3>
-        <a href="#sprinklers" onclick="gohome()" data-icon="back">Back</a>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <div data-role="collapsible-set" data-content-theme="d">
