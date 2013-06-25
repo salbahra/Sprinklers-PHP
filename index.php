@@ -26,26 +26,23 @@ is_auth();
         <link rel="stylesheet" href="css/main.css" />
     </head> 
     <body style="display:none">
-    	<div id="container">
-            
-            <div data-role="page" data-theme="a" id="start"></div>
-            
-            <div data-role="dialog" id="login" data-theme="a" data-close-btn="none">
-            	<div data-role="header" data-position="fixed">
-                    <h1>Welcome</h1>
-               </div>
-            	<div data-role="content">
-                    <form action="javascript:dologin()" method="post">
-                        <fieldset>
-                            <label for="username" class="ui-hidden-accessible">Username:</label>
-                            <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" placeholder="username" data-theme="a" />
-                            <label for="password" class="ui-hidden-accessible">Password:</label>
-                            <input type="password" name="password" id="password" value="" placeholder="password" data-theme="a" />
-                            <label><input type="checkbox" id="remember" name="remember" />Remember Me</label>
-                            <button type="submit" data-theme="b">Sign in</button>
-                        </fieldset>
-                    </form>
-                </div>
+        <div data-role="page" data-theme="a" id="start"></div>
+        
+        <div data-role="dialog" id="login" data-theme="a" data-close-btn="none">
+        	<div data-role="header" data-position="fixed">
+                <h1>Welcome</h1>
+           </div>
+        	<div data-role="content">
+                <form action="javascript:dologin()" method="post">
+                    <fieldset>
+                        <label for="username" class="ui-hidden-accessible">Username:</label>
+                        <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" placeholder="username" data-theme="a" />
+                        <label for="password" class="ui-hidden-accessible">Password:</label>
+                        <input type="password" name="password" id="password" value="" placeholder="password" data-theme="a" />
+                        <label><input type="checkbox" id="remember" name="remember" />Remember Me</label>
+                        <button type="submit" data-theme="b">Sign in</button>
+                    </fieldset>
+                </form>
             </div>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

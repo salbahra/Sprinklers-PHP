@@ -17,7 +17,6 @@ if(!defined('Sprinklers')) {
 
 //After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
-	$.mobile.pageContainer = $('#container');
     $.mobile.defaultPageTransition = 'fade';
     $.mobile.hashListeningEnabled = false;
 });
@@ -62,7 +61,7 @@ function check_token() {
                 $.mobile.changePage($("#login"));
                 return;
             } else {
-                $("#container").append(reply);
+                $("body").append(reply);
                 $("#sprinklers").page();
             }
         }, "html");
@@ -82,7 +81,7 @@ function dologin() {
             $.mobile.hidePageLoadingMsg();
             showerror("Invalid Login");
         } else {
-            $("#container").append(reply);
+            $("body").append(reply);
             $("#sprinklers").page();
         }
     },"html");

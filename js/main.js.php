@@ -263,7 +263,7 @@ function logout(){
         $.mobile.changePage($("#login"));
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
-            $("#container div[data-role='page']:not('.ui-page-active')").remove();
+            $("body div[data-role='page']:not('.ui-page-active')").remove();
             $('.ui-page-active').one("pagehide",function(){
                 $(this).remove();
             })
@@ -399,10 +399,6 @@ function get_programs() {
             $("#input_days_"+old+"-"+progid).hide()
         })
 
-        //Stupidest bug fix ever but it works...
-        $("#programs [type='checkbox']").change(function(){
-            window.scrollTo(1,1)
-        })
         $("#programs [id^='submit-']").click(function(){
             submit_program($(this).attr("id").split("-")[1]);
         })
@@ -438,10 +434,6 @@ function add_program() {
             }
             $("#input_days_"+type+"-"+progid).show()
             $("#input_days_"+old+"-"+progid).hide()
-        })
-        //Stupidest bug fix ever but it works...
-        $("#addprogram [type='checkbox']").change(function(){
-            window.scrollTo(1,1)
         })
         $("#addprogram [id^='s_checkall-']").click(function(){
             $("[id^='station_'][id$='-new']").prop("checked",true).checkboxradio("refresh");
