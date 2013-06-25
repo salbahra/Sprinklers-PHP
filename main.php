@@ -806,49 +806,6 @@ function make_settings_list() {
     echo $list."</fieldset></li></ul>";
 }
 
-#Make slide panel
-function make_panel($page) {
-    $buttons = array(
-        "Settings" => array(
-            "icon" => "gear",
-            "url" => "#os-settings",
-            "script" => "show_settings()"
-        ),
-        "Export Configuration" => array(
-            "icon" => "forward",
-            "url" => "#",
-            "script" => "export_config()"
-        ),
-        "Import Configuration" => array(
-            "icon" => "back",
-            "url" => "#",
-            "script" => "import_config()"
-        ),
-        "Reboot OpenSprinkler" => array(
-            "icon" => "alert",
-            "url" => "#",
-            "script" => "rbt()"
-        ),
-        "Logout" => array(
-            "icon" => "delete",
-            "url" => "#",
-            "script" => "logout()"
-        ),
-        "About" => array(
-            "icon" => "info",
-            "url" => "#about",
-            "script" => ""
-        )
-    );
-    $opts = '';
-    $panel = '<div data-role="panel" id="'.$page.'-settings" data-position-fixed="true" data-theme="a"'.$opts.'><ul data-role="listview" data-theme="a"><li>Logged in as: '.$_SESSION["username"].'</li><li><div class="ui-grid-a"><div class="ui-block-a"><br><label for="autologin">Auto Login</label></div><div class="ui-block-b"><select name="autologin" id="'.$page.'-autologin" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div></li>';
-    foreach ($buttons as $button => $data) {
-        $panel .= '<li data-icon="'.$data["icon"].'"><a href="'.$data["url"].'" onclick="'.$data["script"].'; return false;">'.$button.'</a></li>';
-    }
-    $panel .= '</ul></div>';
-    return $panel;
-}
-
 #Authentication functions
 function http_authenticate($user,$pass,$crypt_type='SHA'){
     global $pass_file;

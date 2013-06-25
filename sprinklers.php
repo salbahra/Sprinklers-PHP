@@ -52,7 +52,30 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
         </ul>
     </div>
-    <?php echo make_panel("sprinklers"); ?>
+    <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
+        <ul data-role="listview" data-theme="a">
+            <li>Logged in as: <?php echo $_SESSION["username"] ?></li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><br>
+                        <label for="autologin">Auto Login</label>
+                    </div>
+                    <div class="ui-block-b">
+                        <select name="autologin" id="'.$page.'-autologin" data-role="slider">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li data-icon="gear"><a href="#os-settings" onclick="show_settings(); return false;">Settings</a></li>
+            <li data-icon="forward"><a href="#" onclick="export_config(); return false;">Export Configuration</a></li>
+            <li data-icon="back"><a href="#" onclick="import_config(); return false;">Import Configuration</a></li>
+            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
+            <li data-icon="delete"><a href="#" onclick="logout(); return false;">Logout</a></li>
+            <li data-icon="info"><a href="#about">About</a></li>
+        </ul>
+    </div>
 </div>
 
 <div data-role="page" id="status">
