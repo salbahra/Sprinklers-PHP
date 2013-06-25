@@ -1,3 +1,6 @@
+#programs_list, #newprogram {
+    margin-top: 28px;
+}
 #addprogram .ui-input-text, #programs .ui-input-text {
     margin: 0.1em !important;
 }
@@ -45,58 +48,9 @@ div[class*='ui-block-'] {
     white-space: normal
 }
 body{
-   margin: 0;
-}
-div#container {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
+    margin: 0;
     background-image: -webkit-linear-gradient( #444,#222 ) !important;
 }
-div[data-role="page"] div[data-role="header"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-div[data-role="page"] div[data-role="content"] {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-}
-div[data-role="page"] div[data-role="footer"] {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-.ui-li-thumb {
-    max-width: 95px;
-}
-.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit {
-    min-height: 50px;
-    padding-left: 110px;
-}
-#preview div[data-role="content"] {
-    top: 85px;
-}
-#about div[data-role="content"], #os-settings div[data-role="content"], #status div[data-role="content"], #manual div[data-role="content"] {
-    top: 41px;
-}
-#sprinklers div[data-role="content"], #logs div[data-role="content"], #logs div[data-role="content"], #runonce div[data-role="content"], #addprogram div[data-role="content"], #programs div[data-role="content"] {
-    top: 28px;
-}
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    #sprinklers div[data-role="content"] {
-        top: 0;
-    }
-}
-
 div.timeline-frame {
     border-color: #5D99C3;
     border-radius: 5px;
