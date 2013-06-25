@@ -272,19 +272,17 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
     if($pid_array[$sid]) {
       if($data["seq"]==1) {
         time_to_text($sid,$st_array[$sid],$pid_array[$sid],$et_array[$sid],$data,$simt);
-//        echo "Station: ".$sid.", Start Time: ".$st_array[$sid].", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
-        if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
-            echo "Master Start: ".$st_array[$sid]+$data["mton"].", Master End: ".($et_array[$sid]+$data["mtoff"]-60)."\n<br>";
-            $endtime=$et_array[$sid];
+//        if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
+//            echo "Master Start: ".$st_array[$sid]+$data["mton"].", Master End: ".($et_array[$sid]+$data["mtoff"]-60)."\n<br>";
+        $endtime=$et_array[$sid];
       } else {
         time_to_text($sid,$simseconds,$pid_array[$sid],$et_array[$sid],$data,$simt);
-//        echo "Station: ".$sid.", Start Time: ".$simseconds.", Program ID: ".$pid_array[$sid].", End Time: ".$et_array[$sid]."\n<br>";
         if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
           $endtime=($endtime>$et_array[$sid])?$endtime:$et_array[$sid];
       }
     }
   }
-  if($data["seq"]==0&&$data["mas"]>0) echo "Master Start: ".$simseconds.", Master End: ".$endtime."\n<br>";
+//  if($data["seq"]==0&&$data["mas"]>0) echo "Master Start: ".$simseconds.", Master End: ".$endtime."\n<br>";
   return $endtime;
 }
 
@@ -296,7 +294,8 @@ function time_to_text($sid,$start,$pid,$end,$data,$simt) {
         $rain_color="black";
         $rain_skip="";
     }
-    echo $data["stations"][$sid]." ".getrunstr($start,$end)." P".$pid." ".(($end-$start)/60>>0)."minutes ".$rain_skip."\n<br><br>";
+    echo "{'start': ".$start.",'end': ".$end.",'content':'P".$pid."','group':'".$data["stations"][$sid]."'},";
+//    echo $data["stations"][$sid]." ".getrunstr($start,$end)." P".$pid." ".(($end-$start)/60>>0)."minutes ".$rain_skip."\n<br><br>";
 }
 
 function getrunstr($start,$end){

@@ -159,9 +159,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Program Preview</h3>
         <a href="javascript:gohome()" data-icon="back">Back</a>
-        <input style="text-align:center" type="date" name="preview_date" id="preview_date" value="<?php echo date("Y-m-d"); ?>" />
+        <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
     </div>
-    <div data-role="content">
+    <div data-role="content" id="timeline">
     </div>
 </div>
 

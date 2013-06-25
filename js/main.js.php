@@ -22,6 +22,12 @@ if (isset($_SESSION['sendtoken']) && $_SESSION['sendtoken']) { echo "localStorag
 //After main page is processed, hide loading message and change to the page
 $(document).one("pageinit","#sprinklers", function(){
     $.mobile.hidePageLoadingMsg();
+    var date = new Date();
+    var y = date.getFullYear();
+    var m = String(date.getMonth()+1);
+    if (m.length == 1) m = "0"+m;
+    var d = date.getDate();
+    $("#preview_date").val(y+"-"+m+"-"+d);
     $.mobile.changePage($("#sprinklers"));
 });
 
@@ -332,15 +338,45 @@ function get_preview() {
     $.mobile.showPageLoadingMsg();
     var date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
-        var list = $("#preview div[data-role='content']");
+        var list = $("#timeline"), empty = true;
         if (items == "") {
             list.html("<p align='center'>No stations set to run on this day.</p>")
         } else {
-            list.html(items);
+            empty = false
+            list.html("");
+            var date = $("#preview_date").val().split("-");
+            var data = eval("["+items.substring(0, items.length - 1)+"]");
+            $.each(data, function(){
+                this.start = new Date(date[0],date[1]-1,date[2],0,0,this.start);
+                this.end = new Date(date[0],date[1]-1,date[2],0,0,this.end);
+            })
+            var options = {
+                'width':  '100%',
+                'editable': false,
+                'axisOnTop': true,
+                'eventMargin': 10,
+                'eventMarginAxis': 0,
+                'min': new Date(date[0],date[1]-1,date[2],0),
+                'max': new Date(date[0],date[1]-1,date[2],24),
+                'selectable': false,
+                'showMajorLabels': false,
+                "zoomMax": 1000 * 60 * 60 * 24,
+                "zoomMin": 1000 * 60 * 60,
+                'groupsChangeable': false
+            };
+
+            window.timeline = new links.Timeline(document.getElementById('timeline'));
+            window.addEventListener("resize",timeline_redraw);
+            timeline.draw(data, options);
+            setTimeout(timeline_redraw,300);
         }
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#preview"));
     })
+}
+
+function timeline_redraw() {
+    window.timeline.redraw();
 }
 
 function get_programs() {
