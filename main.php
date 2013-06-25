@@ -538,7 +538,7 @@ function make_list_logs() {
 
 #Make run-once list
 function make_runonce() {
-    $list = "<p align='center'>Value is in minutes. Zero means the station will be excluded from the run-once program.</p><div data-role='fieldcontain'>";
+    $list = "<p style='text-align:center'>Value is in minutes. Zero means the station will be excluded from the run-once program.</p><div data-role='fieldcontain'>";
     $n = 0;
     $stations = get_stations();
     foreach ($stations as $station) {
@@ -553,12 +553,12 @@ function make_all_programs() {
     $data = get_programs();
     $total = count($data["programs"]);
     if ($total == 0) {
-        echo "<p align='center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
+        echo "<p style='text-align:center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
         return;
     }
     $stations = get_stations();
     $n = 0;
-    $list = "<p align='center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
+    $list = "<p style='text-align:center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
     foreach ($data["programs"] as $program) {
         $list .= make_program($n,$total,$stations,$program);
         $n++;

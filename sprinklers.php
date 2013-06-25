@@ -162,7 +162,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" onclick="get_logs(); return false;" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
-        <p align='center'>Viewing data for the last <?php global $timeViewWindow;echo strtolower($timeViewWindow); ?>.</p>
+        <p style='text-align:center'>Viewing data for the last <?php global $timeViewWindow;echo strtolower($timeViewWindow); ?>.</p>
         <ul data-role="listview" data-inset="true" id="logs_list">
         </ul>
     </div>
@@ -206,8 +206,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             </div>
             <div data-role="collapsible">
                 <h3>Donate</h3>
-                    <p align='center' style="overflow: visible;white-space: normal;">This web app has been developed by Samer Albahra. If you find it useful please donate to him by clicking the button below.<br>
-                    <form align='center' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                    <p style="text-align:center;overflow: visible;white-space: normal;">This web app has been developed by Samer Albahra. If you find it useful please donate to him by clicking the button below.<br>
+                    <form style='text-align:center' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="89M484QR2TCFJ">
                         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
