@@ -173,8 +173,9 @@ $(document).on("pageshow",function(e,data){
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
         check_auto($("#"+newpage+" select[data-role='slider']"));
+    } else if (newpage == "preview") {
+        timeline_redraw();
     }
-
 });
 
 $(document).on("pagebeforeshow",function(e,data){
@@ -368,9 +369,7 @@ function get_preview() {
             window.timeline = new links.Timeline(document.getElementById('timeline'));
             window.addEventListener("resize",timeline_redraw);
             timeline.draw(data, options);
-            setTimeout(timeline_redraw,300);
         }
-        $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#preview"));
     })
 }
