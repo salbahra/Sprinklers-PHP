@@ -58,7 +58,7 @@ $(document).on("swiperight swipeleft", function(e){
         return false;
     }
 
-    //If the action is swiperight and where on the main page then expose the panel
+    //If the action is swiperight and we are on the main page then expose the panel
     if (eventtype == "swiperight" && pageid == "sprinklers") {
         //If the panel is not found ignore
         if (panel.length == 0) return;
