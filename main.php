@@ -830,7 +830,7 @@ function make_settings_list() {
 
     $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Automatic Rain Delay</li>";
     $list .= "<li><div data-role='fieldcontain'><label for='auto_delay'>Auto Rain Delay</label><select name='auto_delay' id='auto_delay' data-role='slider'><option value='off'>Off</option><option ".(($auto_delay) ? "selected " : "")."value='on'>On</option></select></div>";
-    $list .= "<label for='auto_delay_duration'>Delay Duration (hours)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='48' id='auto_delay_duration' value='".$auto_delay_duration."' /></li></ul>";
+    $list .= "<label for='auto_delay_duration'>Delay Duration (hours)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='96' id='auto_delay_duration' value='".$auto_delay_duration."' /></li></ul>";
 
     $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
     $i = 0;
