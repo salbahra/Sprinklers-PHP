@@ -502,8 +502,12 @@ function submit_program(id) {
     if (id == "new") {
         $.get("index.php","action=update_program&pid=-1&data="+program,function(result){
             $.mobile.hidePageLoadingMsg()
-            if (result == 0) comm_error()
             get_programs()
+            if (result == 0) {
+                setTimeout(comm_error,400)
+            } else {
+                setTimeout(function(){showerror("Program added successfully")},400)
+            }
         });
     } else {
         $.get("index.php","action=update_program&pid="+id+"&data="+program,function(result){
