@@ -552,10 +552,14 @@ function submit_settings() {
     })
     if (invalid) return
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names),function(data){
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names),function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
-        showerror("Settings Have Been Saved")
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("Settings Have Been Saved")
+        }
     })
 }
 
