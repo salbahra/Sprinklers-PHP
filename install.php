@@ -79,8 +79,10 @@ function new_config() {
     try {
         #Add the watcher for logs to crontab
         $output = shell_exec('crontab -l');
-        file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
-        exec('crontab /tmp/crontab.txt');
+        if (strpos($output,"/watcher.php >/dev/null 2>&1") === false) {
+            file_put_contents('/tmp/crontab.txt', $output.'* * * * * cd '.dirname(__FILE__).'; php '.dirname(__FILE__).'/watcher.php >/dev/null 2>&1'.PHP_EOL);
+            exec('crontab /tmp/crontab.txt');
+        }
     } catch (Exception $e) {
         echo 3; exit();        
     }
