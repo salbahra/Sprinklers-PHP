@@ -47,6 +47,6 @@ is_auth();
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script><?php include_once("js/auth.js.php"); ?></script>
         <script src="js/jquery.mobile-1.3.1.min.js"></script>
-        <script type="text/javascript" src="js/timeline.js"></script>
+        <script async type="text/javascript" src="js/timeline.js"></script>
     </body>
 </html>
