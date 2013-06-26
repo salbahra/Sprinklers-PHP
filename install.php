@@ -180,7 +180,7 @@ function fail() {
                             </div>
                         </li>
                     </ul>
-                    <p align='center'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
+                    <p style='text-align:center'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
                     <ul data-inset="true" data-role="listview">
                         <li data-role="list-divider">Intial Configuration</li>
                         <li>
@@ -196,7 +196,7 @@ function fail() {
                                 <label for="cache_file">Cache File Location:</label>
                                 <input type="text" name="cache_file" id="cache_file" value="/var/www/sprinklers/.cache" />
                                 <label for="force_ssl">Force SSL</label>
-                                <input type="checkbox" name="force_ssl" id="force_ssl" checked />
+                                <input type="checkbox" name="force_ssl" id="force_ssl" />
                             </div>
                         </li>
                     </ul>
