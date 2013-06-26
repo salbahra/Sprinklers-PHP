@@ -28,6 +28,44 @@ if (isset($_REQUEST['action'])) {
 	}
 }
 
+#Weather functions
+
+#Resolve location to WOEID
+function get_woeid() {
+    $options = get_options();
+    $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".$options["loc"]."%22");
+    preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid);
+    return $woeid[1];
+}
+
+#Get the current weather code and temp
+function get_weather_data() {
+    $woeid = get_woeid();
+    $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
+    preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
+    $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$newdata[3],"date"=>$newdata[4]);
+    return $weather;
+}
+
+#Lookup code and get the set delay
+function code_to_delay($code) {
+    $codes = explode("\n",file_get_contents("yahoo_weather.csv"));
+    foreach ($codes as $line) {
+        $data = explode(",", $line);
+        if (!isset($data[2])) continue;
+        if ($code == $data[0]) return $data[2];
+    }
+    return false;
+}
+
+#Check the current weather for the devices location, and set the appropriate delay, if needed
+function check_weather() {
+    $weather = get_weather_data();
+    $delay = code_to_delay($weather["code"]);
+    if ($delay === false) return;
+    send_to_os("/cv?pw=&rd=".$delay);
+}
+
 #Export/Import
 function export_config() {
     $data = get_from_os("/gp?d=0");

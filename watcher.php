@@ -3,21 +3,25 @@
 
 if(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] == $_SERVER['PHP_SELF']) {header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404);exit();}
 
-if (!file_exists("config.php")) return;
+if (!file_exists("main.php")) return;
 
-#Include configuration
-require_once("config.php");
+#Tell main we are calling it
+define('Sprinklers', TRUE);
 
-date_default_timezone_set('UTC');
+#Source required files
+require_once "main.php";
 
+#Update log files
 $datetime=Date("Y-m-d H:i:s",time());
-preg_match("/,rs=(\d)/", file_get_contents("http://".$os_ip), $rainSenseStatus);
-$rainSenseStatus = $rainSenseStatus[1];
-preg_match("/\d+/", file_get_contents("http://".$os_ip."/sn0"), $newSprinklerValveSettings);
-$newSprinklerValveSettings=$newSprinklerValveSettings[0];
+$settings = get_settings();
+$rainSenseStatus = $settings["rs"];
+$newSprinklerValveSettings=implode("",get_station_status());
 $oldSprinklerValveSettings=explode("--",file_get_contents($log_previous));
 if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || $rainSenseStatus!=$oldSprinklerValveSettings[1]) {
 	file_put_contents ($log_file, $newSprinklerValveSettings."--".$datetime."--".$rainSenseStatus."\n",FILE_APPEND);
 	file_put_contents ($log_previous, $newSprinklerValveSettings."--".$rainSenseStatus);
 };
+
+#Automatic rain delay, every hour, if enabled
+if (isset($auto_delay) && $auto_delay && date('i') == "00") check_weather();
 ?>
