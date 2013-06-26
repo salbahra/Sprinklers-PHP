@@ -49,13 +49,9 @@ function get_weather_data() {
 
 #Lookup code and get the set delay
 function code_to_delay($code) {
-    $codes = explode("\n",file_get_contents("yahoo_weather.csv"));
-    foreach ($codes as $line) {
-        $data = explode(",", $line);
-        if (!isset($data[2])) continue;
-        if ($code == $data[0]) return $data[2];
-    }
-    return false;
+    global $delays;
+    if (!isset($delays[$code])) return false;
+    return $delays[$code];
 }
 
 #Check the current weather for the devices location, and set the appropriate delay, if needed

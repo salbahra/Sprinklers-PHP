@@ -30,4 +30,7 @@ $log_previous = "/var/www/sprinklers/SprinklerPrevious.txt";
 #Enable/Disable Automatic Rain Delay Based on Weather
 $auto_delay = 0;
 
+#Rain Delays for Yahoo Weather Codes (Set via GUI)
+$delays = array(48,48,48,48,48,48,48,48,24,24,48,48,48,48,48,48,48,24,48,false,false,false,false,4,4,false,false,false,false,false,false,false,false,false,false,48,0,48,48,48,48,48,48,48,false,48,48,48);
+
 ?>
