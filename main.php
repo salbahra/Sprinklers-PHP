@@ -987,14 +987,35 @@ function checktoken() {
 #Supplemental functions
 
 #Delete a line from a file
-function delLineFromFile($fileName, $lineNum){
+function delLineFromFile($fileName, $lineToDelete){
     $arr = file($fileName);
-    $lineToDelete = $lineNum;
-    unset($arr["$lineToDelete"]);
+    unset($arr[$lineToDelete]);
     $fp = fopen($fileName, 'w+');
     foreach($arr as $line) { fwrite($fp,$line); }
     fclose($fp);
-    return TRUE;
+    return true;
+}
+
+#Change a configuration value
+function changeConfig($variable, $value){
+    $allowed = array("auto_delay","auto_delay_duration");
+    #Only allow the above variables to be changed
+    if (!in_array($variable, $allowed)) return false;
+    #Help sanatize input
+    $value = intval($value);
+    $found = 0;
+    $arr = file("config.php");    
+    $fp = fopen("config.php", 'w+');
+    foreach($arr as $line) {
+        if (strpos($line, "\$".$variable) === 0) {
+            $line = "\$".$variable."=".$value.";\n";
+            $found = 1;
+        }
+        if (!$found && strpos($line,"?>") === 0) fwrite($fp,"\$".$variable."=".$value.";\n");
+        fwrite($fp,$line);
+    }
+    fclose($fp);
+    return true;
 }
 
 #Rearrange array by move the keys in $keys array to the end of $array
