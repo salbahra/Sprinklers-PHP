@@ -488,6 +488,8 @@ function make_list_logs() {
                         } else { break; };
                     };
 
+                    if (($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) $TimeNow = time();
+
                     $TimeElapsed=$TimeNow-$TimeBegin;
 
                     $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
@@ -503,6 +505,8 @@ function make_list_logs() {
                         $TimeBegin=$SprinklerTimeConverted[$i-$k];
                     } else { break; };
                 };
+
+                if (($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) $TimeNow = time();
 
                 $TimeElapsed=$TimeNow-$TimeBegin;
 
