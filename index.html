@@ -40,7 +40,7 @@
 <a name="opensprinkler-controller" class="anchor" href="#opensprinkler-controller"><span class="octicon octicon-link"></span></a><a href="http://salbahra.github.io/OpenSprinkler-Controller">OpenSprinkler Controller</a>
 </h1>
 
-<p>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, change OpenSprinkler settings and view logs. Screenshots available <a href="http://albahra.com/journal/2013/06/opensprinkler-with-custom-web-app">here</a>.</p>
+<p>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, weather-based automatic rain delay, change OpenSprinkler settings and view logs. Screenshots available <a href="http://albahra.com/journal/2013/06/opensprinkler-with-custom-web-app">here</a>.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview:</h2>
@@ -62,7 +62,7 @@
 <li>In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The OSPi defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080</li>
 </ul>
 </li>
-<li><p>In order for the interval program to be 100% compatibile with the web app a patch needs to be applied to the python code. More information regarding the patch and what is being changed specifically can be found on the <a href="http://rayshobby.net/phpBB3/viewtopic.php?f=2&amp;t=154&amp;start=40#p781">forum's here</a></p></li>
+<li><p>In order for the interval program to be 100% compatibile with the web app you must be using OSPi built on or after June 22, 2013.</p></li>
 </ul><h2>
 <a name="install-instructions" class="anchor" href="#install-instructions"><span class="octicon octicon-link"></span></a>Install Instructions:</h2>
 
@@ -159,7 +159,7 @@
 
       </div>
       <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
       </div>
     </footer>
   </div>
