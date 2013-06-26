@@ -23,15 +23,5 @@ if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || $rainSenseStatu
 };
 
 #Automatic rain delay, every hour, if enabled
-if (isset($auto_delay)) {
-	if ($auto_delay && date('i') == "00") {
-	    if (!isset($auto_delay_duration)) {
-	    	changeConfig("auto_delay_duration",24);
-	    } else {
-			check_weather();
-		}
-	}
-} else {
-	changeConfig("auto_delay",0);
-}
+if ($auto_delay && date('i') == "00") check_weather();
 ?>

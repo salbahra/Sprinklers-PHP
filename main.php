@@ -9,6 +9,17 @@ if (!file_exists("config.php")) header("Location: install.php");
 #Include configuration
 require_once("config.php");
 
+#Help migrate older configurations
+if (!isset($auto_delay)) {
+    changeConfig("auto_delay",0);
+    $auto_delay = 0;
+}
+
+if (!isset($auto_delay_duration)) {
+    changeConfig("auto_delay_duration",24);
+    $auto_delay_duration = 24;
+}
+
 date_default_timezone_set('UTC');
 
 #Get Base URL of Site
