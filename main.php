@@ -1002,6 +1002,7 @@ function delLineFromFile($fileName, $lineToDelete){
     $arr = file($fileName);
     unset($arr[$lineToDelete]);
     $fp = fopen($fileName, 'w+');
+    if ($fp === false) return false;
     foreach($arr as $line) { fwrite($fp,$line); }
     fclose($fp);
     return true;
@@ -1017,6 +1018,7 @@ function changeConfig($variable, $value){
     $found = 0;
     $arr = file("config.php");    
     $fp = fopen("config.php", 'w+');
+    if ($fp === false) return false;
     foreach($arr as $line) {
         if (strpos($line, "\$".$variable) === 0) {
             $line = "\$".$variable."=".$value.";\n";
