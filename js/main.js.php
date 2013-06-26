@@ -63,30 +63,6 @@ $(window).bind("resize",function(e){
     e.stopImmediatePropagation();
 })
 
-//Event bind swipe actions to show/hide side panel
-$(document).on("swiperight swipeleft", function(e){
-    //Define specific action triggered
-    var eventtype = e.type;
-    //Grab the calling page
-    var page = $(e.target).closest(".ui-page-active");
-    //Save the calling page's ID
-    var pageid = page.attr("id");
-    //Grab the panel associated with the calling page
-    var panel = page.find("[id$=settings]");
-
-    //If the panel is open then close the panel
-    if (panel.length != 0 && !panel.hasClass("ui-panel-closed")) {
-        return false;
-    }
-
-    //If the action is swiperight and we are on the main page then expose the panel
-    if (eventtype == "swiperight" && pageid == "sprinklers") {
-        //If the panel is not found ignore
-        if (panel.length == 0) return;
-        panel.panel("open");
-    }
-});
-
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
@@ -242,7 +218,7 @@ function new_tip() {
         "Be sure to disable manual mode otherwise programs will not run",
         "The status page highlights active sprinklers in green and inactive in red",
         "Logs allow you to view historical activity of your sprinkler system",
-        "Slide to the right to expose the settings panel"
+        "Expose the side panel by hitting the bars on the top left corner"
     ];
     var i = Math.floor((Math.random()*tips.length));
     $("#tip").html("Tip: "+tips[i]);

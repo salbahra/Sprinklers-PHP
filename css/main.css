@@ -1,3 +1,7 @@
+.ui-icon-bars {
+    background-color: transparent;
+    box-shadow: none;
+}
 #programs, #newprogram {
     margin-top: 28px;
 }
