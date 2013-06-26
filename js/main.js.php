@@ -522,7 +522,7 @@ function submit_program(id) {
 }
 
 function submit_settings() {
-    var opt = {}, names = {}, invalid = false;
+    var opt = {}, names = {}, autodelay = {}, invalid = false;
     $("#os-settings").find(":input").each(function(a,b){
         var $item = $(b), id = $item.attr('id'), data = $item.val();
         switch (id) {
@@ -551,12 +551,17 @@ function submit_settings() {
                 names[id] = encodeURIComponent(data)
                 return true;
                 break;
+            case "auto_delay":
+            case "auto_delay_duration":
+                autodelay[id] = encodeURIComponent(data)
+                return true;
+                break;
         }
         opt[id] = data
     })
     if (invalid) return
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names),function(result){
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+"&autodelay="+JSON.stringify(autodelay),function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
         if (result == 0) {

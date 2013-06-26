@@ -442,8 +442,20 @@ function delete_program() {
 
 #Submit updated options
 function submit_options() {
+    global $auto_delay,$auto_delay_duration;
     send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
     send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
+    $autodelay = json_decode($_REQUEST["autodelay"],true);
+    $switch = ($autodelay["auto_delay"] === "on") ? 1 : 0;
+    if ($switch !== $auto_delay) {
+        changeConfig("auto_delay",$switch);
+        $auto_delay = $switch;
+    }
+    $switch = intval($autodelay["auto_delay_duration"]);
+    if ($switch !== $auto_delay_duration) {
+        changeConfig("auto_delay_duration",$switch);
+        $auto_delay_duration = $switch;
+    }
 }
 
 #Submit run-once program
@@ -754,6 +766,7 @@ function make_list_status() {
 
 #Generate settings page
 function make_settings_list() {
+    global $auto_delay, $auto_delay_duration;
     $options = get_options();
     $stations = get_stations();
     $list = "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Primary Settings</li><li><div data-role='fieldcontain'><fieldset>";
@@ -813,7 +826,13 @@ function make_settings_list() {
                 continue 2;
         }
     }
-    $list .= "</fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
+    $list .= "</fieldset></div></li></ul>";
+
+    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Automatic Rain Delay</li>";
+    $list .= "<li><div data-role='fieldcontain'><label for='auto_delay'>Auto Rain Delay</label><select name='auto_delay' id='auto_delay' data-role='slider'><option value='off'>Off</option><option ".(($auto_delay) ? "selected " : "")."value='on'>On</option></select></div>";
+    $list .= "<label for='auto_delay_duration'>Delay Duration (hours)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='48' id='auto_delay_duration' value='".$auto_delay_duration."' /></li></ul>";
+
+    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
     $i = 0;
     foreach ($stations as $station) {
         if ($station == "") continue;
@@ -1013,16 +1032,16 @@ function changeConfig($variable, $value){
     $allowed = array("auto_delay","auto_delay_duration");
     #Only allow the above variables to be changed
     if (!in_array($variable, $allowed)) return false;
-    #Help sanatize input
+    #Sanatize input
     $value = intval($value);
-    $found = 0;
+    $found = false;
     $arr = file("config.php");    
     $fp = fopen("config.php", 'w+');
     if ($fp === false) return false;
     foreach($arr as $line) {
-        if (strpos($line, "\$".$variable) === 0) {
+        if (!$found && strpos($line, "\$".$variable) === 0) {
             $line = "\$".$variable."=".$value.";\n";
-            $found = 1;
+            $found = true;
         }
         if (!$found && strpos($line,"?>") === 0) fwrite($fp,"\$".$variable."=".$value.";\n");
         fwrite($fp,$line);
