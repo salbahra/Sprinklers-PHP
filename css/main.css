@@ -1,3 +1,7 @@
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
 #manual ul {
     max-width: 800px;
     margin: 16px auto;
