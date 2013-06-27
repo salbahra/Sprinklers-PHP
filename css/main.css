@@ -18,10 +18,18 @@
         width: 25% !important;
         font-size: smaller;
     }
+    div.timeline-frame {
+        counter-reset: station;
+    }
     div.timeline-groups-text {
-        width: 50px;
+        width: 22px;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow: clip;
+    }
+    div.timeline-groups-text:before {
+        content: "S" counter(station) "     ";
+        white-space:pre;
+        counter-increment: station;
     }
 }
 
