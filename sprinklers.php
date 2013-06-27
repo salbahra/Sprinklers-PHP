@@ -24,14 +24,17 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-role="content">
         <p style="text-align:center" id="tip"></p>
         <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider">Main Menu</li>
-            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
+            <li data-role="list-divider">Program Control</li>
+            <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>
             <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>
-            <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
-            <li><a href="#programs" onclick="get_programs(); return false;">View/Change Programs</a></li>
-            <li><a href="#preview">Preview Programs</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
-            <li><a href="#logs" onclick="get_logs(); return false;">View Log</a></li>
+            <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
+        </ul>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">System Information</li>
+            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
+            <li><a href="#preview">Preview Programs</a></li>
+            <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
@@ -50,6 +53,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 </select>
             </li>
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
+            <li data-icon="gear"><a href="#os-settings" onclick="show_settings(); return false;">Settings</a></li>
+            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
         </ul>
     </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
@@ -68,10 +73,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                 </div>
             </li>
-            <li data-icon="gear"><a href="#os-settings" onclick="show_settings(); return false;">Settings</a></li>
             <li data-icon="forward"><a href="#" onclick="export_config(); return false;">Export Configuration</a></li>
             <li data-icon="back"><a href="#" onclick="import_config(); return false;">Import Configuration</a></li>
-            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
             <li data-icon="delete"><a href="#" onclick="logout(); return false;">Logout</a></li>
             <li data-icon="info"><a href="#about">About</a></li>
         </ul>
