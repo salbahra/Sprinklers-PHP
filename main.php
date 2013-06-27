@@ -61,7 +61,7 @@ function get_weather_data() {
 #Lookup code and get the set delay
 function code_to_delay($code) {
     global $auto_delay_duration;
-    $adverse_codes = aray(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,35,37,38,39,40,41,42,43,44,45,46,47);
+    $adverse_codes = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,35,37,38,39,40,41,42,43,44,45,46,47);
     $reset_codes = array(36);
     if (in_array($code, $adverse_codes)) return $auto_delay_duration;
     if (in_array($code, $reset_codes)) return 0;
