@@ -592,7 +592,7 @@ function make_list_logs() {
         $list .= "<li data-role='list-divider'>".$ValveName[$j]."<span class='ui-li-count'>".$ct.(($ct == 1) ? " run" : " runs" )."</span></li>";
         if ($ct>0) {
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
-                $theTime=date('D, n/j/Y g:i A',strtotime($ValveHistory[$j][$k][0])+$tz);
+                $theTime=date('D, d M Y H:i',strtotime($ValveHistory[$j][$k][0])+$tz);
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
                 $list .= "<li>".$theTime.$ValveHistory[$j][$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
@@ -603,7 +603,7 @@ function make_list_logs() {
         $list .= "<li data-role='list-divider'>Rain Sensor<span class='ui-li-count'>".$ct.(($ct == 1) ? " switch" : " switches" )."</span></li>";
         if ($ct>0) {
             for ($k=0;$k<count($RainHistory);$k++){
-                $theTime=date('D, n/j/Y g:i A',strtotime($RainHistory[$k][0])+$tz);
+                $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
                 $mins = ceil($RainHistory[$k][1]/60);
                 $list .= "<li>".$theTime.$RainHistory[$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
