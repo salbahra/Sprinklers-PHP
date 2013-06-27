@@ -215,6 +215,10 @@ function grab_token(pageid){
 function update_weather() {
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
+        if (weather["code"] == null) {
+            $("#weather").html("");
+            return
+        }
         $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"&#176;F</span><br><span>"+weather["location"]+"</span>");
     })
 }
