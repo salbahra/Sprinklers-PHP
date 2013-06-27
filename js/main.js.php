@@ -152,8 +152,7 @@ $(document).on("pagebeforeshow",function(e,data){
     $.mobile.silentScroll(0);
 
     if (newpage == "sprinklers") {
-        //Add a new tip to the header of main page on each page load
-        new_tip();
+        update_weather();
     } else {
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
@@ -213,15 +212,11 @@ function grab_token(pageid){
     }, "text");
 }
 
-function new_tip() {
-    var tips = [
-        "Be sure to disable manual mode otherwise programs will not run",
-        "The status page highlights active sprinklers in green and inactive in red",
-        "Logs allow you to view historical activity of your sprinkler system",
-        "Expose the side panel by hitting the bars on the top left corner"
-    ];
-    var i = Math.floor((Math.random()*tips.length));
-    $("#tip").html("Tip: "+tips[i]);
+function update_weather() {
+    $.get("index.php","action=get_weather",function(result){
+        var weather = JSON.parse(result);
+        $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"&#176;F</span><br><span>"+weather["location"]+"</span>");
+    })
 }
 
 function logout(){

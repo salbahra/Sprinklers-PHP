@@ -52,11 +52,6 @@ div.ui-slider-switch {
     font-weight: normal;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
-/* Link to the Google webfont is in the head */
-.ui-title, .gridlist .ui-li-aside {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-}
 div[class*='ui-block-'] {
 	text-align: center
 }
@@ -98,3 +93,63 @@ div.timeline-event {
 div.timeline-event-content {
     padding: 5px;
 }
+
+#weather {
+    text-align: center;
+}
+
+.wicon { vertical-align: middle; display: inline-block; margin: -25px -10px -25px -25px; width: 150px; height: 150px; zoom: .5; background: url(../img/weather-icons-sprite.png);}
+/* Weather Icon Sprites 
+ * http://www.alistapart.com/articles/sprites
+ * http://developer.yahoo.com/weather/#codes
+ */
+
+.wicon.cond0  { background-position: -150px -150px; } /*  0   tornado                   */ 
+.wicon.cond1  { background-position: -150px -150px; } /*  1   tropical storm            */
+.wicon.cond2  { background-position: -150px -150px; } /*  2   hurricane                 */ 
+.wicon.cond3  { background-position: -300px -150px; } /*  3   severe thunderstorms      */ 
+.wicon.cond4  { background-position: -300px -150px; } /*  4   thunderstorms             */ 
+.wicon.cond5  { background-position:    0px -450px; } /*  5   mixed rain and snow       */ 
+.wicon.cond6  { background-position: -150px -450px; } /*  6   mixed rain and sleet      */ 
+.wicon.cond7  { background-position:    0px -600px; } /*  7   mixed snow and sleet      */ 
+.wicon.cond8  { background-position:    0px -600px; } /*  8   freezing drizzle          */ 
+.wicon.cond9  { background-position: -150px -300px; } /*  9   drizzle                   */ 
+.wicon.cond10 { background-position:    0px -450px; } /*  10  freezing rain             */ 
+.wicon.cond11 { background-position:    0px    0px; } /*  11  showers                   */ 
+.wicon.cond12 { background-position:    0px    0px; } /*  12  showers                   */ 
+.wicon.cond13 { background-position: -450px -150px; } /*  13  snow flurries             */ 
+.wicon.cond14 { background-position: -300px -300px; } /*  14  light snow showers        */ 
+.wicon.cond15 { background-position:    0px -150px; } /*  15  blowing snow              */ 
+.wicon.cond16 { background-position: -450px -150px; } /*  16  snow                      */ 
+.wicon.cond17 { background-position: -300px -450px; } /*  17  hail                      */ 
+.wicon.cond18 { background-position: -150px -450px; } /*  18  sleet                     */ 
+.wicon.cond19 { background-position: -150px -600px; } /*  19  dust                      */ 
+.wicon.cond20 { background-position: -150px -600px; } /*  20  foggy                     */ 
+.wicon.cond21 { background-position: -150px -600px; } /*  21  haze                      */ 
+.wicon.cond22 { background-position: -150px -600px; } /*  22  smoky                     */ 
+.wicon.cond23 { background-position: -450px -300px; } /*  23  blustery                  */ 
+.wicon.cond24 { background-position: -450px -300px; } /*  24  windy                     */ 
+.wicon.cond25 { background-position:    0px -150px; } /*  25  cold                      */ 
+.wicon.cond26 { background-position: -300px    0px; } /*  26  cloudy                    */ 
+.wicon.cond27 { background-position: -300px -600px; } /*  27  mostly cloudy (night)     */ 
+.wicon.cond28 { background-position:    0px -300px; } /*  28  mostly cloudy (day)       */ 
+.wicon.cond29 { background-position: -450px -600px; } /*  29  partly cloudy (night)     */ 
+.wicon.cond30 { background-position: -150px    0px; } /*  30  partly cloudy (day)       */ 
+.wicon.cond31 { background-position: -450px -450px; } /*  31  clear (night)             */ 
+.wicon.cond32 { background-position: -450px    0px; } /*  32  sunny                     */ 
+.wicon.cond33 { background-position: -450px -450px; } /*  33  fair (night)              */ 
+.wicon.cond34 { background-position: -450px    0px; } /*  34  fair (day)                */ 
+.wicon.cond35 { background-position: -300px -450px; } /*  35  mixed rain and hail       */ 
+.wicon.cond36 { background-position: -450px    0px; } /*  36  hot                       */ 
+.wicon.cond37 { background-position: -300px -150px; } /*  37  isolated thunderstorms    */ 
+.wicon.cond38 { background-position: -300px -150px; } /*  38  scattered thunderstorms   */ 
+.wicon.cond39 { background-position: -300px -150px; } /*  39  scattered thunderstorms   */ 
+.wicon.cond40 { background-position:    0px    0px; } /*  40  scattered showers         */ 
+.wicon.cond41 { background-position: -450px -150px; } /*  41  heavy snow                */ 
+.wicon.cond42 { background-position:    0px -450px; } /*  42  scattered snow showers    */ 
+.wicon.cond43 { background-position: -450px -150px; } /*  43  heavy snow                */ 
+.wicon.cond44 { background-position: -150px    0px; } /*  44  partly cloudy             */ 
+.wicon.cond45 { background-position: -300px -150px; } /*  45  thundershowers            */ 
+.wicon.cond46 { background-position:    0px -450px; } /*  46  snow showers              */ 
+.wicon.cond47 { background-position: -300px -150px; } /*  47  isolated thundershowers   */ 
+.wicon.cond3200 { background: none; } /* 3200  not available             */ 

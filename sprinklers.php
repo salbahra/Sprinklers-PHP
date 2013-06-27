@@ -23,7 +23,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3><?php echo $webtitle; ?></h3>
     </div>
     <div data-role="content">
-        <p style="text-align:center" id="tip"></p>
+        <div id="weather">Loading Weather...</div>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Program Control</li>
             <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>

@@ -9,6 +9,8 @@ if (!file_exists("config.php")) header("Location: install.php");
 #Include configuration
 require_once("config.php");
 
+date_default_timezone_set('UTC');
+
 #Help migrate older configurations
 if (!isset($auto_delay)) {
     changeConfig("auto_delay",0);
@@ -20,7 +22,10 @@ if (!isset($auto_delay_duration)) {
     $auto_delay_duration = 24;
 }
 
-date_default_timezone_set('UTC');
+if (!isset($woeid)) {
+    $woeid = get_woeid();
+    changeConfig("woeid",$woeid);
+}
 
 #Get Base URL of Site
 if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "http://").$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
@@ -29,7 +34,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		}
@@ -46,15 +51,16 @@ function get_woeid() {
     $options = get_options();
     $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".$options["loc"]."%22");
     preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid);
-    return $woeid[1];
+    return intval($woeid[1]);
 }
 
 #Get the current weather code and temp
 function get_weather_data() {
-    $woeid = get_woeid();
+    global $woeid;
     $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
     preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
-    $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$newdata[3],"date"=>$newdata[4]);
+    preg_match("/<title>Yahoo! Weather - (.*)<\/title>/",$data,$loc);
+    $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$newdata[3],"date"=>$newdata[4],"location"=>$loc[1]);
     return $weather;
 }
 
@@ -69,11 +75,15 @@ function code_to_delay($code) {
 }
 
 #Check the current weather for the devices location, and set the appropriate delay, if needed
-function check_weather() {
+function weather_to_delay() {
     $weather = get_weather_data();
     $delay = code_to_delay($weather["code"]);
     if ($delay === false) return;
     send_to_os("/cv?pw=&rd=".$delay);
+}
+
+function get_weather() {
+    echo json_encode(get_weather_data());
 }
 
 #Export/Import
@@ -456,6 +466,8 @@ function submit_options() {
         changeConfig("auto_delay_duration",$switch);
         $auto_delay_duration = $switch;
     }
+    $woeid = get_woeid();
+    changeConfig("woeid",$woeid);
 }
 
 #Submit run-once program
@@ -1029,7 +1041,7 @@ function delLineFromFile($fileName, $lineToDelete){
 
 #Change a configuration value
 function changeConfig($variable, $value){
-    $allowed = array("auto_delay","auto_delay_duration");
+    $allowed = array("auto_delay","auto_delay_duration","woeid");
     #Only allow the above variables to be changed
     if (!in_array($variable, $allowed)) return false;
     #Sanatize input
