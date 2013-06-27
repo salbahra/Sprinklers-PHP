@@ -19,6 +19,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="sprinklers">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <a data-icon="bars" data-iconpos="notext" href="#sprinklers-settings"></a>
+        <a data-icon="gear" data-iconpos="notext" href="#os-settings" onclick="show_settings(); return false;">Settings</a>
         <h3><?php echo $webtitle; ?></h3>
     </div>
     <div data-role="content">
@@ -53,7 +54,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 </select>
             </li>
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
-            <li data-icon="gear"><a href="#os-settings" onclick="show_settings(); return false;">Settings</a></li>
             <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
         </ul>
     </div>

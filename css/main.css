@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 16px auto;
 }
-.ui-icon-bars {
+#sprinklers div[data-role="header"] .ui-icon {
     background-color: transparent;
     box-shadow: none;
 }
