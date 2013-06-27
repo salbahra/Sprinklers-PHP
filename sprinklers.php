@@ -99,6 +99,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" onclick="gohome(); return false;" data-icon="back">Back</a>
     </div>
     <div data-role="content">
+        <p style="text-align:center">With manual mode turned on, tap a station to toggle.</p>
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="mmm"><b>Manual Mode</b></label>

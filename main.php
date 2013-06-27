@@ -569,7 +569,7 @@ function make_list_logs() {
                 if (($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) $TimeNow = time();
 
                 $TimeElapsed=$TimeNow-$TimeBegin;
-
+                
                 $ValveHistory[$j][]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) ? " Running Now" : ""));
             };
         };
@@ -712,7 +712,7 @@ function make_list_manual() {
     $i = 0;
 
     foreach ($stations as $station) {
-        $list .= '<li><a '.(($status[$i]) ? 'class="green" ' : '').'href="#" onclick="toggle(this); return false;">'.$station.'</a></li>';
+        $list .= '<li data-icon="false"><a style="text-align:center" '.(($status[$i]) ? 'class="green" ' : '').'href="#" onclick="toggle(this); return false;">'.$station.'</a></li>';
         $i++;
     }
     echo $list;
