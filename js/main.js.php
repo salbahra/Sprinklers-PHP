@@ -539,10 +539,12 @@ function submit_settings() {
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+"&autodelay="+JSON.stringify(autodelay),function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
-        if (result == 0) {
+        if (result == 0 || result == 10) {
             comm_error()
+        } else if (result == 112) {
+            showerror("Settings have been saved however auto-delay changes were not saved. Check config.php permissions and try again.");
         } else {
-            showerror("Settings Have Been Saved")
+            showerror("Settings have been saved")
         }
     })
 }

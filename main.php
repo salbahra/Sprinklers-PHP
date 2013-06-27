@@ -456,18 +456,24 @@ function submit_options() {
     send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
     send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
     $autodelay = json_decode($_REQUEST["autodelay"],true);
+    $woeid = get_woeid();
+    changeConfig("woeid",$woeid);
     $switch = ($autodelay["auto_delay"] === "on") ? 1 : 0;
     if ($switch !== $auto_delay) {
-        changeConfig("auto_delay",$switch);
         $auto_delay = $switch;
+        if (!changeConfig("auto_delay",$switch)) {
+            echo 2;
+            exit();
+        }
     }
     $switch = intval($autodelay["auto_delay_duration"]);
     if ($switch !== $auto_delay_duration) {
-        changeConfig("auto_delay_duration",$switch);
         $auto_delay_duration = $switch;
+        if (!changeConfig("auto_delay_duration",$switch)) {
+            echo 2;
+            exit();
+        }
     }
-    $woeid = get_woeid();
-    changeConfig("woeid",$woeid);
 }
 
 #Submit run-once program
