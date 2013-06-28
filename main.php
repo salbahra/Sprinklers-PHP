@@ -354,7 +354,7 @@ function time_to_text($sid,$start,$pid,$end,$data,$simt) {
         $rain_color="black";
         $rain_skip="";
     }
-    echo "{'start': ".$start.",'end': ".$end.",'content':'<a href=\"#\" onclick=\"get_programs(".($pid-1).")\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
+    echo "{'start': ".$start.",'end': ".$end.",'content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
 //    echo $data["stations"][$sid]." ".getrunstr($start,$end)." P".$pid." ".(($end-$start)/60>>0)."minutes ".$rain_skip."\n<br><br>";
 }
 

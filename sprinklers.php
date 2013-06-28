@@ -186,9 +186,10 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Program Preview</h3>
         <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
-        <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
     </div>
-    <div data-role="content" id="timeline">
+    <div data-role="content">
+        <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
+        <div id="timeline"></div>
     </div>
 </div>
 
