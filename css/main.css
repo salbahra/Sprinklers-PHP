@@ -181,4 +181,4 @@ div.timeline-event-content {
 .wicon.cond45 { background-position: -300px -150px; } /*  45  thundershowers            */ 
 .wicon.cond46 { background-position:    0px -450px; } /*  46  snow showers              */ 
 .wicon.cond47 { background-position: -300px -150px; } /*  47  isolated thundershowers   */ 
-.wicon.cond3200 { background: none; } /* 3200  not available             */ 
+.wicon.cond3200 { background: none; display: none; } /* 3200  not available             */ 
