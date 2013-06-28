@@ -350,6 +350,19 @@ function get_preview() {
             };
 
             window.timeline = new links.Timeline(document.getElementById('timeline'));
+            links.events.addListener(timeline, "select", function(){
+                var row = undefined;
+                var sel = timeline.getSelection();
+                if (sel.length) {
+                    if (sel[0].row != undefined) {
+                        row = sel[0].row;
+                    }
+                }
+                if (row === undefined) return;
+                var content = $(".timeline-event-content")[row];
+                var pid = parseInt($(content).html().substr(1)) - 1;
+                get_programs(pid);
+            });
             window.addEventListener("resize",timeline_redraw);
             timeline.draw(data, options);
             if ($(window).width() <= 480) {

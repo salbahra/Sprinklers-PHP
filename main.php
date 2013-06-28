@@ -365,7 +365,7 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
 function time_to_text($sid,$start,$pid,$end,$data,$simt) {
     $class = "program-".(($pid+3)%4);
     if (($data["settings"]["rd"]!=0)&&($simt+$start+($data["settings"]["tz"]-48)*900<=$data["settings"]["rdst"])) $class="delayed";
-    echo "{'start': ".$start.",'end': ".$end.",'className':'".$class."','content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
+    echo "{'start': ".$start.",'end': ".$end.",'className':'".$class."','content':'P".$pid."','group':'".$data["stations"][$sid]."'},";
 }
 
 function getrunstr($start,$end){
