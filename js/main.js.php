@@ -344,9 +344,10 @@ function get_preview() {
                 'max': new Date(date[0],date[1]-1,date[2],24),
                 'selectable': true,
                 'showMajorLabels': false,
-                "zoomMax": 1000 * 60 * 60 * 24,
-                "zoomMin": 1000 * 60 * 60,
-                'groupsChangeable': false
+                'zoomMax': 1000 * 60 * 60 * 24,
+                'zoomMin': 1000 * 60 * 60,
+                'groupsChangeable': false,
+                'showNavigation': true
             };
 
             window.timeline = new links.Timeline(document.getElementById('timeline'));
