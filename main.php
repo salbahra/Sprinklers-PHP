@@ -55,7 +55,7 @@ if (isset($_REQUEST['action'])) {
 #Resolve location to WOEID
 function get_woeid() {
     $options = get_options();
-    $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".$options["loc"]."%22");
+    $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".urlencode($options["loc"])."%22");
     preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid);
     return intval($woeid[1]);
 }
