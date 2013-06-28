@@ -46,6 +46,20 @@ div.ui-slider-switch {
     top: 5px;
     width: 44%;
 }
+.master {
+    background-color: #DEAD5D !important;    
+}
+.program-0 {
+}
+.program-1 {
+    background-color: rgba(0,200,0,0.5) !important
+}
+.program-2 {
+    background-color: rgba(200,0,0,0.5) !important
+}
+.program-3 {
+    background-color: rgba(0,200,200,0.5) !important
+}
 .delayed {
     background-color: #C96161 !important;
     text-decoration: line-through;

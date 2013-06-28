@@ -336,7 +336,7 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
       if($data["seq"]==1) {
         time_to_text($sid,$st_array[$sid],$pid_array[$sid],$et_array[$sid],$data,$simt);
         if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
-            echo "{'start': ".($st_array[$sid]+$data["mton"]).",'end': ".($et_array[$sid]+$data["mtoff"]-60).",'content':'','group':'Master'},";
+            echo "{'start': ".($st_array[$sid]+$data["mton"]).",'end': ".($et_array[$sid]+$data["mtoff"]-60).",'content':'','className':'master','group':'Master'},";
         $endtime=$et_array[$sid];
       } else {
         time_to_text($sid,$simseconds,$pid_array[$sid],$et_array[$sid],$data,$simt);
@@ -345,17 +345,14 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
       }
     }
   }
-  if($data["seq"]==0&&$data["mas"]>0) echo "{'start': ".$simseconds.",'end': ".$endtime.",'content':'','group':'Master'},";
+  if($data["seq"]==0&&$data["mas"]>0) echo "{'start': ".$simseconds.",'end': ".$endtime.",'content':'','className':'master','group':'Master'},";
   return $endtime;
 }
 
 function time_to_text($sid,$start,$pid,$end,$data,$simt) {
-    if (($data["settings"]["rd"]!=0)&&($simt+$start+($data["settings"]["tz"]-48)*900<=$data["settings"]["rdst"])) {
-        $rain_skip="'className':'delayed',";
-    } else {
-        $rain_skip="";
-    }
-    echo "{'start': ".$start.",'end': ".$end.",".$rain_skip."'content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
+    $class = "program-".(($pid+3)%4);
+    if (($data["settings"]["rd"]!=0)&&($simt+$start+($data["settings"]["tz"]-48)*900<=$data["settings"]["rdst"])) $class="delayed";
+    echo "{'start': ".$start.",'end': ".$end.",'className':'".$class."','content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
 }
 
 function getrunstr($start,$end){
