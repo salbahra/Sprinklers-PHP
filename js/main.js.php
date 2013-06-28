@@ -354,8 +354,12 @@ function get_programs(pid) {
         var list = $("#programs_list");
         list.html(items);
         if (typeof pid !== 'undefined') {
-            $("#programs fieldset[data-collapsed='false']").attr("data-collapsed","true");
-            $("#program-"+pid).attr("data-collapsed","false")
+            if (pid === false) {
+                $.mobile.silentScroll(0)
+            } else {
+                $("#programs fieldset[data-collapsed='false']").attr("data-collapsed","true");
+                $("#program-"+pid).attr("data-collapsed","false")
+            }
         }
         $("#programs input[name^='rad_days']").change(function(){
             var progid = $(this).attr('id').split("-")[1], type = $(this).val().split("-")[0], old;
@@ -428,7 +432,7 @@ function delete_program(id) {
         if (result == 0) {
             comm_error()
         } else {
-            get_programs()
+            get_programs(false)
         }
     })
 }
