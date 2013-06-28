@@ -600,6 +600,7 @@ function make_list_logs() {
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
                 $theTime=date('D, d M Y H:i',strtotime($ValveHistory[$j][$k][0])+$tz);
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
+                if (!$mins && $ValveHistory[$j][$k][2] == "") continue; 
                 $list .= "<li>".$theTime.$ValveHistory[$j][$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
         };
@@ -611,6 +612,7 @@ function make_list_logs() {
             for ($k=0;$k<count($RainHistory);$k++){
                 $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
                 $mins = ceil($RainHistory[$k][1]/60);
+                if (!$mins && $RainHistory[$k][2] == "") continue; 
                 $list .= "<li>".$theTime.$RainHistory[$k][2]."<span class='ui-li-aside'>".$mins.(($mins == 1) ? " min" : " mins")."</span></li>";
             };
         };        
