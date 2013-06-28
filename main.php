@@ -463,8 +463,8 @@ function delete_program() {
 #Submit updated options
 function submit_options() {
     global $auto_delay,$auto_delay_duration;
-    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
     send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
+    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
     $autodelay = json_decode($_REQUEST["autodelay"],true);
     $woeid = get_woeid();
     changeConfig("woeid",$woeid);

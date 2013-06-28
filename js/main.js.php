@@ -573,7 +573,7 @@ function submit_settings() {
                 return true;
                 break;
         }
-        opt[id] = data
+        opt[id] = encodeURIComponent(data)
     })
     if (invalid) return
     $.mobile.showPageLoadingMsg();
