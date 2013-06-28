@@ -9,6 +9,9 @@ if (!file_exists("config.php")) header("Location: install.php");
 #Change time out to 5 seconds (default is 60)
 ini_set('default_socket_timeout', 5);
 
+#Set script timeout to 6 seconds to give time for socket to timeout and return error
+set_time_limit(6);
+
 #Include configuration
 require_once("config.php");
 
