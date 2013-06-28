@@ -324,7 +324,7 @@ function get_preview() {
                 'eventMarginAxis': 0,
                 'min': new Date(date[0],date[1]-1,date[2],0),
                 'max': new Date(date[0],date[1]-1,date[2],24),
-                'selectable': false,
+                'selectable': true,
                 'showMajorLabels': false,
                 "zoomMax": 1000 * 60 * 60 * 24,
                 "zoomMin": 1000 * 60 * 60,
@@ -347,11 +347,15 @@ function timeline_redraw() {
     window.timeline.redraw();
 }
 
-function get_programs() {
+function get_programs(pid) {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_all_programs",function(items){
         var list = $("#programs_list");
         list.html(items);
+        if (typeof pid !== 'undefined') {
+            $("#programs fieldset[data-collapsed='false']").attr("data-collapsed","true");
+            $("#program-"+pid).attr("data-collapsed","false")
+        }
         $("#programs input[name^='rad_days']").change(function(){
             var progid = $(this).attr('id').split("-")[1], type = $(this).val().split("-")[0], old;
             type = type.split("_")[1];
