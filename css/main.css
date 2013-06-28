@@ -1,3 +1,6 @@
+.timeline-event-content a {
+    text-decoration: none;
+}
 :not(input) {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
