@@ -336,7 +336,7 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
       if($data["seq"]==1) {
         time_to_text($sid,$st_array[$sid],$pid_array[$sid],$et_array[$sid],$data,$simt);
         if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
-            echo "{'start': ".($st_array[$sid]+$data["mton"]).",'end': ".($et_array[$sid]+$data["mtoff"]-60).",'content':'Master','group':'Master'},";
+            echo "{'start': ".($st_array[$sid]+$data["mton"]).",'end': ".($et_array[$sid]+$data["mtoff"]-60).",'content':'','group':'Master'},";
         $endtime=$et_array[$sid];
       } else {
         time_to_text($sid,$simseconds,$pid_array[$sid],$et_array[$sid],$data,$simt);
@@ -345,7 +345,7 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
       }
     }
   }
-  if($data["seq"]==0&&$data["mas"]>0) echo "{'start': ".$simseconds.",'end': ".$endtime.",'content':'Master','group':'Master'},";
+  if($data["seq"]==0&&$data["mas"]>0) echo "{'start': ".$simseconds.",'end': ".$endtime.",'content':'','group':'Master'},";
   return $endtime;
 }
 
