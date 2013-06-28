@@ -338,6 +338,7 @@ function get_preview() {
                 var currRange = timeline.getVisibleChartRange();
                 if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
             }
+            $(".timeline-groups-text:contains('Master')").addClass("skip-numbering")
         }
         $.mobile.hidePageLoadingMsg();
     })
