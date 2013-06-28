@@ -60,7 +60,14 @@ function get_weather_data() {
     $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
     preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
     preg_match("/<title>Yahoo! Weather - (.*)<\/title>/",$data,$loc);
-    $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$newdata[3],"date"=>$newdata[4],"location"=>$loc[1]);
+    preg_match("/<yweather:location .*?country=\"(.*?)\"\/>/",$data,$region);
+    $region = $region[1];
+    if ($region == "United States" || $region == "Bermuda" || $region == "Palau") {
+        $temp = $newdata[3]."&#176;F";
+    } else {
+        $temp = intval(($newdata[3]-32)*(5/9))."&#176;C";
+    }
+    $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$temp,"date"=>$newdata[4],"location"=>$loc[1]);
     return $weather;
 }
 

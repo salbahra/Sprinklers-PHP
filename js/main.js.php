@@ -219,7 +219,7 @@ function update_weather() {
             $("#weather").html("");
             return
         }
-        $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"&#176;F</span><br><span>"+weather["location"]+"</span>");
+        $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
     })
 }
 
