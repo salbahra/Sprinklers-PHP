@@ -332,8 +332,8 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
     if($pid_array[$sid]) {
       if($data["seq"]==1) {
         time_to_text($sid,$st_array[$sid],$pid_array[$sid],$et_array[$sid],$data,$simt);
-//        if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
-//            echo "Master Start: ".$st_array[$sid]+$data["mton"].", Master End: ".($et_array[$sid]+$data["mtoff"]-60)."\n<br>";
+        if(($data["mas"]>0)&&($data["mas"]!=$sid+1)&&($data["masop"][$sid>>3]&(1<<($sid%8))))
+            echo "{'start': ".($st_array[$sid]+$data["mton"]).",'end': ".($et_array[$sid]+$data["mtoff"]-60).",'content':'Master','group':'Master'},";
         $endtime=$et_array[$sid];
       } else {
         time_to_text($sid,$simseconds,$pid_array[$sid],$et_array[$sid],$data,$simt);
@@ -342,20 +342,17 @@ function run_sched($simseconds,$st_array,$pid_array,$et_array,$data,$simt) {
       }
     }
   }
-//  if($data["seq"]==0&&$data["mas"]>0) echo "Master Start: ".$simseconds.", Master End: ".$endtime."\n<br>";
+  if($data["seq"]==0&&$data["mas"]>0) echo "{'start': ".$simseconds.",'end': ".$endtime.",'content':'Master','group':'Master'},";
   return $endtime;
 }
 
 function time_to_text($sid,$start,$pid,$end,$data,$simt) {
     if (($data["settings"]["rd"]!=0)&&($simt+$start+($data["settings"]["tz"]-48)*900<=$data["settings"]["rdst"])) {
-        $rain_color="red";
-        $rain_skip="Skip";
+        $rain_skip="'className':'delayed',";
     } else {
-        $rain_color="black";
         $rain_skip="";
     }
-    echo "{'start': ".$start.",'end': ".$end.",'content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
-//    echo $data["stations"][$sid]." ".getrunstr($start,$end)." P".$pid." ".(($end-$start)/60>>0)."minutes ".$rain_skip."\n<br><br>";
+    echo "{'start': ".$start.",'end': ".$end.",".$rain_skip."'content':'<a href=\"#\" onclick=\"get_programs(".($pid-1)."); return false;\">P".$pid."</a>','group':'".$data["stations"][$sid]."'},";
 }
 
 function getrunstr($start,$end){

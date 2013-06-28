@@ -46,6 +46,10 @@ div.ui-slider-switch {
     top: 5px;
     width: 44%;
 }
+.delayed {
+    background-color: #C96161 !important;
+    text-decoration: line-through;
+}
 .red {
     background-color: #C96161;
     background: #C96161;
