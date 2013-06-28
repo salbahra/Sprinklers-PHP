@@ -19,6 +19,22 @@ if (!is_auth()) {header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404)
 #Echo token so browser can cache it for automatic logins
 if (isset($_SESSION['sendtoken']) && $_SESSION['sendtoken']) { echo "localStorage.setItem('token', '".$_SESSION['token']."');\n"; $_SESSION['sendtoken'] = false; }
 ?>
+//Set AJAX timeout
+$.ajaxSetup({
+    timeout: 5000
+});
+
+//Handle timeout
+$(document).ajaxError(function(x,t,m) {
+    if(t.statusText==="timeout") {
+        if (m.url == "index.php?action=get_weather") {
+            $("#weather").html("")
+        } else {
+            showerror("Connection timed-out. Please try again.")
+        }
+    }
+});
+
 //After main page is processed, hide loading message and change to the page
 $(document).one("pageinit","#sprinklers", function(){
     $.mobile.hidePageLoadingMsg();
@@ -220,8 +236,6 @@ function update_weather() {
             return
         }
         $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
-    }).fail(function(x,t,m){
-        $("#weather").html("");
     })
 }
 

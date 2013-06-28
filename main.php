@@ -538,7 +538,7 @@ function spoff() {
 function make_list_logs() {
     #Adapted from the script written by David B. Gustavson, 20121021
     global $timeViewWindow, $log_file;
-
+    
     $list = "";
     $ValveName = get_stations();
     $settings = get_settings();
