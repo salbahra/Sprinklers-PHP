@@ -302,8 +302,10 @@ function get_runonce() {
 
 function get_preview() {
     $("#timeline").html("");
+    var date = $("#preview_date").val();
+    if (date === "") return;
+    date = date.split("-");
     $.mobile.showPageLoadingMsg();
-    var date = $("#preview_date").val().split("-");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
         var empty = true;
         if (items == "") {
