@@ -6,6 +6,9 @@ if(!defined('Sprinklers')){header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', 
 #Check if config exists, if not redirect to install
 if (!file_exists("config.php")) header("Location: install.php"); 
 
+#Change time out to 5 seconds (default is 60)
+ini_set('default_socket_timeout', 5);
+
 #Include configuration
 require_once("config.php");
 
