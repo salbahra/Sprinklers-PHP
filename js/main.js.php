@@ -220,6 +220,8 @@ function update_weather() {
             return
         }
         $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
+    }).fail(function(x,t,m){
+        $("#weather").html("");
     })
 }
 

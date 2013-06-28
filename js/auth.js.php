@@ -22,6 +22,16 @@ $(document).one("mobileinit", function(e){
     $.mobile.hashListeningEnabled = false;
 });
 
+//Set AJAX timeout
+$.ajaxSetup({
+    timeout: 5000
+});
+
+//Handle timeout
+$(document).ajaxError(function(x,t,m) {
+     if(t.statusText==="timeout") showerror("Connection timed-out. Please try again.")
+});
+
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
 $("#start").on("pageinit",function(e){
     $("body").show();
