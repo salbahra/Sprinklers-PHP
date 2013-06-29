@@ -207,6 +207,13 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <ul><li>Large on/off buttons in manual mode</li><li>Easy slider inputs for any duration input</li><li>Compatibility between many/all devices</li><li>Easy feedback of current status</li><li>Easy program input/modification</li></ul>
                 <p>Fortunately, I had a lot of feedback on Ray's forums and now have an application that has been tested across many devices and installed in many unique environments.</p>
                 <p>I fully support every feature of the OpenSprinkler and also the OpenSprinkler Pi (using the interval program).</p>
+                <?php
+                    $data = file_get_contents(".git/FETCH_HEAD");
+                    if ($data !== false) {
+                        preg_match("/\w{40}/", $data, $commit);
+                        echo "<p>Version: ".$commit[0]."</p>";
+                    }
+                ?>
                 <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
             </div>
             <div data-role="collapsible">
