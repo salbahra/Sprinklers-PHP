@@ -45,6 +45,13 @@ $(document).one("pageinit","#sprinklers", function(){
     var d = date.getDate();
     $("#preview_date").val(y+"-"+m+"-"+d);
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
+    var curr = $("#commit").html();
+    if (curr !== undefined) {
+        $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
+            var newest = data.object.sha;
+            if (newest != curr) $("#showupdate").fadein(500);
+        })
+    }
 });
 
 //This bind intercepts most links to remove the 300ms delay iOS adds

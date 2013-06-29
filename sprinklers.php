@@ -24,6 +24,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div data-role="content">
         <div id="weather">Loading Weather...</div>
+        <p id="showupdate" style="display:none;text-align:center">Update Available</p>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Program Control</li>
             <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>
@@ -211,7 +212,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     $data = file_get_contents(".git/FETCH_HEAD");
                     if ($data !== false) {
                         preg_match("/\w{40}/", $data, $commit);
-                        echo "<p>Version: ".$commit[0]."</p>";
+                        echo "<p>Version: <span id='commit'>".$commit[0]."</span></p>";
                     }
                 ?>
                 <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
