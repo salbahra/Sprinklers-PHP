@@ -131,7 +131,7 @@ function import_config() {
             if (in_array($key, array(16,21,22,25)) && $value["val"] == 0) continue; 
             $co .= "&o".$key."=".$value["val"];
         } else if ($key == "loc") {
-            $co .= "&".$key."=".$value;
+            $co .= "&".$key."=".urlencode($value);
         }
     }
     send_to_os($co);
