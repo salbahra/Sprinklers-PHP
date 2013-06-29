@@ -113,7 +113,10 @@ function export_config() {
         $i++;
     }
     $newdata["options"] = get_options();
-    $newdata["stations"] = get_stations();
+
+    $vs = get_stations();
+    $newdata["stations"] = $vs["stations"];
+    $newdata["masop"] = $vs["masop"];
 
     echo json_encode($newdata);
 }
@@ -136,6 +139,11 @@ function import_config() {
         $cs .= "&s".$i."=".urlencode($station);
         $i++;
     }
+    $i = 0;
+    foreach ($data["masop"] as $bit) {
+        $cs .= "&m".$i."=".urlencode($bit);
+        $i++;
+    }
     send_to_os($cs);
     send_to_os("/dp?pw=&pid=-1");
     foreach ($data["programs"] as $prog) {
@@ -147,21 +155,17 @@ function import_config() {
 
 #Get station names
 function get_stations() {
-    $stations = get_from_os("/vs");
-    preg_match("/snames=\[(.*)\];/", $stations, $matches);
+    $data = get_from_os("/vs");
+    preg_match("/snames=\[(.*)\];/", $data, $matches);
     $stations = str_replace("'", "", $matches[1]);
     $stations = explode(",", $stations);
 
+    preg_match("/masop=\[(.*?)\]/", $data, $masop);
+    $masop = explode(",",$masop[1]);
+
     #Pop the last element off the array which is always an extra empty string
     array_pop($stations);
-    return $stations;
-}
-
-#Get master operation bits
-function get_masop() {
-    $data = get_from_os("/vs");
-    preg_match("/masop=\[(.*?)\]/", $data, $masop);
-    return explode(",",$masop[1]);
+    return array("stations" => $stations,"masop" => $masop);
 }
 
 #Get program information
@@ -238,7 +242,8 @@ function process_programs($month,$day,$year) {
     $newdata = array();
 
     $newdata["settings"] = get_settings();
-    $newdata["stations"] = get_stations();
+    $vs = get_stations();
+    $newdata["stations"] = $vs["stations"];
 
     $data = get_from_os("/gp?d=".$day."&m=".$month."&y=".$year);
     preg_match_all("/(seq|mas|wl|sdt|mton|mtoff|devday|devmin|dd|mm|yy|nprogs|nboards|ipas|mnp)=[\w|\d|.\"]+/", $data, $opts);
@@ -558,7 +563,8 @@ function make_list_logs() {
     global $timeViewWindow, $log_file;
     
     $list = "";
-    $ValveName = get_stations();
+    $vs = get_stations();
+    $ValveName = $vs["stations"];
     $settings = get_settings();
     $tz = $settings["tz"] - 48;
     $tz = (($tz>=0) ? "+" : "-").((abs($tz)/4)*60*60)+(((abs($tz)%4)*15/10).((abs($tz)%4)*15%10) * 60);
@@ -649,7 +655,8 @@ function make_list_logs() {
 function make_runonce() {
     $list = "<p style='text-align:center'>Value is in minutes. Zero means the station will be excluded from the run-once program.</p><div data-role='fieldcontain'>";
     $n = 0;
-    $stations = get_stations();
+    $vs = get_stations();
+    $stations = $vs["stations"];
     foreach ($stations as $station) {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
         $n++;
@@ -665,7 +672,8 @@ function make_all_programs() {
         echo "<p style='text-align:center'>You have no programs currently added. Tap the Add button on the top right corner to get started.</p>";
         return;
     }
-    $stations = get_stations();
+    $vs = get_stations();
+    $stations = $vs["stations"];
     $n = 0;
     $list = "<p style='text-align:center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
     foreach ($data["programs"] as $program) {
@@ -677,7 +685,8 @@ function make_all_programs() {
 
 #Generate a new program view
 function fresh_program() {
-    $stations = get_stations();
+    $vs = get_stations();
+    $stations = $vs["stations"];
     echo make_program("new",1,$stations);
 }
 
@@ -752,7 +761,8 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
 #Make the manual list
 function make_list_manual() {
     $list = '<li data-role="list-divider">Sprinkler Stations</li>';
-    $stations = get_stations();
+    $vs = get_stations();
+    $stations = $vs["stations"];
     $status = get_station_status();
     $i = 0;
 
@@ -766,7 +776,8 @@ function make_list_manual() {
 #Generate status page
 function make_list_status() {
     $settings = get_settings();
-    $stations = get_stations();
+    $vs = get_stations();
+    $stations = $vs["stations"];
     $status = get_station_status();
 
     $tz = $settings['tz']-48;
@@ -825,8 +836,9 @@ function make_settings_list() {
     global $auto_delay, $auto_delay_duration;
     $options = get_options();
     $settings = get_settings();
-    $stations = get_stations();
-    $masop = get_masop();
+    $vs = get_stations();
+    $stations = $vs["stations"];
+    $masop = $vs["masop"];
     $list = "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Primary Settings</li><li><div data-role='fieldcontain'><fieldset>";
     foreach ($options as $key => $data) {
         if (!is_int($key)) continue;
