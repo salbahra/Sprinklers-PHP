@@ -409,7 +409,14 @@ function get_settings() {
     preg_match_all("/(ver|devt|nbrd|tz|en|rd|rs|mm|rdst|mas|urs|wl|ipas)=[\w|\d|.\"]+/", $data, $matches);
     preg_match("/loc=\"(.*)\"/",$data,$loc);
     preg_match("/lrun=\[(.*)\]/", $data, $lrun);
-    $newdata = array("lrun" => explode(",", $lrun[1]), "loc" => $loc[1]);
+    preg_match("/ps=\[(.*)\];/",$data,$ps);
+    $ps = explode("],[",$ps[1]);
+    $i = 0;
+    foreach ($ps as $p) {
+        $ps[$i] = explode(",",str_replace(array("[","]"), "", $ps[$i]));
+        $i++;
+    }
+    $newdata = array("ps" => $ps, "lrun" => explode(",", $lrun[1]), "loc" => $loc[1]);
     foreach ($matches[0] as $variable) {
         if ($variable === "") continue;
         $tmp = str_replace('"','',explode("=", $variable));
