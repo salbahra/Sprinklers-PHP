@@ -49,7 +49,7 @@ $(document).one("pageinit","#sprinklers", function(){
     if (curr !== undefined) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
             var newest = data.object.sha;
-            if (newest != curr) $("#showupdate").fadein(500);
+            if (newest != curr) $("#showupdate").fadeIn(500);
         })
     }
 });
