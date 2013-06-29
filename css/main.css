@@ -68,17 +68,24 @@ div.ui-slider-switch {
     background-color: #C96161 !important;
     text-decoration: line-through;
 }
+.rem {
+    margin-bottom: 0;
+}
 .red {
     background-color: #C96161;
     background: #C96161;
     color: #FFFFFF;
     font-weight: normal;
+    text-shadow: none;
+    font-size: larger;
 }
 .green {
     background-color: #426746;
     background: #426746;
     color: #FFFFFF !important;
     font-weight: normal;
+    text-shadow: none;
+    font-size: larger;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
 div[class*='ui-block-'] {
