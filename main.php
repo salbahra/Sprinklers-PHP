@@ -157,6 +157,13 @@ function get_stations() {
     return $stations;
 }
 
+#Get master operation bits
+function get_masop() {
+    $data = get_from_os("/vs");
+    preg_match("/masop=\[(.*?)\]/", $data, $masop);
+    return explode(",",$masop[1]);
+}
+
 #Get program information
 function get_programs() {
     $data = get_from_os("/gp?d=0");
@@ -470,8 +477,9 @@ function delete_program() {
 #Submit updated options
 function submit_options() {
     global $auto_delay,$auto_delay_duration;
+    $masop = (isset($_REQUEST["masop"])) ? "&".http_build_query(json_decode($_REQUEST["masop"])) : "";
     send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
-    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])));
+    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])).$masop);
     $autodelay = json_decode($_REQUEST["autodelay"],true);
     $woeid = get_woeid();
     changeConfig("woeid",$woeid);
@@ -816,7 +824,9 @@ function make_list_status() {
 function make_settings_list() {
     global $auto_delay, $auto_delay_duration;
     $options = get_options();
+    $settings = get_settings();
     $stations = get_stations();
+    $masop = get_masop();
     $list = "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Primary Settings</li><li><div data-role='fieldcontain'><fieldset>";
     foreach ($options as $key => $data) {
         if (!is_int($key)) continue;
@@ -880,14 +890,23 @@ function make_settings_list() {
     $list .= "<li><div data-role='fieldcontain'><label for='auto_delay'>Auto Rain Delay</label><select name='auto_delay' id='auto_delay' data-role='slider'><option value='off'>Off</option><option ".(($auto_delay) ? "selected " : "")."value='on'>On</option></select></div>";
     $list .= "<label for='auto_delay_duration'>Delay Duration (hours)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='96' id='auto_delay_duration' value='".$auto_delay_duration."' /></li></ul>";
 
-    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Station Names</li><li><fieldset>";
+    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Edit Stations</li><li>";
+    if ($settings["mas"]) $list .= "<table><tr><th>Station Name</th><th>Activate Master?</th></tr>";
     $i = 0;
     foreach ($stations as $station) {
-        if ($station == "") continue;
+        if ($settings["mas"]) $list .= "<tr><td>";
         $list .= "<input id='edit_station_".$i."' type='text' value='".$station."' />";
+        if ($settings["mas"]) {
+            if ($settings["mas"] == $i+1) {
+                $list .= "</td><td class='use_master'><p id='um_".$i."' style='text-align:center'>(Master)</p></td></tr>";
+            } else {
+                $list .= "</td><td class='use_master'><input id='um_".$i."' type='checkbox' ".(($masop[intval($i/8)]&(1<<($i%8))) ? "checked='checked'" : "")." /><label for='um_".$i."'></label></td></tr>";
+            }
+        }
         $i++;
     }
-    echo $list."</fieldset></li></ul>";
+    if ($settings["mas"]) $list .= "</table>";
+    echo $list."</li></ul>";
 }
 
 #Authentication functions

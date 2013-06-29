@@ -538,8 +538,8 @@ function submit_program(id) {
 }
 
 function submit_settings() {
-    var opt = {}, names = {}, autodelay = {}, invalid = false;
-    $("#os-settings").find(":input").each(function(a,b){
+    var opt = {}, names = {}, autodelay = {}, invalid = false,v="";bid=0,s=0,m={},masop="";
+    $("#os-settings").find(":input,p[id^='um_']").each(function(a,b){
         var $item = $(b), id = $item.attr('id'), data = $item.val();
         switch (id) {
             case "o1":
@@ -553,7 +553,7 @@ function submit_settings() {
             case "o21":
             case "o22":
             case "o25":
-                data = $item.is(":checked")
+                data = $item.is(":checked") ? 1 : 0
                 if (!data) return true
                 break;
             case "edit_station_" + id.slice("edit_station_".length):
@@ -567,6 +567,14 @@ function submit_settings() {
                 names[id] = encodeURIComponent(data)
                 return true;
                 break;
+            case "um_" + id.slice("um_".length):
+                v = ($item.is(":checked") || $item.prop("tagName") == "P") ? "1".concat(v) : "0".concat(v);
+                s++;
+                if (parseInt(s/8) > bid) {
+                    m["m"+bid]=parseInt(v,2); bid++; s=0; v="";
+                }
+                return true;
+                break;
             case "auto_delay":
             case "auto_delay_duration":
                 autodelay[id] = encodeURIComponent(data)
@@ -575,9 +583,11 @@ function submit_settings() {
         }
         opt[id] = encodeURIComponent(data)
     })
+    m["m"+bid]=parseInt(v,2);
+    if ($("[id^='um_']").length) masop = "&masop="+JSON.stringify(m);
     if (invalid) return
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+"&autodelay="+JSON.stringify(autodelay),function(result){
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+"&autodelay="+JSON.stringify(autodelay)+masop,function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
         if (result == 0 || result == 10) {

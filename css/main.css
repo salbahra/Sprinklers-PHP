@@ -1,3 +1,13 @@
+.use_master .ui-btn-inner {
+    border-top: 0;
+}
+.use_master {
+    width: 5%;
+}
+.use_master .ui-checkbox {
+    width: 60%;
+    margin: 0 auto;
+}
 .timeline-event-content a {
     text-decoration: none;
 }
