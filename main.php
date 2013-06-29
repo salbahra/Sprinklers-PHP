@@ -803,7 +803,7 @@ function make_list_status() {
             $rem=$settings["ps"][$i][1];
             $remm=$rem/60>>0;
             $rems=$rem%60;
-            $pname="P"+$settings["ps"][$i][0];
+            $pname="P".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual Program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once Program";
             $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." (".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</p>";
