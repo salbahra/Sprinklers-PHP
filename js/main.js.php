@@ -43,6 +43,7 @@ $(document).one("pageinit","#sprinklers", function(){
     var m = String(date.getMonth()+1);
     if (m.length == 1) m = "0"+m;
     var d = date.getDate();
+    if (d.length == 1) d = "0"+d;
     $("#preview_date").val(y+"-"+m+"-"+d);
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
     var curr = $("#commit").html();
@@ -385,6 +386,18 @@ function get_preview() {
 
 function timeline_redraw() {
     window.timeline.redraw();
+}
+
+function changeday(dir) {
+    inputBox = $("#preview_date");
+    var nDate = new Date(inputBox.val());
+    nDate.setDate(nDate.getDate() + dir);
+    var m = String(nDate.getMonth()+1);
+    if (m.length == 1) m = "0"+m;
+    var d = String(nDate.getDate());
+    if (d.length == 1) d = "0"+d;
+    inputBox.val(nDate.getFullYear() + "-" + m + "-" + d);
+    get_preview();
 }
 
 function get_programs(pid) {

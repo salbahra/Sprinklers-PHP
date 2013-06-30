@@ -1,3 +1,7 @@
+#preview div[data-role='content'] .ui-input-text {
+    display: inline-block;
+    width:80%;
+}
 .use_master .ui-btn-inner {
     border-top: 0;
 }
