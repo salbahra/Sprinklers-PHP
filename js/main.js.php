@@ -243,7 +243,7 @@ function update_weather() {
             $("#weather").html("");
             return
         }
-        $("#weather").html("<p class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
+        $("#weather").html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
     })
 }
 
@@ -326,6 +326,7 @@ function get_runonce() {
 
 function get_preview() {
     $("#timeline").html("");
+    $("#timeline-navigation").hide()
     var date = $("#preview_date").val();
     if (date === "") return;
     date = date.split("-");
@@ -355,7 +356,7 @@ function get_preview() {
                 'zoomMax': 1000 * 60 * 60 * 24,
                 'zoomMin': 1000 * 60 * 60,
                 'groupsChangeable': false,
-                'showNavigation': true
+                'showNavigation': false
             };
 
             window.timeline = new links.Timeline(document.getElementById('timeline'));
@@ -378,7 +379,8 @@ function get_preview() {
                 var currRange = timeline.getVisibleChartRange();
                 if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
             }
-            $(".timeline-groups-text:contains('Master')").addClass("skip-numbering")
+            $("#timeline .timeline-groups-text:contains('Master')").addClass("skip-numbering")
+            $("#timeline-navigation").show()
         }
         $.mobile.hidePageLoadingMsg();
     })

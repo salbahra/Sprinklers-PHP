@@ -195,6 +195,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <a href="#" onclick="changeday(2); return false;"><img src="img/moveright.png" /></a>
         </div>
         <div id="timeline"></div>
+        <div id="timeline-navigation" style="display:none;width:144px;margin:0 auto">
+            <div class="timeline-navigation-zoom-in" onclick="timeline.zoom(0.4)" title="Zoom in"></div>
+            <div class="timeline-navigation-zoom-out" onclick="timeline.zoom(-0.4)" title="Zoom out"></div>
+            <div class="timeline-navigation-move-left" onclick="timeline.move(-0.2)" title="Move left"></div>
+            <div class="timeline-navigation-move-right" onclick="timeline.move(0.2)" title="Move right"></div>
+        </div>
     </div>
 </div>
 
