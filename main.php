@@ -40,7 +40,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		}
@@ -454,6 +454,11 @@ function is_mm() {
     if ($settings["mm"] == 1) return "selected";
 }
 
+function get_autodelay() {
+    global $auto_delay,$auto_delay_duration;
+    echo json_encode(array("auto_delay"=>$auto_delay,"auto_delay_duration"=>$auto_delay_duration));
+}
+
 #Send command to OpenSprinkler
 function send_to_os($url) {
     global $os_ip, $os_pw;
@@ -479,15 +484,10 @@ function delete_program() {
     send_to_os("/dp?pw=&pid=".$_REQUEST["pid"]);
 }
 
-#Submit updated options
-function submit_options() {
+#Submit auto-delay settings
+function submit_autodelay() {
     global $auto_delay,$auto_delay_duration;
-    $masop = (isset($_REQUEST["masop"])) ? "&".http_build_query(json_decode($_REQUEST["masop"])) : "";
-    send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
-    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])).$masop);
     $autodelay = json_decode($_REQUEST["autodelay"],true);
-    $woeid = get_woeid();
-    changeConfig("woeid",$woeid);
     $switch = ($autodelay["auto_delay"] === "on") ? 1 : 0;
     if ($switch !== $auto_delay) {
         $auto_delay = $switch;
@@ -504,6 +504,16 @@ function submit_options() {
             exit();
         }
     }
+    echo 1;
+}
+
+#Submit updated options
+function submit_options() {
+    $masop = (isset($_REQUEST["masop"])) ? "&".http_build_query(json_decode($_REQUEST["masop"])) : "";
+    send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
+    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])).$masop);
+    $woeid = get_woeid();
+    changeConfig("woeid",$woeid);
 }
 
 #Submit run-once program
@@ -833,7 +843,6 @@ function make_list_status() {
 
 #Generate settings page
 function make_settings_list() {
-    global $auto_delay, $auto_delay_duration;
     $options = get_options();
     $settings = get_settings();
     $vs = get_stations();
@@ -896,13 +905,7 @@ function make_settings_list() {
                 continue 2;
         }
     }
-    $list .= "</fieldset></div></li></ul>";
-
-    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Automatic Rain Delay</li>";
-    $list .= "<li><div data-role='fieldcontain'><label for='auto_delay'>Auto Rain Delay</label><select name='auto_delay' id='auto_delay' data-role='slider'><option value='off'>Off</option><option ".(($auto_delay) ? "selected " : "")."value='on'>On</option></select></div>";
-    $list .= "<label for='auto_delay_duration'>Delay Duration (hours)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='96' id='auto_delay_duration' value='".$auto_delay_duration."' /></li></ul>";
-
-    $list .= "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Edit Stations</li><li>";
+    $list .= "</fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Edit Stations</li><li>";
     if ($settings["mas"]) $list .= "<table><tr><th>Station Name</th><th>Activate Master?</th></tr>";
     $i = 0;
     foreach ($stations as $station) {

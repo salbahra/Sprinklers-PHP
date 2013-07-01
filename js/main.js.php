@@ -181,6 +181,15 @@ $(document).on("pagebeforeshow",function(e,data){
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
     }    
+    if (newpage == "raindelay") {
+        $.get("index.php","action=get_autodelay",function(data){
+            data = JSON.parse(data)
+            if (data["auto_delay"]) {
+                $("#auto_delay").val("on").slider("refresh")
+            }
+            $("#auto_delay_duration").val(data["auto_delay_duration"])
+        })
+    }
 })
 
 function check_auto(sliders){
@@ -597,11 +606,6 @@ function submit_settings() {
                 }
                 return true;
                 break;
-            case "auto_delay":
-            case "auto_delay_duration":
-                autodelay[id] = encodeURIComponent(data)
-                return true;
-                break;
         }
         opt[id] = encodeURIComponent(data)
     })
@@ -609,13 +613,11 @@ function submit_settings() {
     if ($("[id^='um_']").length) masop = "&masop="+JSON.stringify(m);
     if (invalid) return
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+"&autodelay="+JSON.stringify(autodelay)+masop,function(result){
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+masop,function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
         if (result == 0 || result == 10) {
             comm_error()
-        } else if (result == 112) {
-            showerror("Settings have been saved however auto-delay changes were not saved. Check config.php permissions and try again.");
         } else {
             showerror("Settings have been saved")
         }
@@ -675,6 +677,24 @@ function raindelay() {
             showerror("Rain delay has been successfully set")
         }
     });
+}
+
+function auto_raindelay() {
+    $.mobile.showPageLoadingMsg();
+    var params = {
+        "auto_delay": $("#auto_delay").val(),
+        "auto_delay_duration": $("#auto_delay_duration").val()
+    }
+    params = JSON.stringify(params)
+    $.get("index.php","action=submit_autodelay&autodelay="+params,function(result){
+        $.mobile.hidePageLoadingMsg();
+        gohome();
+        if (result == 2) {
+            showerror("Auto-delay changes were not saved. Check config.php permissions and try again.");
+        } else {
+            showerror("Auto-delay changes have been saved")
+        }
+    })
 }
 
 function rbt() {

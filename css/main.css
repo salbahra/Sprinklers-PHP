@@ -1,3 +1,9 @@
+.rain-desc {
+    word-wrap:normal;
+    white-space:normal;
+    overflow:visible;
+    text-align:center;
+}
 #preview div[data-role='content'] .ui-input-text {
     display: inline-block;
     width:80%;

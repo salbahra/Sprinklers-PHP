@@ -145,18 +145,44 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
 </div>
 
-<div data-role="dialog" id="raindelay" data-close-btn="none" data-overlay-theme="a" data-theme="c" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
+<div data-role="page" id="raindelay">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h1>Rain Delay</h1>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
     </div>
-    <div data-role="content" data-theme="d">
-        <form action="javascript:raindelay()">
-            <p>To turn off use a value of 0.</p>
-            <label for="delay">Duration (in hours):</label>
-            <input type="number" name="delay" pattern="[0-9]*" id="delay" value="0">
-            <input type="submit" data-mini="true" value="Submit" />
-        </form>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-role="button" data-mini="true" data-theme="a">Cancel</a>
+    <div data-role="content">
+        <p style="text-align:center">Rain delay allows you to disable all programs for a set duration. You can manually set a rain delay or enable automatic rain delays.</p>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Manual Rain Delay</li>
+            <li>
+                <p class="rain-desc">Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0.</p>
+                <form action="javascript:raindelay()">
+                    <div data-role="fieldcontain">
+                        <label for="delay">Duration (in hours):</label>
+                        <input type="number" name="delay" pattern="[0-9]*" id="delay" value="">
+                    </div>
+                    <input type="submit" value="Submit" />
+                </form>
+            </li>
+        </ul>
+        <ul data-role='listview' data-inset='true'>
+            <li data-role='list-divider'>Automatic Rain Delay</li>
+            <li>
+                <p class="rain-desc">When automatic rain delay is enabled, the weather will be checked for rain every hour. If the weather reports any condition suggesting rain, a rain delay is automatically issued using the below set delay duration.</p>
+                <form action="javascript:auto_raindelay()">
+                    <div data-role='fieldcontain'>
+                        <label for='auto_delay'>Auto Rain Delay</label>
+                        <select name='auto_delay' id='auto_delay' data-role='slider'>
+                            <option value='off'>Off</option>
+                            <option value='on'>On</option>
+                        </select>
+                    </div>
+                    <label for='auto_delay_duration'>Delay Duration (hours)</label>
+                    <input type='number' pattern='[0-9]*' data-type='range' min='0' max='96' id='auto_delay_duration' />
+                    <input type="submit" value="Submit" />
+                </form>
+            </li>
+        </ul>
     </div>
 </div>
 
