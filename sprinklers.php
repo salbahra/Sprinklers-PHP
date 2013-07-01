@@ -178,7 +178,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         </select>
                     </div>
                     <label for='auto_delay_duration'>Delay Duration (hours)</label>
-                    <input type='number' pattern='[0-9]*' data-type='range' min='0' max='96' id='auto_delay_duration' />
+                    <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
                     <input type="submit" value="Submit" />
                 </form>
             </li>
