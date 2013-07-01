@@ -180,14 +180,15 @@ $(document).on("pagebeforeshow",function(e,data){
     } else {
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
-    }    
+    }
+
     if (newpage == "raindelay") {
         $.get("index.php","action=get_autodelay",function(data){
             data = JSON.parse(data)
             if (data["auto_delay"]) {
                 $("#auto_delay").val("on").slider("refresh")
             }
-            $("#auto_delay_duration").val(data["auto_delay_duration"]).rangeslider( "refresh" );
+            $("#auto_delay_duration").val(data["auto_delay_duration"]).slider("refresh");
         })
     }
 })
