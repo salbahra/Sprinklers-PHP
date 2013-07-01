@@ -187,7 +187,7 @@ $(document).on("pagebeforeshow",function(e,data){
             if (data["auto_delay"]) {
                 $("#auto_delay").val("on").slider("refresh")
             }
-            $("#auto_delay_duration").val(data["auto_delay_duration"])
+            $("#auto_delay_duration").val(data["auto_delay_duration"]).rangeslider( "refresh" );
         })
     }
 })
