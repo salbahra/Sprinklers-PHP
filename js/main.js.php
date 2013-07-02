@@ -59,7 +59,7 @@ $(document).one("pageinit","#sprinklers", function(){
 $(document).on('pageinit', function (e, data) {
     var newpage = e.target.id;
 
-    if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs") {
+    if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs" || newpage == "settings" || newpage == "os-settings" || newpage == "os-stations" || newpage == "raindelay") {
         var currpage = $(e.target);
 
         currpage.find("a[href='#"+currpage.attr('id')+"-settings']").bind('vclick', function (e) {
