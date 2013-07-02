@@ -19,7 +19,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="sprinklers">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <a data-icon="bars" data-iconpos="notext" href="#sprinklers-settings"></a>
-        <a data-icon="gear" data-iconpos="notext" href="#os-settings" onclick="show_settings(); return false;">Settings</a>
+        <a data-icon="gear" data-iconpos="notext" href="#settings">Settings</a>
         <h3><?php echo $webtitle; ?></h3>
     </div>
     <div data-role="content">
@@ -37,25 +37,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
             <li><a href="#preview">Preview Programs</a></li>
             <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
-        </ul>
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider">System Control</li>
-            <li data-role="fieldcontain">
-                <label for="en"><b>Operation</b></label>
-                <select name="en" id="en" data-role="slider">
-                    <option value="off">Off</option>
-                    <option <?php echo is_en(); ?> value="on">On</option>
-                </select>
-            </li>
-            <li data-role="fieldcontain">
-                <label for="mm"><b>Manual Mode</b></label>
-                <select name="mm" id="mm" data-role="slider">
-                    <option value="off">Off</option>
-                    <option <?php echo is_mm(); ?> value="on">On</option>
-                </select>
-            </li>
-            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
-            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
         </ul>
     </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
@@ -199,13 +180,59 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
 </div>
 
+<div data-role="page" id="settings">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>Settings</h3>
+        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#" onclick="show_settings(); return false;">Device Options</a></li>
+            <li><a href="#" onclick="show_stations(); return false;">Edit Stations</a></li>
+        </ul>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">System Control</li>
+            <li data-role="fieldcontain">
+                <label for="en"><b>Operation</b></label>
+                <select name="en" id="en" data-role="slider">
+                    <option value="off">Off</option>
+                    <option <?php echo is_en(); ?> value="on">On</option>
+                </select>
+            </li>
+            <li data-role="fieldcontain">
+                <label for="mm"><b>Manual Mode</b></label>
+                <select name="mm" id="mm" data-role="slider">
+                    <option value="off">Off</option>
+                    <option <?php echo is_mm(); ?> value="on">On</option>
+                </select>
+            </li>
+            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
+            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
+        </ul>
+    </div>
+</div>
+
 <div data-role="page" id="os-settings">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>OS Settings</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#settings" data-icon="back">Back</a>
         <a href="#" onclick="submit_settings(); return false;">Submit</a>
     </div>
     <div data-role="content">
+        <ul data-role="listview" data-inset="true" id="os-settings-list">
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="os-stations">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>Stations</h3>
+        <a href="#settings" data-icon="back">Back</a>
+        <a href="#" onclick="submit_stations(); return false;">Submit</a>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true" id="os-stations-list">
+        </ul>
     </div>
 </div>
 

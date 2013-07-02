@@ -277,16 +277,22 @@ function gohome() {
 function show_settings() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_settings_list",function(items){
-        var container = $("#os-settings div[data-role='content']");
-        container.html(items);
-        container.children().trigger("create")
-        if (container.hasClass("ui-content")) {
-            container.find("ul").each(function(a,b){
-                $(b).listview();
-            })
-        }
+        var list = $("#os-settings-list");
+        list.html(items).trigger("create");
+        if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#os-settings"));
+    })    
+}
+
+function show_stations() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_stations_list",function(items){
+        var list = $("#os-stations-list");
+        list.html(items).trigger("create");
+        if (list.hasClass("ui-listview")) list.listview("refresh");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#os-stations"));
     })    
 }
 
@@ -570,8 +576,8 @@ function submit_program(id) {
 }
 
 function submit_settings() {
-    var opt = {}, names = {}, autodelay = {}, invalid = false,v="";bid=0,s=0,m={},masop="";
-    $("#os-settings").find(":input,p[id^='um_']").each(function(a,b){
+    var opt = {}, invalid = false;
+    $("#os-settings-list").find(":input").each(function(a,b){
         var $item = $(b), id = $item.attr('id'), data = $item.val();
         switch (id) {
             case "o1":
@@ -588,6 +594,27 @@ function submit_settings() {
                 data = $item.is(":checked") ? 1 : 0
                 if (!data) return true
                 break;
+        }
+        opt[id] = encodeURIComponent(data)
+    })
+    if (invalid) return
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=submit_options&options="+JSON.stringify(opt),function(result){
+        $.mobile.hidePageLoadingMsg();
+        gohome();
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("Settings have been saved")
+        }
+    })
+}
+
+function submit_stations() {
+    var names = {}, invalid = false,v="";bid=0,s=0,m={},masop="";
+    $("#os-stations-list").find(":input,p[id^='um_']").each(function(a,b){
+        var $item = $(b), id = $item.attr('id'), data = $item.val();
+        switch (id) {
             case "edit_station_" + id.slice("edit_station_".length):
                 id = "s" + id.split("_")[2]
                 if (data.length > 16) {
@@ -608,19 +635,18 @@ function submit_settings() {
                 return true;
                 break;
         }
-        opt[id] = encodeURIComponent(data)
     })
     m["m"+bid]=parseInt(v,2);
     if ($("[id^='um_']").length) masop = "&masop="+JSON.stringify(m);
     if (invalid) return
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=submit_options&options="+JSON.stringify(opt)+"&names="+JSON.stringify(names)+masop,function(result){
+    $.get("index.php","action=submit_stations&names="+JSON.stringify(names)+masop,function(result){
         $.mobile.hidePageLoadingMsg();
         gohome();
-        if (result == 0 || result == 10) {
+        if (result == 0) {
             comm_error()
         } else {
-            showerror("Settings have been saved")
+            showerror("Stations have been updated")
         }
     })
 }

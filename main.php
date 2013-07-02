@@ -40,7 +40,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		}
@@ -509,11 +509,15 @@ function submit_autodelay() {
 
 #Submit updated options
 function submit_options() {
-    $masop = (isset($_REQUEST["masop"])) ? "&".http_build_query(json_decode($_REQUEST["masop"])) : "";
     send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
-    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])).$masop);
     $woeid = get_woeid();
     changeConfig("woeid",$woeid);
+}
+
+#Submit updated stations
+function submit_stations() {
+    $masop = (isset($_REQUEST["masop"])) ? "&".http_build_query(json_decode($_REQUEST["masop"])) : "";
+    send_to_os("/cs?pw=&".http_build_query(json_decode($_REQUEST["names"])).$masop);
 }
 
 #Submit run-once program
@@ -847,8 +851,7 @@ function make_settings_list() {
     $settings = get_settings();
     $vs = get_stations();
     $stations = $vs["stations"];
-    $masop = $vs["masop"];
-    $list = "<ul data-role='listview' data-inset='true'><li data-role='list-divider'>Primary Settings</li><li><div data-role='fieldcontain'><fieldset>";
+    $list = "<li data-role='list-divider'>Device Settings</li><li><div data-role='fieldcontain'><fieldset>";
     foreach ($options as $key => $data) {
         if (!is_int($key)) continue;
         switch ($key) {
@@ -905,7 +908,16 @@ function make_settings_list() {
                 continue 2;
         }
     }
-    $list .= "</fieldset></div></li></ul><ul data-role='listview' data-inset='true'><li data-role='list-divider'>Edit Stations</li><li>";
+    $list .= "</fieldset></div></li>";
+    echo $list;
+}
+
+function make_stations_list() {
+    $settings = get_settings();
+    $vs = get_stations();
+    $stations = $vs["stations"];
+    $masop = $vs["masop"];
+    $list = "<li data-role='list-divider'>Edit Stations</li><li>";
     if ($settings["mas"]) $list .= "<table><tr><th>Station Name</th><th>Activate Master?</th></tr>";
     $i = 0;
     foreach ($stations as $station) {
@@ -921,7 +933,7 @@ function make_settings_list() {
         $i++;
     }
     if ($settings["mas"]) $list .= "</table>";
-    echo $list."</li></ul>";
+    echo $list."</li>";
 }
 
 #Authentication functions
