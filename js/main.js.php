@@ -42,7 +42,7 @@ $(document).one("pageinit","#sprinklers", function(){
     var y = date.getFullYear();
     var m = String(date.getMonth()+1);
     if (m.length == 1) m = "0"+m;
-    var d = date.getDate();
+    var d = String(date.getDate());
     if (d.length == 1) d = "0"+d;
     $("#preview_date").val(y+"-"+m+"-"+d);
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
