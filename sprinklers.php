@@ -31,6 +31,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
             <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
+            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Information</li>
@@ -193,20 +194,19 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
             <li data-role="fieldcontain">
-                <label for="en"><b>Operation</b></label>
-                <select name="en" id="en" data-role="slider">
-                    <option value="off">Off</option>
-                    <option <?php echo is_en(); ?> value="on">On</option>
-                </select>
-            </li>
-            <li data-role="fieldcontain">
                 <label for="mm"><b>Manual Mode</b></label>
                 <select name="mm" id="mm" data-role="slider">
                     <option value="off">Off</option>
                     <option <?php echo is_mm(); ?> value="on">On</option>
                 </select>
             </li>
-            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
+            <li data-role="fieldcontain">
+                <label for="en"><b>Operation</b></label>
+                <select name="en" id="en" data-role="slider">
+                    <option value="off">Off</option>
+                    <option <?php echo is_en(); ?> value="on">On</option>
+                </select>
+            </li>
             <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
         </ul>
     </div>
