@@ -742,15 +742,18 @@ function rbt() {
 }
 
 function rsn() {
-    $.mobile.showPageLoadingMsg()
-    $.get("index.php","action=rsn",function(result){
-        $.mobile.hidePageLoadingMsg()
-        if (result == 0) {
-            comm_error()
-        } else {
-            showerror("All stations have been stopped")
-        }
-    });
+    areYouSure("Are you sure you want to stop all stations?", "", function() {
+        $.mobile.showPageLoadingMsg()
+        $.get("index.php","action=rsn",function(result){
+            $.mobile.hidePageLoadingMsg()
+            gohome();
+            if (result == 0) {
+                comm_error()
+            } else {
+                showerror("All stations have been stopped")
+            }
+        });
+    },gohome);
 }
 
 function export_config() {
