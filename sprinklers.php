@@ -26,18 +26,18 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <div id="weather">Loading Weather...</div>
         <p id="showupdate" style="display:none;text-align:center">Update Available</p>
         <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Information</li>
+            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
+            <li><a href="#preview">Preview Programs</a></li>
+            <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
+        </ul>
+        <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Program Control</li>
             <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>
             <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
             <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
-        </ul>
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider">System Information</li>
-            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
-            <li><a href="#preview">Preview Programs</a></li>
-            <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
         </ul>
     </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
