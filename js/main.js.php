@@ -353,7 +353,6 @@ function get_preview() {
             $("#timeline").html("<p align='center'>No stations set to run on this day.</p>")
         } else {
             empty = false
-            var date = $("#preview_date").val().split("-");
             var data = eval("["+items.substring(0, items.length - 1)+"]");
             $.each(data, function(){
                 this.start = new Date(date[0],date[1]-1,date[2],0,0,this.start);
@@ -407,8 +406,11 @@ function timeline_redraw() {
 }
 
 function changeday(dir) {
-    inputBox = $("#preview_date");
-    var nDate = new Date(inputBox.val());
+    var inputBox = $("#preview_date");
+    var date = inputBox.val();
+    if (date === "") return;
+    date = date.split("-");
+    var nDate = new Date(date[0],date[1]-1,date[2]);
     nDate.setDate(nDate.getDate() + dir);
     var m = String(nDate.getMonth()+1);
     if (m.length == 1) m = "0"+m;
