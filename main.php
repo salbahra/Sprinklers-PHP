@@ -23,6 +23,11 @@ if (!isset($auto_delay)) {
     $auto_delay = 0;
 }
 
+if (!isset($auto_mm)) {
+    changeConfig("auto_mm",0);
+    $auto_mm = 0;
+}
+
 if (!isset($auto_delay_duration)) {
     changeConfig("auto_delay_duration",24);
     $auto_delay_duration = 24;
@@ -40,7 +45,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		}
@@ -570,6 +575,19 @@ function spoff() {
     send_to_os("/sn".$_REQUEST["zone"]."=0");
 }
 
+#Turn off automatic disable of manual mode
+function auto_mm_off() {
+    changeConfig("auto_mm",0);
+    $auto_mm = 0;
+    echo 1;
+}
+
+#Turn on automatic disable of manual mode
+function auto_mm_on() {
+    changeConfig("auto_mm",1);
+    $auto_mm = 1;
+    echo 1;
+}
 
 #Content generation functions
 function make_list_logs() {
@@ -1146,7 +1164,7 @@ function delLineFromFile($fileName, $lineToDelete){
 
 #Change a configuration value
 function changeConfig($variable, $value){
-    $allowed = array("auto_delay","auto_delay_duration","woeid");
+    $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm");
     #Only allow the above variables to be changed
     if (!in_array($variable, $allowed)) return false;
     #Sanatize input

@@ -33,4 +33,6 @@ $auto_delay = 0;
 #Rain Delay Default for Adverse Weather
 $auto_delay_duration=24;
 
+#Automatically turn off manual mode at midnight
+$auto_mm=0
 ?>

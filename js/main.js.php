@@ -118,6 +118,15 @@ $("select[data-role='slider']").change(function(){
                     }
                 });
             }
+            if (type === "auto_mm") {
+                $.get("index.php","action=auto_mm_on",function(result){
+                    //If switch failed then change the switch back and show error
+                    if (result == 0) {
+                        comm_error()
+                        $("#auto_mm").val("off").slider("refresh")
+                    }
+                });
+            }
             if (type === "mm" || type === "mmm") {
                 $.get("index.php","action=mm_on",function(result){
                     if (result == 0) {
@@ -137,6 +146,14 @@ $("select[data-role='slider']").change(function(){
                     if (result == 0) {
                         comm_error()
                         $("#en").val("on").slider("refresh")
+                    }
+                });
+            }
+            if (type === "auto_mm") {
+                $.get("index.php","action=auto_mm_off",function(result){
+                    if (result == 0) {
+                        comm_error()
+                        $("#auto_mm").val("on").slider("refresh")
                     }
                 });
             }

@@ -213,6 +213,19 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             </li>
             <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
         </ul>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Automatically Disable Manual Mode</li>
+            <li>
+                <p class="rain-desc">Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled.</p>
+            </li>
+            <li data-role="fieldcontain">
+                <label for="auto_mm"><b>Enabled</b></label>
+                <select name="auto_mm" id="auto_mm" data-role="slider">
+                    <option value="off">Off</option>
+                    <option <?php global $auto_mm; echo (($auto_mm) ? "selected" : "") ?> value="on">On</option>
+                </select>
+            </li>
+        </ul>
     </div>
 </div>
 

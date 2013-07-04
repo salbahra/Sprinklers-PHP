@@ -22,6 +22,9 @@ if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || $rainSenseStatu
 	file_put_contents ($log_previous, $newSprinklerValveSettings."--".$rainSenseStatus);
 };
 
+#Automatically turn off manual mode daily, if enabled
+if ($auto_mm && date('H') == "00" && date('i') == "00") send_to_os("/cv?pw=&mm=0");;
+
 #Automatic rain delay, every hour, if enabled
 if ($auto_delay && date('i') == "00") weather_to_delay();
 ?>
