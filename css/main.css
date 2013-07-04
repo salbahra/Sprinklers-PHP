@@ -1,3 +1,21 @@
+#footer-running {
+    display:none;
+    font-weight: normal;
+    background-color: #C4C2C3;
+    opacity: 0.9;
+}
+#running-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 2px;
+    top: 50%;
+}
+#running-text {
+    padding: 0 0 0 15px;
+    margin:0;
+
+}
 .rain-desc {
     word-wrap:normal;
     white-space:normal;

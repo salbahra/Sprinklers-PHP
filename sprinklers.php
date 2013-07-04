@@ -40,6 +40,10 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
         </ul>
     </div>
+    <div id="footer-running" data-role="footer" data-position-fixed="true" data-position="fixed" data-theme="a">
+        <img id="running-icon" width="11px" height="11px" src="img/running.png" />
+        <p id="running-text"></p>
+    </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
         <ul data-role="listview" data-theme="a">
             <li>Logged in as: <?php echo $_SESSION["username"] ?></li>

@@ -40,7 +40,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		}
@@ -785,6 +785,29 @@ function make_list_manual() {
         $i++;
     }
     echo $list;
+}
+
+function current_status() {
+    $settings = get_settings();
+    $vs = get_stations();
+    $stations = $vs["stations"];
+    $status = get_station_status();
+
+    $i = 0;
+    foreach ($stations as $station) {
+        $info = "";
+        if ($settings["ps"][$i][0] && $status[$i]) {
+            $rem=$settings["ps"][$i][1];
+            $remm=$rem/60>>0;
+            $rems=$rem%60;
+            $pname="Program ".$settings["ps"][$i][0];
+            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual Program";
+            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once Program";
+            $info = $pname." is Running (".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." Remaining)";
+            echo $info; return;
+        }
+        $i++;
+    }
 }
 
 #Generate status page
