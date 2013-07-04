@@ -201,11 +201,17 @@ $(document).on("pagebeforeshow",function(e,data){
                 footer.css("opacity",0);
                 return;
             }
-            $("#running-text").html(data);
+            data = JSON.parse(data);
+            var minutes = parseInt( data.seconds / 60 ) % 60;
+            var seconds = data.seconds % 60;
+            var line = data.program + " is running on station <span class='nobr'>" + data.station + "</span> <span id='countdown' class='nobr'>(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + " remaining)</span>";
+            if (data.seconds != 0) update_timer(data.seconds);
+            $("#running-text").html(line);
             $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")        
             footer.animate({"opacity": "0.88"})
         })
     } else {
+        clearInterval(window.interval_id);
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
     }
@@ -220,6 +226,20 @@ $(document).on("pagebeforeshow",function(e,data){
         })
     }
 })
+
+function update_timer(total) {
+    window.interval_id = setInterval(function(){
+        if (total <= 0) {
+            clearInterval(interval_id);
+            $("#footer-running").css("opacity",0).html("");
+        }
+        else
+            --total;
+            var minutes = parseInt( total / 60 ) % 60;
+            var seconds = total % 60;
+            $("#countdown").text("(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + " remaining)");
+    },1000)
+}
 
 function check_auto(sliders){
     if (typeof(window.sliders) !== "object") window.sliders = [];

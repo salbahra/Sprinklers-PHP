@@ -821,14 +821,11 @@ function current_status() {
     foreach ($stations as $station) {
         $info = "";
         if ($settings["ps"][$i][0] && $status[$i]) {
-            $rem=$settings["ps"][$i][1];
-            $remm=$rem/60>>0;
-            $rems=$rem%60;
             $pname="Program ".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
-            $info = $pname." is running on station <span class='nobr'>".$stations[$i]."</span> <span class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span>";
-            echo $info; return;
+            $info = array("program" => $pname,"station" => $stations[$i], "seconds" => $settings["ps"][$i][1]);
+            echo json_encode($info); return;
         }
         $i++;
     }
