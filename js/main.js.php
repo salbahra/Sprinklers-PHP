@@ -165,15 +165,6 @@ $(document).on("pageshow",function(e,data){
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
         check_auto($("#"+newpage+" select[data-role='slider']"));
-        //Check if a program is running
-        $.get("index.php","action=current_status",function(data){
-            if (data === "") {
-                $("#footer-running").css("display","none");
-                return;
-            }
-            $("#running-text").html(data);
-            show_running();
-        })
     } else if (newpage == "preview") {
         get_preview();
     }
@@ -186,6 +177,17 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
+        //Check if a program is running
+        $.get("index.php","action=current_status",function(data){
+            var footer = $("#footer-running")
+            if (data === "") {
+                footer.css("opacity",0);
+                return;
+            }
+            $("#running-text").html(data);
+            $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")        
+            footer.animate({"opacity": "0.9"})
+        })
     } else {
         var title = document.title;
         document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
@@ -798,12 +800,6 @@ function import_config() {
             }
         })
     },gohome);
-}
-
-function show_running() {
-    var footer = $("#footer-running")
-    $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")        
-    footer.css("display","inline")
 }
 
 function areYouSure(text1, text2, callback, callback2) {

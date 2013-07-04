@@ -1,8 +1,10 @@
+.nobr {
+    white-space:nowrap
+}
 #footer-running {
-    display:none;
     font-weight: normal;
     background-color: #C4C2C3;
-    opacity: 0.9;
+    opacity: 0.0;
 }
 #running-icon {
     position: absolute;
