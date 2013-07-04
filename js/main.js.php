@@ -122,7 +122,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=auto_mm_on",function(result){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
-                        comm_error()
+                        showerror("Auto disable of manual mode was not changed. Check config.php permissions and try again.")
                         $("#auto_mm").val("off").slider("refresh")
                     }
                 });
@@ -152,7 +152,7 @@ $("select[data-role='slider']").change(function(){
             if (type === "auto_mm") {
                 $.get("index.php","action=auto_mm_off",function(result){
                     if (result == 0) {
-                        comm_error()
+                        showerror("Auto disable of manual mode was not changed. Check config.php permissions and try again.")
                         $("#auto_mm").val("on").slider("refresh")
                     }
                 });

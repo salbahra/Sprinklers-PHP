@@ -577,16 +577,22 @@ function spoff() {
 
 #Turn off automatic disable of manual mode
 function auto_mm_off() {
-    changeConfig("auto_mm",0);
-    $auto_mm = 0;
-    echo 1;
+    if (changeConfig("auto_mm",0)) {
+        $auto_mm = 0;
+        echo 1;
+        exit();
+    }
+    echo 0;
 }
 
 #Turn on automatic disable of manual mode
 function auto_mm_on() {
-    changeConfig("auto_mm",1);
-    $auto_mm = 1;
-    echo 1;
+    if (changeConfig("auto_mm",1)) {
+        $auto_mm = 1;
+        echo 1;
+        exit();
+    }
+    echo 0;
 }
 
 #Content generation functions
