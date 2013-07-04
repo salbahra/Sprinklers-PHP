@@ -23,7 +23,7 @@ if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || $rainSenseStatu
 };
 
 #Automatically turn off manual mode daily, if enabled
-if ($auto_mm && date('H') == "00" && date('i') == "00") send_to_os("/cv?pw=&mm=0");;
+if ($auto_mm && date('H') == "00" && date('i') == "00" && $settings["mm"] == 1) send_to_os("/cv?pw=&mm=0");
 
 #Automatic rain delay, every hour, if enabled
 if ($auto_delay && date('i') == "00") weather_to_delay();
