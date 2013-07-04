@@ -186,7 +186,7 @@ $(document).on("pagebeforeshow",function(e,data){
             }
             $("#running-text").html(data);
             $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")        
-            footer.animate({"opacity": "0.9"})
+            footer.animate({"opacity": "0.88"})
         })
     } else {
         var title = document.title;

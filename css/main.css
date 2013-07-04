@@ -10,11 +10,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    margin-left: 2px;
+    margin-left: 4px;
     top: 50%;
 }
 #running-text {
-    padding: 0 0 0 15px;
+    padding: 0 0 0 20px;
     margin:0;
 
 }
