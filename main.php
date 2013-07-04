@@ -801,9 +801,9 @@ function current_status() {
             $remm=$rem/60>>0;
             $rems=$rem%60;
             $pname="Program ".$settings["ps"][$i][0];
-            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual Program";
-            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once Program";
-            $info = $pname." is Running (".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." Remaining)";
+            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
+            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
+            $info = $pname." is running <span style='white-space:nowrap'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span>";
             echo $info; return;
         }
         $i++;
