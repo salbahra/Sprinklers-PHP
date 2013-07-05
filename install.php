@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("webtitle","os_ip","os_pw","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+    $needed = array("os_ip","os_pw","timeViewWindow","pass_file","cache_file","log_file","log_previous");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -187,8 +187,6 @@ function fail() {
                         <li data-role="list-divider">Intial Configuration</li>
                         <li>
                             <div data-role="fieldcontain">
-                                <label for="webtitle">Site Title:</label>
-                                <input type="text" name="webtitle" id="webtitle" value="Sprinkler System" />
                                 <label for="os_ip">Open Sprinkler IP:</label>
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
                                 <label for="os_pw">Open Sprinkler Password:</label>

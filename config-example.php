@@ -1,8 +1,5 @@
 <?php
 
-#WebApp Title
-$webtitle = "Sprinkler System";
-
 #Set IP of OpenSprinkler
 $os_ip = "192.168.1.30";
 

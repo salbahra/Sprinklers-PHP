@@ -1040,7 +1040,7 @@ function gettoken() {
 
 #Authenticate user
 function login($tosend = "sprinklers") {
-    global $webtitle, $cache_file;
+    global $cache_file;
 
     $starttime = explode(' ', microtime()); 
     $starttime = $starttime[1] + $starttime[0]; 
@@ -1145,8 +1145,6 @@ function is_ssl() {
 
 #Check if token is valid and if not reject
 function checktoken() {
-    global $webtitle;
-
     if (check_localstorage($_POST['token'])) {
         include_once("sprinklers.php");
     } else {

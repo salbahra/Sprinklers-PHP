@@ -20,7 +20,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <a data-icon="bars" data-iconpos="notext" href="#sprinklers-settings"></a>
         <a data-icon="gear" data-iconpos="notext" href="#settings">Settings</a>
-        <h3><?php echo $webtitle; ?></h3>
+        <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
     <div data-role="content">
         <div id="weather">Loading Weather...</div>
