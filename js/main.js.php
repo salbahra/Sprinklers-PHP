@@ -359,8 +359,7 @@ function get_logs() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_logs",function(items){
         var list = $("#logs_list");
-        list.html(items);
-        if (list.hasClass("ui-listview")) list.listview("refresh");
+        list.html(items).trigger("create");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
     })
