@@ -213,7 +213,7 @@ $(document).on("pagebeforeshow",function(e,data){
     } else {
         clearInterval(window.interval_id);
         var title = document.title;
-        document.title = $("#sprinklers div[data-role='header'] h3").html()+": "+title;
+        document.title = "OpenSprinkler: "+title;
     }
 
     if (newpage == "raindelay") {
