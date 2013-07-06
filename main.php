@@ -620,6 +620,7 @@ function make_list_logs() {
                 $SprinklerTime[]=$ELines[$i][1];
                 $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
                 if ($settings["urs"] == 1 && isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
+                if (isset($ELines[$i][3])) $RainDelay[]=$ELines[$i][3];
             };
         };
     };
@@ -642,6 +643,26 @@ function make_list_logs() {
                     $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
             }
         }
+
+        if (isset($RainDelay[$i])) {
+            if (($i>0) && ($RainDelay[$i-1]=="1") && ($RainDelay[$i]=="0") || ($i==count($RainDelay)-1) && ($RainDelay[$i]=="1")) {
+                    $TimeNow = $SprinklerTimeConverted[$i];
+                    $TimeBegin = $TimeNow;
+
+                    for ($k=1;$k<$i;$k++) {
+                        if ($RainDelay[$i-$k]=="1"){
+                            $TimeBegin=$SprinklerTimeConverted[$i-$k];
+                        } else { break; };
+                    };
+
+                    if (($i==count($RainDelay)-1)&&($RainDelay[$i]=="1")) $TimeNow = time();
+
+                    $TimeElapsed=$TimeNow-$TimeBegin;
+
+                    $DelayHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainDelay)-1)&&($RainDelay[$i]=="1")) ? " Running Now" : ""));
+            }
+        }
+
         for ($j=0;$j<count($ValveName);$j++){
             if (($i>0) && ($SprinklerPattern[$i-1][$j]=="1") && ($SprinklerPattern[$i][$j]=="0")|| ($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) {
                 $TimeNow = $SprinklerTimeConverted[$i];
@@ -685,6 +706,19 @@ function make_list_logs() {
                 $mins = ceil($RainHistory[$k][1]/60);
                 if (!$mins && $RainHistory[$k][2] == "") continue; 
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$RainHistory[$k][2]."</td></tr>";
+            };
+        };        
+        $list .= "</tbody></table></div>";
+    }
+    if (isset($DelayHistory)) {
+        $ct=count($DelayHistory);
+        $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " change" : " changes" )."</div>Rain Delay</h2>".$table_header;
+        if ($ct>0) {
+            for ($k=0;$k<count($DelayHistory);$k++){
+                $theTime=date('D, d M Y H:i',strtotime($DelayHistory[$k][0])+$tz);
+                $mins = ceil($DelayHistory[$k][1]/60);
+                if (!$mins && $DelayHistory[$k][2] == "") continue; 
+                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$DelayHistory[$k][2]."</td></tr>";
             };
         };        
         $list .= "</tbody></table></div>";
@@ -1199,3 +1233,5 @@ function move_keys($keys,$array) {
     }
     return $array;    
 }
+
+?>
