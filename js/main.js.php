@@ -301,7 +301,7 @@ function update_weather() {
             $("#weather").html("");
             return
         }
-        $("#weather").html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span>"+weather["location"]+"</span>");
+        $("#weather").html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
     })
 }
 

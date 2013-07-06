@@ -23,15 +23,18 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
     <div data-role="content">
-        <div id="weather">Loading Weather...</div>
         <p id="showupdate" style="display:none;text-align:center">Update Available</p>
-        <ul data-role="listview" data-inset="true">
+        <ul data-role="listview" data-inset="true" id="weather-list">
+            <li data-role="list-divider">Weather</li>
+            <li><div id="weather">Loading Weather...</div></li>
+        </ul>
+        <ul data-role="listview" data-inset="true" id="info-list">
             <li data-role="list-divider">Information</li>
             <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
             <li><a href="#preview">Preview Programs</a></li>
             <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
         </ul>
-        <ul data-role="listview" data-inset="true">
+        <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider">Program Control</li>
             <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>
             <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>

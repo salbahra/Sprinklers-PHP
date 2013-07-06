@@ -1,3 +1,18 @@
+#weather-list {
+    width:20%;
+    float:left;
+    margin-right:10px;
+    overflow-y:hidden
+}
+#weather-list li:not(.ui-li-divider) {
+    height: 104px;
+}
+#info-list {
+    overflow: hidden;
+}
+#program-control-list {
+    clear:both;
+}
 .custom-count-pos{
     font-size: 11px;
     font-weight: bold;
@@ -94,6 +109,16 @@
 }
 
 @media (max-width: 480px) {
+    #weather-list {
+        width:80px;
+    }
+    #weather-list li:not(.ui-li-divider) {
+        height: auto;
+    }
+    #weather .location {
+        font-size:8px;
+        font-weight: none;
+    }
     #logs_list .ui-li-aside {
         width: 25% !important;
         font-size: smaller;
@@ -114,7 +139,7 @@
     div.skip-numbering:before {
         content: "M       ";
         white-space:pre;
-    }    
+    }
 }
 
 div.ui-slider-switch {
@@ -227,6 +252,8 @@ div.timeline-event-content {
 
 #weather {
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .wicon { vertical-align: middle; display: inline-block; margin: -25px -10px -25px -25px; width: 150px; height: 150px; zoom: .5; background: url(../img/weather-icons-sprite.png);}
