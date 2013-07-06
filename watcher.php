@@ -15,11 +15,12 @@ require_once "main.php";
 $datetime=Date("Y-m-d H:i:s",time());
 $settings = get_settings();
 $rainSenseStatus = $settings["rs"];
+$rainDelayStatus = ($settings["rdst"]) ? 1 : 0;
 $newSprinklerValveSettings=implode("",get_station_status());
 $oldSprinklerValveSettings=explode("--",file_get_contents($log_previous));
-if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || $rainSenseStatus!=$oldSprinklerValveSettings[1]) {
-	file_put_contents ($log_file, $newSprinklerValveSettings."--".$datetime."--".$rainSenseStatus."\n",FILE_APPEND);
-	file_put_contents ($log_previous, $newSprinklerValveSettings."--".$rainSenseStatus);
+if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || (!isset($oldSprinklerValveSettings[1]) || $rainSenseStatus!=$oldSprinklerValveSettings[1]) || (!isset($oldSprinklerValveSettings[2]) || $rainDelayStatus!=$oldSprinklerValveSettings[2])) {
+	file_put_contents ($log_file, $newSprinklerValveSettings."--".$datetime."--".$rainSenseStatus."--".$rainDelayStatus."\n",FILE_APPEND);
+	file_put_contents ($log_previous, $newSprinklerValveSettings."--".$rainSenseStatus."--".$rainDelayStatus);
 };
 
 $tz = $settings["tz"] - 48;
