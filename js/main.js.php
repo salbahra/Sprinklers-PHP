@@ -27,8 +27,8 @@ $.ajaxSetup({
 //Handle timeout
 $(document).ajaxError(function(x,t,m) {
     if(t.statusText==="timeout") {
-        if (m.url == "index.php?action=get_weather") {
-            $("#weather").html("")
+        if (m.url.search("action=get_weather")) {
+            $("#weather-list").hide()
         } else {
             showerror("Connection timed-out. Please try again.")
         }
