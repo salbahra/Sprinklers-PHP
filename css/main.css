@@ -1,3 +1,6 @@
+#showupdate {
+    margin-bottom: 0;
+}
 #weather-list {
     width:20%;
     float:left;
@@ -51,20 +54,21 @@
 }
 #footer-running {
     font-weight: normal;
-    background-color: #C4C2C3;
-    opacity: 0.0;
+    display: none;
+    background: #3B3838;
+    padding: 2px 0;
 }
 #running-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
     margin-left: 4px;
-    top: 50%;
+    float: left;
+    position: relative;
 }
 #running-text {
-    padding: 0 0 0 20px;
+    overflow: hidden;
     margin:0;
-
+    padding-left: 5px;
+    text-shadow: none;
+    color: #ffffff;
 }
 .rain-desc {
     word-wrap:normal;

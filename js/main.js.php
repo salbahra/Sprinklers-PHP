@@ -77,14 +77,7 @@ $(document).on('pageinit', function (e, data) {
 });
 
 $(window).bind("resize",function(e){
-    var content_height = $.mobile.activePage.children('[data-role="content"]').height(),
-        header_height  = $.mobile.activePage.children('[data-role="header"]').height(),
-        window_height  = $(this).height(),
-        total          = content_height + header_height;
-
-    if (window_height > total) total = window_height;
-    $.mobile.activePage.css('min-height', total);
-    e.stopImmediatePropagation();
+    $("#running-icon").css("top",$("#footer-running").height()/2 - 5.5 + "px")
 })
 
 $("#preview_date").change(function(){
@@ -194,22 +187,7 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
-        //Check if a program is running
-        $.get("index.php","action=current_status",function(data){
-            var footer = $("#footer-running")
-            if (data === "") {
-                footer.css("opacity",0);
-                return;
-            }
-            data = JSON.parse(data);
-            var minutes = parseInt( data.seconds / 60 ) % 60;
-            var seconds = data.seconds % 60;
-            var line = data.program + " is running on station <span class='nobr'>" + data.station + "</span> <span id='countdown' class='nobr'>(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + " remaining)</span>";
-            if (data.seconds != 0) update_timer(data.seconds);
-            $("#running-text").html(line);
-            $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")        
-            footer.animate({"opacity": "0.88"})
-        })
+        setTimeout(check_status,1000);
     } else {
         clearInterval(window.interval_id);
         var title = document.title;
@@ -227,11 +205,35 @@ $(document).on("pagebeforeshow",function(e,data){
     }
 })
 
-function update_timer(total) {
+function check_status() {
+    //Check if a program is running
+    $.get("index.php","action=current_status",function(data){
+        var footer = $("#footer-running")
+        if (data === "") {
+            footer.slideUp();
+            return;
+        }
+        data = JSON.parse(data);
+        var minutes = parseInt( data.seconds / 60 ) % 60;
+        var seconds = data.seconds % 60;
+        var line = data.program + " is running on station <span class='nobr'>" + data.station + "</span> <span id='countdown' class='nobr'>(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + " remaining)</span>";
+        if (window.interval_id !== undefined) clearInterval(window.interval_id);
+        if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
+        if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
+        $("#running-text").html(line);
+        if (data.program == "Manual program") $("#countdown").html("");
+        $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")
+        footer.slideDown();
+    })
+}
+
+
+function update_timer(total,sdelay) {
     window.interval_id = setInterval(function(){
         if (total <= 0) {
-            clearInterval(interval_id);
-            $("#footer-running").css("opacity",0).html("");
+            clearInterval(window.interval_id);
+            $("#footer-running").slideUp();
+            window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
         else
             --total;

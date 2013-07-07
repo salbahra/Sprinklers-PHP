@@ -22,7 +22,11 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a data-icon="gear" data-iconpos="notext" href="#settings">Settings</a>
         <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
-    <div data-role="content">
+    <div id="footer-running">
+        <img id="running-icon" width="11px" height="11px" src="img/running.png" />
+        <p id="running-text"></p>
+    </div>
+    <div data-role="content" style="clear:both;padding-top:2px">
         <p id="showupdate" style="display:none;text-align:center">Update Available</p>
         <ul data-role="listview" data-inset="true" id="weather-list">
             <li data-role="list-divider">Weather</li>
@@ -42,10 +46,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
             <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
         </ul>
-    </div>
-    <div id="footer-running" data-role="footer" data-position-fixed="true" data-position="fixed" data-theme="a">
-        <img id="running-icon" width="11px" height="11px" src="img/running.png" />
-        <p id="running-text"></p>
     </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
         <ul data-role="listview" data-theme="a">

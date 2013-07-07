@@ -853,6 +853,7 @@ function current_status() {
     $vs = get_stations();
     $stations = $vs["stations"];
     $status = get_station_status();
+    $options = get_options();
 
     $i = 0;
     foreach ($stations as $station) {
@@ -861,7 +862,7 @@ function current_status() {
             $pname="Program ".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
-            $info = array("program" => $pname,"station" => $stations[$i], "seconds" => $settings["ps"][$i][1]);
+            $info = array("program" => $pname,"station" => $stations[$i], "seconds" => $settings["ps"][$i][1], "sdelay" => $options[17]["val"]);
             echo json_encode($info); return;
         }
         $i++;
