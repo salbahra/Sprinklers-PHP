@@ -114,7 +114,6 @@
 #addprogram .ui-input-text, #programs .ui-input-text {
     margin: 0.1em !important;
 }
-
 @media (max-width: 480px) {
     #weather-list {
         width:80px;
@@ -148,7 +147,12 @@
         white-space:pre;
     }
 }
-
+@media (max-width: 640px) {
+    .wicon {
+        zoom: .5;
+        -moz-transform: scale(0.5);
+    }
+}
 div.ui-slider-switch {
     position: absolute;
     right: 5px;
@@ -263,7 +267,13 @@ div.timeline-event-content {
     text-overflow: ellipsis;
 }
 
-.wicon { vertical-align: middle; display: inline-block; margin: -25px -10px -25px -25px; width: 150px; height: 150px; zoom: .5; background: url(../img/weather-icons-sprite.png);}
+.wicon {
+    vertical-align: middle;
+    display: inline-block;
+    margin: -50px -10px -25px -25px; 
+    width: 150px; height: 150px; 
+    background: url(../img/weather-icons-sprite.png);
+ }
 /* Weather Icon Sprites 
  * http://www.alistapart.com/articles/sprites
  * http://developer.yahoo.com/weather/#codes
