@@ -187,6 +187,8 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
+        $("#running-icon").hide()
+        $("#running-text").html("<p style='margin:0;text-align:center'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
         setTimeout(check_status,1000);
     } else {
         clearInterval(window.interval_id);
@@ -222,7 +224,7 @@ function check_status() {
         if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
         $("#running-text").html(line);
         if (data.program == "Manual program") $("#countdown").html("");
-        $("#running-icon").css("top",footer.height()/2 - 5.5 + "px")
+        $("#running-icon").show().css("top",footer.height()/2 - 5.5 + "px")
         footer.slideDown();
     })
 }
@@ -233,6 +235,8 @@ function update_timer(total,sdelay) {
         if (total <= 0) {
             clearInterval(window.interval_id);
             $("#footer-running").slideUp();
+            $("#running-icon").hide();
+            $("#running-text").html("<p style='margin:0;text-align:center'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
         else
@@ -297,13 +301,15 @@ function grab_token(pageid){
 }
 
 function update_weather() {
+    var $weather = $("#weather");
+    $weather.html("<img src='img/ajax-loader.gif' class='mini-load' />");
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
-            $("#weather").html("");
+            $weather.html("");
             return
         }
-        $("#weather").html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
+        $weather.html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
     })
 }
 

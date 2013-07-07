@@ -30,7 +30,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <p id="showupdate" style="display:none;text-align:center">Update Available</p>
         <ul data-role="listview" data-inset="true" id="weather-list">
             <li data-role="list-divider">Weather</li>
-            <li><div id="weather">Loading Weather...</div></li>
+            <li><div id="weather"></div></li>
         </ul>
         <ul data-role="listview" data-inset="true" id="info-list">
             <li data-role="list-divider">Information</li>
