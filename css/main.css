@@ -55,8 +55,8 @@
 #footer-running {
     font-weight: normal;
     display: none;
-    background: #3B3838;
     padding: 2px 0;
+    font-size: medium;
 }
 #running-icon {
     margin-left: 4px;

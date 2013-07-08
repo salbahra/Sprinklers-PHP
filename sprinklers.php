@@ -22,7 +22,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a data-icon="gear" data-iconpos="notext" href="#settings">Settings</a>
         <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
-    <div id="footer-running">
+    <div id="footer-running" class="green">
         <img id="running-icon" width="11px" height="11px" src="img/running.png" />
         <p id="running-text"></p>
     </div>
