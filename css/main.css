@@ -10,9 +10,6 @@
     margin-right:10px;
     overflow-y:hidden
 }
-#weather-list li:not(.ui-li-divider) {
-    height: 104px;
-}
 #info-list {
     overflow: hidden;
 }
@@ -147,10 +144,11 @@
         white-space:pre;
     }
 }
-@media (max-width: 640px) {
+@media (max-width: 940px) {
     .wicon {
         zoom: .5;
         -moz-transform: scale(0.5);
+        -o-transform: scale(0.5);
     }
 }
 div.ui-slider-switch {
@@ -270,8 +268,8 @@ div.timeline-event-content {
 .wicon {
     vertical-align: middle;
     display: inline-block;
-    margin: -40px -10px -25px -25px; 
     width: 150px; height: 150px; 
+    margin: -40px -10px -25px -25px; 
     background: url(../img/weather-icons-sprite.png);
  }
 /* Weather Icon Sprites 
