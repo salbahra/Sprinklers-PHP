@@ -194,7 +194,7 @@ $(document).on("pagebeforeshow",function(e,data){
     if (newpage == "sprinklers") {
         update_weather();
         $("#running-icon").hide()
-        $("#running-text").html("<p style='margin:0;text-align:center'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+        $("#running-text").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
         setTimeout(check_status,1000);
     } else {
         clearInterval(window.interval_id);
@@ -242,7 +242,7 @@ function update_timer(total,sdelay) {
             clearInterval(window.interval_id);
             $("#footer-running").slideUp();
             $("#running-icon").hide();
-            $("#running-text").html("<p style='margin:0;text-align:center'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            $("#running-text").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
         else
@@ -308,7 +308,7 @@ function grab_token(pageid){
 
 function update_weather() {
     var $weather = $("#weather");
-    $weather.html("<img src='img/ajax-loader.gif' class='mini-load' />");
+    $weather.html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
