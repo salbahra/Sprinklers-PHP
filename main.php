@@ -48,7 +48,9 @@ if (isset($_REQUEST['action'])) {
             if (in_array($_REQUEST["action"], array("auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
-		}
+		} else {
+            header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404);
+        }
 		exit();
 	} else {
 		exit();

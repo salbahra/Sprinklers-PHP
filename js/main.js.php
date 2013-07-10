@@ -26,6 +26,9 @@ $.ajaxSetup({
 
 //Handle timeout
 $(document).ajaxError(function(x,t,m) {
+    if(t.status==404) {
+        location.reload();
+    }
     if(t.statusText==="timeout") {
         if (m.url.search("action=get_weather")) {
             $("#weather-list").animate({ 
