@@ -233,8 +233,12 @@ function check_status() {
         if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
         $("#running-text").html(line);
         if (data.program == "Manual program") $("#countdown").html("");
-        $("#running-icon").show().css("top",footer.height()/2 - 5.5 + "px")
-        footer.slideDown();
+        var icon = $("#running-icon");
+        icon.show().css("top",footer.height()/2 - 5.5 + "px");
+        footer.slideDown(function(){
+            //Fix again since FireFox reports wrong height when element is hidden
+            icon.css("top",footer.height()/2 - 5.5 + "px");
+        });
     })
 }
 
