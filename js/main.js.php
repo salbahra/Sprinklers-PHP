@@ -530,7 +530,21 @@ function get_programs(pid) {
         })
         $.mobile.hidePageLoadingMsg();
         $("#programs").trigger("create");
+        update_program_header();
         $.mobile.changePage($("#programs"));
+    })
+}
+
+function update_program_header() {
+    $("#programs_list").find("[id^=program-]").each(function(a,b){
+        var item = $(b)
+        var id = item.attr('id').split("program-")[1]
+        var en = $("#en-"+id).is(":checked")
+        if (en) {
+            item.find(".ui-collapsible-heading-toggle").removeClass("red")
+        } else {
+            item.find(".ui-collapsible-heading-toggle").addClass("red")
+        }
     })
 }
 
@@ -640,6 +654,7 @@ function submit_program(id) {
             if (result == 0) {
                 comm_error()
             } else {
+                update_program_header();
                 showerror("Program has been updated")
             }
         });

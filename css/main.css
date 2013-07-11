@@ -1,3 +1,6 @@
+.ui-collapsible-heading-toggle {
+    font-weight: bold !important;
+}
 .mini-load {
     zoom: 0.5;
 }
