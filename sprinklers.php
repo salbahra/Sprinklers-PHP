@@ -22,11 +22,11 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a data-icon="gear" data-iconpos="notext" href="#settings">Settings</a>
         <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
-    <div id="footer-running" class="green">
-        <img id="running-icon" width="11px" height="11px" src="img/running.png" />
-        <p id="running-text"></p>
-    </div>
-    <div data-role="content" style="clear:both;padding-top:2px">
+    <div data-role="content" style="padding-top:0px">
+        <div id="footer-running" class="green">
+            <img id="running-icon" width="11px" height="11px" src="img/running.png" />
+            <p id="running-text"></p>
+        </div>
         <p id="showupdate" style="display:none;text-align:center">Update Available</p>
         <ul data-role="listview" data-inset="true" id="weather-list">
             <li data-role="list-divider">Weather</li>

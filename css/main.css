@@ -60,6 +60,7 @@
     display: none;
     padding: 2px 0;
     font-size: medium;
+    margin: 0 -15px 0 -15px;
 }
 #running-icon {
     margin-left: 4px;
