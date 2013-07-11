@@ -1,9 +1,6 @@
 .mini-load {
     zoom: 0.5;
 }
-#showupdate {
-    margin-bottom: 0;
-}
 #weather-list {
     width:20%;
     float:left;
@@ -52,7 +49,7 @@
 .nobr {
     white-space:nowrap
 }
-#footer-running {
+#footer-running, #showupdate {
     font-weight: normal;
     display: none;
     padding: 2px 0;

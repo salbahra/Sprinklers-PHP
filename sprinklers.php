@@ -27,7 +27,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <img id="running-icon" width="11px" height="11px" src="img/running.png" />
             <p id="running-text"></p>
         </div>
-        <p id="showupdate" style="display:none;text-align:center">Update Available</p>
+        <div id="showupdate" class="red">
+            <p style="margin:0;text-align:center">Update Available</p>
+        </div>
         <ul data-role="listview" data-inset="true" id="weather-list">
             <li data-role="list-divider">Weather</li>
             <li><div id="weather"></div></li>
