@@ -26,7 +26,7 @@ $.ajaxSetup({
 
 //Handle timeout
 $(document).ajaxError(function(x,t,m) {
-    if(t.status==404) {
+    if(t.status==401) {
         location.reload();
     }
     if(t.statusText==="timeout") {

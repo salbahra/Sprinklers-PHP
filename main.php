@@ -49,7 +49,7 @@ if (isset($_REQUEST['action'])) {
     			call_user_func($_REQUEST['action']);
             }
 		} else {
-            header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found', true, 404);
+            header($_SERVER['SERVER_PROTOCOL'].' 401 Unauthorized', true, 401);
         }
 		exit();
 	} else {
