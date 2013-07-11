@@ -403,6 +403,13 @@ function get_runonce() {
     $.get("index.php","action=make_runonce",function(items){
         var list = $("#runonce_list");
         list.html(items);
+        var data = JSON.parse(localStorage.getItem("runonce")), i = 0;
+        if (data !== null) {
+            list.find(":input[data-type='range']").each(function(a,b){
+                $(b).val(data[i]/60);
+                i++;
+            })
+        }
         list.trigger("create");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#runonce"));
@@ -592,6 +599,10 @@ function delete_program(id) {
     })
 }
 
+function reset_runonce() {
+    $("#runonce").find(":input[data-type='range']").val(0).slider("refresh")
+}
+
 function submit_program(id) {
     var program = [], days=[0,0]
     program[0] = ($("#en-"+id).is(':checked')) ? 1 : 0
@@ -742,6 +753,7 @@ function submit_runonce() {
     $("#runonce").find(":input[data-type='range']").each(function(a,b){
         runonce.push(parseInt($(b).val())*60)
     })
+    localStorage.setItem("runonce",JSON.stringify(runonce));
     $.get("index.php","action=runonce&data="+JSON.stringify(runonce),function(result){
         if (result == 0) {
             comm_error()
