@@ -32,11 +32,9 @@ $(document).ajaxError(function(x,t,m) {
     if(t.statusText==="timeout") {
         if (m.url.search("action=get_weather")) {
             $("#weather-list").animate({ 
-                width: "hide", 
-                paddingLeft: "hide", 
-                paddingRight: "hide", 
-                marginLeft: "hide", 
-                marginRight: "hide" 
+                "margin-left": "-1000px"
+            },1000,function(){
+                $(this).hide();
             })
         } else {
             showerror("Connection timed-out. Please try again.")
@@ -323,6 +321,9 @@ function update_weather() {
             return
         }
         $weather.html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
+        $("#weather-list").animate({ 
+            "margin-left": "0"
+        },1000).show()
     })
 }
 

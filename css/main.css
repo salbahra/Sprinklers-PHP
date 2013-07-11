@@ -2,9 +2,11 @@
     zoom: 0.5;
 }
 #weather-list {
+    display:none;
     width:20%;
     float:left;
     margin-right:10px;
+    margin-left: -1000px;
     overflow-y:hidden
 }
 #info-list {
