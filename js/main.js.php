@@ -65,22 +65,19 @@ $(document).one("pageinit","#sprinklers", function(){
 //This bind intercepts most links to remove the 300ms delay iOS adds
 $(document).on('pageinit', function (e, data) {
     var newpage = e.target.id;
+    var currpage = $(e.target);
 
-    if (newpage == "sprinklers" || newpage == "status" || newpage == "manual" || newpage == "logs" || newpage == "programs" || newpage == "settings" || newpage == "os-settings" || newpage == "os-stations" || newpage == "raindelay") {
-        var currpage = $(e.target);
-
-        currpage.find("a[href='#"+currpage.attr('id')+"-settings']").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            highlight(this);
-            $(".ui-page-active [id$=settings]").panel("open");
-        });
-        currpage.find("a[onclick]").bind('vclick', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation();
-            var func = $(this).attr("onclick").split(";")[0];
-            highlight(this);
-            eval(func);
-        });
-    }
+    currpage.find("a[href='#"+currpage.attr('id')+"-settings']").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        highlight(this);
+        $(".ui-page-active [id$=settings]").panel("open");
+    });
+    currpage.find("a[data-onclick]").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        var func = $(this).data("onclick");
+        highlight(this);
+        eval(func);
+    });
 });
 
 $(window).bind("resize",function(e){

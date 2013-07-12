@@ -36,17 +36,17 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
         <ul data-role="listview" data-inset="true" id="info-list">
             <li data-role="list-divider">Information</li>
-            <li><a href="#status" onclick="get_status(); return false;">Current Status</a></li>
+            <li><a href="#status" data-onclick="get_status();">Current Status</a></li>
             <li><a href="#preview">Preview Programs</a></li>
-            <li><a href="#logs" onclick="get_logs(); return false;">View Logs</a></li>
+            <li><a href="#logs" data-onclick="get_logs();">View Logs</a></li>
         </ul>
         <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider">Program Control</li>
-            <li><a href="#programs" onclick="get_programs(); return false;">Edit Programs</a></li>
-            <li><a href="#manual" onclick="get_manual(); return false;">Manual Control</a></li>
+            <li><a href="#programs" data-onclick="get_programs();">Edit Programs</a></li>
+            <li><a href="#manual" data-onclick="get_manual();">Manual Control</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
-            <li><a href="#runonce" onclick="get_runonce(); return false;">Run-Once Program</a></li>
-            <li><a href="#" onclick="rsn(); return false;">Stop All Stations</a></li>
+            <li><a href="#runonce" data-onclick="get_runonce();">Run-Once Program</a></li>
+            <li><a href="#" data-onclick="rsn();">Stop All Stations</a></li>
         </ul>
     </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="a">
@@ -65,9 +65,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                 </div>
             </li>
-            <li data-icon="forward"><a href="#" onclick="export_config(); return false;">Export Configuration</a></li>
-            <li data-icon="back"><a href="#" onclick="import_config(); return false;">Import Configuration</a></li>
-            <li data-icon="delete"><a href="#" onclick="logout(); return false;">Logout</a></li>
+            <li data-icon="forward"><a href="#" data-onclick="export_config();">Export Configuration</a></li>
+            <li data-icon="back"><a href="#" data-onclick="import_config();">Import Configuration</a></li>
+            <li data-icon="delete"><a href="#" data-onclick="logout();">Logout</a></li>
             <li data-icon="info"><a href="#about">About</a></li>
         </ul>
     </div>
@@ -76,8 +76,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="status">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Current Status</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
-        <a href="#" onclick="get_status(); return false;" data-icon="refresh">Refresh</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
+        <a href="#" data-onclick="get_status();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true" id="status_list">
@@ -88,7 +88,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="manual">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Manual Control</h3>
-        <a href="#" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <p style="text-align:center">With manual mode turned on, tap a station to toggle it.</p>
@@ -109,8 +109,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="runonce">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Run-Once Program</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
-        <a href="#" onclick="submit_runonce(); return false;">Submit</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
+        <a href="#" data-onclick="submit_runonce();">Submit</a>
     </div>
     <div data-role="content" id="runonce_list">
     </div>
@@ -119,8 +119,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="programs">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Programs</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
-        <a href="#" onclick="add_program(); return false;" data-icon="plus">Add</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
+        <a href="#" data-onclick="add_program();" data-icon="plus">Add</a>
     </div>
     <div data-role="content" id="programs_list">
     </div>
@@ -129,8 +129,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="addprogram">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Add Program</h3>
-        <a href="#programs" onclick="get_programs(); return false;" data-icon="back">Back</a>
-        <a href="#" onclick="submit_program('new'); return false;">Submit</a>
+        <a href="#programs" data-onclick="get_programs();" data-icon="back">Back</a>
+        <a href="#" data-onclick="submit_program('new');">Submit</a>
     </div>
     <div data-role="content" id="newprogram">
     </div>
@@ -139,7 +139,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="raindelay">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h1>Rain Delay</h1>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <p style="text-align:center">Rain delay allows you to disable all programs for a set duration. You can manually set a rain delay or enable automatic rain delays.</p>
@@ -180,8 +180,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="logs">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Logs</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
-        <a href="#" onclick="get_logs(); return false;" data-icon="refresh">Refresh</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
+        <a href="#" data-onclick="get_logs();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
         <p style='text-align:center'>Viewing data for the last <?php global $timeViewWindow;echo strtolower($timeViewWindow); ?>.</p>
@@ -193,12 +193,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="settings">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Settings</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
-            <li><a href="#" onclick="show_settings(); return false;">Device Options</a></li>
-            <li><a href="#" onclick="show_stations(); return false;">Edit Stations</a></li>
+            <li><a href="#" data-onclick="show_settings();">Device Options</a></li>
+            <li><a href="#" data-onclick="show_stations();">Edit Stations</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
@@ -216,7 +216,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     <option <?php echo is_en(); ?> value="on">On</option>
                 </select>
             </li>
-            <li data-icon="alert"><a href="#" onclick="rbt(); return false;">Reboot OpenSprinkler</a></li>
+            <li data-icon="alert"><a href="#" data-onclick="rbt();">Reboot OpenSprinkler</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">Automatically Disable Manual Mode</li>
@@ -238,7 +238,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>OS Settings</h3>
         <a href="#settings" data-icon="back">Back</a>
-        <a href="#" onclick="submit_settings(); return false;">Submit</a>
+        <a href="#" data-onclick="submit_settings();">Submit</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true" id="os-settings-list">
@@ -250,7 +250,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Stations</h3>
         <a href="#settings" data-icon="back">Back</a>
-        <a href="#" onclick="submit_stations(); return false;">Submit</a>
+        <a href="#" data-onclick="submit_stations();">Submit</a>
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true" id="os-stations-list">
@@ -261,13 +261,13 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="preview">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Program Preview</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <div style="white-space:nowrap;width:100%;text-align:center">
-            <a href="#" onclick="changeday(-1); return false;"><img src="img/moveleft.png" /></a>
+            <a href="#" data-onclick="changeday(-1);"><img src="img/moveleft.png" /></a>
             <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
-            <a href="#" onclick="changeday(1); return false;"><img src="img/moveright.png" /></a>
+            <a href="#" data-onclick="changeday(1);"><img src="img/moveright.png" /></a>
         </div>
         <div id="timeline"></div>
         <div id="timeline-navigation" style="display:none;width:144px;margin:0 auto">
@@ -282,7 +282,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="about">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>About</h3>
-        <a href="#sprinklers" onclick="gohome(); return false;" data-icon="back">Back</a>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
         <div data-role="collapsible-set" data-content-theme="d">
