@@ -844,7 +844,7 @@ function make_list_manual() {
     $i = 0;
 
     foreach ($stations as $station) {
-        $list .= '<li data-icon="false"><a style="text-align:center" '.(($status[$i]) ? 'class="green" ' : '').'href="#" data-onclick="toggle(this);">'.$station.'</a></li>';
+        $list .= '<li data-icon="false"><a style="text-align:center" '.(($status[$i]) ? 'class="green" ' : '').'href="#" onclick="toggle(this);">'.$station.'</a></li>';
         $i++;
     }
     echo $list;
