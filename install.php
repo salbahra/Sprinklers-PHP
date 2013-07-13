@@ -93,7 +93,7 @@ function new_config() {
 
 #Check if URL is valid by grabbing headers and verifying reply is: 200 OK
 function isValidUrl($url) {
-    $data = file_get_contents($url."/vo");
+    $data = file_get_contents($url."/vs");
     if ($data === false) return false;
 
     preg_match("/<script>.*?snames=/",$data,$test);
