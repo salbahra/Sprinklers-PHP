@@ -45,7 +45,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("change_user","add_user","delete_user","make_user_list","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		} else {
@@ -1020,6 +1020,131 @@ function make_stations_list() {
     echo $list."</li>";
 }
 
+function make_user_list() {
+    global $pass_file;
+    $list = "<div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
+
+    if(file_exists($pass_file) && is_readable($pass_file)){
+        if($fp=fopen($pass_file,'r')){
+            $i=0;
+            while($line=fgets($fp)){
+                $line=preg_replace('`[\r\n]$`','',$line);
+                list($user,)=explode(':',$line);
+                if ($user == "") continue;
+                $list .= "<fieldset id='user-".$i."' data-role='collapsible' data-theme='b' data-content-theme='d'>";
+                $list .= "<legend>".$user."</legend>";
+                $list .= "<label for='cpu-".$i."'>Change Password</label><input id='cpu-".$i."' type='password' />";
+                $list .= "<a data-role='button' data-onclick='change_user(".$i.")'>Save Changes to ".$user."</a>";
+                $list .= "<a data-role='button' data-onclick='delete_user(".$i.")' data-theme='a'>Delete ".$user."</a>";
+                $list .= "</fieldset>";
+                $i++;
+            }
+            fclose($fp);
+        }else{
+            echo 2;
+        }
+    }else{
+        echo 2;
+    }
+    echo $list."</div>";
+}
+
+function delete_user() {
+    global $pass_file,$cache_file;
+
+    $hashs = file($cache_file);
+    if (count($hashs) !== 0) {
+        $i = 0;
+        foreach ($hashs as $hash){
+            $hash = explode(" ",$hash);
+            $hash[2] = str_replace("\n", "", $hash[2]);
+            if ($hash[2] === $_REQUEST["name"]) {
+                delLineFromFile($cache_file, $i);
+            }
+            $i++;
+        }
+    }
+    unset($hashs);
+
+    $users = file($pass_file);
+    if (isset($_REQUEST['name']) && count($users) !== 0) {
+        $i = 0;
+        foreach ($users as $user){
+            list($user,) = explode(":",$user);
+            if ($user === $_REQUEST['name']) {
+                delLineFromFile($pass_file, $i);
+                if ($user == $_SESSION['username']) {
+                    logout();
+                    exit();
+                }
+            }
+            $i++;
+        }
+    }
+    unset($users);
+
+    echo 1;
+}
+
+function change_user() {
+    global $pass_file;
+
+    #If username or password is not submitted fail
+    if (!isset($_REQUEST["name"]) || !isset($_REQUEST["pass"])) {
+        echo 2;
+        exit();
+    }
+
+    $arr = file($pass_file);
+    $i=0;
+    foreach ($arr as $line) {
+        $line=preg_replace('`[\r\n]$`','',$line);
+        list($user,)=explode(':',$line);
+        if ($user == $_REQUEST["name"]) {
+            delLineFromFile($pass_file,$i);
+            add_user();
+            echo 1;
+            exit();
+        }
+        $i++;
+    }
+    echo 0;
+}
+
+function add_user() {
+    global $pass_file;
+
+    #If username or password is not submitted fail
+    if (!isset($_REQUEST["name"]) || !isset($_REQUEST["pass"])) {
+        echo 2;
+        exit();
+    }
+
+    $arr = file($pass_file);
+
+    if (strpos(implode("\n",$arr),$_REQUEST["name"].":") !== false) {
+        echo 3;
+        exit();
+    }
+
+    array_push($arr, $_REQUEST["name"].":".base64_encode(sha1($_REQUEST["pass"])));
+
+    $fp = fopen($pass_file, 'w+');
+
+    if ($fp === false) {
+        echo 2;
+        exit();
+    }
+
+    foreach($arr as $line) { 
+        $line=preg_replace('`[\r\n]$`','',$line);
+        fwrite($fp,$line."\n");
+    }
+
+    fclose($fp);
+    echo 1;
+}
+
 #Authentication functions
 function http_authenticate($user,$pass,$crypt_type='SHA'){
     global $pass_file;
@@ -1031,18 +1156,8 @@ function http_authenticate($user,$pass,$crypt_type='SHA'){
                 list($fuser,$fpass)=explode(':',$line);
                 if($fuser==$user){
                     switch($crypt_type){
-                        case 'DES':
-                            $salt=substr($fpass,0,2);
-                            $test_pw=crypt($pass,$salt);
-                            break;
-                        case 'PLAIN':
-                            $test_pw=$pass;
-                            break;
                         case 'SHA':
                             $test_pw=base64_encode(sha1($pass));
-                            break;
-                        case 'MD5':
-                            $test_pw=md5($pass);
                             break;
                         default:
                             fclose($fp);

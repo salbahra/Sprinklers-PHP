@@ -62,24 +62,6 @@ $(document).one("pageinit","#sprinklers", function(){
     }
 });
 
-//This bind intercepts most links to remove the 300ms delay iOS adds
-$(document).on('pageinit', function (e, data) {
-    var newpage = e.target.id;
-    var currpage = $(e.target);
-
-    currpage.find("a[href='#"+currpage.attr('id')+"-settings']").on('vclick', function (e) {
-        e.preventDefault(); e.stopImmediatePropagation();
-        highlight(this);
-        $(".ui-page-active [id$=settings]").panel("open");
-    });
-    currpage.find("a[data-onclick]").on('vclick', function (e) {
-        e.preventDefault(); e.stopImmediatePropagation();
-        var func = $(this).data("onclick");
-        highlight(this);
-        eval(func);
-    });
-});
-
 $(window).bind("resize",function(e){
     $("#running-icon").css("top",$("#footer-running").height()/2 - 5.5 + "px")
 })
@@ -175,6 +157,7 @@ function comm_error() {
 
 $(document).on("pageshow",function(e,data){
     var newpage = e.target.id;
+    var currpage = $(e.target);
 
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
@@ -182,6 +165,19 @@ $(document).on("pageshow",function(e,data){
     } else if (newpage == "preview") {
         get_preview();
     }
+
+    currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        highlight(this);
+        $(".ui-page-active [id$=settings]").panel("open");
+    });
+    currpage.find("a[data-onclick]").unbind("vclick").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        var func = $(this).data("onclick");
+        highlight(this);
+        eval(func);
+    });
+
 });
 
 $(document).on("pagebeforeshow",function(e,data){
@@ -360,6 +356,69 @@ function show_stations() {
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#os-stations"));
+    })    
+}
+
+function show_users() {
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_user_list",function(items){
+        var list = $("#user-control-list");
+        list.html(items).trigger("create");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#user-control"));
+    })
+}
+
+function user_id_name(id) {
+    var name = $("#user-"+id+" .ui-btn-text").first().text()
+    name = name.replace(/ click to (collapse|expand) contents/g,"")
+    return name;
+}
+
+function delete_user(id) {
+    var name = user_id_name(id);
+    areYouSure("Are you sure you want to delete "+name+"?", "", function() {
+        $.mobile.showPageLoadingMsg();
+        $.get("index.php","action=delete_user&name="+name,function(result){
+            $.mobile.hidePageLoadingMsg();
+            if (result == 0) {
+                comm_error()
+            } else {
+                show_users()
+            }
+        })
+    },show_users)
+}
+
+function add_user() {
+    var nameEl = $("#name"), passEl = $("#pass");
+    var name = nameEl.val(), pass = passEl.val();
+    nameEl.val(""), passEl.val("");
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=add_user&name="+name+"&pass="+pass,function(result){
+        $.mobile.hidePageLoadingMsg();
+        if (result == 0) {
+            comm_error()
+        } else if (result == 3) {
+            showerror("User already exists")
+        } else {
+            show_users()
+        }
+    })
+}
+
+function change_user(id) {
+    var name = user_id_name(id), cpu = $("#cpu-"+id);
+    var pass = cpu.val();
+    cpu.val("");
+    $.mobile.showPageLoadingMsg();
+    $.get("index.php","action=change_user&name="+name+"&pass="+pass,function(result){
+        $.mobile.hidePageLoadingMsg();
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("Password for "+name+" has been updated")
+        }
     })    
 }
 

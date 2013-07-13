@@ -199,6 +199,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li><a href="#" data-onclick="show_settings();">Device Options</a></li>
             <li><a href="#" data-onclick="show_stations();">Edit Stations</a></li>
+            <li><a href="#" data-onclick="show_users();">User Management</a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider">System Control</li>
@@ -245,6 +246,40 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
     </div>
 </div>
+
+<div data-role="page" id="user-control">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>User Control</h3>
+        <a href="#settings" data-icon="back">Back</a>
+        <a href="#add-user" data-icon="plus">Add</a>
+    </div>
+    <div data-role="content" id="user-control-list">
+    </div>
+</div>
+
+<div data-role="page" id="add-user">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3>Add User</h3>
+        <a href="#user-control" data-icon="back">Back</a>
+        <a href="#" data-onclick="add_user();">Submit</a>
+    </div>
+    <div data-role="content">
+        <ul data-inset="true" data-role="listview">
+            <li data-role="list-divider">Add New User</li>
+            <li>
+                <div data-role="fieldcontain">
+                    <label for="name">Username:</label>
+                    <input autocapitalize="off" autocorrect="off" type="text" id="name" value="" />
+                    <label for="pass">Password:</label>
+                    <input type="password" id="pass" value="" />
+                    <a data-role="button" href="#" data-onclick="add_user();">Submit</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
 
 <div data-role="page" id="os-stations">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
