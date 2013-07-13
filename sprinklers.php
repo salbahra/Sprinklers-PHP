@@ -197,6 +197,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div data-role="content">
         <ul data-role="listview" data-inset="true">
+            <li><a href="#" data-onclick="clear_logs();">Clear Logs</a></li>
             <li><a href="#" data-onclick="show_settings();">Device Options</a></li>
             <li><a href="#" data-onclick="show_stations();">Edit Stations</a></li>
             <li><a href="#" data-onclick="show_users();">User Management</a></li>

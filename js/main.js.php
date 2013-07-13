@@ -879,6 +879,21 @@ function auto_raindelay() {
     })
 }
 
+function clear_logs() {
+    areYouSure("Are you sure you want to clear all your log data?", "", function() {
+        $.mobile.showPageLoadingMsg()
+        $.get("index.php","action=clear_logs",function(result){
+            $.mobile.hidePageLoadingMsg()
+            gohome();
+            if (result == 0) {
+                comm_error()
+            } else {
+                showerror("Logs have been cleared")
+            }
+        });
+    },gohome);    
+}
+
 function rbt() {
     areYouSure("Are you sure you want to reboot OpenSprinkler?", "", function() {
         $.mobile.showPageLoadingMsg()

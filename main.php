@@ -45,7 +45,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 if (isset($_REQUEST['action'])) {
 	if (is_callable($_REQUEST['action'])) {
 		if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("change_user","add_user","delete_user","make_user_list","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
     			call_user_func($_REQUEST['action']);
             }
 		} else {
@@ -1047,6 +1047,19 @@ function make_user_list() {
         echo 2;
     }
     echo $list."</div>";
+}
+
+function clear_logs() {
+    global $log_file;
+
+    $f = @fopen($log_file, "r+");
+    if ($f !== false) {
+        ftruncate($f, 0);
+        fclose($f);
+        echo 1;
+    } else {
+        echo 0;
+    }
 }
 
 function delete_user() {
