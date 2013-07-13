@@ -62,10 +62,6 @@ $(document).one("pageinit","#sprinklers", function(){
     }
 });
 
-$(window).bind("resize",function(e){
-    $("#running-icon").css("top",$("#footer-running").height()/2 - 5.5 + "px")
-})
-
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
@@ -224,12 +220,8 @@ function check_status() {
         if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
         $("#running-text").html(line);
         if (data.program == "Manual program") $("#countdown").html("");
-        var icon = $("#running-icon");
-        icon.show().css("top",footer.height()/2 - 5.5 + "px");
-        footer.slideDown(function(){
-            //Fix again since FireFox reports wrong height when element is hidden
-            icon.css("top",footer.height()/2 - 5.5 + "px");
-        });
+        $("#running-icon").show()
+        footer.slideDown();
     })
 }
 

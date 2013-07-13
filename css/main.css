@@ -60,16 +60,19 @@
     padding: 2px 0;
     font-size: medium;
     margin: 0 -15px 0 -15px;
-}
-#running-icon {
-    margin-left: 4px;
-    float: left;
     position: relative;
 }
+#running-icon {
+    margin:auto;
+    position:absolute;
+    top:0;bottom:0;
+    max-height:100%;
+    max-width:100%;
+    padding-left:2px;
+ }
 #running-text {
-    overflow: hidden;
     margin:0;
-    padding-left: 5px;
+    padding-left: 15px;
     text-shadow: none;
     color: #ffffff;
 }
