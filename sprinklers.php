@@ -330,10 +330,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <p>Fortunately, I had a lot of feedback on Ray's forums and now have an application that has been tested across many devices and installed in many unique environments.</p>
                 <p>I fully support every feature of the OpenSprinkler and also the OpenSprinkler Pi (using the interval program).</p>
                 <?php
-                    $data = file_get_contents(".git/FETCH_HEAD");
-                    if ($data !== false) {
-                        preg_match("/\w{40}/", $data, $commit);
-                        echo "<p>Version: <span id='commit'>".$commit[0]."</span></p>";
+                    if (file_exists(".git/FETCH_HEAD")) {
+                        $data = file_get_contents(".git/FETCH_HEAD");
+                        if ($data !== false) {
+                            preg_match("/\w{40}/", $data, $commit);
+                            echo "<p>Version: <span id='commit'>".$commit[0]."</span></p>";
+                        }
                     }
                 ?>
                 <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
