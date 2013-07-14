@@ -735,10 +735,10 @@ function make_runonce() {
     $vs = get_stations();
     $stations = $vs["stations"];
     foreach ($stations as $station) {
-        $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
+        $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='300' id='zone-".$n."' value='0'>";
         $n++;
     }
-    echo $list."</div><button data-onclick='submit_runonce()'>Submit</button><button data-theme='a' data-onclick='reset_runonce()'>Reset</button>";
+    echo $list."</div><a data-role='button' data-onclick='submit_runonce();'>Submit</a><a data-role='button' data-theme='a' data-onclick='reset_runonce();'>Reset</a>";
 }
 
 #Make the list of all programs
@@ -824,7 +824,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
     $list .= "<div class='ui-block-b'><label for='end-".$n."'>End Time</label><input type='time' name='end-".$n."' id='end-".$n."' value='".gmdate("H:i", $program["end"]*60)."'></div>";
     $list .= "</div>";
 
-    $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='30' id='duration-".$n."' value='".($program["duration"]/60)."'>";
+    $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='300' id='duration-".$n."' value='".($program["duration"]/60)."'>";
     $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1439' id='interval-".$n."' value='".($program["interval"])."'>";
     if ($n === "new") {
         $list .= "<input type='submit' name='submit-".$n."' id='submit-".$n."' value='Save New Program'></fieldset>";
