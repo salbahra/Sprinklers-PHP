@@ -9,6 +9,10 @@
 .mini-load {
     zoom: 0.5;
 }
+#weather-list .ui-li-divider {
+    padding: 0.5em 0;
+    text-align: center;
+}
 #weather-list {
     display:none;
     width:20%;
