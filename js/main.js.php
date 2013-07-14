@@ -183,9 +183,8 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
-        $("#running-icon").hide()
-        $("#running-text").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
-        setTimeout(check_status,1000);
+        $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+        setTimeout(check_status,500);
     } else {
         clearInterval(window.interval_id);
         var title = document.title;
@@ -224,9 +223,7 @@ function update_timer(total,sdelay) {
     window.interval_id = setInterval(function(){
         if (total <= 0) {
             clearInterval(window.interval_id);
-            $("#footer-running").slideUp();
-            $("#running-icon").hide();
-            $("#running-text").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
         else
