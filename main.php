@@ -738,7 +738,7 @@ function make_runonce() {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='30' id='zone-".$n."' value='0'>";
         $n++;
     }
-    echo $list."</div><button data-theme='a' data-onclick='reset_runonce()'>Reset</button><button data-onclick='submit_runonce()'>Submit</button>";
+    echo $list."</div><button data-onclick='submit_runonce()'>Submit</button><button data-theme='a' data-onclick='reset_runonce()'>Reset</button>";
 }
 
 #Make the list of all programs
