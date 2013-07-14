@@ -220,7 +220,17 @@ function check_status() {
 
 
 function update_timer(total,sdelay) {
+    window.lastCheck = new Date().getTime();
     window.interval_id = setInterval(function(){
+        var now = new Date().getTime();
+        var diff = now - window.lastCheck;
+        if (diff > 3000) {
+            clearInterval(window.interval_id);
+            $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            check_status();
+        }
+        window.lastCheck = now;
+
         if (total <= 0) {
             clearInterval(window.interval_id);
             $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
