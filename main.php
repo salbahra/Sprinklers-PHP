@@ -857,6 +857,21 @@ function current_status() {
     $status = get_station_status();
     $options = get_options();
 
+    if (!$settings["en"]) {
+        $line = "<p id='running-text' style='text-align:center'>System Disabled</p>";
+        echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
+    }
+
+    if ($settings["rd"]) {
+        $line = "<p id='running-text' style='text-align:center'>Rain delay until ".gmdate("D, d M Y H:i:s",$settings["rdst"])."</p>";
+        echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
+    }
+
+    if ($settings["urs"] && $settings["rs"]) {
+        $line = "<p id='running-text' style='text-align:center'>Rain detected</p>";
+        echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
+    }
+
     $i = 0;
     foreach ($stations as $station) {
         $info = "";
@@ -864,10 +879,20 @@ function current_status() {
             $pname="Program ".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
-            $info = array("program" => $pname,"station" => $stations[$i], "seconds" => $settings["ps"][$i][1], "sdelay" => $options[17]["val"]);
-            echo json_encode($info); return;
+            $minutes = intval( $settings["ps"][$i][1] / 60 ) % 60;
+            $seconds = $settings["ps"][$i][1] % 60;
+            $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
+            $line .= $pname." is running on station <span class='nobr'>".$station."</span> ";
+            if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds)." remaining)</span>";
+            $line .= "</p>";
+            echo json_encode(array("color" => "green","line" => $line,"seconds" => $settings["ps"][$i][1],"sdelay" => $options[17]["val"])); return;
         }
         $i++;
+    }
+
+    if ($settings["mm"]) {
+        $line = "<p id='running-text' style='text-align:center'>Manual mode enabled</p>";
+        echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
     }
 }
 
@@ -878,22 +903,12 @@ function make_list_status() {
     $stations = $vs["stations"];
     $status = get_station_status();
 
-    $tz = $settings['tz']-48;
+    $list = "";$tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
-
-    $list = '<li data-role="list-divider">Device Time</li><li>'.gmdate("D, d M Y H:i:s",$settings["devt"]).'</li>';
-
-    $list .= '<li data-role="list-divider">Time Zone</li><li>GMT '.$tz.'</li>';
 
     $ver = join(".",str_split($settings["ver"]));
     
-    $list .= '<li data-role="list-divider">Firmware Version</li><li>'.$ver.'</li>';
-
-    $list .= '<li data-role="list-divider">System Enabled</li><li>'.(($settings["en"]==1) ? "Yes" : "No").'</li>';
-
-    $list .= '<li data-role="list-divider">Rain Delay</li><li>'.(($settings["rd"]==0) ? "No" : "Until ".gmdate("D, d M Y H:i:s",$settings["rdst"])).'</li>';
-
-    $list .= '<li data-role="list-divider">Rain Sensor</li><li>'.($settings["urs"] ? ($settings["rs"] ? "Rain Detected" : "No Rain Detected" ) : "Not Enabled").'</li>';
+    $header = gmdate("D, d M Y H:i:s",$settings["devt"]).' GMT '.$tz;
 
     $lrpid = $settings["lrun"][1]; $lrdur = $settings["lrun"][2];
     $pname="from program ".$lrpid;
@@ -926,7 +941,9 @@ function make_list_status() {
         $list .= "<li class='".$color."'><p class='sname'>".$station."</p>".$info."</li>";
         $i++;
     }
-    echo $list;
+    $footer = "F/W: ".$ver;
+
+    echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer));
 }
 
 #Generate settings page

@@ -212,16 +212,10 @@ function check_status() {
             return;
         }
         data = JSON.parse(data);
-        var minutes = parseInt( data.seconds / 60 ) % 60;
-        var seconds = data.seconds % 60;
-        var line = data.program + " is running on station <span class='nobr'>" + data.station + "</span> <span id='countdown' class='nobr'>(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds  < 10 ? "0" + seconds : seconds) + " remaining)</span>";
         if (window.interval_id !== undefined) clearInterval(window.interval_id);
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
         if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
-        $("#running-text").html(line);
-        if (data.program == "Manual program") $("#countdown").html("");
-        $("#running-icon").show()
-        footer.slideDown();
+        footer.removeClass().addClass(data.color).html(data.line).slideDown();
     })
 }
 
@@ -418,7 +412,10 @@ function get_status() {
     $.mobile.showPageLoadingMsg();
     $.get("index.php","action=make_list_status",function(items){
         var list = $("#status_list");
-        list.html(items);
+        items = JSON.parse(items)
+        list.html(items.list);
+        $("#status_header").html(items.header);
+        $("#status_footer").html(items.footer);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#status"));

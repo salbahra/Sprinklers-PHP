@@ -23,9 +23,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3 style="margin:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
     <div data-role="content" style="padding-top:0px">
-        <div id="footer-running" class="green">
-            <img id="running-icon" width="11px" height="11px" src="img/running.png" />
-            <p id="running-text"></p>
+        <div id="footer-running">
         </div>
         <div id="showupdate" class="red">
             <p style="margin:0;text-align:center">Update Available</p>
@@ -80,8 +78,10 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" data-onclick="get_status();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
+        <p id="status_header"></p>
         <ul data-role="listview" data-inset="true" id="status_list">
         </ul>
+        <p id="status_footer"></p>
     </div>
 </div>
 
