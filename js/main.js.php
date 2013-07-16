@@ -21,7 +21,7 @@ if (isset($_SESSION['sendtoken']) && $_SESSION['sendtoken']) { echo "localStorag
 ?>
 //Set AJAX timeout
 $.ajaxSetup({
-    timeout: 5000
+    timeout: 6000
 });
 
 //Handle timeout
