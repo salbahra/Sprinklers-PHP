@@ -218,7 +218,6 @@ function check_status() {
     })
 }
 
-
 function update_timer(total,sdelay) {
     window.lastCheck = new Date().getTime();
     window.interval_id = setInterval(function(){
@@ -234,6 +233,7 @@ function update_timer(total,sdelay) {
         if (total <= 0) {
             clearInterval(window.interval_id);
             $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
         else
@@ -241,6 +241,32 @@ function update_timer(total,sdelay) {
             var minutes = parseInt( total / 60 ) % 60;
             var seconds = total % 60;
             $("#countdown").text("(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + " remaining)");
+    },1000)
+}
+
+function update_timers(sdelay) {
+    if (typeof window.totals === "undefined") return;
+    window.lastCheck = new Date().getTime();
+    window.interval_id = setInterval(function(){
+        var now = new Date().getTime();
+        var diff = now - window.lastCheck;
+        if (diff > 3000) {
+            clearInterval(window.interval_id);
+            get_status();
+        }
+        window.lastCheck = now;
+        $.each(window.totals,function(a,b){
+            if (b <= 0) {
+                delete window.totals[a];
+                if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
+                window.timeout_id = setTimeout(get_status,(sdelay*1000));
+            } else {
+                --window.totals[a];
+                var minutes = parseInt( window.totals[a] / 60 ) % 60;
+                var seconds = window.totals[a] % 60;
+                $("#countdown-"+a).text("(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + " remaining)");
+            }
+        })
     },1000)
 }
 
@@ -424,8 +450,12 @@ function get_status() {
         $("#status_header").html(items.header);
         $("#status_footer").html(items.footer);
         if (list.hasClass("ui-listview")) list.listview("refresh");
+        window.totals = JSON.parse(items.totals);
+        if (window.interval_id !== undefined) clearInterval(window.interval_id);
+        if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#status"));
+        update_timers(items.sdelay);
     })
 }
 

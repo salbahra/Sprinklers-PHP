@@ -902,6 +902,7 @@ function make_list_status() {
     $vs = get_stations();
     $stations = $vs["stations"];
     $status = get_station_status();
+    $options = get_options();
 
     $list = "";$tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
@@ -921,6 +922,7 @@ function make_list_status() {
     }
     $list .= '<li data-role="list-divider">Sprinkler Stations</li>';
     $i = 0;
+    $runningTotal = array();
     foreach ($stations as $station) {
         $info = "";
         if ($settings["ps"][$i][0]) {
@@ -930,7 +932,8 @@ function make_list_status() {
             $pname="P".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual Program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once Program";
-            $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." (".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</p>";
+            if ($status[$i]) $runningTotal[$i] = $rem;
+            $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span></p>";
         }
         if ($settings["mas"] == $i+1) $station .= " (Master)";
         if ($status[$i]) {
@@ -942,8 +945,7 @@ function make_list_status() {
         $i++;
     }
     $footer = "F/W: ".$ver;
-
-    echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer));
+    echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer, "sdelay" => $options[17]["val"], "totals" => json_encode($runningTotal)));
 }
 
 #Generate settings page
