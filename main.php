@@ -872,6 +872,26 @@ function current_status() {
         echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
     }
 
+    $open = array_keys($status,true);
+    if (count($open) >= 2) {
+        $ptotal = 0;
+        foreach ($open as $key => $value) {
+            $ptotal += $settings["ps"][$value][1];
+        }
+        $sample = $open[0];
+        $pname = "Program ".$settings["ps"][$sample][0];
+        if($settings["ps"][$sample][0]==255||$settings["ps"][$sample][0]==99) $pname="Manual program";
+        if($settings["ps"][$sample][0]==254||$settings["ps"][$sample][0]==98) $pname="Run-once program";
+        $minutes = intval( $ptotal / 60 ) % 60;
+        $seconds = $ptotal % 60;
+        $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
+        $line .= $pname." is running on ".count($open)." stations ";
+        if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds)." remaining)</span>";
+        $line .= "</p>";
+        echo json_encode(array("color" => "green","line" => $line,"seconds" => $ptotal,"sdelay" => $options[17]["val"]));
+        return;
+    }
+
     $i = 0;
     foreach ($stations as $station) {
         $info = "";
@@ -885,7 +905,8 @@ function current_status() {
             $line .= $pname." is running on station <span class='nobr'>".$station."</span> ";
             if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds)." remaining)</span>";
             $line .= "</p>";
-            echo json_encode(array("color" => "green","line" => $line,"seconds" => $settings["ps"][$i][1],"sdelay" => $options[17]["val"])); return;
+            echo json_encode(array("color" => "green","line" => $line,"seconds" => $settings["ps"][$i][1],"sdelay" => $options[17]["val"]));
+            return;
         }
         $i++;
     }
