@@ -109,6 +109,8 @@ $("select[data-role='slider']").change(function(){
                         $("#mm,#mmm").val("off").slider("refresh")
                     }
                 });
+                //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
+                $("#manual a.green").removeClass("green");
                 $("#mm,#mmm").val("on").slider("refresh");
             }
         } else {
