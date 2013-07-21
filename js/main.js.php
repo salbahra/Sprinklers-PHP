@@ -838,6 +838,7 @@ function submit_runonce() {
     $("#runonce").find(":input[data-type='range']").each(function(a,b){
         runonce.push(parseInt($(b).val())*60)
     })
+    runonce.push(0);
     localStorage.setItem("runonce",JSON.stringify(runonce));
     $.get("index.php","action=runonce&data="+JSON.stringify(runonce),function(result){
         if (result == 0) {
