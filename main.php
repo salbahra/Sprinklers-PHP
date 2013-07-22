@@ -927,8 +927,6 @@ function make_list_status() {
 
     $list = "";$tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
-
-    $ver = join(".",str_split($settings["ver"]));
     
     $header = gmdate("D, d M Y H:i:s",$settings["devt"]).' GMT '.$tz;
 
@@ -968,7 +966,6 @@ function make_list_status() {
         $footer = '<p>'.$pname.' last ran station '.$stations[$settings["lrun"][0]].' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</p>';
     }
 
-    $footer .= "<p>F/W: ".$ver."</p>";
     echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer, "sdelay" => $options[17]["val"], "totals" => json_encode($runningTotal)));
 }
 
