@@ -260,7 +260,9 @@ function update_timers(sdelay) {
         $.each(window.totals,function(a,b){
             if (b <= 0) {
                 delete window.totals[a];
+                clearInterval(window.interval_id);
                 if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
+                $("#countdown-"+a).parent("p").text("Station delay").parent("li").removeClass("green").addClass("red");
                 window.timeout_id = setTimeout(get_status,(sdelay*1000));
             } else {
                 --window.totals[a];
