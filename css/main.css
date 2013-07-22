@@ -1,3 +1,6 @@
+#status_list .ui-li {
+    padding-bottom: 4px;
+}
 #status_header,#status_footer {
     margin:0;
     text-align: center;

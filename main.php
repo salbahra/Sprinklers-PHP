@@ -937,11 +937,6 @@ function make_list_status() {
     if($lrpid==255||$lrpid==99) $pname="from manual mode";
     if($lrpid==254||$lrpid==98) $pname="from a run-once program";
 
-    if ($lrdur != 0) {
-        $list .= '<li data-role="list-divider">Last Run</li>';
-        $list .= '<li>'.$stations[$settings["lrun"][0]].' ran '.$pname.' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</li>';
-    }
-    $list .= '<li data-role="list-divider">Sprinkler Stations</li>';
     $i = 0;
     $runningTotal = array();
     foreach ($stations as $station) {
@@ -951,8 +946,8 @@ function make_list_status() {
             $remm=$rem/60>>0;
             $rems=$rem%60;
             $pname="P".$settings["ps"][$i][0];
-            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual Program";
-            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once Program";
+            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
+            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
             if ($status[$i]) $runningTotal[$i] = $rem;
             $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span></p>";
         }
@@ -965,7 +960,13 @@ function make_list_status() {
         $list .= "<li class='".$color."'><p class='sname'>".$station."</p>".$info."</li>";
         $i++;
     }
-    $footer = "F/W: ".$ver;
+
+    $footer = "";
+    if ($lrdur != 0) {
+        $footer = '<p>'.$pname.' last ran station '.$stations[$settings["lrun"][0]].' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</p>';
+    }
+
+    $footer .= "<p>F/W: ".$ver."</p>";
     echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer, "sdelay" => $options[17]["val"], "totals" => json_encode($runningTotal)));
 }
 
