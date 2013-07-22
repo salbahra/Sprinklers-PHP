@@ -932,11 +932,6 @@ function make_list_status() {
     
     $header = gmdate("D, d M Y H:i:s",$settings["devt"]).' GMT '.$tz;
 
-    $lrpid = $settings["lrun"][1]; $lrdur = $settings["lrun"][2];
-    $pname="from program ".$lrpid;
-    if($lrpid==255||$lrpid==99) $pname="from manual mode";
-    if($lrpid==254||$lrpid==98) $pname="from a run-once program";
-
     $i = 0;
     $runningTotal = array();
     foreach ($stations as $station) {
@@ -962,7 +957,14 @@ function make_list_status() {
     }
 
     $footer = "";
+    $lrdur = $settings["lrun"][2];
+    
     if ($lrdur != 0) {
+        $lrpid = $settings["lrun"][1];
+        $pname="P".$lrpid;
+        if($lrpid==255||$lrpid==99) $pname="Manual program";
+        if($lrpid==254||$lrpid==98) $pname="Run-once program";
+
         $footer = '<p>'.$pname.' last ran station '.$stations[$settings["lrun"][0]].' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</p>';
     }
 
