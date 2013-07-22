@@ -1095,9 +1095,14 @@ function make_user_list() {
 function clear_logs() {
     global $log_file;
 
-    $f = @fopen($log_file, "r+");
+    $f = @fopen($log_file, "w");
     if ($f !== false) {
-        ftruncate($f, 0);
+        $settings = get_settings();
+        $datetime=Date("Y-m-d H:i:s",time());
+        $newSprinklerValveSettings=implode("",get_station_status());
+        $rainSenseStatus = $settings["rs"];
+        $rainDelayStatus = $settings["rd"];
+        fwrite($f, $newSprinklerValveSettings."--".$datetime."--".$rainSenseStatus."--".$rainDelayStatus."\n");
         fclose($f);
         echo 1;
     } else {
