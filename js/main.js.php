@@ -240,9 +240,7 @@ function update_timer(total,sdelay) {
         }
         else
             --total;
-            var minutes = parseInt( total / 60 ) % 60;
-            var seconds = total % 60;
-            $("#countdown").text("(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + " remaining)");
+            $("#countdown").text("(" + sec2hms(total) + " remaining)");
     },1000)
 }
 
@@ -262,16 +260,28 @@ function update_timers(sdelay) {
                 delete window.totals[a];
                 clearInterval(window.interval_id);
                 if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
-                $("#countdown-"+a).parent("p").text("Station delay").parent("li").removeClass("green").addClass("red");
-                window.timeout_id = setTimeout(get_status,(sdelay*1000));
+                if (a == "p") {
+                    get_status();
+                } else {
+                    $("#countdown-"+a).parent("p").text("Station delay").parent("li").removeClass("green").addClass("red");
+                    window.timeout_id = setTimeout(get_status,(sdelay*1000));
+                }
             } else {
+                if (a == "p" && !$("#status_list li.green").length) return true;
                 --window.totals[a];
-                var minutes = parseInt( window.totals[a] / 60 ) % 60;
-                var seconds = window.totals[a] % 60;
-                $("#countdown-"+a).text("(" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds) + " remaining)");
+                $("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
             }
         })
     },1000)
+}
+
+function sec2hms(diff) {
+    var str = "";
+    var hours = parseInt( diff / 3600 ) % 24;
+    var minutes = parseInt( diff / 60 ) % 60;
+    var seconds = diff % 60;
+    if (hours) str += (hours < 10 ? "0"+hours : hours)+":";
+    return str+(minutes < 10 ? "0"+minutes : minutes)+":"+(seconds < 10 ? "0"+seconds : seconds);
 }
 
 function check_auto(sliders){

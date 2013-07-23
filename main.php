@@ -882,11 +882,9 @@ function current_status() {
         $pname = "Program ".$settings["ps"][$sample][0];
         if($settings["ps"][$sample][0]==255||$settings["ps"][$sample][0]==99) $pname="Manual program";
         if($settings["ps"][$sample][0]==254||$settings["ps"][$sample][0]==98) $pname="Run-once program";
-        $minutes = intval( $ptotal / 60 ) % 60;
-        $seconds = $ptotal % 60;
         $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
         $line .= $pname." is running on ".count($open)." stations ";
-        if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds)." remaining)</span>";
+        if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".sec2hms($ptotal)." remaining)</span>";
         $line .= "</p>";
         echo json_encode(array("color" => "green","line" => $line,"seconds" => $ptotal,"sdelay" => $options[17]["val"]));
         return;
@@ -899,11 +897,9 @@ function current_status() {
             $pname="Program ".$settings["ps"][$i][0];
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
-            $minutes = intval( $settings["ps"][$i][1] / 60 ) % 60;
-            $seconds = $settings["ps"][$i][1] % 60;
             $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
             $line .= $pname." is running on station <span class='nobr'>".$station."</span> ";
-            if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds)." remaining)</span>";
+            if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".sec2hms($settings["ps"][$i][1])." remaining)</span>";
             $line .= "</p>";
             echo json_encode(array("color" => "green","line" => $line,"seconds" => $settings["ps"][$i][1],"sdelay" => $options[17]["val"]));
             return;
@@ -932,6 +928,7 @@ function make_list_status() {
 
     $i = 0;
     $runningTotal = array();
+    $allPnames = array();
     foreach ($stations as $station) {
         $info = "";
         if ($settings["ps"][$i][0]) {
@@ -942,6 +939,7 @@ function make_list_status() {
             if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
             if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
             if ($status[$i]) $runningTotal[$i] = $rem;
+            $allPnames[$i] = $pname;
             $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span></p>";
         }
         if ($settings["mas"] == $i+1) $station .= " (Master)";
@@ -964,6 +962,22 @@ function make_list_status() {
         if($lrpid==254||$lrpid==98) $pname="Run-once program";
 
         $footer = '<p>'.$pname.' last ran station '.$stations[$settings["lrun"][0]].' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</p>';
+    }
+
+    $ptotal = 0;
+    foreach ($settings["ps"] as $valve) {
+        if ($valve[0]) $ptotal += $valve[1];
+        $i++;
+    }
+
+    if ($ptotal) {
+        $allPnames = array_unique($allPnames);
+        $numProg = count($allPnames);
+        $allPnames = strrev(preg_replace(strrev("/, /"),strrev(" and "),strrev(implode(", ", $allPnames)),1));
+        $pinfo = $allPnames.(($numProg > 1) ? " are" : " is" )." running ";
+        $pinfo .= "<span id='countdown-p' class='nobr'>(".sec2hms($ptotal)." remaining)</span>";
+        $runningTotal["p"] = $ptotal;
+        $header .= "<br>".$pinfo;
     }
 
     echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer, "sdelay" => $options[17]["val"], "totals" => json_encode($runningTotal)));
@@ -1408,6 +1422,16 @@ function move_keys($keys,$array) {
         $array[$key] = $t;
     }
     return $array;    
+}
+
+#Covert seconds to HH:MM:SS notation
+function sec2hms($diff) {
+    $str = "";
+    $hours = intval( $diff / 3600 ) % 24;
+    $minutes = intval( $diff / 60 ) % 60;
+    $seconds = $diff % 60;
+    if ($hours) $str .= ($hours < 10 ? "0".$hours : $hours).":";
+    return $str.($minutes < 10 ? "0".$minutes : $minutes).":".($seconds < 10 ? "0".$seconds : $seconds);
 }
 
 ?>
