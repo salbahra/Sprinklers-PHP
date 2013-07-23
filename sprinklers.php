@@ -334,7 +334,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         $data = file_get_contents(".git/FETCH_HEAD");
                         if ($data !== false) {
                             preg_match("/\w{40}/", $data, $commit);
-                            echo "<p>Version: <span id='commit'>".$commit[0]."</span></p>";
+                            echo "<p>Version: <span id='commit' data-commit='".$commit[0]."'><a href='https://github.com/salbahra/OpenSprinkler-Controller/commit/".$commit[0]."'>".substr($commit[0], 0,6)."</a></span></p>";
                         }
                     }
                 ?>

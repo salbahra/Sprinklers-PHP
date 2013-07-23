@@ -53,7 +53,7 @@ $(document).one("pageinit","#sprinklers", function(){
     if (d.length == 1) d = "0"+d;
     $("#preview_date").val(y+"-"+m+"-"+d);
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
-    var curr = $("#commit").html();
+    var curr = $("#commit").data("commit");
     if (curr !== undefined) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
             var newest = data.object.sha;
