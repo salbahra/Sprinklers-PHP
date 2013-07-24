@@ -868,9 +868,7 @@ function current_status() {
             $ptotal += $settings["ps"][$value][1];
         }
         $sample = $open[0];
-        $pname = "Program ".$settings["ps"][$sample][0];
-        if($settings["ps"][$sample][0]==255||$settings["ps"][$sample][0]==99) $pname="Manual program";
-        if($settings["ps"][$sample][0]==254||$settings["ps"][$sample][0]==98) $pname="Run-once program";
+        $pname = pidname($settings["ps"][$sample][0]);
         $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
         $line .= $pname." is running on ".count($open)." stations ";
         if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".sec2hms($ptotal)." remaining)</span>";
@@ -883,9 +881,7 @@ function current_status() {
     foreach ($stations as $station) {
         $info = "";
         if ($settings["ps"][$i][0] && $status[$i]) {
-            $pname="Program ".$settings["ps"][$i][0];
-            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
-            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
+            $pname= pidname($settings["ps"][$i][0]);
             $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
             $line .= $pname." is running on station <span class='nobr'>".$station."</span> ";
             if ($pname != "Manual program") $line .= "<span id='countdown' class='nobr'>(".sec2hms($settings["ps"][$i][1])." remaining)</span>";
@@ -924,9 +920,7 @@ function make_list_status() {
             $rem=$settings["ps"][$i][1];
             $remm=$rem/60>>0;
             $rems=$rem%60;
-            $pname="P".$settings["ps"][$i][0];
-            if($settings["ps"][$i][0]==255||$settings["ps"][$i][0]==99) $pname="Manual program";
-            if($settings["ps"][$i][0]==254||$settings["ps"][$i][0]==98) $pname="Run-once program";
+            $pname= pidname($settings["ps"][$i][0]);
             if ($status[$i]) $runningTotal[$i] = $rem;
             $allPnames[$i] = $pname;
             $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span></p>";
@@ -946,9 +940,7 @@ function make_list_status() {
     
     if ($lrdur != 0) {
         $lrpid = $settings["lrun"][1];
-        $pname="P".$lrpid;
-        if($lrpid==255||$lrpid==99) $pname="Manual program";
-        if($lrpid==254||$lrpid==98) $pname="Run-once program";
+        $pname= pidname($lrpid);
 
         $footer = '<p>'.$pname.' last ran station '.$stations[$settings["lrun"][0]].' for '.($lrdur/60>>0).'m '.($lrdur%60).'s on '.gmdate("D, d M Y H:i:s",$settings["lrun"][3]).'</p>';
     }
@@ -1090,6 +1082,13 @@ function make_user_list() {
         echo 2;
     }
     echo $list."</div>";
+}
+
+function pidname($pid) {
+    $pname = "Program ".$pid;
+    if($pid==255||$pid==99) $pname="Manual program";
+    if($pid==254||$pid==98) $pname="Run-once program";
+    return $pname;
 }
 
 function clear_logs() {
