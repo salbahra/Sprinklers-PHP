@@ -641,8 +641,10 @@ function make_list_logs() {
                     if (($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) $TimeNow = time();
 
                     $TimeElapsed=$TimeNow-$TimeBegin;
+                    $now = (($i==count($RainSensor)-1)&&($RainSensor[$i]=="1"));
 
-                    $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainSensor)-1)&&($RainSensor[$i]=="1")) ? " Running Now" : ""));
+                    if (!$TimeElapsed && !$now) continue;
+                    $RainHistory[]= array($SprinklerTime[$i], $TimeElapsed, ($now ? " Running Now" : ""));
             }
         }
 
@@ -660,8 +662,10 @@ function make_list_logs() {
                     if (($i==count($RainDelay)-1)&&($RainDelay[$i]=="1")) $TimeNow = time();
 
                     $TimeElapsed=$TimeNow-$TimeBegin;
+                    $now = (($i==count($RainDelay)-1)&&($RainDelay[$i]=="1"));
 
-                    $DelayHistory[]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($RainDelay)-1)&&($RainDelay[$i]=="1")) ? " Running Now" : ""));
+                    if (!$TimeElapsed && !$now) continue;
+                    $DelayHistory[]= array($SprinklerTime[$i], $TimeElapsed, ($now ? " Running Now" : ""));
             }
         }
 
@@ -679,8 +683,10 @@ function make_list_logs() {
                 if (($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) $TimeNow = time();
 
                 $TimeElapsed=$TimeNow-$TimeBegin;
-                
-                $ValveHistory[$j][]= array($SprinklerTime[$i], $TimeElapsed, ((($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1")) ? " Running Now" : ""));
+                $now = (($i==count($SprinklerPattern)-1)&&($SprinklerPattern[$i][$j]=="1"));
+
+                if (!$TimeElapsed && !$now) continue;
+                $ValveHistory[$j][]= array($SprinklerTime[$i], $TimeElapsed, ($now ? " Running Now" : ""));
             };
         };
     };
@@ -693,7 +699,6 @@ function make_list_logs() {
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
                 $theTime=date('D, d M Y H:i',strtotime($ValveHistory[$j][$k][0])+$tz);
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
-                if (!$mins && $ValveHistory[$j][$k][2] == "") continue; 
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$ValveHistory[$j][$k][2]."</td></tr>";
             };
         };
@@ -706,7 +711,6 @@ function make_list_logs() {
             for ($k=0;$k<count($RainHistory);$k++){
                 $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
                 $mins = ceil($RainHistory[$k][1]/60);
-                if (!$mins && $RainHistory[$k][2] == "") continue; 
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$RainHistory[$k][2]."</td></tr>";
             };
         };        
@@ -719,7 +723,6 @@ function make_list_logs() {
             for ($k=0;$k<count($DelayHistory);$k++){
                 $theTime=date('D, d M Y H:i',strtotime($DelayHistory[$k][0])+$tz);
                 $mins = ceil($DelayHistory[$k][1]/60);
-                if (!$mins && $DelayHistory[$k][2] == "") continue; 
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$DelayHistory[$k][2]."</td></tr>";
             };
         };        
