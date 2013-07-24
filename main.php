@@ -921,9 +921,11 @@ function make_list_status() {
             $remm=$rem/60>>0;
             $rems=$rem%60;
             $pname= pidname($settings["ps"][$i][0]);
-            if ($status[$i]) $runningTotal[$i] = $rem;
+            if ($status[$i] && $pname != "Manual program") $runningTotal[$i] = $rem;
             $allPnames[$i] = $pname;
-            $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname." <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span></p>";
+            $info = "<p class='rem'>".(($status[$i]) ? "Running" : "Scheduled" )." ".$pname;
+            if ($pname != "Manual program") $info .= " <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." remaining)</span>";
+            $info .= "</p>";
         }
         if ($settings["mas"] == $i+1) $station .= " (Master)";
         if ($status[$i]) {
