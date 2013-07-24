@@ -387,20 +387,6 @@ function time_to_text($sid,$start,$pid,$end,$data,$simt) {
     echo "{'start': ".$start.",'end': ".$end.",'className':'".$class."','content':'P".$pid."','group':'".$data["stations"][$sid]."'},";
 }
 
-function getrunstr($start,$end){
-    $h=$start/3600>>0;
-    $m=($start/60>>0)%60;
-    $s=$start%60;
-
-    $str=($h/10>>0).($h%10).":".($m/10>>0).($m%10).":".($s/10>>0).($s%10);
-
-    $h=$end/3600>>0;
-    $m=($end/60>>0)%60;
-    $s=$end%60;
-    $str = $str."->".($h/10>>0).($h%10).":".($m/10>>0).($m%10).":".($s/10>>0).($s%10);
-    return $str;
-} 
-
 #Get OpenSprinkler options
 function get_options() {
     $data = get_from_os("/vo");
