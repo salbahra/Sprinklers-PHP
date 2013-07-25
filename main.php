@@ -906,14 +906,16 @@ function make_list_status() {
     $status = get_station_status();
     $options = get_options();
 
+    $runningTotal = array();
+    $allPnames = array();
+
     $list = "";$tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
     
-    $header = gmdate("D, d M Y H:i:s",$settings["devt"]).' GMT '.$tz;
+    $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
+    $runningTotal["c"] = $settings["devt"];
 
     $i = 0;
-    $runningTotal = array();
-    $allPnames = array();
     foreach ($stations as $station) {
         $info = "";
         if ($settings["ps"][$i][0]) {
@@ -950,10 +952,13 @@ function make_list_status() {
     $ptotal = 0;
     foreach ($settings["ps"] as $valve) {
         if ($valve[0]) $ptotal += $valve[1];
-        $i++;
     }
 
     if ($ptotal) {
+        $open = count(array_keys($status,true));
+        $scheduled = count($allPnames);
+        if (!$open && $scheduled) $runningTotal["d"] = $options[17]["val"];
+        if ($open == 1) $ptotal += ($scheduled-1)*$options[17]["val"];
         $allPnames = array_unique($allPnames);
         $numProg = count($allPnames);
         $allPnames = strrev(preg_replace(strrev("/, /"),strrev(" and "),strrev(implode(", ", $allPnames)),1));

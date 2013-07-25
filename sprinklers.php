@@ -322,25 +322,16 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div data-role="content">
         <div data-role="collapsible-set" data-content-theme="d">
-            <div data-role="collapsible" data-collapsed="false">
+            <div data-role="collapsible">
                 <h3>Background</h3>
                 <p>I, Samer Albahra, am a medical school graduate, currently doing a pathology residency at UTHSCSA. I enjoy making mobile applications in my spare time and was excited when I first discovered the OpenSprinkler, an open-source Internet based sprinkler system, which lacked a truly mobile interface.</p>
                 <p>I decided to add a mobile front-end using jQuery Mobile. There were a few things I wanted to accomplish:</p>
                 <ul><li>Large on/off buttons in manual mode</li><li>Easy slider inputs for any duration input</li><li>Compatibility between many/all devices</li><li>Easy feedback of current status</li><li>Easy program input/modification</li></ul>
                 <p>Fortunately, I had a lot of feedback on Ray's forums and now have an application that has been tested across many devices and installed in many unique environments.</p>
                 <p>I fully support every feature of the OpenSprinkler and also the OpenSprinkler Pi (using the interval program).</p>
-                <?php
-                    if (file_exists(".git/FETCH_HEAD")) {
-                        $data = file_get_contents(".git/FETCH_HEAD");
-                        if ($data !== false) {
-                            preg_match("/\w{40}/", $data, $commit);
-                            echo "<p>Version: <span id='commit' data-commit='".$commit[0]."'><a href='https://github.com/salbahra/OpenSprinkler-Controller/commit/".$commit[0]."'>".substr($commit[0], 0,7)."</a></span></p>";
-                        }
-                    }
-                ?>
                 <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
             </div>
-            <div data-role="collapsible">
+            <div data-role="collapsible" data-collapsed="false">
                 <h3>Donate</h3>
                     <p style="text-align:center;overflow: visible;white-space: normal;">This web app has been developed by Samer Albahra. If you find it useful please donate to him by clicking the button below.</p>
                     <form style='text-align:center' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
@@ -351,6 +342,17 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </form>
             </div>
         </div>
+        <p id='versions'>
+            <?php
+                if (file_exists(".git/FETCH_HEAD")) {
+                    $data = file_get_contents(".git/FETCH_HEAD");
+                    if ($data !== false) {
+                        preg_match("/\w{40}/", $data, $commit);
+                        echo "Mobile Version: <span id='commit' data-commit='".$commit[0]."'><a target='_blank' href='https://github.com/salbahra/OpenSprinkler-Controller/commit/".$commit[0]."'>".substr($commit[0], 0,7)."</a></span>";
+                    }
+                }
+            ?>
+         </p>
     </div>
 </div>
 

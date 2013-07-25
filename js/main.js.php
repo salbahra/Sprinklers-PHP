@@ -186,7 +186,7 @@ $(document).on("pagebeforeshow",function(e,data){
     if (newpage == "sprinklers") {
         update_weather();
         $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
-        setTimeout(check_status,500);
+        setTimeout(check_status,1000);
     } else {
         clearInterval(window.interval_id);
         var title = document.title;
@@ -245,7 +245,8 @@ function update_timer(total,sdelay) {
 }
 
 function update_timers(sdelay) {
-    if (typeof window.totals === "undefined") return;
+    if (window.interval_id !== undefined) clearInterval(window.interval_id);
+    if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
     window.lastCheck = new Date().getTime();
     window.interval_id = setInterval(function(){
         var now = new Date().getTime();
@@ -258,8 +259,6 @@ function update_timers(sdelay) {
         $.each(window.totals,function(a,b){
             if (b <= 0) {
                 delete window.totals[a];
-                clearInterval(window.interval_id);
-                if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
                 if (a == "p") {
                     get_status();
                 } else {
@@ -267,9 +266,13 @@ function update_timers(sdelay) {
                     window.timeout_id = setTimeout(get_status,(sdelay*1000));
                 }
             } else {
-                if (a == "p" && !$("#status_list li.green").length) return true;
-                --window.totals[a];
-                $("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
+                if (a == "c") {
+                    	++window.totals[a];
+                    	$("#clock-s").text(new Date(window.totals[a]*1000).toUTCString().slice(0,-4));
+                } else {
+                    	--window.totals[a];
+                    	$("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
+                }
             }
         })
     },1000)
@@ -469,6 +472,10 @@ function get_status() {
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#status"));
+        if (window.totals["d"] !== undefined) {
+            delete window.totals["p"];
+            setTimeout(get_status,window.totals["d"]*1000);
+        }
         update_timers(items.sdelay);
     })
 }
