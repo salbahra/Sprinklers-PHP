@@ -267,11 +267,11 @@ function update_timers(sdelay) {
                 }
             } else {
                 if (a == "c") {
-                    	++window.totals[a];
-                    	$("#clock-s").text(new Date(window.totals[a]*1000).toUTCString().slice(0,-4));
+                    ++window.totals[a];
+                    $("#clock-s").text(new Date(window.totals[a]*1000).toUTCString().slice(0,-4));
                 } else {
-                    	--window.totals[a];
-                    	$("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
+                    --window.totals[a];
+                    $("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
                 }
             }
         })

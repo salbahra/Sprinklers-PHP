@@ -588,6 +588,8 @@ function make_list_logs() {
     #Adapted from the script written by David B. Gustavson, 20121021
     global $timeViewWindow, $log_file;
     
+    $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
+
     $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-content-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
     $vs = get_stations();
     $ValveName = $vs["stations"];
@@ -677,44 +679,74 @@ function make_list_logs() {
         };
     };
     $table_header = "<table><thead><tr><th data-priority='1'>Runtime</th><th data-priority='2'>Date/Time</th></tr></thead><tbody>";
+    $hour = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    $month = array(0,0,0,0,0,0,0,0,0,0,0,0);
+    $dow = array(0,0,0,0,0,0,0);
     for ($j=0;$j<count($ValveName);$j++) {
         if (!isset($ValveHistory[$j])) continue;
         $ct=count($ValveHistory[$j]);
         $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " run" : " runs" )."</div>".$ValveName[$j]."</h2>".$table_header;
-        if ($ct>0) {
+            if ($graphing) {
+                if (isset($_REQUEST["sort"])) {
+                    switch ($_REQUEST["sort"]) {
+                        case 'dow':
+                            $data[$j] = $dow;
+                            $date_needed = "w";
+                            break;
+                        case 'month':
+                            $data[$j] = $month;
+                            $date_needed = "n";
+                            break;
+                        case 'hour':
+                            $data[$j] = $hour;
+                            $date_needed = "G";
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    $date_needed = "U";
+                }
+            }
             for ($k=0;$k<count($ValveHistory[$j]);$k++){
-                $theTime=date('D, d M Y H:i',strtotime($ValveHistory[$j][$k][0])+$tz);
+                $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
-                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$ValveHistory[$j][$k][2]."</td></tr>";
+                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";
+
+                if ($graphing && ($theTime >= $_REQUEST["start"]) && ($theTime <= $_REQUEST["end"])) {
+                    $info = intval(date($date_needed,$theTime));
+                    if (isset($_REQUEST["sort"]) && $_REQUEST["sort"] == "month") $info--;
+                    $data[$j][$info] += $ValveHistory[$j][$k][1];
+                }
             };
-        };
         $list .= "</tbody></table></div>";
     };
     if (isset($RainHistory)) {
         $ct=count($RainHistory);
         $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " switch" : " switches" )."</div>Rain Sensor</h2>".$table_header;
-        if ($ct>0) {
-            for ($k=0;$k<count($RainHistory);$k++){
-                $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
-                $mins = ceil($RainHistory[$k][1]/60);
-                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$RainHistory[$k][2]."</td></tr>";
-            };
-        };        
+        for ($k=0;$k<count($RainHistory);$k++){
+            $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
+            $mins = ceil($RainHistory[$k][1]/60);
+            $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$RainHistory[$k][2]."</td></tr>";
+        };
         $list .= "</tbody></table></div>";
     }
     if (isset($DelayHistory)) {
         $ct=count($DelayHistory);
         $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " change" : " changes" )."</div>Rain Delay</h2>".$table_header;
-        if ($ct>0) {
-            for ($k=0;$k<count($DelayHistory);$k++){
-                $theTime=date('D, d M Y H:i',strtotime($DelayHistory[$k][0])+$tz);
-                $mins = ceil($DelayHistory[$k][1]/60);
-                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$DelayHistory[$k][2]."</td></tr>";
-            };
-        };        
+        for ($k=0;$k<count($DelayHistory);$k++){
+            $theTime=date('D, d M Y H:i',strtotime($DelayHistory[$k][0])+$tz);
+            $mins = ceil($DelayHistory[$k][1]/60);
+            $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$DelayHistory[$k][2]."</td></tr>";
+        };
         $list .= "</tbody></table></div>";
     }
-    echo $list."</div>";
+
+    if ($graphing) {
+        echo json_encode($data);    
+    } else {
+        echo $list."</div>";
+    }
 }
 
 #Make run-once list
