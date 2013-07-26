@@ -45,13 +45,9 @@ $(document).ajaxError(function(x,t,m) {
 //After main page is processed, hide loading message and change to the page
 $(document).one("pageinit","#sprinklers", function(){
     $.mobile.hidePageLoadingMsg();
-    var date = new Date();
-    var y = date.getFullYear();
-    var m = String(date.getMonth()+1);
-    if (m.length == 1) m = "0"+m;
-    var d = String(date.getDate());
-    if (d.length == 1) d = "0"+d;
-    $("#preview_date").val(y+"-"+m+"-"+d);
+    var now = new Date();
+    $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
+    $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
     $.mobile.changePage($("#sprinklers"),{transition:"none"});
     var curr = $("#commit").data("commit");
     if (curr !== null) {
@@ -482,7 +478,8 @@ function get_status() {
 
 function get_logs() {
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=make_list_logs",function(items){
+    $.get("index.php","action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + (new Date($("#log_end").val()).getTime() / 1000),function(items){
+        $("#log_options").trigger("collapse");
         var list = $("#logs_list");
         list.html(items).trigger("create");
         $.mobile.hidePageLoadingMsg();

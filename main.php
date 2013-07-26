@@ -604,6 +604,7 @@ function make_list_logs() {
         $ELines[$i]=explode("--",$Lines[$i]);
         if (count($ELines[$i])>1){
             $timeThis=strtotime($ELines[$i][1]);
+            if (!(($timeThis >= $_REQUEST["start"]) && ($timeThis <= $_REQUEST["end"]))) continue;
             $SprinklerPattern[]=str_split($ELines[$i][0]);
             $SprinklerTime[]=$ELines[$i][1];
             $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
@@ -708,8 +709,7 @@ function make_list_logs() {
         }
         for ($k=0;$k<count($ValveHistory[$j]);$k++){
             $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
-
-            if ($graphing && ($theTime >= $_REQUEST["start"]) && ($theTime <= $_REQUEST["end"])) {
+            if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"]) && $_REQUEST["sort"] == "month") $info--;
                 $data[$j][$info] += $ValveHistory[$j][$k][1];

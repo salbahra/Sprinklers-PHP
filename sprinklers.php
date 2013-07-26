@@ -184,6 +184,16 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" data-onclick="get_logs();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
+        <fieldset data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" id="log_options">
+            <legend>Options</legend>
+            <div data-role="fieldcontain">
+                <label for="log_start">Start:</label>
+                <input data-mini="true" type="date" id="log_start" />
+                <label for="log_end">End:</label>
+                <input data-mini="true" type="date" id="log_end" />
+            </div>
+            <a data-onclick="get_logs();" data-role="button" href="#" data-mini="true">Refresh</a>
+        </fieldset>
         <div id="logs_list">
         </div>
     </div>
