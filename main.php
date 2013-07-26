@@ -586,7 +586,7 @@ function auto_mm_on() {
 #Content generation functions
 function make_list_logs() {
     #Adapted from the script written by David B. Gustavson, 20121021
-    global $timeViewWindow, $log_file;
+    global $log_file;
     
     $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
 
@@ -598,20 +598,17 @@ function make_list_logs() {
     $tz = (($tz>=0) ? "+" : "-").((abs($tz)/4)*60*60)+(((abs($tz)%4)*15/10).((abs($tz)%4)*15%10) * 60);
 
     $SprinklerValveHistory=file_get_contents($log_file);
-    $timeEarliest=strtotime(Date("Y-m-d H:i:s",strtotime("-".$timeViewWindow,time())));
     $Lines=explode("\n",$SprinklerValveHistory);
     
     for ($i=0;$i<count($Lines);$i++){
         $ELines[$i]=explode("--",$Lines[$i]);
         if (count($ELines[$i])>1){
             $timeThis=strtotime($ELines[$i][1]);
-            if ($timeThis>$timeEarliest){
-                $SprinklerPattern[]=str_split($ELines[$i][0]);
-                $SprinklerTime[]=$ELines[$i][1];
-                $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
-                if ($settings["urs"] == 1 && isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
-                if (isset($ELines[$i][3])) $RainDelay[]=$ELines[$i][3];
-            };
+            $SprinklerPattern[]=str_split($ELines[$i][0]);
+            $SprinklerTime[]=$ELines[$i][1];
+            $SprinklerTimeConverted[]=strtotime($ELines[$i][1]);
+            if ($settings["urs"] == 1 && isset($ELines[$i][2])) $RainSensor[]=$ELines[$i][2];
+            if (isset($ELines[$i][3])) $RainDelay[]=$ELines[$i][3];
         };
     };
     for ($i=0;$i<count($SprinklerPattern);$i++){

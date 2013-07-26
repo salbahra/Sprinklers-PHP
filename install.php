@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("os_ip","os_pw","timeViewWindow","pass_file","cache_file","log_file","log_previous");
+    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file","log_previous");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -195,9 +195,9 @@ function fail() {
                                 <label for="os_pw">Open Sprinkler Password:</label>
                                 <input type="password" name="os_pw" id="os_pw" value="" />
                                 <label for="pass_file">Pass File Location:</label>
-                                <input type="text" name="pass_file" id="pass_file" value="/var/www/sprinklers/.htpasswd" />
+                                <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
                                 <label for="cache_file">Cache File Location:</label>
-                                <input type="text" name="cache_file" id="cache_file" value="/var/www/sprinklers/.cache" />
+                                <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
                                 <label for="force_ssl">Force SSL</label>
                                 <input type="checkbox" name="force_ssl" id="force_ssl" />
                             </div>
@@ -207,12 +207,10 @@ function fail() {
                         <li data-role="list-divider">Log Configuration</li>
                         <li>
                             <div data-role="fieldcontain">
-                                <label for="timeViewWindow">How Far Back to Log:</label>
-                                <input type="text" name="timeViewWindow" id="timeViewWindow" value="7 days" />
                                 <label for="log_file">Sprinkler Log File:</label>
-                                <input type="text" name="log_file" id="log_file" value="/var/www/sprinklers/SprinklerChanges.txt" />
+                                <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
                                 <label for="log_previous">Sprinkler Previous Status File:</label>
-                                <input type="text" name="log_previous" id="log_previous" value="/var/www/sprinklers/SprinklerPrevious.txt" />
+                                <input type="text" name="log_previous" id="log_previous" value="<?php echo dirname(__FILE__); ?>/SprinklerPrevious.txt" />
                             </div>
                         </li>
                     </ul>
