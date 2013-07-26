@@ -184,7 +184,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" data-onclick="get_logs();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
-        <p style='text-align:center'>Viewing data for the last <?php global $timeViewWindow;echo strtolower($timeViewWindow); ?>.</p>
         <div id="logs_list">
         </div>
     </div>
