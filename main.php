@@ -681,41 +681,43 @@ function make_list_logs() {
     $dow = array(0,0,0,0,0,0,0);
     for ($j=0;$j<count($ValveName);$j++) {
         if (!isset($ValveHistory[$j])) continue;
-        $ct=count($ValveHistory[$j]);
-        $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " run" : " runs" )."</div>".$ValveName[$j]."</h2>".$table_header;
-            if ($graphing) {
-                if (isset($_REQUEST["sort"])) {
-                    switch ($_REQUEST["sort"]) {
-                        case 'dow':
-                            $data[$j] = $dow;
-                            $date_needed = "w";
-                            break;
-                        case 'month':
-                            $data[$j] = $month;
-                            $date_needed = "n";
-                            break;
-                        case 'hour':
-                            $data[$j] = $hour;
-                            $date_needed = "G";
-                            break;
-                        default:
-                            break;
-                    }
-                } else {
-                    $date_needed = "U";
+        if ($graphing) {
+            if (isset($_REQUEST["sort"])) {
+                switch ($_REQUEST["sort"]) {
+                    case 'dow':
+                        $data[$j] = $dow;
+                        $date_needed = "w";
+                        break;
+                    case 'month':
+                        $data[$j] = $month;
+                        $date_needed = "n";
+                        break;
+                    case 'hour':
+                        $data[$j] = $hour;
+                        $date_needed = "G";
+                        break;
+                    default:
+                        break;
                 }
+            } else {
+                $date_needed = "U";
             }
-            for ($k=0;$k<count($ValveHistory[$j]);$k++){
-                $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
-                $mins = ceil($ValveHistory[$j][$k][1]/60);
-                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";
+        } else {
+            $ct=count($ValveHistory[$j]);
+            $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " run" : " runs" )."</div>".$ValveName[$j]."</h2>".$table_header;
+        }
+        for ($k=0;$k<count($ValveHistory[$j]);$k++){
+            $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
 
-                if ($graphing && ($theTime >= $_REQUEST["start"]) && ($theTime <= $_REQUEST["end"])) {
-                    $info = intval(date($date_needed,$theTime));
-                    if (isset($_REQUEST["sort"]) && $_REQUEST["sort"] == "month") $info--;
-                    $data[$j][$info] += $ValveHistory[$j][$k][1];
-                }
-            };
+            if ($graphing && ($theTime >= $_REQUEST["start"]) && ($theTime <= $_REQUEST["end"])) {
+                $info = intval(date($date_needed,$theTime));
+                if (isset($_REQUEST["sort"]) && $_REQUEST["sort"] == "month") $info--;
+                $data[$j][$info] += $ValveHistory[$j][$k][1];
+            } else {
+                $mins = ceil($ValveHistory[$j][$k][1]/60);
+                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
+            }
+        };
         $list .= "</tbody></table></div>";
     };
     if (isset($RainHistory)) {
