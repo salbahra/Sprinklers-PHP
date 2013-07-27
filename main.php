@@ -712,7 +712,6 @@ function make_list_logs() {
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"])) {
-                    if ($_REQUEST["sort"] == "month") $info--;
                     $data[$j][$info][1] += $ValveHistory[$j][$k][1];
                 } else {
                     $data[$j][] = array($info*1000,$ValveHistory[$j][$k][1]);
