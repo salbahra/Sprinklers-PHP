@@ -559,6 +559,7 @@ function get_logs() {
             }
             $.mobile.hidePageLoadingMsg();
             $.mobile.changePage($("#logs"));
+            $(window).trigger("resize");
         });
         return;
     }
