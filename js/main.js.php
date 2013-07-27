@@ -579,6 +579,21 @@ function seriesChange() {
             xaxis: { mode: "time", min:minval, max:maxval.getTime()}
         });
     }
+
+    $("#logs .legend").children().unbind("vclick").on("vclick",function(){
+    var legend = $("#logs .legend");
+    if (legend.css("position") == "relative") {
+        legend.animate({
+            right: "0px"
+        },function(){
+            $(this).css("position","static");
+        })
+    } else {
+        legend.css("position","relative").animate({
+            right: "-150px"
+        })
+    }
+    })
 }
 
 function get_manual() {
