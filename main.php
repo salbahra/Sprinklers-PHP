@@ -656,6 +656,7 @@ function make_list_logs() {
         }
 
         for ($j=0;$j<count($ValveName);$j++){
+            if (!isset($SprinklerPattern[$i-1][$j])) continue;
             if (($i>0) && ($SprinklerPattern[$i-1][$j]=="1") && ($SprinklerPattern[$i][$j]=="0")|| ($i==count($SprinklerPattern)-1) && ($SprinklerPattern[$i][$j]=="1")) {
                 $TimeNow = $SprinklerTimeConverted[$i];
                 $TimeBegin = $TimeNow;
