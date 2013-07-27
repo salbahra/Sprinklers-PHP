@@ -528,7 +528,7 @@ function get_logs() {
             } else {
                 $("#logs_list").empty().hide();
                 var state = ($(window).height() > 700) ? "expand" : "collapse";
-                $("#log_options").trigger(state);
+                setTimeout(function(){$("#log_options").trigger(state)},100);
                 $("#placeholder").show();
                 var zones = $("#zones");
                 var freshLoad = zones.find("table").length;
