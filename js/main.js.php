@@ -60,6 +60,27 @@ $(document).one("pageinit","#sprinklers", function(){
 
 $("#logs input:radio[name='log_type']").change(get_logs)
 
+$("#zones").scroll(showArrows)
+
+function showArrows() {
+    var zones = $("#zones");
+    var height = zones.height(), sleft = zones.scrollLeft();
+    if (sleft > 13) {
+        $("#graphScrollLeft").show().css("margin-top",(height/2)-12.5)
+    } else {
+        $("#graphScrollLeft").hide();
+    }
+    var total = zones.find("table").width(), container = zones.width();
+    if ((total-container) > 0 && sleft < ((total-container) - 13)) {
+        $("#graphScrollRight").show().css({
+            "margin-top":(height/2)-12.5,
+            "left":container
+        })
+    } else {
+        $("#graphScrollRight").hide();
+    }
+}
+
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
@@ -505,20 +526,30 @@ function get_logs() {
                 $("#zones, #graph_sort").hide();
                 $("#logs_list").show().html("<p class='center'>No entries found in the selected date range</p>");
             } else {
-                var zones = $("#zones");
-                zones.show(); $("#graph_sort").show();
                 $("#logs_list").empty();
-                $("#log_options").trigger("expand"); $("#placeholder").show(); $("#logs_list").hide();
-                if (!zones.find("fieldset").length) {
-                    var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
+                $("#log_options").trigger("collapse"); $("#placeholder").show(); $("#logs_list").hide();
+                var zones = $("#zones");
+                var freshLoad = zones.find("table").length;
+                zones.show(); $("#graph_sort").show();
+                if (!freshLoad) {
+                    var output = '<div class="ui-icon ui-icon-arrow-l" id="graphScrollLeft"></div><div class="ui-icon ui-icon-arrow-r" id="graphScrollRight"></div><table style="font-size:smaller"><tbody><tr>', k=0;
                     for (var i=0; i<items.stations.length; i++) {
-                        output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+                        output += '<td onclick="javascript:toggleZone(this)" class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;overflow:hidden"></div></div></td><td onclick="javascript:toggleZone(this)" id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" class="legendLabel">'+items.stations[i]+'</td>';
+                        k++;
                     }
-                    output += "</legend>";
+                    output += '</tr></tbody></table>';
                     zones.empty().append(output).trigger('create');
                 }
                 window.plotdata = items.data;
                 seriesChange();
+                var i = 0;
+                if (!freshLoad) {
+                    zones.find("td.legendColorBox div div").each(function(a,b){
+                        $(b).css("border",$($(".legend .legendColorBox div div").get(i)).css("border"));
+                        i++;
+                    })
+                    showArrows();
+                }
             }
             $.mobile.hidePageLoadingMsg();
             $.mobile.changePage($("#logs"));
@@ -542,11 +573,23 @@ function get_logs() {
     })
 }
 
+function toggleZone(zone) {
+    zone = $(zone);
+    if (zone.hasClass("legendColorBox")) {
+        zone.find("div div").toggleClass("hideZone");
+        zone.next().toggleClass("unchecked");
+    } else if (zone.hasClass("legendLabel")) {
+        zone.prev().find("div div").toggleClass("hideZone");
+        zone.toggleClass("unchecked");
+    }
+    seriesChange();
+}
+
 function seriesChange() {
 //Function written by Richard Zimmerman
     var grouping=$("input:radio[name='g']:checked").val();
     var pData = [];
-    $("input:checked[type=checkbox]").each(function () {
+    $("td[zone_num]:not('.unchecked')").each(function () {
         var key = $(this).attr("zone_num");
         if (!window.plotdata[key]) window.plotdata[key]=[[0,0]];
         if (key && window.plotdata[key]) {
@@ -592,21 +635,6 @@ function seriesChange() {
             xaxis: { mode: "time", min:minval, max:maxval.getTime()}
         });
     }
-
-    $("#logs .legend").children().unbind("vclick").on("vclick",function(){
-    var legend = $("#logs .legend");
-    if (legend.css("position") == "relative") {
-        legend.animate({
-            right: "0px"
-        },function(){
-            $(this).css("position","static");
-        })
-    } else {
-        legend.css("position","relative").animate({
-            right: "-150px"
-        })
-    }
-    })
 }
 
 function get_manual() {

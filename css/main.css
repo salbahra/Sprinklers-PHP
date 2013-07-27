@@ -1,3 +1,18 @@
+#graphScrollLeft, #graphScrollRight {
+    position: absolute;
+    height: 25px;
+    display:none;
+}
+.hideZone {
+    border: 5px solid rgba(255,255,255,0) !important;
+}
+.legend {
+    display:none;
+}
+#zones {
+    overflow-y: scroll;
+    display: none;
+}
 .log_type {
     text-align: center;
     padding-bottom:15px !important;

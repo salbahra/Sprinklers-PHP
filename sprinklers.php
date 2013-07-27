@@ -191,10 +191,10 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <label for="log_table">Table</label>
         </fieldset>
         <div id="placeholder" style="display:none;width:100%;height:300px;"></div>
+        <div id="zones">
+        </div>
         <fieldset data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" id="log_options">
             <legend>Options</legend>
-            <div id="zones" data-role="fieldcontain" style="display:none">
-            </div>
             <div data-role="fieldcontain">
                 <label for="log_start">Start:</label>
                 <input data-mini="true" type="date" id="log_start" />
