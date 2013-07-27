@@ -185,9 +185,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div data-role="content">
         <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="log_type">
-            <input type="radio" name="log_type" id="log_graph" value="graph" />
+            <input data-mini="true" type="radio" name="log_type" id="log_graph" value="graph" />
             <label for="log_graph">Graph</label>
-            <input type="radio" name="log_type" id="log_table" value="table" checked="checked" />
+            <input data-mini="true" type="radio" name="log_type" id="log_table" value="table" checked="checked" />
             <label for="log_table">Table</label>
         </fieldset>
         <div id="placeholder" style="display:none;width:100%;height:300px;"></div>
