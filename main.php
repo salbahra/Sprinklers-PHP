@@ -677,9 +677,9 @@ function make_list_logs() {
         };
     };
     $table_header = "<table><thead><tr><th data-priority='1'>Runtime</th><th data-priority='2'>Date/Time</th></tr></thead><tbody>";
-    $hour = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-    $month = array(0,0,0,0,0,0,0,0,0,0,0,0);
-    $dow = array(0,0,0,0,0,0,0);
+    $hour = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0),array(7,0),array(8,0),array(9,0),array(10,0),array(11,0),array(12,0),array(13,0),array(14,0),array(15,0),array(16,0),array(17,0),array(18,0),array(19,0),array(20,0),array(21,0),array(22,0),array(23,0));
+    $month = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0),array(7,0),array(8,0),array(9,0),array(10,0),array(11,0));
+    $dow = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0));
     for ($j=0;$j<count($ValveName);$j++) {
         if (!isset($ValveHistory[$j])) continue;
         if ($graphing) {
@@ -711,8 +711,12 @@ function make_list_logs() {
             $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
-                if (isset($_REQUEST["sort"]) && $_REQUEST["sort"] == "month") $info--;
-                $data[$j][$info] += $ValveHistory[$j][$k][1];
+                if (isset($_REQUEST["sort"])) {
+                    if ($_REQUEST["sort"] == "month") $info--;
+                    $data[$j][$info][1] += $ValveHistory[$j][$k][1];
+                } else {
+                    $data[$j][] = array($info*1000,$ValveHistory[$j][$k][1]);
+                }
             } else {
                 $mins = ceil($ValveHistory[$j][$k][1]/60);
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
@@ -742,7 +746,7 @@ function make_list_logs() {
     }
 
     if ($graphing) {
-        echo json_encode($data);    
+        echo json_encode(array("data" => $data, "stations" => $ValveName));    
     } else {
         echo $list."</div>";
     }

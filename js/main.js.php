@@ -478,13 +478,101 @@ function get_status() {
 
 function get_logs() {
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + (new Date($("#log_end").val()).getTime() / 1000),function(items){
-        $("#log_options").trigger("collapse");
+    var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + (new Date($("#log_end").val()).getTime() / 1000);
+
+    if ($("#log_graph").prop("checked")) {
+        $("#zones, #graph_sort").show();
+        var grouping=$("input:radio[name='g']:checked").val();
+        switch(grouping){
+            case "m":
+                var sort = "&sort=month";
+                break;
+            case "n":
+                var sort = "";
+                break;
+            case "h":
+                var sort = "&sort=hour";
+                break;
+            case "d":
+                var sort = "&sort=dow";
+                break;
+        }
+        $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
+            $("#log_options").trigger("collapse"); $("#placeholder").show(); $("#logs_list").hide();
+            var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
+            for (var i=0; i<items.stations.length; i++) {
+                output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+            }
+            output += "</legend>";
+            $('#zones').empty().append(output).trigger('create');
+            window.plotdata = items.data;
+            seriesChange();
+            $.mobile.hidePageLoadingMsg();
+            $.mobile.changePage($("#logs"));
+        });
+        return;
+    }
+
+    $("#zones, #graph_sort").hide();
+    $.get("index.php",parms,function(items){
         var list = $("#logs_list");
+        $("#log_options").trigger("collapse"); $("#placeholder").hide(); list.show();
         list.html(items).trigger("create");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
     })
+}
+
+function seriesChange() {
+    var grouping=$("input:radio[name='g']:checked").val();
+    var pData = [];
+    $("input:checked[type=checkbox]").each(function () {
+        var key = $(this).attr("zone_num");
+        if (!window.plotdata[key]) window.plotdata[key]=[[0,0]];
+        if (key && window.plotdata[key]) {
+            if ((grouping == 'h') || (grouping == 'm') || (grouping == 'd'))
+                pData.push({
+                    data:window.plotdata[key],
+                    label:$(this).attr("name"),
+                    color:parseInt(key),
+                    bars: { order:key, show: true, barWidth:0.08}
+                });
+            else if (grouping == 'n')
+                pData.push({
+                    data:plotdata[key],
+                    label:$(this).attr("name"),
+                    color:parseInt(key),
+                    lines: { show:true }
+                });
+        }
+    });
+    console.log(pData)
+    if (grouping=='h')
+        $.plot($('#placeholder'), pData, {
+            yaxis: {min: 0 },
+            xaxis: { tickDecimals: 0, tickSize: 1 }
+        });
+    else if (grouping=='d')
+        $.plot($('#placeholder'), pData, {
+            yaxis: {min: 0 },
+            xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
+            tickFormatter: function(v) { var dow=["Sun","Mon","Tue","Wed","Thr","Fri","Sat"]; return dow[v]; } }
+        });
+    else if (grouping=='m')
+    $.plot($('#placeholder'), pData, {
+        yaxis: {min: 0 },
+        xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
+        tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
+    });
+    else if (grouping=='n') {
+        var minval = new Date($('#log_start').val()).getTime();
+        var maxval = new Date($('#log_end').val());
+        maxval.setDate(maxval.getDate() + 1);
+        $.plot($('#placeholder'), pData, {
+            yaxis: {min: 0 },
+            xaxis: { mode: "time", min:minval, max:maxval.getTime()}
+        });
+    }
 }
 
 function get_manual() {

@@ -184,13 +184,35 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" data-onclick="get_logs();" data-icon="refresh">Refresh</a>
     </div>
     <div data-role="content">
+        <div id="placeholder" style="display:none;width:100%;height:300px;"></div>
         <fieldset data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" id="log_options">
             <legend>Options</legend>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <input type="radio" name="log_type" id="log_table" value="table" checked="checked" />
+                <label for="log_table">Table</label>
+                <input type="radio" name="log_type" id="log_graph" value="graph" />
+                <label for="log_graph">Graph</label>
+            </fieldset>
+            <div id="zones" data-role="fieldcontain" style="display:none">
+            </div>
             <div data-role="fieldcontain">
                 <label for="log_start">Start:</label>
                 <input data-mini="true" type="date" id="log_start" />
                 <label for="log_end">End:</label>
                 <input data-mini="true" type="date" id="log_end" />
+            </div>
+            <div data-role="fieldcontain" id="graph_sort" style="display:none">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                  <legend>Grouping:</legend>
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-a" value="h" checked="checked" />
+                  <label for="radio-choice-a">Hour</label>
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-b" value="d" />
+                  <label for="radio-choice-b">DOW</label>
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-c" value="m" />
+                  <label for="radio-choice-c">Month</label>
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-d" value="n" />
+                  <label for="radio-choice-d">None</label>
+                </fieldset>
             </div>
             <a data-onclick="get_logs();" data-role="button" href="#" data-mini="true">Refresh</a>
         </fieldset>
@@ -288,8 +310,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
     </div>
 </div>
-
-
 
 <div data-role="page" id="os-stations">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
