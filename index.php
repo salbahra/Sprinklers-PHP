@@ -21,7 +21,7 @@ is_auth();
     	<meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
     	<link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+    	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
         <link rel="stylesheet" href="css/main.css" />
         <link rel="shortcut icon" href="img/favicon.ico">
     </head> 
@@ -47,7 +47,7 @@ is_auth();
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script><?php include_once("js/auth.js.php"); ?></script>
-        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.2.min.js"></script>
         <script async src="js/timeline.js"></script>
         <script src="js/jquery.flot.min.js"></script>
         <script async src="js/jquery.flot.orderBars.js"></script>
