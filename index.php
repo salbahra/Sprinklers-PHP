@@ -51,7 +51,6 @@ is_auth();
         <script async src="js/timeline.js"></script>
         <script src="js/jquery.flot.min.js"></script>
         <script async src="js/jquery.flot.orderBars.js"></script>
-        <script async src="js/jquery.flot.resize.min.js"></script>
         <script async src="js/jquery.flot.time.min.js"></script>
     </body>
 </html>

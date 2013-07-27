@@ -550,6 +550,10 @@ function get_logs() {
                     })
                     showArrows();
                 }
+                $(window).resize(function(){
+                    showArrows();
+                    seriesChange();
+                });
             }
             $.mobile.hidePageLoadingMsg();
             $.mobile.changePage($("#logs"));
