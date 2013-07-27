@@ -204,14 +204,14 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <div data-role="fieldcontain" id="graph_sort" style="display:none">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                   <legend>Grouping:</legend>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-a" value="h" checked="checked" />
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-d" value="n" checked="checked" />
+                  <label for="radio-choice-d">None</label>
+                  <input data-mini="true" type="radio" name="g" id="radio-choice-a" value="h" />
                   <label for="radio-choice-a">Hour</label>
                   <input data-mini="true" type="radio" name="g" id="radio-choice-b" value="d" />
                   <label for="radio-choice-b">DOW</label>
                   <input data-mini="true" type="radio" name="g" id="radio-choice-c" value="m" />
                   <label for="radio-choice-c">Month</label>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-d" value="n" />
-                  <label for="radio-choice-d">None</label>
                 </fieldset>
             </div>
             <a data-onclick="get_logs();" data-role="button" href="#" data-mini="true">Refresh</a>
