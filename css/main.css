@@ -217,7 +217,7 @@ div.ui-slider-switch {
     font-size: larger;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
-div[class*='ui-block-'], #log_options {
+div[class*='ui-block-'], #log_options, .center {
 	text-align: center
 }
 .panelhelp {
