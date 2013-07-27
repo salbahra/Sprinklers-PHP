@@ -519,11 +519,10 @@ function get_logs() {
         return;
     }
 
-    $("#zones, #graph_sort").hide();
     $.get("index.php",parms,function(items){
-        $("#placeholder").empty();
+        $("#placeholder").empty().hide();
         var list = $("#logs_list");
-        $("#log_options").trigger("collapse"); $("#placeholder").hide(); list.show();
+        $("#log_options").trigger("collapse"); $("#zones, #graph_sort").hide(); list.show();
         list.html(items).trigger("create");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
@@ -531,6 +530,7 @@ function get_logs() {
 }
 
 function seriesChange() {
+//Function written by Richard Zimmerman
     var grouping=$("input:radio[name='g']:checked").val();
     var pData = [];
     $("input:checked[type=checkbox]").each(function () {
@@ -555,18 +555,18 @@ function seriesChange() {
     });
     if (grouping=='h')
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0 },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
             xaxis: { tickDecimals: 0, tickSize: 1 }
         });
     else if (grouping=='d')
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0 },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
             xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
             tickFormatter: function(v) { var dow=["Sun","Mon","Tue","Wed","Thr","Fri","Sat"]; return dow[v]; } }
         });
     else if (grouping=='m')
     $.plot($('#placeholder'), pData, {
-        yaxis: {min: 0 },
+        yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
         xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
         tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
     });
@@ -575,7 +575,7 @@ function seriesChange() {
         var maxval = new Date($('#log_end').val());
         maxval.setDate(maxval.getDate() + 1);
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0 },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
             xaxis: { mode: "time", min:minval, max:maxval.getTime()}
         });
     }
