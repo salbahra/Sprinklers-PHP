@@ -481,7 +481,6 @@ function get_logs() {
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + (new Date($("#log_end").val()).getTime() / 1000);
 
     if ($("#log_graph").prop("checked")) {
-        $("#zones, #graph_sort").show();
         var grouping=$("input:radio[name='g']:checked").val();
         switch(grouping){
             case "m":
@@ -498,13 +497,17 @@ function get_logs() {
                 break;
         }
         $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
+            var zones = $("#zones");
+            zones.show(); $("#graph_sort").show();
             $("#log_options").trigger("collapse"); $("#placeholder").show(); $("#logs_list").hide();
-            var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
-            for (var i=0; i<items.stations.length; i++) {
-                output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+            if (!zones.find("fieldset").length) {
+                var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
+                for (var i=0; i<items.stations.length; i++) {
+                    output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+                }
+                output += "</legend>";
+                zones.empty().append(output).trigger('create');
             }
-            output += "</legend>";
-            $('#zones').empty().append(output).trigger('create');
             window.plotdata = items.data;
             seriesChange();
             $.mobile.hidePageLoadingMsg();
@@ -546,7 +549,6 @@ function seriesChange() {
                 });
         }
     });
-    console.log(pData)
     if (grouping=='h')
         $.plot($('#placeholder'), pData, {
             yaxis: {min: 0 },
