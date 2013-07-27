@@ -526,8 +526,10 @@ function get_logs() {
                 $("#zones, #graph_sort").hide();
                 $("#logs_list").show().html("<p class='center'>No entries found in the selected date range</p>");
             } else {
-                $("#logs_list").empty();
-                $("#log_options").trigger("collapse"); $("#placeholder").show(); $("#logs_list").hide();
+                $("#logs_list").empty().hide();
+                var state = ($(window).height() > 700) ? "expand" : "collapse";
+                $("#log_options").trigger(state);
+                $("#placeholder").show();
                 var zones = $("#zones");
                 var freshLoad = zones.find("table").length;
                 zones.show(); $("#graph_sort").show();
