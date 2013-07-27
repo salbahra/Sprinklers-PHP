@@ -534,7 +534,7 @@ function get_logs() {
                 if (!freshLoad) {
                     var output = '<div class="ui-icon ui-icon-arrow-l" id="graphScrollLeft"></div><div class="ui-icon ui-icon-arrow-r" id="graphScrollRight"></div><table style="font-size:smaller"><tbody><tr>', k=0;
                     for (var i=0; i<items.stations.length; i++) {
-                        output += '<td onclick="javascript:toggleZone(this)" class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;overflow:hidden"></div></div></td><td onclick="javascript:toggleZone(this)" id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" class="legendLabel">'+items.stations[i]+'</td>';
+                        output += '<td onclick="javascript:toggleZone(this)" class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;overflow:hidden"></div></div></td><td onclick="javascript:toggleZone(this)" id="z'+i+'" zone_num='+i+' name="'+items.stations[i] + '" class="legendLabel">'+items.stations[i]+'</td>';
                         k++;
                     }
                     output += '</tr></tbody></table>';
