@@ -58,6 +58,8 @@ $(document).one("pageinit","#sprinklers", function(){
     }
 });
 
+$("#log_options input:radio[name='log_type']").change(get_logs)
+
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
