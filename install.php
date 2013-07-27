@@ -4,7 +4,7 @@
 ini_set('default_socket_timeout', 5);
 
 #If config exists then redirect to the app
-if (file_exists("config.php")) header("Location: index.php");
+#if (file_exists("config.php")) header("Location: index.php");
 
 #If an action is new_config and config file does not exist then process the information
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
@@ -126,9 +126,9 @@ function fail() {
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
+    	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script src="js/jquery.mobile-1.3.2.min.js"></script>
         <script>
             function showerror(msg) {
                 // show error message
@@ -194,26 +194,24 @@ function fail() {
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
                                 <label for="os_pw">Open Sprinkler Password:</label>
                                 <input type="password" name="os_pw" id="os_pw" value="" />
-                                <label for="pass_file">Pass File Location:</label>
-                                <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
-                                <label for="cache_file">Cache File Location:</label>
-                                <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
-                                <label for="force_ssl">Force SSL</label>
-                                <input type="checkbox" name="force_ssl" id="force_ssl" />
                             </div>
                         </li>
                     </ul>
-                    <ul data-inset="true" data-role="listview">
-                        <li data-role="list-divider">Log Configuration</li>
-                        <li>
-                            <div data-role="fieldcontain">
-                                <label for="log_file">Sprinkler Log File:</label>
-                                <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-                                <label for="log_previous">Sprinkler Previous Status File:</label>
-                                <input type="text" name="log_previous" id="log_previous" value="<?php echo dirname(__FILE__); ?>/SprinklerPrevious.txt" />
-                            </div>
-                        </li>
-                    </ul>
+                    <fieldset data-role="collapsible" data-theme="a" data-content-theme="d">
+                        <legend>Advanced Configuration</legend>
+                        <div data-role="fieldcontain">
+                            <label for="pass_file">Pass File Location:</label>
+                            <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
+                            <label for="cache_file">Cache File Location:</label>
+                            <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
+                            <label for="log_file">Sprinkler Log File:</label>
+                            <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
+                            <label for="log_previous">Sprinkler Previous Status File:</label>
+                            <input type="text" name="log_previous" id="log_previous" value="<?php echo dirname(__FILE__); ?>/SprinklerPrevious.txt" />
+                            <label for="force_ssl">Force SSL</label>
+                            <input type="checkbox" name="force_ssl" id="force_ssl" />
+                        </div>
+                    </fieldset>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
