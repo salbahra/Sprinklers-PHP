@@ -709,15 +709,15 @@ function make_list_logs() {
         }
         for ($k=0;$k<count($ValveHistory[$j]);$k++){
             $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
+            $mins = ceil($ValveHistory[$j][$k][1]/60);
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"])) {
-                    $data[$j][$info][1] += $ValveHistory[$j][$k][1];
+                    $data[$j][$info][1] += $mins;
                 } else {
-                    $data[$j][] = array($info*1000,$ValveHistory[$j][$k][1]);
+                    $data[$j][] = array($info*1000,$mins);
                 }
             } else {
-                $mins = ceil($ValveHistory[$j][$k][1]/60);
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
             }
         };
