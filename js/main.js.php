@@ -555,18 +555,18 @@ function seriesChange() {
     });
     if (grouping=='h')
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "min";} },
             xaxis: { tickDecimals: 0, tickSize: 1 }
         });
     else if (grouping=='d')
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "min";} },
             xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
             tickFormatter: function(v) { var dow=["Sun","Mon","Tue","Wed","Thr","Fri","Sat"]; return dow[v]; } }
         });
     else if (grouping=='m')
     $.plot($('#placeholder'), pData, {
-        yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
+        yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "min";} },
         xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
         tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
     });
@@ -575,7 +575,7 @@ function seriesChange() {
         var maxval = new Date($('#log_end').val());
         maxval.setDate(maxval.getDate() + 1);
         $.plot($('#placeholder'), pData, {
-            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "Minutes";} },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? val : "min";} },
             xaxis: { mode: "time", min:minval, max:maxval.getTime()}
         });
     }
