@@ -717,7 +717,7 @@ function make_list_logs() {
                 } else {
                     $data[$j][] = array($info*1000,0);
                     $data[$j][] = array($info*1000,$mins);
-                    $data[$j][] = array($info*1000,0);
+                    $data[$j][] = array(($info+($mins*60))*1000,0);
                 }
             } else {
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
