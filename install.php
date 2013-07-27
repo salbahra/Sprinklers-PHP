@@ -127,6 +127,15 @@ function fail() {
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
     	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+        <style type="text/css">
+            .desc {
+                font-size:smaller;
+                text-align:center;
+                word-wrap:normal;
+                white-space:normal;
+                overflow:visible;
+            }
+        </style>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="js/jquery.mobile-1.3.2.min.js"></script>
         <script>
@@ -177,6 +186,7 @@ function fail() {
                     <ul data-inset="true" data-role="listview">
                         <li data-role="list-divider">Add New User</li>
                         <li>
+                            <p class='desc'>You can add additional users after logging in</p>
                             <div data-role="fieldcontain">
                                 <label for="username">Username:</label>
                                 <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" />
@@ -185,10 +195,10 @@ function fail() {
                             </div>
                         </li>
                     </ul>
-                    <p style='text-align:center'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
                     <ul data-inset="true" data-role="listview">
-                        <li data-role="list-divider">Intial Configuration</li>
+                        <li data-role="list-divider">OpenSprinkler IP/password</li>
                         <li>
+                            <p class='desc'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
                             <div data-role="fieldcontain">
                                 <label for="os_ip">Open Sprinkler IP:</label>
                                 <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
