@@ -499,7 +499,8 @@ function get_logs() {
         $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
             var zones = $("#zones");
             zones.show(); $("#graph_sort").show();
-            $("#log_options").trigger("collapse"); $("#placeholder").show(); $("#logs_list").hide();
+            $("#logs_list").empty();
+            $("#log_options").trigger("expand"); $("#placeholder").show(); $("#logs_list").hide();
             if (!zones.find("fieldset").length) {
                 var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
                 for (var i=0; i<items.stations.length; i++) {
@@ -518,6 +519,7 @@ function get_logs() {
 
     $("#zones, #graph_sort").hide();
     $.get("index.php",parms,function(items){
+        $("#placeholder").empty();
         var list = $("#logs_list");
         $("#log_options").trigger("collapse"); $("#placeholder").hide(); list.show();
         list.html(items).trigger("create");
