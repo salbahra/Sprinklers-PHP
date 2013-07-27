@@ -499,20 +499,27 @@ function get_logs() {
                 break;
         }
         $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
-            var zones = $("#zones");
-            zones.show(); $("#graph_sort").show();
-            $("#logs_list").empty();
-            $("#log_options").trigger("expand"); $("#placeholder").show(); $("#logs_list").hide();
-            if (!zones.find("fieldset").length) {
-                var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
-                for (var i=0; i<items.stations.length; i++) {
-                    output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+            if (items.data === null) {
+                $("#placeholder").empty().hide();
+                $("#log_options").trigger("expand");
+                $("#zones, #graph_sort").hide();
+                $("#logs_list").show().html("<p class='center'>No entries found in the selected date range</p>");
+            } else {
+                var zones = $("#zones");
+                zones.show(); $("#graph_sort").show();
+                $("#logs_list").empty();
+                $("#log_options").trigger("expand"); $("#placeholder").show(); $("#logs_list").hide();
+                if (!zones.find("fieldset").length) {
+                    var output = '<fieldset data-role="controlgroup" data-type="vertical" data-mini="true"><legend>Stations:</legend>';
+                    for (var i=0; i<items.stations.length; i++) {
+                        output += '<input id="z'+i+'" zone_num='+(i+1)+' name="'+items.stations[i] + '" type="checkbox" checked onchange="javascript:seriesChange()"><label for="z'+i+'">' + items.stations[i] + '</label>';
+                    }
+                    output += "</legend>";
+                    zones.empty().append(output).trigger('create');
                 }
-                output += "</legend>";
-                zones.empty().append(output).trigger('create');
+                window.plotdata = items.data;
+                seriesChange();
             }
-            window.plotdata = items.data;
-            seriesChange();
             $.mobile.hidePageLoadingMsg();
             $.mobile.changePage($("#logs"));
         });
@@ -522,8 +529,14 @@ function get_logs() {
     $.get("index.php",parms,function(items){
         $("#placeholder").empty().hide();
         var list = $("#logs_list");
-        $("#log_options").trigger("collapse"); $("#zones, #graph_sort").hide(); list.show();
-        list.html(items).trigger("create");
+        $("#zones, #graph_sort").hide(); list.show();
+        if (items.length == 154) {
+            $("#log_options").trigger("expand");
+            list.html("<p class='center'>No entries found in the selected date range</p>");
+        } else {
+            $("#log_options").trigger("collapse");
+            list.html(items).trigger("create");
+        }
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
     })
