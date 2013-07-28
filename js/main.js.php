@@ -58,6 +58,14 @@ $(document).one("pageinit","#sprinklers", function(){
     }
 });
 
+$(window).resize(function(){
+    var currpage = $(".ui-page-active").attr("id");
+    if (currpage == "logs") {
+        showArrows();
+        seriesChange();
+    }
+});
+
 $("#logs input:radio[name='log_type'],#graph_sort input[name='g']").change(get_logs)
 
 $("#log_start,#log_end").change(function(){
@@ -66,25 +74,6 @@ $("#log_start,#log_end").change(function(){
 })
 
 $("#zones").scroll(showArrows)
-
-function showArrows() {
-    var zones = $("#zones");
-    var height = zones.height(), sleft = zones.scrollLeft();
-    if (sleft > 13) {
-        $("#graphScrollLeft").show().css("margin-top",(height/2)-12.5)
-    } else {
-        $("#graphScrollLeft").hide();
-    }
-    var total = zones.find("table").width(), container = zones.width();
-    if ((total-container) > 0 && sleft < ((total-container) - 13)) {
-        $("#graphScrollRight").show().css({
-            "margin-top":(height/2)-12.5,
-            "left":container
-        })
-    } else {
-        $("#graphScrollRight").hide();
-    }
-}
 
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
@@ -513,6 +502,7 @@ function get_logs() {
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + ((new Date($("#log_end").val()).getTime() / 1000) + 86340);
 
     if ($("#log_graph").prop("checked")) {
+        $.mobile.changePage($("#logs"));
         var grouping=$("input:radio[name='g']:checked").val();
         switch(grouping){
             case "m":
@@ -561,14 +551,8 @@ function get_logs() {
                     })
                     showArrows();
                 }
-                $(window).resize(function(){
-                    showArrows();
-                    seriesChange();
-                });
             }
             $.mobile.hidePageLoadingMsg();
-            $.mobile.changePage($("#logs"));
-            $(window).trigger("resize");
         });
         return;
     }
@@ -606,6 +590,25 @@ function toggleZone(zone) {
         zone.toggleClass("unchecked");
     }
     seriesChange();
+}
+
+function showArrows() {
+    var zones = $("#zones");
+    var height = zones.height(), sleft = zones.scrollLeft();
+    if (sleft > 13) {
+        $("#graphScrollLeft").show().css("margin-top",(height/2)-12.5)
+    } else {
+        $("#graphScrollLeft").hide();
+    }
+    var total = zones.find("table").width(), container = zones.width();
+    if ((total-container) > 0 && sleft < ((total-container) - 13)) {
+        $("#graphScrollRight").show().css({
+            "margin-top":(height/2)-12.5,
+            "left":container
+        })
+    } else {
+        $("#graphScrollRight").hide();
+    }
 }
 
 function seriesChange() {
