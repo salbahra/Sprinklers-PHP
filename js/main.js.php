@@ -529,7 +529,7 @@ function get_logs() {
                 break;
         }
         $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
-            if (items.data === null) {
+            if (!items.data.length) {
                 $("#placeholder").empty().hide();
                 $("#log_options").trigger("expand");
                 $("#zones, #graph_sort").hide();
