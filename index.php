@@ -48,9 +48,7 @@ is_auth();
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script><?php include_once("js/auth.js.php"); ?></script>
         <script src="js/jquery.mobile-1.3.2.min.js"></script>
-        <script async src="js/timeline.js"></script>
         <script src="js/jquery.flot.min.js"></script>
-        <script async src="js/jquery.flot.orderBars.js"></script>
-        <script async src="js/jquery.flot.time.min.js"></script>
+        <script async src="js/async.js"></script>
     </body>
 </html>
