@@ -685,7 +685,6 @@ function make_list_logs() {
     $dow = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0));
     $data = array();
     for ($j=0;$j<count($ValveName);$j++) {
-        if (!isset($ValveHistory[$j])) continue;
         if ($graphing) {
             if (isset($_REQUEST["sort"])) {
                 switch ($_REQUEST["sort"]) {
@@ -705,9 +704,12 @@ function make_list_logs() {
                         break;
                 }
             } else {
+                $data[$j] = array();
                 $date_needed = "U";
             }
-        } else {
+        }
+        if (!isset($ValveHistory[$j])) continue;
+        if (!$graphing) {
             $ct=count($ValveHistory[$j]);
             $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " run" : " runs" )."</div>".$ValveName[$j]."</h2>".$table_header;
         }
