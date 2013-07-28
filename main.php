@@ -732,30 +732,31 @@ function make_list_logs() {
         if (!$graphing) $list .= "</tbody></table></div>";
     };
     $ValveName[$j] = "Rain Sensor";
-    if (isset($RainHistory)) {
-        if ($graphing) {
-            if (isset($_REQUEST["sort"])) {
-                switch ($_REQUEST["sort"]) {
-                    case 'dow':
-                        $data[$j] = $dow;
-                        $date_needed = "w";
-                        break;
-                    case 'month':
-                        $data[$j] = $month;
-                        $date_needed = "n";
-                        break;
-                    case 'hour':
-                        $data[$j] = $hour;
-                        $date_needed = "G";
-                        break;
-                    default:
-                        break;
-                }
-            } else {
-                $data[$j] = array();
-                $date_needed = "U";
+    if ($graphing) {
+        if (isset($_REQUEST["sort"])) {
+            switch ($_REQUEST["sort"]) {
+                case 'dow':
+                    $data[$j] = $dow;
+                    $date_needed = "w";
+                    break;
+                case 'month':
+                    $data[$j] = $month;
+                    $date_needed = "n";
+                    break;
+                case 'hour':
+                    $data[$j] = $hour;
+                    $date_needed = "G";
+                    break;
+                default:
+                    break;
             }
         } else {
+            $data[$j] = array();
+            $date_needed = "U";
+        }
+    }
+    if (isset($RainHistory)) {
+        if (!$graphing) {
             $ct=count($RainHistory);
             $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " switch" : " switches" )."</div>Rain Sensor</h2>".$table_header;
         }
@@ -776,34 +777,33 @@ function make_list_logs() {
             }
         };
         if (!$graphing) $list .= "</tbody></table></div>";
-    } else {
-        if ($graphing) $data[$j] = array();
     }
     $j++; $ValveName[$j] = "Rain Delay";
-    if (isset($DelayHistory)) {
-        if ($graphing) {
-            if (isset($_REQUEST["sort"])) {
-                switch ($_REQUEST["sort"]) {
-                    case 'dow':
-                        $data[$j] = $dow;
-                        $date_needed = "w";
-                        break;
-                    case 'month':
-                        $data[$j] = $month;
-                        $date_needed = "n";
-                        break;
-                    case 'hour':
-                        $data[$j] = $hour;
-                        $date_needed = "G";
-                        break;
-                    default:
-                        break;
-                }
-            } else {
-                $data[$j] = array();
-                $date_needed = "U";
+    if ($graphing) {
+        if (isset($_REQUEST["sort"])) {
+            switch ($_REQUEST["sort"]) {
+                case 'dow':
+                    $data[$j] = $dow;
+                    $date_needed = "w";
+                    break;
+                case 'month':
+                    $data[$j] = $month;
+                    $date_needed = "n";
+                    break;
+                case 'hour':
+                    $data[$j] = $hour;
+                    $date_needed = "G";
+                    break;
+                default:
+                    break;
             }
         } else {
+            $data[$j] = array();
+            $date_needed = "U";
+        }
+    }
+    if (isset($DelayHistory)) {
+        if (!$graphing) {
             $ct=count($DelayHistory);
             $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " change" : " changes" )."</div>Rain Delay</h2>".$table_header;
         }
@@ -824,8 +824,6 @@ function make_list_logs() {
             }
         };
         if (!$graphing) $list .= "</tbody></table></div>";
-    } else {
-        if ($graphing) $data[$j] = array();
     }
 
     if ($graphing) {
