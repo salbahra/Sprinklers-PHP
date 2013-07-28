@@ -498,6 +498,7 @@ function get_status() {
 }
 
 function get_logs() {
+    $("#logs input").blur();
     $.mobile.changePage($("#logs"));
     $.mobile.showPageLoadingMsg();
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + ((new Date($("#log_end").val()).getTime() / 1000) + 86340);
