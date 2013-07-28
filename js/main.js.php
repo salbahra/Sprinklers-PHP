@@ -543,7 +543,7 @@ function get_logs() {
                 var freshLoad = zones.find("table").length;
                 zones.show(); $("#graph_sort").show();
                 if (!freshLoad) {
-                    var output = '<div class="ui-icon ui-icon-arrow-l" id="graphScrollLeft"></div><div class="ui-icon ui-icon-arrow-r" id="graphScrollRight"></div><table style="font-size:smaller"><tbody><tr>', k=0;
+                    var output = '<div onclick="scrollZone(this);" class="ui-icon ui-icon-arrow-l" id="graphScrollLeft"></div><div onclick="scrollZone(this);" class="ui-icon ui-icon-arrow-r" id="graphScrollRight"></div><table style="font-size:smaller"><tbody><tr>', k=0;
                     for (var i=0; i<items.stations.length; i++) {
                         output += '<td onclick="javascript:toggleZone(this)" class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;overflow:hidden"></div></div></td><td onclick="javascript:toggleZone(this)" id="z'+i+'" zone_num='+i+' name="'+items.stations[i] + '" class="legendLabel">'+items.stations[i]+'</td>';
                         k++;
@@ -587,6 +587,13 @@ function get_logs() {
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#logs"));
     })
+}
+
+function scrollZone(dir) {
+    dir = ($(dir).attr("id") == "graphScrollRight") ? "+=" : "-=";
+    var zones = $("#zones");
+    var w = zones.width();
+    zones.animate({scrollLeft: dir+w})
 }
 
 function toggleZone(zone) {
