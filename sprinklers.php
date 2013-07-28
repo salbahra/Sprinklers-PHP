@@ -10,6 +10,8 @@ if(!defined('Sprinklers')) {
     #Required files
     require_once "main.php";
 }
+#Get data needed to render home page
+$data = start_data();
 
 #Redirect if not authenticated or grabbing page directly
 if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {header('Location: '.$base_url); exit();}
@@ -97,7 +99,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <label for="mmm"><b>Manual Mode</b></label>
                 <select name="mmm" id="mmm" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo is_mm(); ?> value="on">On</option>
+                    <option <?php echo $data["mm"]; ?> value="on">On</option>
                 </select>
             </li>
         </ul>
@@ -236,14 +238,14 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <label for="mm"><b>Manual Mode</b></label>
                 <select name="mm" id="mm" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo is_mm(); ?> value="on">On</option>
+                    <option <?php echo $data["mm"]; ?> value="on">On</option>
                 </select>
             </li>
             <li data-role="fieldcontain">
                 <label for="en"><b>Operation</b></label>
                 <select name="en" id="en" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo is_en(); ?> value="on">On</option>
+                    <option <?php echo $data["en"]; ?> value="on">On</option>
                 </select>
             </li>
             <li data-icon="alert"><a href="#" data-onclick="rbt();">Reboot OpenSprinkler</a></li>
@@ -370,11 +372,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </div>
         <p id='versions'>
             <?php
+                echo "Firmware Version: ".$data["ver"];
                 if (file_exists(".git/FETCH_HEAD")) {
                     $data = file_get_contents(".git/FETCH_HEAD");
                     if ($data !== false) {
                         preg_match("/\w{40}/", $data, $commit);
-                        echo "Mobile Version: <span id='commit' data-commit='".$commit[0]."'><a target='_blank' href='https://github.com/salbahra/OpenSprinkler-Controller/commit/".$commit[0]."'>".substr($commit[0], 0,7)."</a></span>";
+                        echo "<br>Mobile Version: <span id='commit' data-commit='".$commit[0]."'><a target='_blank' href='https://github.com/salbahra/OpenSprinkler-Controller/commit/".$commit[0]."'>".substr($commit[0], 0,7)."</a></span>";
                     }
                 }
             ?>

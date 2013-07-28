@@ -436,16 +436,13 @@ function get_station_status() {
     return str_split($data[0]);
 }
 
-#Check if operation is enabled
-function is_en() {
+#Check if operation and manual mode are enabled. Also return version information
+function start_data() {
     $settings = get_settings();
-    if ($settings["en"] == 1) return "selected";
-}
-
-#Check if manual mode is enabled
-function is_mm() {
-    $settings = get_settings();
-    if ($settings["mm"] == 1) return "selected";
+    $en = ($settings["en"] == 1) ? "selected" : "";
+    $mm = ($settings["mm"] == 1) ? "selected" : "";
+    $ver = join(".",str_split($settings["ver"]));
+    return array("en"=>$en,"mm"=>$mm,"ver"=>$ver);
 }
 
 function get_autodelay() {
