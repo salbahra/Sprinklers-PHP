@@ -498,11 +498,11 @@ function get_status() {
 }
 
 function get_logs() {
+    $.mobile.changePage($("#logs"));
     $.mobile.showPageLoadingMsg();
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + ((new Date($("#log_end").val()).getTime() / 1000) + 86340);
 
     if ($("#log_graph").prop("checked")) {
-        $.mobile.changePage($("#logs"));
         var grouping=$("input:radio[name='g']:checked").val();
         switch(grouping){
             case "m":
@@ -569,7 +569,6 @@ function get_logs() {
             list.html(items).trigger("create");
         }
         $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#logs"));
     })
 }
 
