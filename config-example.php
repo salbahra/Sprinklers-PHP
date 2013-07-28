@@ -7,7 +7,7 @@ $os_ip = "192.168.1.30";
 $os_pw = "opendoor";
 
 #Force SSL
-$force_ssl = 1;
+$force_ssl = 0;
 
 #Password File
 $pass_file="/var/www/sprinklers/.htpasswd";
@@ -17,9 +17,6 @@ $cache_file = "/var/www/sprinklers/.cache";
 
 #Sprinkler Log File
 $log_file = "/var/www/sprinklers/SprinklerChanges.txt";
-
-#Sprinkler Previous Status
-$log_previous = "/var/www/sprinklers/SprinklerPrevious.txt";
 
 #Enable/Disable Automatic Rain Delay Based on Weather
 $auto_delay = 0;

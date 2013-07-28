@@ -1515,6 +1515,20 @@ function changeConfig($variable, $value){
     return true;
 }
 
+#Reads last line of a file
+function readLastLine($f) {
+    $fp = fopen($f, 'r');
+    $pos = -2; $line = ''; $c = '';
+    do {
+        $line = $c . $line;
+        fseek($fp, $pos--, SEEK_END);
+        $c = fgetc($fp);
+    } while ($c != "\n");
+
+    fclose($fp);
+    return $line;
+}
+
 #Rearrange array by move the keys in $keys array to the end of $array
 function move_keys($keys,$array) {
     foreach ($keys as $key) {

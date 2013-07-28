@@ -18,7 +18,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file","log_previous");
+    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -51,8 +51,8 @@ function new_config() {
             }
         }
 
-        #Attempt to make the cache file, log file, and previous station status file
-        if ($key == "cache_file" || $key == "log_file" || $key == "log_previous") make_file($data);
+        #Attempt to make the cache file and log file file
+        if ($key == "cache_file" || $key == "log_file") make_file($data);
 
         #Append current key/data pair to config.php string.
         $config .= "$".$key." = '".$data."';\n";            
@@ -216,8 +216,6 @@ function fail() {
                             <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
                             <label for="log_file">Sprinkler Log File:</label>
                             <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-                            <label for="log_previous">Sprinkler Previous Status File:</label>
-                            <input type="text" name="log_previous" id="log_previous" value="<?php echo dirname(__FILE__); ?>/SprinklerPrevious.txt" />
                             <label for="force_ssl">Force SSL</label>
                             <input type="checkbox" name="force_ssl" id="force_ssl" />
                         </div>

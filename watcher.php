@@ -17,10 +17,9 @@ $settings = get_settings();
 $rainSenseStatus = $settings["rs"];
 $rainDelayStatus = $settings["rd"];
 $newSprinklerValveSettings=implode("",get_station_status());
-$oldSprinklerValveSettings=explode("--",file_get_contents($log_previous));
+$oldSprinklerValveSettings=explode("--",readLastLine($log_file));
 if ($newSprinklerValveSettings!=$oldSprinklerValveSettings[0] || (!isset($oldSprinklerValveSettings[1]) || $rainSenseStatus!=$oldSprinklerValveSettings[1]) || (!isset($oldSprinklerValveSettings[2]) || $rainDelayStatus!=$oldSprinklerValveSettings[2])) {
 	file_put_contents ($log_file, $newSprinklerValveSettings."--".$datetime."--".$rainSenseStatus."--".$rainDelayStatus."\n",FILE_APPEND);
-	file_put_contents ($log_previous, $newSprinklerValveSettings."--".$rainSenseStatus."--".$rainDelayStatus);
 };
 
 $tz = $settings["tz"] - 48;
