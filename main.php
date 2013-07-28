@@ -590,7 +590,7 @@ function make_list_logs() {
     
     $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
 
-    $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-content-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
+    if (!$graphing) $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-content-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
     $vs = get_stations();
     $ValveName = $vs["stations"];
     $settings = get_settings();
@@ -724,27 +724,97 @@ function make_list_logs() {
                 $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
             }
         };
-        $list .= "</tbody></table></div>";
+        if (!$graphing) $list .= "</tbody></table></div>";
     };
+    $ValveName[$j] = "Rain Sensor";
     if (isset($RainHistory)) {
-        $ct=count($RainHistory);
-        $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " switch" : " switches" )."</div>Rain Sensor</h2>".$table_header;
+        if ($graphing) {
+            if (isset($_REQUEST["sort"])) {
+                switch ($_REQUEST["sort"]) {
+                    case 'dow':
+                        $data[$j] = $dow;
+                        $date_needed = "w";
+                        break;
+                    case 'month':
+                        $data[$j] = $month;
+                        $date_needed = "n";
+                        break;
+                    case 'hour':
+                        $data[$j] = $hour;
+                        $date_needed = "G";
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                $date_needed = "U";
+            }
+        } else {
+            $ct=count($RainHistory);
+            $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " switch" : " switches" )."</div>Rain Sensor</h2>".$table_header;
+        }
         for ($k=0;$k<count($RainHistory);$k++){
-            $theTime=date('D, d M Y H:i',strtotime($RainHistory[$k][0])+$tz);
+            $theTime=strtotime($RainHistory[$k][0])+$tz;
             $mins = ceil($RainHistory[$k][1]/60);
-            $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$RainHistory[$k][2]."</td></tr>";
+            if ($graphing) {
+                $info = intval(date($date_needed,$theTime));
+                if (isset($_REQUEST["sort"])) {
+                    $data[$j][$info][1] += $mins;
+                } else {
+                    $data[$j][] = array($info*1000,0);
+                    $data[$j][] = array($info*1000,$mins);
+                    $data[$j][] = array(($info+($mins*60))*1000,0);
+                }
+            } else {
+                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$RainHistory[$k][2]."</td></tr>";
+            }
         };
-        $list .= "</tbody></table></div>";
+        if (!$graphing) $list .= "</tbody></table></div>";
     }
+    $j++; $ValveName[$j] = "Rain Delay";
     if (isset($DelayHistory)) {
-        $ct=count($DelayHistory);
-        $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " change" : " changes" )."</div>Rain Delay</h2>".$table_header;
+        if ($graphing) {
+            if (isset($_REQUEST["sort"])) {
+                switch ($_REQUEST["sort"]) {
+                    case 'dow':
+                        $data[$j] = $dow;
+                        $date_needed = "w";
+                        break;
+                    case 'month':
+                        $data[$j] = $month;
+                        $date_needed = "n";
+                        break;
+                    case 'hour':
+                        $data[$j] = $hour;
+                        $date_needed = "G";
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                $date_needed = "U";
+            }
+        } else {
+            $ct=count($DelayHistory);
+            $list .= "<div data-role='collapsible' data-collapsed='true'><h2><div class='ui-btn-up-c ui-btn-corner-all custom-count-pos'>".$ct.(($ct == 1) ? " change" : " changes" )."</div>Rain Delay</h2>".$table_header;
+        }
         for ($k=0;$k<count($DelayHistory);$k++){
-            $theTime=date('D, d M Y H:i',strtotime($DelayHistory[$k][0])+$tz);
+            $theTime=strtotime($DelayHistory[$k][0])+$tz;
             $mins = ceil($DelayHistory[$k][1]/60);
-            $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".$theTime.$DelayHistory[$k][2]."</td></tr>";
+            if ($graphing) {
+                $info = intval(date($date_needed,$theTime));
+                if (isset($_REQUEST["sort"])) {
+                    $data[$j][$info][1] += $mins;
+                } else {
+                    $data[$j][] = array($info*1000,0);
+                    $data[$j][] = array($info*1000,$mins);
+                    $data[$j][] = array(($info+($mins*60))*1000,0);
+                }
+            } else {
+                $list .= "<tr><td>".$mins.(($mins == 1) ? " min" : " mins")."</td><td>".date('D, d M Y H:i',$theTime).$DelayHistory[$k][2]."</td></tr>";
+            }
         };
-        $list .= "</tbody></table></div>";
+        if (!$graphing) $list .= "</tbody></table></div>";
     }
 
     if ($graphing) {
