@@ -195,26 +195,23 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </div>
         <fieldset data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" id="log_options">
             <legend>Options</legend>
+            <fieldset data-role="controlgroup" data-type="horizontal" id="graph_sort" style="display:none;text-align:center">
+              <p style="margin:0">Grouping:</p>
+              <input data-mini="true" type="radio" name="g" id="radio-choice-d" value="n" checked="checked" />
+              <label for="radio-choice-d">None</label>
+              <input data-mini="true" type="radio" name="g" id="radio-choice-a" value="h" />
+              <label for="radio-choice-a">Hour</label>
+              <input data-mini="true" type="radio" name="g" id="radio-choice-b" value="d" />
+              <label for="radio-choice-b">DOW</label>
+              <input data-mini="true" type="radio" name="g" id="radio-choice-c" value="m" />
+              <label for="radio-choice-c">Month</label>
+            </fieldset>
             <div data-role="fieldcontain">
                 <label for="log_start">Start:</label>
                 <input data-mini="true" type="date" id="log_start" />
                 <label for="log_end">End:</label>
                 <input data-mini="true" type="date" id="log_end" />
             </div>
-            <div data-role="fieldcontain" id="graph_sort" style="display:none">
-                <fieldset data-role="controlgroup" data-type="horizontal">
-                  <legend>Grouping:</legend>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-d" value="n" checked="checked" />
-                  <label for="radio-choice-d">None</label>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-a" value="h" />
-                  <label for="radio-choice-a">Hour</label>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-b" value="d" />
-                  <label for="radio-choice-b">DOW</label>
-                  <input data-mini="true" type="radio" name="g" id="radio-choice-c" value="m" />
-                  <label for="radio-choice-c">Month</label>
-                </fieldset>
-            </div>
-            <a data-onclick="get_logs();" data-role="button" href="#" data-mini="true">Refresh</a>
         </fieldset>
         <div id="logs_list">
         </div>

@@ -58,7 +58,12 @@ $(document).one("pageinit","#sprinklers", function(){
     }
 });
 
-$("#logs input:radio[name='log_type']").change(get_logs)
+$("#logs input:radio[name='log_type'],#graph_sort input[name='g']").change(get_logs)
+
+$("#log_start,#log_end").change(function(){
+    clearTimeout(window.logtimeout);
+    window.logtimeout = setTimeout(get_logs,500);
+})
 
 $("#zones").scroll(showArrows)
 
@@ -527,7 +532,7 @@ function get_logs() {
                 $("#logs_list").show().html("<p class='center'>No entries found in the selected date range</p>");
             } else {
                 $("#logs_list").empty().hide();
-                var state = ($(window).height() > 700) ? "expand" : "collapse";
+                var state = ($(window).height() > 680) ? "expand" : "collapse";
                 setTimeout(function(){$("#log_options").trigger(state)},100);
                 $("#placeholder").show();
                 var zones = $("#zones");
