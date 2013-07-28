@@ -554,7 +554,19 @@ function get_logs() {
                 var i = 0;
                 if (!freshLoad) {
                     zones.find("td.legendColorBox div div").each(function(a,b){
-                        $(b).css("border",$($(".legend .legendColorBox div div").get(i)).css("border"));
+                        var border = $($("#placeholder .legendColorBox div div").get(i)).css("border");
+                        //Firefox and IE fix
+                        if (border == "") {
+                            border = $($("#placeholder .legendColorBox div div").get(i)).attr("style").split(";");
+                            $.each(border,function(a,b){
+                                var c = b.split(":");
+                                if (c[0] == "border") {
+                                    border = c[1];
+                                    return false;
+                                }
+                            })
+                        }
+                        $(b).css("border",border);
                         i++;
                     })
                     showArrows();
