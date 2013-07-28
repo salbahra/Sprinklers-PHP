@@ -370,8 +370,12 @@ function update_weather() {
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
-            $weather.html("");
-            return
+            $("#weather-list").animate({ 
+                "margin-left": "-1000px"
+            },1000,function(){
+                $(this).hide();
+            })
+            return;
         }
         $weather.html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
         $("#weather-list").animate({ 

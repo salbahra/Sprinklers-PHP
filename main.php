@@ -71,6 +71,7 @@ function get_woeid() {
 function get_weather_data() {
     global $woeid;
     $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
+    if ($data === false) return array();
     preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
     preg_match("/<title>Yahoo! Weather - (.*)<\/title>/",$data,$loc);
     preg_match("/<yweather:location .*?country=\"(.*?)\"\/>/",$data,$region);
@@ -599,7 +600,8 @@ function make_list_logs() {
 
     $SprinklerValveHistory=file_get_contents($log_file);
     $Lines=explode("\n",$SprinklerValveHistory);
-    
+    $SprinklerPattern = array();
+
     for ($i=0;$i<count($Lines);$i++){
         $ELines[$i]=explode("--",$Lines[$i]);
         if (count($ELines[$i])>1){
@@ -681,6 +683,7 @@ function make_list_logs() {
     $hour = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0),array(7,0),array(8,0),array(9,0),array(10,0),array(11,0),array(12,0),array(13,0),array(14,0),array(15,0),array(16,0),array(17,0),array(18,0),array(19,0),array(20,0),array(21,0),array(22,0),array(23,0));
     $month = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0),array(7,0),array(8,0),array(9,0),array(10,0),array(11,0));
     $dow = array(array(0,0),array(1,0),array(2,0),array(3,0),array(4,0),array(5,0),array(6,0));
+    $data = array();
     for ($j=0;$j<count($ValveName);$j++) {
         if (!isset($ValveHistory[$j])) continue;
         if ($graphing) {
