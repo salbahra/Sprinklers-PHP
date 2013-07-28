@@ -520,7 +520,14 @@ function get_logs() {
                 break;
         }
         $.getJSON("index.php",parms+"&type=graph"+sort,function(items){
-            if (!items.data.length) {
+            var is_empty = true;
+            $.each(items.data,function(a,b){
+                if (b.length) {
+                    is_empty = false;
+                    return false;
+                }
+            })
+            if (is_empty) {
                 $("#placeholder").empty().hide();
                 $("#log_options").trigger("expand");
                 $("#zones, #graph_sort").hide();
