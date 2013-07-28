@@ -752,6 +752,7 @@ function make_list_logs() {
                         break;
                 }
             } else {
+                $data[$j] = array();
                 $date_needed = "U";
             }
         } else {
@@ -775,6 +776,8 @@ function make_list_logs() {
             }
         };
         if (!$graphing) $list .= "</tbody></table></div>";
+    } else {
+        if ($graphing) $data[$j] = array();
     }
     $j++; $ValveName[$j] = "Rain Delay";
     if (isset($DelayHistory)) {
@@ -797,6 +800,7 @@ function make_list_logs() {
                         break;
                 }
             } else {
+                $data[$j] = array();
                 $date_needed = "U";
             }
         } else {
@@ -820,6 +824,8 @@ function make_list_logs() {
             }
         };
         if (!$graphing) $list .= "</tbody></table></div>";
+    } else {
+        if ($graphing) $data[$j] = array();
     }
 
     if ($graphing) {
