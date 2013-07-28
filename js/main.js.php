@@ -609,12 +609,12 @@ function toggleZone(zone) {
 }
 
 function seriesChange() {
-//Function written by Richard Zimmerman
+//Originally written by Richard Zimmerman
     var grouping=$("input:radio[name='g']:checked").val();
     var pData = [];
     $("td[zone_num]:not('.unchecked')").each(function () {
         var key = $(this).attr("zone_num");
-        if (!window.plotdata[key]) window.plotdata[key]=[[0,0]];
+        if (!window.plotdata[key].length) window.plotdata[key]=[[0,0]];
         if (key && window.plotdata[key]) {
             if ((grouping == 'h') || (grouping == 'm') || (grouping == 'd'))
                 pData.push({
