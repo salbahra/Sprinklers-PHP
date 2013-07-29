@@ -1523,7 +1523,7 @@ function changeConfig($variable, $value){
 
 #Reads last line of a file
 function readLastLine($f) {
-    return shell_exec("tail -n 1 ".escapeshellarg($f));
+    return str_replace("\n","",shell_exec("tail -n 1 ".escapeshellarg($f)));
 }
 
 #Rearrange array by move the keys in $keys array to the end of $array
