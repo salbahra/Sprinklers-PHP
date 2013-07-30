@@ -1523,7 +1523,24 @@ function changeConfig($variable, $value){
 
 #Reads last line of a file
 function readLastLine($f) {
-    return str_replace("\n","",shell_exec("tail -n 1 ".escapeshellarg($f)));
+    $line = '';
+    $f = fopen($f, 'r');
+    $cursor = -1;
+    fseek($f, $cursor, SEEK_END);
+    $char = fgetc($f);
+
+    while ($char === "\n" || $char === "\r") {
+        fseek($f, $cursor--, SEEK_END);
+        $char = fgetc($f);
+    }
+
+    while ($char !== false && $char !== "\n" && $char !== "\r") {
+        $line = $char . $line;
+        fseek($f, $cursor--, SEEK_END);
+        $char = fgetc($f);
+    }
+    
+    return $line;
 }
 
 #Rearrange array by move the keys in $keys array to the end of $array
