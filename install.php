@@ -12,6 +12,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
     exit();
 }
 
+#Detect local interval program
+$localPi = isValidUrl("http://127.0.0.1:8080");
+
 #New config setup
 function new_config() {
     #Begin creation of config.php
@@ -195,31 +198,30 @@ function fail() {
                             </div>
                         </li>
                     </ul>
-                    <ul data-inset="true" data-role="listview">
-                        <li data-role="list-divider">OpenSprinkler IP/password</li>
-                        <li>
-                            <p class='desc'>Note: OpenSprinkler IP can be either an IP or hostname. You can also specify a port by using IP:Port</p>
+                    <div data-role="collapsible-set">
+                        <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='a'" : "data-collapsed='false' data-theme='b'"; ?> data-content-theme="d">
+                            <legend><?php echo $localPi ? "Interval Program (detected)" : "OpenSprinkler IP/password"; ?></legend>
                             <div data-role="fieldcontain">
                                 <label for="os_ip">Open Sprinkler IP:</label>
-                                <input type="text" name="os_ip" id="os_ip" value="192.168.1.102" />
+                                <input type="text" name="os_ip" id="os_ip" <?php echo $localPi ? "value='127.0.0.1:8080'" : ""; ?> />
                                 <label for="os_pw">Open Sprinkler Password:</label>
-                                <input type="password" name="os_pw" id="os_pw" value="" />
+                                <input type="password" name="os_pw" id="os_pw" <?php echo $localPi ? "value='opendoor'" : ""; ?> />
                             </div>
-                        </li>
-                    </ul>
-                    <fieldset data-role="collapsible" data-theme="a" data-content-theme="d">
-                        <legend>Advanced Configuration</legend>
-                        <div data-role="fieldcontain">
-                            <label for="pass_file">Pass File Location:</label>
-                            <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
-                            <label for="cache_file">Cache File Location:</label>
-                            <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
-                            <label for="log_file">Sprinkler Log File:</label>
-                            <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-                            <label for="force_ssl">Force SSL</label>
-                            <input type="checkbox" name="force_ssl" id="force_ssl" />
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                        <fieldset data-role="collapsible" data-theme="a" data-content-theme="d">
+                            <legend>Advanced Configuration</legend>
+                            <div data-role="fieldcontain">
+                                <label for="pass_file">Pass File Location:</label>
+                                <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
+                                <label for="cache_file">Cache File Location:</label>
+                                <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
+                                <label for="log_file">Sprinkler Log File:</label>
+                                <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
+                                <label for="force_ssl">Force SSL</label>
+                                <input type="checkbox" name="force_ssl" id="force_ssl" />
+                            </div>
+                        </fieldset>
+                    </div>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
