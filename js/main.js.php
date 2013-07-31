@@ -73,6 +73,21 @@ $("#log_start,#log_end").change(function(){
     window.logtimeout = setTimeout(get_logs,500);
 })
 
+var previousPoint = null;
+$("#placeholder").on("plothover", function(event, pos, item) {
+    if (item) {
+        if (previousPoint != item.dataIndex) {
+            previousPoint = item.dataIndex;
+            $("#tooltip").remove();
+            showTooltip(item.pageX, item.pageY, item.series.label);
+        }
+    }
+    else {
+        $("#tooltip").remove();
+        previousPoint = null;            
+    }
+});
+
 $("#zones").scroll(showArrows)
 
 $("#preview_date").change(function(){
@@ -656,26 +671,30 @@ function seriesChange() {
     });
     if (grouping=='h')
         $.plot($('#placeholder'), pData, {
+            grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
             xaxis: { tickDecimals: 0, tickSize: 1 }
         });
     else if (grouping=='d')
         $.plot($('#placeholder'), pData, {
+            grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
             xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
             tickFormatter: function(v) { var dow=["Sun","Mon","Tue","Wed","Thr","Fri","Sat"]; return dow[v]; } }
         });
     else if (grouping=='m')
-    $.plot($('#placeholder'), pData, {
-        yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
-        xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
-        tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
-    });
+        $.plot($('#placeholder'), pData, {
+            grid: { hoverable: true },
+            yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
+            xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
+            tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
+        });
     else if (grouping=='n') {
         var minval = new Date($('#log_start').val()).getTime();
         var maxval = new Date($('#log_end').val());
         maxval.setDate(maxval.getDate() + 1);
         $.plot($('#placeholder'), pData, {
+            grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
             xaxis: { mode: "time", min:minval, max:maxval.getTime()}
         });
@@ -1209,4 +1228,17 @@ function areYouSure(text1, text2, callback, callback2) {
         callback2();
     });
     $.mobile.changePage("#sure");
+}
+
+function showTooltip(x, y, contents) {
+    $('<div id="tooltip">' + contents + '</div>').css( {
+        position: 'absolute',
+        display: 'none',
+        top: y + 5,
+        left: x + 5,
+        border: '1px solid #fdd',
+        padding: '2px',
+        'background-color': '#fee',
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
 }
