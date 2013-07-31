@@ -73,19 +73,10 @@ $("#log_start,#log_end").change(function(){
     window.logtimeout = setTimeout(get_logs,500);
 })
 
-var previousPoint = null;
 $("#placeholder").on("plothover", function(event, pos, item) {
-    if (item) {
-        if (previousPoint != item.dataIndex) {
-            previousPoint = item.dataIndex;
-            $("#tooltip").remove();
-            showTooltip(item.pageX, item.pageY, item.series.label);
-        }
-    }
-    else {
-        $("#tooltip").remove();
-        previousPoint = null;            
-    }
+    $("#tooltip").remove();
+    clearTimeout(window.hovertimeout);
+    if (item) window.hovertimeout = setTimeout(function(){showTooltip(item.pageX, item.pageY, item.series.label, item.series.color)}, 100);
 });
 
 $("#zones").scroll(showArrows)
@@ -1230,7 +1221,7 @@ function areYouSure(text1, text2, callback, callback2) {
     $.mobile.changePage("#sure");
 }
 
-function showTooltip(x, y, contents) {
+function showTooltip(x, y, contents, color) {
     $('<div id="tooltip">' + contents + '</div>').css( {
         position: 'absolute',
         display: 'none',
@@ -1238,7 +1229,7 @@ function showTooltip(x, y, contents) {
         left: x + 5,
         border: '1px solid #fdd',
         padding: '2px',
-        'background-color': '#fee',
+        'background-color': color,
         opacity: 0.80
     }).appendTo("body").fadeIn(200);
 }
