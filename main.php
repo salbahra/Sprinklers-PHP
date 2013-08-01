@@ -838,7 +838,7 @@ function make_runonce() {
     $vs = get_stations();
     $stations = $vs["stations"];
     foreach ($stations as $station) {
-        $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='100' id='zone-".$n."' value='0'>";
+        $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='50' id='zone-".$n."' value='0'>";
         $n++;
     }
     $list .= "</div><a data-role='button' onclick='submit_runonce();'>Submit</a><a data-role='button' data-theme='a' onclick='reset_runonce();'>Reset</a>";
