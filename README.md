@@ -8,21 +8,29 @@ Overview:
 
 + This application interfaces with the interval program on the OpenSprinkler which is the default software available. The application has been tested on firmware version 2.0.0 but should be compatible with 1.8.x and newer.
 
-+ There is an authentication system in place and a guide on first run will assist in adding a new user along with the other required settings.
++ There is an authentication system in place and a guide on first run will assist in adding a new user along with any other required settings.
 
 + The provided interface does not rely on the javascript files hosted by Ray therefore will work on a locally hosted server even without an internet connection. However an internet connection (with a properly configured web server and port forwarding) will allow you to access the application from anywhere.
 
 + For current discussion about the project please refer to the [forum post](http://rayshobby.net/phpBB3/viewtopic.php?f=2&t=154). 
 
+Screenshots:
+------------
+
+![Splash Screen](http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png) ![Home Screen](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-18-2013-6.36.32-PM-169x300.png) ![Status Page](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-23-2013-6.24.41-PM-169x300.png) ![Program Preview](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.46.37-PM-169x300.png) ![Log Viewer](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.39.39-PM-169x300.png) ![Program Editor](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.55.42-PM-169x300.png) ![Manual Program](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.30.53-PM-169x300.png) ![Rain Delay](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.56.03-PM-169x300.png) ![Run Once](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-31-2013-8.40.23-PM-169x300.png)
+
+
 Raspberry Pi Users:
 -------------------
 
 + The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  [Ray's Blog Post](http://rayshobby.net/?p=6339).
+  +  This is a seperate program that needs to be running on the Raspberry Pi.
+  + Please rememeber this is a front end for a hardware device. In the case of the OpenSprinkler Pi, the hardware happens to be the Pi combined with the interval program software.
 
-+ The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.
-  + In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The OSPi defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080
++ The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web deamon and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.
+  + In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The interval program defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080
 
-+ In order for the interval program to be 100% compatibile with the web app you must be using OSPi built on or after June 22, 2013.
++ In order for the interval program to be 100% compatibile with the web app you must be using an interval program built on or after June 22, 2013.
 
 Install Instructions:
 ---------------------
@@ -41,24 +49,6 @@ Install Instructions:
 
 + From there you may attempt to access the front end which will guide you through the rest of the install process.
 
-PHP Safe Mode:
---------------
-
-+ If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example:
-  +  ```crontab -e```
-  +  ```* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php >/dev/null 2>&1```
-
-Synology Specific:
-------------------
-
-+ There is no crontab script on Synology, you have to edit /etc/crontab file manually.
-
-+ The cron line parameters (* * * * *) must be separated by tabs, example:
-  + ```*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php >/dev/null 2>&1```
-
-+ Cron service has to be restarted manually after updating the crontab by running
-  + ```/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh```
-
 Update Instructions:
 --------------------
 
@@ -67,5 +57,23 @@ Update Instructions:
 
 + Trigger a remote update using git
   + ```git pull```
+
+PHP Safe Mode:
+--------------
+
++ If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example of how to do this:
+  +  ```crontab -e```
+  +  ```* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php >/dev/null 2>&1```
+
+Synology Specific:
+------------------
+
++ There is no crontab editor on Synology, you have to edit /etc/crontab file manually.
+
++ The cron line parameters (* * * * *) must be separated by tabs, example:
+  + ```*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php >/dev/null 2>&1```
+
++ Cron service has to be restarted manually after updating the crontab by running
+  + ```/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh```
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/87d3c8783710e88024be2bf608fe8195 "githalytics.com")](http://githalytics.com/salbahra/OpenSprinkler-Controller)
