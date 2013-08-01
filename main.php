@@ -834,13 +834,26 @@ function make_list_logs() {
 function make_runonce() {
     $list = "<p style='text-align:center'>Value is in minutes. Zero means the station will be excluded from the run-once program.</p><div data-role='fieldcontain'>";
     $n = 0;
+    $data = get_programs();
     $vs = get_stations();
     $stations = $vs["stations"];
     foreach ($stations as $station) {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='100' id='zone-".$n."' value='0'>";
         $n++;
     }
-    echo $list."</div><a data-role='button' onclick='submit_runonce();'>Submit</a><a data-role='button' data-theme='a' onclick='reset_runonce();'>Reset</a>";
+    $list .= "</div><a data-role='button' onclick='submit_runonce();'>Submit</a><a data-role='button' data-theme='a' onclick='reset_runonce();'>Reset</a>";
+    $progs = array();
+    if (count($data["programs"])) {
+        foreach ($data["programs"] as $program) {
+            $prog = array();
+            $set_stations = str_split($program["stations"]);
+            for ($i=0;$i<count($stations);$i++) { 
+                $prog[] = (isset($set_stations[$i]) && $set_stations[$i]) ? $program["duration"] : 0;
+            }
+            $progs[] = $prog;
+        }
+    }
+    echo json_encode(array("page"=>$list,"progs"=>$progs));
 }
 
 #Make the list of all programs

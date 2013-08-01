@@ -705,19 +705,39 @@ function get_manual() {
 
 function get_runonce() {
     $.mobile.showPageLoadingMsg();
-    $.get("index.php","action=make_runonce",function(items){
+    $.getJSON("index.php","action=make_runonce",function(items){
+        window.rprogs = items.progs;
         var list = $("#runonce_list");
-        list.html(items);
-        var data = JSON.parse(localStorage.getItem("runonce")), i = 0;
-        if (data !== null) {
-            list.find(":input[data-type='range']").each(function(a,b){
-                $(b).val(data[i]/60);
-                i++;
-            })
-        }
+        list.html(items.page);
         list.trigger("create");
+
+        var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'>Quick Programs</option>";
+        var data = JSON.parse(localStorage.getItem("runonce"));
+        if (data !== null) {
+            fill_runonce(list,data);
+            window.rprogs["l"] = data;
+            progs += "<option value='l' selected='selected'>Last Used Program</option>";
+        }
+        for (var i=0; i<items.progs.length; i++) {
+            progs += "<option value='"+i+"'>Program "+(i+1)+"</option>";
+        };
+        progs += "</select>";
+        list.prepend(progs);
+        $("#rprog").change(function(){
+            var prog = $(this).val();
+            if (window.rprogs[prog] == undefined) return;
+            fill_runonce(list,window.rprogs[prog]);
+        })
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#runonce"));
+    })
+}
+
+function fill_runonce(list,data){
+    var i=0;
+    list.find(":input[data-type='range']").each(function(a,b){
+        $(b).val(data[i]/60).slider("refresh");
+        i++;
     })
 }
 
