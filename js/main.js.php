@@ -707,27 +707,35 @@ function get_runonce() {
     $.mobile.showPageLoadingMsg();
     $.getJSON("index.php","action=make_runonce",function(items){
         window.rprogs = items.progs;
-        var list = $("#runonce_list");
+        var list = $("#runonce_list"), i=0;
         list.html(items.page);
-        list.trigger("create");
 
         var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'>Quick Programs</option>";
         var data = JSON.parse(localStorage.getItem("runonce"));
         if (data !== null) {
-            fill_runonce(list,data);
+            list.find(":input[data-type='range']").each(function(a,b){
+                $(b).val(data[i]/60);
+                i++;
+            })
             window.rprogs["l"] = data;
             progs += "<option value='l' selected='selected'>Last Used Program</option>";
         }
-        for (var i=0; i<items.progs.length; i++) {
+        for (i=0; i<items.progs.length; i++) {
             progs += "<option value='"+i+"'>Program "+(i+1)+"</option>";
         };
         progs += "</select>";
         $("#runonce_list p").after(progs);
         $("#rprog").change(function(){
             var prog = $(this).val();
+            if (prog == "s") {
+                reset_runonce()
+                return;
+            }
             if (window.rprogs[prog] == undefined) return;
             fill_runonce(list,window.rprogs[prog]);
         })
+
+        list.trigger("create");
         $.mobile.hidePageLoadingMsg();
         $.mobile.changePage($("#runonce"));
     })
