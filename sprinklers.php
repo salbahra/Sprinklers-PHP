@@ -312,7 +312,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 
 <div data-role="page" id="os-stations">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
-        <h3>Stations</h3>
+        <h3>Edit Stations</h3>
         <a href="#settings" data-icon="back">Back</a>
         <a href="#" data-onclick="submit_stations();">Submit</a>
     </div>

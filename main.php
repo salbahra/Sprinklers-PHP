@@ -1169,12 +1169,12 @@ function make_stations_list() {
     $vs = get_stations();
     $stations = $vs["stations"];
     $masop = $vs["masop"];
-    $list = "<li data-role='list-divider'>Edit Stations</li><li>";
+    $list = "<li>";
     if ($settings["mas"]) $list .= "<table><tr><th>Station Name</th><th>Activate Master?</th></tr>";
     $i = 0;
     foreach ($stations as $station) {
         if ($settings["mas"]) $list .= "<tr><td>";
-        $list .= "<input id='edit_station_".$i."' type='text' value='".$station."' />";
+        $list .= "<input data-mini='true' id='edit_station_".$i."' type='text' value='".$station."' />";
         if ($settings["mas"]) {
             if ($settings["mas"] == $i+1) {
                 $list .= "</td><td class='use_master'><p id='um_".$i."' style='text-align:center'>(Master)</p></td></tr>";
