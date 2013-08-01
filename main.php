@@ -1103,7 +1103,7 @@ function make_settings_list() {
     $settings = get_settings();
     $vs = get_stations();
     $stations = $vs["stations"];
-    $list = "<li data-role='list-divider'>Device Settings</li><li><div data-role='fieldcontain'><fieldset>";
+    $list = "<li><div data-role='fieldcontain'><fieldset>";
     foreach ($options as $key => $data) {
         if (!is_int($key)) continue;
         switch ($key) {
@@ -1111,7 +1111,7 @@ function make_settings_list() {
                 $timezones = array("-12:00","-11:30","-11:00","-10:00","-09:30","-09:00","-08:30","-08:00","-07:00","-06:00","-05:00","-04:30","-04:00","-03:30","-03:00","-02:30","-02:00","+00:00","+01:00","+02:00","+03:00","+03:30","+04:00","+04:30","+05:00","+05:30","+05:45","+06:00","+06:30","+07:00","+08:00","+08:45","+09:00","+09:30","+10:00","+10:30","+11:00","+11:30","+12:00","+12:45","+13:00","+13:45","+14:00");
                 $tz = $data["val"]-48;
                 $tz = (($tz>=0) ? "+" : "-").sprintf("%02d", strval(abs($tz)/4)).":".strval(((abs($tz)%4)*15/10).((abs($tz)%4)*15%10));
-                $list .= "<label for='o1' class='select'>Timezone</label><select id='o1'>";
+                $list .= "<label for='o1' class='select'>Timezone</label><select data-mini='true' id='o1'>";
                 foreach ($timezones as $timezone) {
                     $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
                 }
@@ -1119,44 +1119,44 @@ function make_settings_list() {
                 continue 2;
             case 12:
 #                $http = $options[13]["val"]*256+$data["val"];
-#                $list .= "<label for='o12'>HTTP Port</label><input type='number' pattern='[0-9]*' id='o12' value='".$http."' />";
+#                $list .= "<label for='o12'>HTTP Port</label><input data-mini='true' type='number' pattern='[0-9]*' id='o12' value='".$http."' />";
                 continue 2;
             case 15:
-                $list .= "<label for='o15'>Extension Boards</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='5' id='o15' value='".$data["val"]."' />";
+                $list .= "<label for='o15'>Extension Boards</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='5' id='o15' value='".$data["val"]."' />";
                 continue 2;
             case 16:
-                $list .= "<input id='o16' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o16'>Sequential</label>";
+                $list .= "<input data-mini='true' id='o16' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o16'>Sequential</label>";
                 continue 2;
             case 17:
-                $list .= "<label for='o17'>Station Delay (seconds)</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
+                $list .= "<label for='o17'>Station Delay (seconds)</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
                 continue 2;
             case 18:
-                $list .= "<label for='o18' class='select'>Master Station</label><select id='o18'><option value='0'>None</option>";
+                $list .= "<label for='o18' class='select'>Master Station</label><select data-mini='true' id='o18'><option value='0'>None</option>";
                 $i = 1;
                 foreach ($stations as $station) {
                     $list .= "<option ".(($i == $data["val"]) ? "selected" : "")." value='".$i."'>".$station."</option>";
                     if ($i == 8) break;
                     $i++;
                 }
-                $list .= "</select><label for='loc'>Location</label><input type='text' id='loc' value='".$options["loc"]."' />";
+                $list .= "</select><label for='loc'>Location</label><input data-mini='true' type='text' id='loc' value='".$options["loc"]."' />";
                 continue 2;
             case 19:
-                $list .= "<label for='o19'>Master On Delay</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
+                $list .= "<label for='o19'>Master On Delay</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
                 continue 2;
             case 20:
-                $list .= "<label for='o20'>Master Off Delay</label><input type='number' pattern='[0-9]*' data-type='range' min='-60' max='60' id='o20' value='".$data["val"]."' />";
+                $list .= "<label for='o20'>Master Off Delay</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='-60' max='60' id='o20' value='".$data["val"]."' />";
                 continue 2;
             case 21:
-                $list .= "<input id='o21' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o21'>Use Rain Sensor</label>";
+                $list .= "<input data-mini='true' id='o21' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o21'>Use Rain Sensor</label>";
                 continue 2;
             case 22:
-                $list .= "<input id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (Rain Sensor)</label>";
+                $list .= "<input data-mini='true' id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (Rain Sensor)</label>";
                 continue 2;
             case 23:
-                $list .= "<label for='o23'>Water Level</label><input type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
+                $list .= "<label for='o23'>Water Level</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
                 continue 2;
             case 25:
-                $list .= "<input id='o25' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o25'>Ignore Password</label>";
+                $list .= "<input data-mini='true' id='o25' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o25'>Ignore Password</label>";
                 continue 2;
         }
     }
