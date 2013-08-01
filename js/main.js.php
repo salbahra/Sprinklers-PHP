@@ -722,7 +722,7 @@ function get_runonce() {
             progs += "<option value='"+i+"'>Program "+(i+1)+"</option>";
         };
         progs += "</select>";
-        list.prepend(progs);
+        $("#runonce_list p").after(progs);
         $("#rprog").change(function(){
             var prog = $(this).val();
             if (window.rprogs[prog] == undefined) return;
