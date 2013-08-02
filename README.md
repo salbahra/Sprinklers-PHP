@@ -14,10 +14,16 @@ Overview:
 
 + For current discussion about the project please refer to the [forum post](http://rayshobby.net/phpBB3/viewtopic.php?f=2&t=154). 
 
+Video Tutorial:
+---------------
+[![Video Tutorial](https://img.youtube.com/vi/5pYHsMZSj6w/0.jpg)](https://www.youtube.com/watch?v=5pYHsMZSj6w)
+
+Very well put together by Ray, thanks!
+
 Screenshots:
 ------------
 
-![Splash Screen](http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png) ![Home Screen](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-18-2013-6.36.32-PM-169x300.png) ![Status Page](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-23-2013-6.24.41-PM-169x300.png) ![Program Preview](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.46.37-PM-169x300.png) ![Log Viewer](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.39.39-PM-169x300.png) ![Program Editor](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.55.42-PM-169x300.png) ![Manual Program](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.30.53-PM-169x300.png) ![Rain Delay](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.56.03-PM-169x300.png) ![Run Once](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-31-2013-8.40.23-PM-169x300.png)
+![Splash Screen](http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png) ![Home Screen](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-18-2013-6.36.32-PM-169x300.png) ![Status Page](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-23-2013-6.24.41-PM-169x300.png) ![Program Preview](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.46.37-PM-169x300.png) ![Log Viewer](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.39.39-PM-169x300.png) ![Program Editor](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.55.42-PM-169x300.png) ![Manual Program](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.30.53-PM-169x300.png) ![Rain Delay](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.56.03-PM-169x300.png) ![Run Once](http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-31-2013-8.40.23-PM-169x300.png) ![Settings](http://albahra.com/journal/wp-content/uploads/2013/08/iOS-Simulator-Screen-shot-Aug-1-2013-6.52.25-PM-169x300.png)
 
 
 Raspberry Pi Users:
