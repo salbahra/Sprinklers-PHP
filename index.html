@@ -1,41 +1,36 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>OpenSprinkler Controller by salbahra</title>
+  </head>
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
-
-  <title>OpenSprinkler Controller</title>
-  <meta name="description" content="A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, change OpenSprinkler settings and view logs.">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <header>
-      <h1 class="title">OpenSprinkler Controller</h1>
-    </header>
+  <body>
     <div id="container">
-      <p class="tagline">A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, change OpenSprinkler settings and view logs.</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/salbahra/OpenSprinkler-Controller/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/salbahra/OpenSprinkler-Controller/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/salbahra/OpenSprinkler-Controller" class="code">View OpenSprinkler Controller on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
+      <div class="inner">
+
+        <header>
+          <h1>OpenSprinkler Controller</h1>
+          <h2>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, change OpenSprinkler settings and view logs.</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/salbahra/OpenSprinkler-Controller/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/salbahra/OpenSprinkler-Controller/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/salbahra/OpenSprinkler-Controller" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
           <h1>
 <a name="opensprinkler-controller" class="anchor" href="#opensprinkler-controller"><span class="octicon octicon-link"></span></a><a href="http://salbahra.github.io/OpenSprinkler-Controller">OpenSprinkler Controller</a>
 </h1>
@@ -47,22 +42,41 @@
 
 <ul>
 <li><p>This application interfaces with the interval program on the OpenSprinkler which is the default software available. The application has been tested on firmware version 2.0.0 but should be compatible with 1.8.x and newer.</p></li>
-<li><p>There is an authentication system in place and a guide on first run will assist in adding a new user along with the other required settings.</p></li>
+<li><p>There is an authentication system in place and a guide on first run will assist in adding a new user along with any other required settings.</p></li>
 <li><p>The provided interface does not rely on the javascript files hosted by Ray therefore will work on a locally hosted server even without an internet connection. However an internet connection (with a properly configured web server and port forwarding) will allow you to access the application from anywhere.</p></li>
 <li><p>For current discussion about the project please refer to the <a href="http://rayshobby.net/phpBB3/viewtopic.php?f=2&amp;t=154">forum post</a>. </p></li>
 </ul><h2>
+<a name="video-tutorial" class="anchor" href="#video-tutorial"><span class="octicon octicon-link"></span></a>Video Tutorial:</h2>
+
+<p><a href="https://www.youtube.com/watch?v=5pYHsMZSj6w"><img src="https://img.youtube.com/vi/5pYHsMZSj6w/0.jpg" alt="Video Tutorial"></a></p>
+
+<p>Very well put together by Ray, thanks!</p>
+
+<h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots:</h2>
+
+<p><img src="http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png" alt="Splash Screen"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-18-2013-6.36.32-PM-169x300.png" alt="Home Screen"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-23-2013-6.24.41-PM-169x300.png" alt="Status Page"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.46.37-PM-169x300.png" alt="Program Preview"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.39.39-PM-169x300.png" alt="Log Viewer"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.55.42-PM-169x300.png" alt="Program Editor"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.30.53-PM-169x300.png" alt="Manual Program"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.56.03-PM-169x300.png" alt="Rain Delay"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-31-2013-8.40.23-PM-169x300.png" alt="Run Once"><img src="http://albahra.com/journal/wp-content/uploads/2013/08/iOS-Simulator-Screen-shot-Aug-1-2013-6.52.25-PM-169x300.png" alt="Settings"></p>
+
+<h2>
 <a name="raspberry-pi-users" class="anchor" href="#raspberry-pi-users"><span class="octicon octicon-link"></span></a>Raspberry Pi Users:</h2>
 
 <ul>
-<li><p>The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  <a href="http://rayshobby.net/?p=6339">Ray's Blog Post</a>.</p></li>
 <li>
-<p>The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web server and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.</p>
+<p>The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  <a href="http://rayshobby.net/?p=6339">Ray's Blog Post</a>.</p>
 
 <ul>
-<li>In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The OSPi defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080</li>
+<li> This is a seperate program that needs to be running on the Raspberry Pi.</li>
+<li>Please rememeber this is a front end for a hardware device. In the case of the OpenSprinkler Pi, the hardware happens to be the Pi combined with the interval program software.</li>
 </ul>
 </li>
-<li><p>In order for the interval program to be 100% compatibile with the web app you must be using OSPi built on or after June 22, 2013.</p></li>
+<li>
+<p>The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web deamon and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.</p>
+
+<ul>
+<li>In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The interval program defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080</li>
+</ul>
+</li>
+<li><p>In order for the interval program to be 100% compatibile with the web app you must be using an interval program built on or after June 22, 2013.</p></li>
 </ul><h2>
 <a name="install-instructions" class="anchor" href="#install-instructions"><span class="octicon octicon-link"></span></a>Install Instructions:</h2>
 
@@ -99,38 +113,6 @@
 </li>
 <li><p>From there you may attempt to access the front end which will guide you through the rest of the install process.</p></li>
 </ul><h2>
-<a name="php-safe-mode" class="anchor" href="#php-safe-mode"><span class="octicon octicon-link"></span></a>PHP Safe Mode:</h2>
-
-<ul>
-<li>If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example:
-
-<ul>
-<li> <code>crontab -e</code>
-</li>
-<li> <code>* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code>
-</li>
-</ul>
-</li>
-</ul><h2>
-<a name="synology-specific" class="anchor" href="#synology-specific"><span class="octicon octicon-link"></span></a>Synology Specific:</h2>
-
-<ul>
-<li><p>There is no crontab script on Synology, you have to edit /etc/crontab file manually.</p></li>
-<li>
-<p>The cron line parameters (* * * * *) must be separated by tabs, example:</p>
-
-<ul>
-<li><code>*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
-</ul>
-</li>
-<li>
-<p>Cron service has to be restarted manually after updating the crontab by running</p>
-
-<ul>
-<li><code>/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh</code></li>
-</ul>
-</li>
-</ul><h2>
 <a name="update-instructions" class="anchor" href="#update-instructions"><span class="octicon octicon-link"></span></a>Update Instructions:</h2>
 
 <ul>
@@ -148,28 +130,47 @@
 <li><code>git pull</code></li>
 </ul>
 </li>
+</ul><h2>
+<a name="php-safe-mode" class="anchor" href="#php-safe-mode"><span class="octicon octicon-link"></span></a>PHP Safe Mode:</h2>
+
+<ul>
+<li>If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example of how to do this:
+
+<ul>
+<li> <code>crontab -e</code>
+</li>
+<li> <code>* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code>
+</li>
 </ul>
-        </article>
-      </div>
-    </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/salbahra" class="avatar"><img src="https://secure.gravatar.com/avatar/9e9fbc82f7148ee41af3a425cecf1898?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/salbahra">salbahra</a> maintains <a href="https://github.com/salbahra/OpenSprinkler-Controller">OpenSprinkler Controller</a></p>
+</li>
+</ul><h2>
+<a name="synology-specific" class="anchor" href="#synology-specific"><span class="octicon octicon-link"></span></a>Synology Specific:</h2>
 
+<ul>
+<li><p>There is no crontab editor on Synology, you have to edit /etc/crontab file manually.</p></li>
+<li>
+<p>The cron line parameters (* * * * *) must be separated by tabs, example:</p>
 
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/salbahra/OpenSprinkler-Controller/tarball/master" class="tar">tar</a><a href="https://github.com/salbahra/OpenSprinkler-Controller/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
+<ul>
+<li><code>*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
+</ul>
+</li>
+<li>
+<p>Cron service has to be restarted manually after updating the crontab by running</p>
 
-            <script type="text/javascript">
+<ul>
+<li><code>/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh</code></li>
+</ul>
+</li>
+</ul>
+        </section>
+
+        <footer>
+          OpenSprinkler Controller is maintained by <a href="https://github.com/salbahra">salbahra</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -180,5 +181,7 @@
             } catch(err) {}
           </script>
 
-</body>
+      </div>
+    </div>
+  </body>
 </html>
