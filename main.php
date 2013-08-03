@@ -165,8 +165,8 @@ function import_config() {
 function get_stations() {
     $data = get_from_os("/vs");
     preg_match("/snames=\[(.*)\];/", $data, $matches);
-    $data = str_getcsv($matches[1],",","'");
-    foreach ($data as $station) {
+    $rawstations = str_getcsv($matches[1],",","'");
+    foreach ($rawstations as $station) {
         $station = preg_replace("/\\\u([0-9a-eA-E]{4})/", "&#x\\1;", $station);
         $stations[] = $station;
     }
