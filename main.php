@@ -167,8 +167,7 @@ function get_stations() {
     preg_match("/snames=\[(.*)\];/", $data, $matches);
     $data = str_getcsv($matches[1],",","'");
     foreach ($data as $station) {
-        $station = str_replace("\u", "&#x", $station, $count);
-        if ($count) $station .= ";";
+        $station = preg_replace("/\\\u([0-9a-eA-E]{4})/", "&#x\\1;", $station);
         $stations[] = $station;
     }
 
