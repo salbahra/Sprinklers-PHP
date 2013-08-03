@@ -20,6 +20,7 @@ is_auth();
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
     	<meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     	<link rel="apple-touch-icon" href="img/icon.png">
     	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
         <link rel="stylesheet" href="css/main.css" />

@@ -165,8 +165,12 @@ function import_config() {
 function get_stations() {
     $data = get_from_os("/vs");
     preg_match("/snames=\[(.*)\];/", $data, $matches);
-    $stations = str_replace("'", "", $matches[1]);
-    $stations = explode(",", $stations);
+    $data = str_getcsv($matches[1],",","'");
+    foreach ($data as $station) {
+        $station = str_replace("\u", "&#x", $station, $count);
+        if ($count) $station .= ";";
+        $stations[] = $station;
+    }
 
     preg_match("/masop=\[(.*?)\]/", $data, $masop);
     $masop = explode(",",$masop[1]);
