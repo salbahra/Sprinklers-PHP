@@ -17,6 +17,13 @@ require_once("config.php");
 
 date_default_timezone_set('UTC');
 
+#Check if PHP has str_getcsv function or if it needs an alternative
+if (!function_exists('str_getcsv')) {
+    function str_getcsv($input, $delimiter = ',', $enclosure = '"') {
+        return str_getcsv4($input, $delimiter, $enclosure);
+    }
+}
+
 #Help migrate older configurations
 if (!isset($auto_delay)) {
     changeConfig("auto_delay",0);
@@ -1596,11 +1603,5 @@ function str_getcsv4($input, $delimiter = ',', $enclosure = '"') {
     }
     $a = explode($token, implode($token, $a));
     return (array)preg_replace(array("/^\\s/", "/\\s$/", "/$token2/"), array('', '', $enclosure), $a);
-}
-
-if (!function_exists('str_getcsv')) {
-    function str_getcsv($input, $delimiter = ',', $enclosure = '"') {
-        return str_getcsv4($input, $delimiter, $enclosure);
-    }
 }
 ?>
