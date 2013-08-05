@@ -277,9 +277,6 @@ function process_programs($month,$day,$year) {
         $newdata[$tmp[0]] = $tmp[1];
     }
 
-    #Fix for missing sequential option on RPi interval program
-    if (!isset($newdata["seq"])) $newdata["seq"] = 1;
-
     preg_match("/masop=\[(.*?)\]/", $data, $masop);
     $newdata["masop"] = explode(",",$masop[1]);
 
