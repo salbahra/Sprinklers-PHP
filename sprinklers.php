@@ -328,7 +328,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
-        <div style="white-space:nowrap;width:100%;text-align:center">
+        <div id="preview_header">
             <a href="#" data-onclick="changeday(-1);"><img src="img/moveleft.png" /></a>
             <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
             <a href="#" data-onclick="changeday(1);"><img src="img/moveright.png" /></a>
