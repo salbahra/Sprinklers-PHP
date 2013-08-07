@@ -726,7 +726,7 @@ function make_list_logs() {
         }
         for ($k=0;$k<count($ValveHistory[$j]);$k++){
             $theTime = strtotime($ValveHistory[$j][$k][0])+$tz;
-            $mins = ceil($ValveHistory[$j][$k][1]/60);
+            $mins = round($ValveHistory[$j][$k][1]/60);
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"])) {
@@ -773,7 +773,7 @@ function make_list_logs() {
         }
         for ($k=0;$k<count($RainHistory);$k++){
             $theTime=strtotime($RainHistory[$k][0])+$tz;
-            $mins = ceil($RainHistory[$k][1]/60);
+            $mins = round($RainHistory[$k][1]/60);
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"])) {
@@ -820,7 +820,7 @@ function make_list_logs() {
         }
         for ($k=0;$k<count($DelayHistory);$k++){
             $theTime=strtotime($DelayHistory[$k][0])+$tz;
-            $mins = ceil($DelayHistory[$k][1]/60);
+            $mins = round($DelayHistory[$k][1]/60);
             if ($graphing) {
                 $info = intval(date($date_needed,$theTime));
                 if (isset($_REQUEST["sort"])) {
