@@ -178,16 +178,18 @@ function get_stations() {
     $data = get_from_os("/vs");
     preg_match("/snames=\[(.*)\];/", $data, $matches);
     $rawstations = str_getcsv($matches[1],",","'");
+    preg_match("/nboards=(\d+)/", $data, $matches);
+    $total = $matches[1] * 8; $current = 1;
     foreach ($rawstations as $station) {
+        if ($current > $total) break;
         $station = preg_replace("/\\\u([0-9a-eA-E]{4})/", "&#x\\1;", $station);
         $stations[] = $station;
+        $current++;
     }
 
     preg_match("/masop=\[(.*?)\]/", $data, $masop);
     $masop = explode(",",$masop[1]);
 
-    #Pop the last element off the array which is always an extra empty string
-    array_pop($stations);
     return array("stations" => $stations,"masop" => $masop);
 }
 
