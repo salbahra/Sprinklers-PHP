@@ -910,7 +910,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
     if (isset($program["stations"])) $set_stations = str_split($program["stations"]);
     $list = "<fieldset ".((!$n && $total == 1) ? "data-collapsed='false'" : "")." id='program-".$n."' ".(($n === "new") ? "" : "data-role='collapsible'")." data-theme='b' data-content-theme='d'>";
     if ($n !== "new") $list .= "<legend>Program ".($n + 1)."</legend>";
-    $list .= "<input data-mini='true' type='checkbox' ".(($program["en"]) ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
+    $list .= "<input data-mini='true' type='checkbox' ".(($program["en"] || $n==="new") ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
     $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
     $list .= "<input data-mini='true' type='radio' name='rad_days-".$n."' id='days_week-".$n."' value='days_week-".$n."' ".(($program["is_interval"]) ? "" : "checked='checked'")."><label for='days_week-".$n."'>Weekly</label>";
     $list .= "<input data-mini='true' type='radio' name='rad_days-".$n."' id='days_n-".$n."' value='days_n-".$n."' ".(($program["is_interval"]) ? "checked='checked'" : "")."><label for='days_n-".$n."'>Interval</label>";
