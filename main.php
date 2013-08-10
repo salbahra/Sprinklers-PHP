@@ -1136,13 +1136,13 @@ function make_settings_list() {
 #                $list .= "<label for='o12'>HTTP Port</label><input data-mini='true' type='number' pattern='[0-9]*' id='o12' value='".$http."' />";
                 continue 2;
             case 15:
-                $list .= "<label for='o15'>Extension Boards</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='5' id='o15' value='".$data["val"]."' />";
+                $list .= "<label for='o15'>Extension Boards</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='5' id='o15' value='".$data["val"]."' />";
                 continue 2;
             case 16:
                 $list .= "<input data-mini='true' id='o16' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o16'>Sequential</label>";
                 continue 2;
             case 17:
-                $list .= "<label for='o17'>Station Delay (seconds)</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
+                $list .= "<label for='o17'>Station Delay (seconds)</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='240' id='o17' value='".$data["val"]."' />";
                 continue 2;
             case 18:
                 $list .= "<label for='o18' class='select'>Master Station</label><select data-mini='true' id='o18'><option value='0'>None</option>";
@@ -1155,10 +1155,10 @@ function make_settings_list() {
                 $list .= "</select><label for='loc'>Location</label><input data-mini='true' type='text' id='loc' value='".$options["loc"]."' />";
                 continue 2;
             case 19:
-                $list .= "<label for='o19'>Master On Delay</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
+                $list .= "<label for='o19'>Master On Delay</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
                 continue 2;
             case 20:
-                $list .= "<label for='o20'>Master Off Delay</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='-60' max='60' id='o20' value='".$data["val"]."' />";
+                $list .= "<label for='o20'>Master Off Delay</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='-60' max='60' id='o20' value='".$data["val"]."' />";
                 continue 2;
             case 21:
                 $list .= "<input data-mini='true' id='o21' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o21'>Use Rain Sensor</label>";
@@ -1167,7 +1167,7 @@ function make_settings_list() {
                 $list .= "<input data-mini='true' id='o22' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o22'>Normally Open (Rain Sensor)</label>";
                 continue 2;
             case 23:
-                $list .= "<label for='o23'>Water Level</label><input data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
+                $list .= "<label for='o23'>Water Level</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='250' id='o23' value='".$data["val"]."' />";
                 continue 2;
             case 25:
                 $list .= "<input data-mini='true' id='o25' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o25'>Ignore Password</label>";
