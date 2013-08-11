@@ -38,11 +38,11 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li data-role="list-divider">Information</li>
             <li><a href="#status" data-onclick="get_status();">Current Status</a></li>
             <li><a href="#preview">Preview Programs</a></li>
-            <li><a href="#logs" data-onclick="get_logs();">View Logs</a></li>
+            <li><a href="#logs">View Logs</a></li>
         </ul>
         <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider">Program Control</li>
-            <li><a href="#programs" data-onclick="get_programs();">Edit Programs</a></li>
+            <li><a href="#programs">Edit Programs</a></li>
             <li><a href="#manual" data-onclick="get_manual();">Manual Control</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
             <li><a href="#runonce" data-onclick="get_runonce();">Run-Once Program</a></li>
@@ -122,7 +122,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Programs</h3>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
-        <a href="#" data-onclick="add_program();" data-icon="plus">Add</a>
+        <a href="#addprogram" data-icon="plus">Add</a>
     </div>
     <div data-role="content" id="programs_list">
     </div>
@@ -131,7 +131,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 <div data-role="page" id="addprogram">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Add Program</h3>
-        <a href="#programs" data-onclick="get_programs();" data-icon="back">Back</a>
+        <a href="#programs" data-icon="back">Back</a>
         <a href="#" data-onclick="submit_program('new');">Submit</a>
     </div>
     <div data-role="content" id="newprogram">
@@ -154,7 +154,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         <label for="delay">Duration (in hours):</label>
                         <input type="number" name="delay" pattern="[0-9]*" id="delay" value="">
                     </div>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" data-theme="a" />
                 </form>
             </li>
         </ul>
@@ -172,7 +172,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                     <label for='auto_delay_duration'>Delay Duration (hours)</label>
                     <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" data-theme="a" />
                 </form>
             </li>
         </ul>
@@ -195,7 +195,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <div id="placeholder" style="display:none;width:100%;height:300px;"></div>
         <div id="zones">
         </div>
-        <fieldset data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" id="log_options">
+        <fieldset data-role="collapsible" data-mini="true" id="log_options">
             <legend>Options</legend>
             <fieldset data-role="controlgroup" data-type="horizontal" id="graph_sort" style="display:none;text-align:center">
               <p style="margin:0">Grouping:</p>
@@ -303,7 +303,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     <input autocapitalize="off" autocorrect="off" type="text" id="name" value="" />
                     <label for="pass">Password:</label>
                     <input type="password" id="pass" value="" />
-                    <a data-role="button" href="#" data-onclick="add_user();">Submit</a>
+                    <a data-role="button" href="#" data-onclick="add_user();" data-theme="a">Submit</a>
                 </div>
             </li>
         </ul>
@@ -349,7 +349,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
     </div>
     <div data-role="content">
-        <div data-role="collapsible-set" data-content-theme="d">
+        <div data-role="collapsible-set">
             <div data-role="collapsible">
                 <h3>Background</h3>
                 <p>I, Samer Albahra, am a medical school graduate, currently doing a pathology residency at UTHSCSA. I enjoy making mobile applications in my spare time and was excited when I first discovered the OpenSprinkler, an open-source Internet based sprinkler system, which lacked a truly mobile interface.</p>

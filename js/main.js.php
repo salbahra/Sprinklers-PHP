@@ -181,6 +181,12 @@ $(document).on("pageshow",function(e,data){
         check_auto($("#"+newpage+" select[data-role='slider']"));
     } else if (newpage == "preview") {
         get_preview();
+    } else if (newpage == "logs") {
+        get_logs();
+    } else if (newpage == "programs") {
+        get_programs();
+    } else if (newpage == "addprogram") {
+        add_program();
     }
 
     currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
@@ -505,7 +511,6 @@ function get_status() {
 
 function get_logs() {
     $("#logs input").blur();
-    $.mobile.changePage($("#logs"));
     $.mobile.showPageLoadingMsg();
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + ((new Date($("#log_end").val()).getTime() / 1000) + 86340);
 
@@ -871,7 +876,6 @@ function get_programs(pid) {
         $.mobile.hidePageLoadingMsg();
         $("#programs").trigger("create");
         update_program_header();
-        $.mobile.changePage($("#programs"));
     })
 }
 
@@ -915,7 +919,6 @@ function add_program() {
         })
         $.mobile.hidePageLoadingMsg();
         $("#addprogram").trigger("create");
-        $.mobile.changePage($("#addprogram"));
     })    
 }
 

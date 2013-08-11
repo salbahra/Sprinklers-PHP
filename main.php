@@ -602,7 +602,7 @@ function make_list_logs() {
     
     $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
 
-    if (!$graphing) $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-content-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
+    if (!$graphing) $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
     $vs = get_stations();
     $ValveName = $vs["stations"];
     $settings = get_settings();
@@ -881,7 +881,7 @@ function make_all_programs() {
     $vs = get_stations();
     $stations = $vs["stations"];
     $n = 0;
-    $list = "<p style='text-align:center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
+    $list = "<p style='text-align:center'>Click any program below to expand/edit. Be sure to save changes by hitting submit below.</p><div data-role='collapsible-set'>";
     foreach ($data["programs"] as $program) {
         $list .= make_program($n,$total,$stations,$program);
         $n++;
@@ -908,7 +908,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
         $days = array(0,0,0,0,0,0,0);
     }
     if (isset($program["stations"])) $set_stations = str_split($program["stations"]);
-    $list = "<fieldset ".((!$n && $total == 1) ? "data-collapsed='false'" : "")." id='program-".$n."' ".(($n === "new") ? "" : "data-role='collapsible'")." data-theme='b' data-content-theme='d'>";
+    $list = "<fieldset ".((!$n && $total == 1) ? "data-collapsed='false'" : "")." id='program-".$n."' ".(($n === "new") ? "" : "data-role='collapsible'").">";
     if ($n !== "new") $list .= "<legend>Program ".($n + 1)."</legend>";
     $list .= "<input data-mini='true' type='checkbox' ".(($program["en"] || $n==="new") ? "checked='checked'" : "")." name='en-".$n."' id='en-".$n."'><label for='en-".$n."'>Enabled</label>";
     $list .= "<fieldset data-role='controlgroup' data-type='horizontal' style='text-align: center'>";
@@ -954,7 +954,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
     $list .= "</div>";
 
     $list .= "<label for='duration-".$n."'>Duration (minutes)</label><input data-mini='true' type='number' data-highlight='true' data-type='range' name='duration-".$n."' min='0' max='300' id='duration-".$n."' value='".($program["duration"]/60)."'>";
-    $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input data-mini='true' type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1439' id='interval-".$n."' value='".($program["interval"])."'>";
+    $list .= "<label for='interval-".$n."'>Interval (minutes)</label><input data-mini='true' type='number' data-highlight='true' data-type='range' name='interval-".$n."' min='0' max='1439' id='interval-".$n."' value='".($program["interval"])."'><br>";
     if ($n === "new") {
         $list .= "<input data-mini='true' type='submit' name='submit-".$n."' id='submit-".$n."' value='Save New Program'></fieldset>";
     } else {
@@ -966,7 +966,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
 
 #Make the manual list
 function make_list_manual() {
-    $list = '<li data-role="list-divider">Sprinkler Stations</li>';
+    $list = '<li data-role="list-divider" data-theme="a">Sprinkler Stations</li>';
     $vs = get_stations();
     $stations = $vs["stations"];
     $status = get_station_status();
@@ -1204,7 +1204,7 @@ function make_stations_list() {
 
 function make_user_list() {
     global $pass_file;
-    $list = "<div data-role='collapsible-set' data-theme='c' data-content-theme='d'>";
+    $list = "<div data-role='collapsible-set'>";
 
     if(file_exists($pass_file) && is_readable($pass_file)){
         if($fp=fopen($pass_file,'r')){
@@ -1213,7 +1213,7 @@ function make_user_list() {
                 $line=preg_replace('`[\r\n]$`','',$line);
                 list($user,)=explode(':',$line);
                 if ($user == "") continue;
-                $list .= "<fieldset id='user-".$i."' data-role='collapsible' data-theme='b' data-content-theme='d'>";
+                $list .= "<fieldset id='user-".$i."' data-role='collapsible'>";
                 $list .= "<legend>".$user."</legend>";
                 $list .= "<label for='cpu-".$i."'>Change Password</label><input id='cpu-".$i."' type='password' />";
                 $list .= "<a data-role='button' data-onclick='change_user(".$i.")'>Save Changes to ".$user."</a>";

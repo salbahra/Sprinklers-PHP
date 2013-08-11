@@ -129,7 +129,7 @@ function fail() {
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    	<link rel="stylesheet" href="css/jquery.mobile.flatui.min.css" />
         <style type="text/css">
             .desc {
                 font-size:smaller;
@@ -140,7 +140,7 @@ function fail() {
             }
         </style>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="js/jquery.mobile-1.3.2.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
         <script>
             function showerror(msg) {
                 // show error message
@@ -148,7 +148,7 @@ function fail() {
                     text: msg,
                     textVisible: true,
                     textonly: true,
-                    theme: 'a'
+                    theme: 'c'
                 });
             }
             function submit_config() {
@@ -199,7 +199,7 @@ function fail() {
                         </li>
                     </ul>
                     <div data-role="collapsible-set">
-                        <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='a'" : "data-collapsed='false' data-theme='b'"; ?> data-content-theme="d">
+                        <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='a'" : "data-collapsed='false' data-theme='b'"; ?>>
                             <legend><?php echo $localPi ? "Interval Program (detected)" : "OpenSprinkler IP/password"; ?></legend>
                             <div data-role="fieldcontain">
                                 <label for="os_ip">Open Sprinkler IP:</label>
@@ -208,7 +208,7 @@ function fail() {
                                 <input type="password" name="os_pw" id="os_pw" <?php echo $localPi ? "value='opendoor'" : ""; ?> />
                             </div>
                         </fieldset>
-                        <fieldset data-role="collapsible" data-theme="a" data-content-theme="d">
+                        <fieldset data-role="collapsible" data-theme="a">
                             <legend>Advanced Configuration</legend>
                             <div data-role="fieldcontain">
                                 <label for="pass_file">Pass File Location:</label>

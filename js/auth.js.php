@@ -17,7 +17,8 @@ if(!defined('Sprinklers')) {
 
 //After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
-    $.mobile.defaultPageTransition = 'none';
+    $.mobile.defaultPageTransition = 'fade';
+    $.mobile.defaultDialogTransition = 'fade';
     $.mobile.hashListeningEnabled = false;
 });
 
@@ -93,7 +94,7 @@ function showerror(msg) {
             text: msg,
             textVisible: true,
             textonly: true,
-            theme: 'a'
+            theme: 'c'
             });
 	// hide after delay
 	setTimeout( function(){$.mobile.loading('hide')}, 1500);
