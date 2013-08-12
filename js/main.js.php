@@ -219,13 +219,14 @@ $(document).on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
 
     $.mobile.silentScroll(0);
+    if (window.interval_id !== undefined) clearInterval(window.interval_id);
+    if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
 
     if (newpage == "sprinklers") {
         update_weather();
         $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
         setTimeout(check_status,1000);
     } else {
-        clearInterval(window.interval_id);
         var title = document.title;
         document.title = "OpenSprinkler: "+title;
     }
