@@ -51,7 +51,7 @@ $(document).one("pageinit","#sprinklers", function(){
         localStorage.setItem("theme","flat")
     }
     $("#theme").attr("href",getThemeUrl(theme));
-    $("#theme-select").val(theme).slider("refresh");
+    $("#s-theme-select").val(theme).slider("refresh");
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
