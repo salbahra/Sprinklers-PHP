@@ -814,7 +814,7 @@ function get_preview() {
                 var pid = parseInt($(content).html().substr(1)) - 1;
                 get_programs(pid);
             });
-            window.addEventListener("resize",timeline_redraw);
+            $(window).on("resize",timeline_redraw);
             timeline.draw(data, options);
             if ($(window).width() <= 480) {
                 var currRange = timeline.getVisibleChartRange();
