@@ -58,7 +58,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         <label for="autologin">Auto Login</label>
                     </div>
                     <div class="ui-block-b">
-                        <select name="autologin" id="'.$page.'-autologin" data-role="slider">
+                        <select name="autologin" id="s-autologin" data-role="slider">
                             <option value="off">Off</option>
                             <option value="on">On</option>
                         </select>
@@ -71,7 +71,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         <label for="theme-select">Theme</label>
                     </div>
                     <div class="ui-block-b">
-                        <select name="theme-select" id="theme-select" data-role="slider">
+                        <select name="theme-select" id="s-theme-select" data-role="slider">
                             <option value="default">Default</option>
                             <option value="flat">Flat</option>
                         </select>
