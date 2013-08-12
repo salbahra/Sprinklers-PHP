@@ -84,7 +84,6 @@ a {
     border-bottom: 1px solid #b4b4b4;
     border-right: 1px solid #b4b4b4;
     padding: 5px 5px 5px 5px;
-    background-image: -webkit-linear-gradient(top, #fdfdfd, #eee);
 }
 #logs_list table tr td:last-child {
     border-right: none;
