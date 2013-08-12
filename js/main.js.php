@@ -46,11 +46,6 @@ $(document).ajaxError(function(x,t,m) {
 $(document).one("pageinit","#sprinklers", function(){
     $.mobile.hidePageLoadingMsg();
     var theme = localStorage.getItem("theme");
-    if (theme === null) {
-        theme = "flat";
-        localStorage.setItem("theme","flat")
-    }
-    $("#theme").attr("href",getThemeUrl(theme));
     $("#s-theme-select").val(theme).slider("refresh");
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));

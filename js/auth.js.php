@@ -20,6 +20,12 @@ $(document).one("mobileinit", function(e){
     $.mobile.defaultPageTransition = 'fade';
     $.mobile.defaultDialogTransition = 'fade';
     $.mobile.hashListeningEnabled = false;
+    var theme = localStorage.getItem("theme");
+    if (theme === null) {
+        theme = "flat";
+        localStorage.setItem("theme","flat")
+    }
+    $("#theme").attr("href",getThemeUrl(theme));
 });
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
