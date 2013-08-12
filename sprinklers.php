@@ -65,6 +65,19 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                 </div>
             </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><br>
+                        <label for="theme-select">Theme</label>
+                    </div>
+                    <div class="ui-block-b">
+                        <select name="theme-select" id="theme-select" data-role="slider">
+                            <option value="default">Default</option>
+                            <option value="flat">Flat</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
             <li data-icon="forward"><a href="#" data-onclick="export_config();">Export Configuration</a></li>
             <li data-icon="back"><a href="#" data-onclick="import_config();">Import Configuration</a></li>
             <li data-icon="delete"><a href="#" data-onclick="logout();">Logout</a></li>

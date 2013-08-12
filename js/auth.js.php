@@ -88,6 +88,18 @@ function dologin() {
     },"html");
 }
 
+function getThemeUrl(theme) {
+    switch (theme) {
+        case "default":
+            var url = "//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css";
+            break;
+        case "flat":
+            var url = "css/jquery.mobile.flatui.min.css";
+            break;
+    }
+    return url;
+}
+
 // show error message
 function showerror(msg) {
         $.mobile.loading( 'show', {
