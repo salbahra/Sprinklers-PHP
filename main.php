@@ -1401,9 +1401,7 @@ function gettoken() {
 function login($tosend = "sprinklers") {
     global $cache_file;
 
-    $starttime = explode(' ', microtime()); 
-    $starttime = $starttime[1] + $starttime[0]; 
-    
+    $starttime = time();
     $auth = base64_encode(hash("sha256",$_SERVER['REMOTE_ADDR']).hash("sha256",$starttime).hash("sha256",$_POST['username']));
     if (!http_authenticate($_POST['username'],$_POST['password'])) {
         echo 0; 
@@ -1458,16 +1456,13 @@ function logout() {
 #Check if token is valid
 function check_localstorage($token) {
     global $cache_file;
-    $starttime = explode(' ', microtime()); 
-    $starttime = $starttime[1] + $starttime[0]; 
-    $endtime = $starttime - 2592000;
     $hashs = file($cache_file);
     if (count($hashs) !== 0) {
         $i = 0;
         foreach ($hashs as $hash){
             $hash = explode(" ",$hash);
             $hash[2] = str_replace("\n", "", $hash[2]);
-            if ($hash[0] <= $endtime) {
+            if ($hash[0] >= ($hash[0]+2592000)) {
                 delLineFromFile($cache_file, $i);
                 return FALSE;
             }
