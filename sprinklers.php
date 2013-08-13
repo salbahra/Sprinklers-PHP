@@ -72,7 +72,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                     <div class="ui-block-b">
                         <select name="theme-select" id="s-theme-select" data-role="slider">
-                            <option value="default">Default</option>
+                            <option value="legacy">Legacy</option>
                             <option value="flat">Flat</option>
                         </select>
                     </div>
