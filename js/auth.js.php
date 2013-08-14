@@ -22,8 +22,8 @@ $(document).one("mobileinit", function(e){
     $.mobile.hashListeningEnabled = false;
     var theme = localStorage.getItem("theme");
     if (theme === null) {
-        theme = "flat";
-        localStorage.setItem("theme","flat")
+        theme = "legacy";
+        localStorage.setItem("theme",theme)
     }
     $("#theme").attr("href",getThemeUrl(theme));
 });

@@ -129,7 +129,7 @@ function fail() {
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="css/jquery.mobile.flatui.min.css" />
+    	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />
         <style type="text/css">
             .desc {
                 font-size:smaller;
@@ -142,6 +142,29 @@ function fail() {
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
         <script>
+            //After jQuery mobile is loaded set intial configuration
+            $(document).one("mobileinit", function(e){
+                $.mobile.defaultPageTransition = 'fade';
+                $.mobile.defaultDialogTransition = 'fade';
+                $.mobile.hashListeningEnabled = false;
+                var theme = localStorage.getItem("theme");
+                if (theme === null) {
+                    theme = "legacy";
+                    localStorage.setItem("theme",theme)
+                }
+                $("#theme").attr("href",getThemeUrl(theme));
+            });
+            function getThemeUrl(theme) {
+                switch (theme) {
+                    case "flat":
+                        var url = "css/jquery.mobile.flatui.min.css";
+                        break;
+                    default:
+                        var url = "//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css";
+                        break;
+                }
+                return url;
+            }
             function showerror(msg) {
                 // show error message
                 $.mobile.loading( 'show', {
