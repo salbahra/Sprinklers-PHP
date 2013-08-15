@@ -1399,30 +1399,31 @@ function gettoken() {
 
 #Authenticate user
 function login($tosend = "sprinklers") {
-    global $cache_file;
-
-    $starttime = time();
-    $auth = base64_encode(hash("sha256",$_SERVER['REMOTE_ADDR']).hash("sha256",$starttime).hash("sha256",$_POST['username']));
     if (!http_authenticate($_POST['username'],$_POST['password'])) {
         echo 0; 
         exit();
     } else {
-        if (isset($_POST['remember']) && $_POST['remember'] == "true") {
-            $fh = fopen($cache_file, 'a+');
-            fwrite($fh, $starttime." ".$auth." ".$_POST['username']."\n");
-            fclose($fh);
-            $_SESSION['sendtoken'] = true;
-            $_SESSION['token'] = $auth;
-        }
         $_SESSION['isauth'] = 1;
         $_SESSION['username'] = $_POST['username'];
-        
+        if (isset($_POST['remember']) && $_POST['remember'] == "true") genToken();
         if ($tosend == "token") {
             if (isset($_SESSION["token"])) echo $_SESSION["token"];
         } else {
            include_once("sprinklers.php");
         }
     }
+}
+
+function genToken() {
+    global $cache_file;
+
+    $starttime = time();
+    $auth = base64_encode(hash("sha256",$_SERVER['REMOTE_ADDR']).hash("sha256",$starttime).hash("sha256",$_SESSION['username']));
+    $fh = fopen($cache_file, 'a+');
+    fwrite($fh, $starttime." ".$auth." ".$_SESSION['username']."\n");
+    fclose($fh);
+    $_SESSION['sendtoken'] = true;
+    $_SESSION['token'] = $auth;
 }
 
 #Remove token from cache file
@@ -1462,14 +1463,15 @@ function check_localstorage($token) {
         foreach ($hashs as $hash){
             $hash = explode(" ",$hash);
             $hash[2] = str_replace("\n", "", $hash[2]);
-            if ($hash[0] >= ($hash[0]+2592000)) {
+            if ((time() - $hash[0]) >= 2592000) {
                 delLineFromFile($cache_file, $i);
                 return FALSE;
             }
             if ($token === $hash[1]) {
-                $_SESSION['token'] = $token;
-                $_SESSION['isauth'] = 1;
+                delLineFromFile($cache_file, $i);
                 $_SESSION['username'] = $hash[2];
+                $_SESSION['isauth'] = 1;
+                genToken();
                 return TRUE;
             }
             $i++;
