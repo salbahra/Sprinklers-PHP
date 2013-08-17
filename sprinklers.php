@@ -165,7 +165,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <form action="javascript:raindelay()">
                     <div data-role="fieldcontain">
                         <label for="delay">Duration (in hours):</label>
-                        <input type="number" name="delay" pattern="[0-9]*" id="delay" value="">
+                        <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' value='0' min='0' max='96' id='delay' />
                     </div>
                     <input type="submit" value="Submit" data-theme="a" />
                 </form>
