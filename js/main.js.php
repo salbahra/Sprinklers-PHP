@@ -316,8 +316,8 @@ function sec2hms(diff) {
     var hours = parseInt( diff / 3600 ) % 24;
     var minutes = parseInt( diff / 60 ) % 60;
     var seconds = diff % 60;
-    if (hours) str += (hours < 10 ? "0"+hours : hours)+":";
-    return str+(minutes < 10 ? "0"+minutes : minutes)+":"+(seconds < 10 ? "0"+seconds : seconds);
+    if (hours) str += pad(hours)+":";
+    return str+pad(minutes)+":"+pad(seconds);
 }
 
 function check_auto(sliders){
@@ -834,10 +834,8 @@ function changeday(dir) {
     date = date.split("-");
     var nDate = new Date(date[0],date[1]-1,date[2]);
     nDate.setDate(nDate.getDate() + dir);
-    var m = String(nDate.getMonth()+1);
-    if (m.length == 1) m = "0"+m;
-    var d = String(nDate.getDate());
-    if (d.length == 1) d = "0"+d;
+    var m = pad(nDate.getMonth()+1);
+    var d = pad(nDate.getDate());
     inputBox.val(nDate.getFullYear() + "-" + m + "-" + d);
     get_preview();
 }
