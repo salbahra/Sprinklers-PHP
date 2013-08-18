@@ -190,10 +190,6 @@ $(document).on("pageshow",function(e,data){
         get_preview();
     } else if (newpage == "logs") {
         get_logs();
-    } else if (newpage == "programs") {
-        get_programs();
-    } else if (newpage == "addprogram") {
-        add_program();
     }
 
     currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
@@ -879,6 +875,7 @@ function get_programs(pid) {
         $("#programs [id^='delete-']").click(function(){
             delete_program($(this).attr("id").split("-")[1]);
         })
+        $.mobile.changePage($("#programs"));
         $.mobile.hidePageLoadingMsg();
         $("#programs").trigger("create");
         update_program_header();
@@ -923,6 +920,7 @@ function add_program() {
         $("#addprogram [id^='submit-']").click(function(){
             submit_program("new");
         })
+        $.mobile.changePage($("#addprogram"));
         $.mobile.hidePageLoadingMsg();
         $("#addprogram").trigger("create");
     })    

@@ -42,7 +42,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
         <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider">Program Control</li>
-            <li><a href="#programs">Edit Programs</a></li>
+            <li><a href="#programs" data-onclick="get_programs();">Edit Programs</a></li>
             <li><a href="#manual" data-onclick="get_manual();">Manual Control</a></li>
             <li><a href="#raindelay">Rain Delay</a></li>
             <li><a href="#runonce" data-onclick="get_runonce();">Run-Once Program</a></li>
@@ -135,7 +135,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3>Programs</h3>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back">Back</a>
-        <a href="#addprogram" data-icon="plus">Add</a>
+        <a href="#addprogram" data-onclick="add_program();" data-icon="plus">Add</a>
     </div>
     <div data-role="content" id="programs_list">
     </div>
