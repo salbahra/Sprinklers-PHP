@@ -210,6 +210,7 @@ $(document).on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
 
     $.mobile.silentScroll(0);
+    $("#tooltip").remove();
     if (window.interval_id !== undefined) clearInterval(window.interval_id);
     if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
 
