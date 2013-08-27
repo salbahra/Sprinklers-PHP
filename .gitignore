@@ -1,1 +1,5 @@
 .DS_Store
+.cache
+.htpasswd
+config.php
+SprinklerChanges.txt
