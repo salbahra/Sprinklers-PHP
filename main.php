@@ -15,7 +15,12 @@ set_time_limit(6);
 #Include configuration
 require_once("config.php");
 
-date_default_timezone_set('UTC');
+#Configure timezone
+if(function_exists('date_default_timezone_set') {
+    date_default_timezone_set('UTC');
+} else {
+    putenv("TZ=UTC");
+}
 
 #Check if PHP has str_getcsv function or if it needs a fallback
 if (!function_exists('str_getcsv')) {
