@@ -16,7 +16,7 @@ set_time_limit(6);
 require_once("config.php");
 
 #Configure timezone
-if(function_exists('date_default_timezone_set') {
+if (function_exists('date_default_timezone_set')) {
     date_default_timezone_set('UTC');
 } else {
     putenv("TZ=UTC");
