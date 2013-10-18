@@ -159,7 +159,7 @@ function import_config() {
     foreach ($data["options"] as $key => $value) {
         if (is_array($value)) {
             if (in_array($key, array(16,21,22,25)) && $value["val"] == 0) continue; 
-            $co .= "&".(($_SESSION["OSPi"]) ? $keyNames[$key] : $key)."=".$value["val"];
+            $co .= "&".(($_SESSION["OSPi"]) ? $keyNames[$key] : "o".$key)."=".$value["val"];
         } else if ($key == "loc") {
             $co .= "&".$key."=".urlencode($value);
         }
