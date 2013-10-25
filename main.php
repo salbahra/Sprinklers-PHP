@@ -1516,7 +1516,7 @@ function check_localstorage($token) {
             $hash[2] = str_replace("\n", "", $hash[2]);
             if ((time() - $hash[0]) >= 2592000) {
                 delLineFromFile($cache_file, $i);
-                return FALSE;
+                continue;
             }
             if ($token === $hash[1]) {
                 delLineFromFile($cache_file, $i);
