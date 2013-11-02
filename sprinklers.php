@@ -11,7 +11,7 @@ if(!defined('Sprinklers')) {
     require_once "main.php";
 }
 #Get data needed to render home page
-$data = start_data();
+$_SESSION["data"] = start_data();
 
 #Redirect if not authenticated or grabbing page directly
 if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {header('Location: '.$base_url); exit();}
@@ -112,7 +112,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <label for="mmm"><b>Manual Mode</b></label>
                 <select name="mmm" id="mmm" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo $data["mm"]; ?> value="on">On</option>
+                    <option <?php echo $_SESSION["data"]["mm"]; ?> value="on">On</option>
                 </select>
             </li>
         </ul>
@@ -251,14 +251,14 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <label for="mm"><b>Manual Mode</b></label>
                 <select name="mm" id="mm" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo $data["mm"]; ?> value="on">On</option>
+                    <option <?php echo $_SESSION["data"]["mm"]; ?> value="on">On</option>
                 </select>
             </li>
             <li data-role="fieldcontain">
                 <label for="en"><b>Operation</b></label>
                 <select name="en" id="en" data-role="slider">
                     <option value="off">Off</option>
-                    <option <?php echo $data["en"]; ?> value="on">On</option>
+                    <option <?php echo $_SESSION["data"]["en"]; ?> value="on">On</option>
                 </select>
             </li>
             <li data-icon="alert"><a href="#" data-onclick="rbt();">Reboot OpenSprinkler</a></li>
@@ -385,7 +385,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </div>
         <p id='versions'>
             <?php
-                echo "Firmware Version: ".$data["ver"];
+                echo "Firmware Version: ".$_SESSION["data"]["ver"];
                 if (file_exists(".git/FETCH_HEAD")) {
                     $data = file_get_contents(".git/FETCH_HEAD");
                     if ($data !== false) {
