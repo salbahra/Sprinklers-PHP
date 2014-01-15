@@ -23,8 +23,9 @@ is_auth();
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     	<link rel="apple-touch-icon" href="img/icon.png">
-        <link href='//fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />
+       <!-- not sure what the next line is for I commented it out for now-->
+       <!--    <link href='//fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>        -->
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" id="theme" />
         <link rel="stylesheet" href="css/main.css" />
         <link rel="shortcut icon" href="img/favicon.ico">
     </head> 
@@ -48,10 +49,10 @@ is_auth();
                 </form>
             </div>
         </div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/jquery.min.js"></script>
         <script><?php include_once("js/auth.js.php"); ?></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script src="js/jquery.flot.min.js"></script>
         <script async src="js/async.js"></script>
     </body>
 </html>
