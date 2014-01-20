@@ -25,9 +25,9 @@ is_auth();
     	<link rel="apple-touch-icon" href="img/icon.png">
         <?php
             if ($local_assets) {
-                echo '<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />';
-            } else {
                 echo '<link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" id="theme" />';
+            } else {
+                echo '<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />';
             }
         ?>
         <link rel="stylesheet" href="css/main.css" />
