@@ -276,6 +276,19 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 </select>
             </li>
         </ul>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider">Local Assets</li>
+            <li>
+                <p class="rain-desc">Choose between local assets (javascript libraries and CSS) or public CDN (Google and cdnjs).</p>
+            </li>
+            <li data-role="fieldcontain">
+                <label for="local_assets"><b>Enabled</b></label>
+                <select name="local_assets" id="local_assets" data-role="slider">
+                    <option value="off">Off</option>
+                    <option <?php global $local_assets; echo (($local_assets) ? "selected" : "") ?> value="on">On</option>
+                </select>
+            </li>
+        </ul>
     </div>
 </div>
 

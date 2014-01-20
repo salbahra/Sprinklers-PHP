@@ -35,6 +35,11 @@ if (!function_exists('str_getcsv')) {
 }
 
 #Help migrate older configurations
+if (!isset($local_assets)) {
+    changeConfig("local_assets",0);
+    $local_assets = 0;
+}
+
 if (!isset($auto_delay)) {
     changeConfig("auto_delay",0);
     $auto_delay = 0;
@@ -65,7 +70,7 @@ $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15
 if (isset($_REQUEST['action'])) {
     if (is_callable($_REQUEST['action'])) {
         if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
                 call_user_func($_REQUEST['action']);
             }
         } else {
@@ -613,6 +618,26 @@ function spon() {
 #Turn specific station off
 function spoff() {
     send_to_os("/sn".$_REQUEST["zone"]."=0");
+}
+
+#Switch to CDN hosted assets
+function local_assets_off() {
+    if (changeConfig("local_assets",0)) {
+        $local_assets = 0;
+        echo 1;
+        exit();
+    }
+    echo 0;
+}
+
+#Switch to locally hosted assets
+function local_assets_on() {
+    if (changeConfig("local_assets",1)) {
+        $local_assets = 1;
+        echo 1;
+        exit();
+    }
+    echo 0;
 }
 
 #Turn off automatic disable of manual mode
@@ -1579,7 +1604,7 @@ function delLineFromFile($fileName, $lineToDelete){
 
 #Change a configuration value
 function changeConfig($variable, $value){
-    $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm");
+    $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets");
     #Only allow the above variables to be changed
     if (!in_array($variable, $allowed)) return false;
     #Sanatize input

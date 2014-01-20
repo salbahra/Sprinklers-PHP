@@ -15,6 +15,9 @@ $os_pw = "opendoor";
 #Force SSL
 $force_ssl = 0;
 
+#Resource location; 1 for local and 0 for public CDN
+$local_assets = 0;
+
 #Password File
 $pass_file="/var/www/sprinklers/.htpasswd";
 

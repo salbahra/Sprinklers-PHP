@@ -67,6 +67,12 @@ function new_config() {
         $config .= "\$force_ssl=0;\n";        
     }
 
+    if (isset($_REQUEST["local_assets"])) {
+        $config .= "\$local_assets=1;\n";
+    } else {
+        $config .= "\$local_assets=0;\n";        
+    }
+
     #Attempt to open config.php for writing
     $file = fopen("config.php", 'w');
 
@@ -243,6 +249,8 @@ function fail() {
                                 <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
                                 <label for="force_ssl">Force SSL</label>
                                 <input type="checkbox" name="force_ssl" id="force_ssl" />
+                                <label for="local_assets">Use Local Assets?</label>
+                                <input type="checkbox" name="local_assets" id="local_assets" />
                             </div>
                         </fieldset>
                     </div>

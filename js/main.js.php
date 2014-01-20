@@ -128,6 +128,15 @@ $("select[data-role='slider']").change(function(){
                     }
                 });
             }
+            if (type === "local_assets") {
+                $.get("index.php","action=local_assets_on",function(result){
+                    //If switch failed then change the switch back and show error
+                    if (result == 0) {
+                        showerror("Asset location was not changed. Check config.php permissions and try again.")
+                        $("#local_assets").val("off").slider("refresh")
+                    }
+                });
+            }
             if (type === "mm" || type === "mmm") {
                 $.get("index.php","action=mm_on",function(result){
                     if (result == 0) {
@@ -157,6 +166,14 @@ $("select[data-role='slider']").change(function(){
                     if (result == 0) {
                         showerror("Auto disable of manual mode was not changed. Check config.php permissions and try again.")
                         $("#auto_mm").val("on").slider("refresh")
+                    }
+                });
+            }
+            if (type === "local_assets") {
+                $.get("index.php","action=local_assets_off",function(result){
+                    if (result == 0) {
+                        showerror("Asset location was not changed. Check config.php permissions and try again.")
+                        $("#local_assets").val("on").slider("refresh")
                     }
                 });
             }
