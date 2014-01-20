@@ -99,6 +99,7 @@ $("select[data-role='slider']").change(function(){
         window.sliders[type] = changedTo;
         if (type == "theme-select") {
             localStorage.setItem("theme",changedTo);
+            if (changedTo === "flat") insert_fonts();
             $("#theme").attr("href",getThemeUrl(changedTo));
             return;
         }

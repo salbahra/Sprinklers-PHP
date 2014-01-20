@@ -24,6 +24,8 @@ $(document).one("mobileinit", function(e){
     if (theme === null) {
         theme = "legacy";
         localStorage.setItem("theme",theme)
+    } else if (theme === "flat") {
+        insert_fonts();
     }
     var themecss = $("#theme");
     window.themeurl = themecss.attr("href");
@@ -94,6 +96,10 @@ function dologin() {
             $("#sprinklers").page();
         }
     },"html");
+}
+
+function insert_fonts() {
+    if (!$("#fonts").length) $("<link href='//fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css' id='fonts'>").appendTo("head");
 }
 
 function getThemeUrl(theme) {
