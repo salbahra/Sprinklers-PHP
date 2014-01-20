@@ -25,7 +25,9 @@ $(document).one("mobileinit", function(e){
         theme = "legacy";
         localStorage.setItem("theme",theme)
     }
-    $("#theme").attr("href",getThemeUrl(theme));
+    var themecss = $("#theme");
+    window.themeurl = themecss.attr("href");
+    themecss.attr("href",getThemeUrl(theme));
 });
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
@@ -100,7 +102,7 @@ function getThemeUrl(theme) {
             var url = "css/jquery.mobile.flatui.min.css";
             break;
         default:
-            var url = "//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css";
+            var url = window.themeurl;
             break;
     }
     return url;
