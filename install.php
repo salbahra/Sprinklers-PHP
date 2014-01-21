@@ -12,6 +12,9 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
     exit();
 }
 
+#Required file
+    require_once "locale.php";
+
 #Detect local interval program
 $localPi = isValidUrl("http://127.0.0.1:8080");
 
@@ -21,7 +24,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file");
+    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file","lang");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -124,16 +127,26 @@ function fail() {
     exit();
 }
 
+function get_list_available_lang() {
+	$lang = 'en_GB.utf8';
+	$locals = get_available_languages();			
+	foreach ($locals as $l=>$local) {
+        $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
+	}
+	echo $list;
+}
+
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-    	<title>New Install</title> 
+    	<title><?php echo _("New Install"); ?></title> 
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
     	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />
@@ -188,19 +201,19 @@ function fail() {
                     $.mobile.hidePageLoadingMsg()
                     if (data == 1) {
                         //If successful
-                        showerror("Settings have been saved. Please wait while your redirected to the login screen!")
+                        showerror("<?php echo _('Settings have been saved. Please wait while your redirected to the login screen!'); ?>")
                         setTimeout(function(){location.reload()},2500);
                     } else if (data == 3) {
                         //Crontab not added but everything else went fine
-                        showerror("Settings have been saved. However, crontab was not added and must be added manually.")
+                        showerror("<?php echo _('Settings have been saved. However, crontab was not added and must be added manually.'); ?>")
                         setTimeout(function(){location.reload()},2500);
                     } else {
                         if (data == 2) {
                             //URL Invalid
-                            showerror("Settings have NOT been saved. Check IP and Port settings and try again.")
+                            showerror("<?php echo _('Settings have NOT been saved. Check IP and Port settings and try again.'); ?>")
                         } else {
                             //Probably permission error or required key not submitted
-                            showerror("Settings have NOT been saved. Check folder permissions and file paths then try again.")
+                            showerror("<?php echo _('Settings have NOT been saved. Check folder permissions and file paths then try again.'); ?>")
                         }
                         setTimeout(function(){$.mobile.loading('hide')}, 2500);                    
                     }
@@ -211,19 +224,19 @@ function fail() {
     <body>
         <div data-role="page" id="install" data-close-btn="none">
         	<div data-role="header" data-position="fixed">
-                <h1>New Install</h1>
-                <a href="javascript:submit_config()" class="ui-btn-right">Submit</a>
+                <h1><?php echo _("New Install"); ?></h1>
+                <a href="javascript:submit_config()" class="ui-btn-right"><?php echo _("Submit"); ?></a>
            </div>
         	<div data-role="content">
                 <form action="javascript:submit_config()" method="post" id="options">
                     <ul data-inset="true" data-role="listview">
-                        <li data-role="list-divider">Add New User</li>
+                        <li data-role="list-divider"><?php echo _("Add New User"); ?></li>
                         <li>
-                            <p class='desc'>You can add additional users after logging in</p>
+                            <p class='desc'><?php echo _("You can add additional users after logging in"); ?></p>
                             <div data-role="fieldcontain">
-                                <label for="username">Username:</label>
+                                <label for="username"><?php echo _("Username:"); ?></label>
                                 <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" />
-                                <label for="password">Password:</label>
+                                <label for="password"><?php echo _("Password:"); ?></label>
                                 <input type="password" name="password" id="password" value="" />
                             </div>
                         </li>
@@ -232,24 +245,30 @@ function fail() {
                         <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='a'" : "data-collapsed='false' data-theme='b'"; ?>>
                             <legend><?php echo $localPi ? "Interval Program (detected)" : "OpenSprinkler IP/password"; ?></legend>
                             <div data-role="fieldcontain">
-                                <label for="os_ip">Open Sprinkler IP:</label>
+                                <label for="os_ip"><?php echo _("Open Sprinkler IP:"); ?></label>
                                 <input type="text" name="os_ip" id="os_ip" <?php echo $localPi ? "value='127.0.0.1:8080'" : ""; ?> />
-                                <label for="os_pw">Open Sprinkler Password:</label>
+                                <label for="os_pw"><?php echo _("Open Sprinkler Password:"); ?></label>
                                 <input type="password" name="os_pw" id="os_pw" <?php echo $localPi ? "value='opendoor'" : ""; ?> />
                             </div>
                         </fieldset>
                         <fieldset data-role="collapsible" data-theme="a">
-                            <legend>Advanced Configuration</legend>
+                            <legend><?php echo _("Advanced Configuration"); ?></legend>
                             <div data-role="fieldcontain">
-                                <label for="pass_file">Pass File Location:</label>
+								<label for="lang"><?php echo _("Localization:"); ?></label>
+								<?php if ($localPi) { ?>
+                                <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
+								<?php } else {?>
+								<input type="text" name="lang" id="lang" value="en_GB.utf8" />
+								<?php } ?>
+                                <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
                                 <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
-                                <label for="cache_file">Cache File Location:</label>
+                                <label for="cache_file"><?php echo _("Cache File Location:"); ?></label>
                                 <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
-                                <label for="log_file">Sprinkler Log File:</label>
+                                <label for="log_file"><?php echo _("Sprinkler Log File:"); ?></label>
                                 <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-                                <label for="force_ssl">Force SSL</label>
+                                <label for="force_ssl"><?php echo _("Force SSL"); ?></label>
                                 <input type="checkbox" name="force_ssl" id="force_ssl" />
-                                <label for="local_assets">Use Local Assets?</label>
+								<label for="local_assets"><?php echo _("Use Local Assets?"); ?></label>
                                 <input type="checkbox" name="local_assets" id="local_assets" />
                             </div>
                         </fieldset>
