@@ -37,7 +37,7 @@ $(document).ajaxError(function(x,t,m) {
                 $(this).hide();
             })
         } else {
-            showerror("Connection timed-out. Please try again.")
+            showerror("<?php echo _("Connection timed-out. Please try again."); ?>")
         }
     }
 });
@@ -124,7 +124,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=auto_mm_on",function(result){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
-                        showerror("Auto disable of manual mode was not changed. Check config.php permissions and try again.")
+                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
                         $("#auto_mm").val("off").slider("refresh")
                     }
                 });
@@ -133,7 +133,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=local_assets_on",function(result){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
-                        showerror("Asset location was not changed. Check config.php permissions and try again.")
+                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
                         $("#local_assets").val("off").slider("refresh")
                     }
                 });
@@ -165,7 +165,7 @@ $("select[data-role='slider']").change(function(){
             if (type === "auto_mm") {
                 $.get("index.php","action=auto_mm_off",function(result){
                     if (result == 0) {
-                        showerror("Auto disable of manual mode was not changed. Check config.php permissions and try again.")
+                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
                         $("#auto_mm").val("on").slider("refresh")
                     }
                 });
@@ -173,7 +173,7 @@ $("select[data-role='slider']").change(function(){
             if (type === "local_assets") {
                 $.get("index.php","action=local_assets_off",function(result){
                     if (result == 0) {
-                        showerror("Asset location was not changed. Check config.php permissions and try again.")
+                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
                         $("#local_assets").val("on").slider("refresh")
                     }
                 });
@@ -194,7 +194,7 @@ $("select[data-role='slider']").change(function(){
 });
 
 function comm_error() {
-    showerror("Error communicating with OpenSprinkler. Please check your password is correct.")
+    showerror("<?php echo _("Error communicating with OpenSprinkler. Please check your password is correct."); ?>")
 }
 
 $(document).on("pageshow",function(e,data){
@@ -288,7 +288,7 @@ function update_timer(total,sdelay) {
         }
         else
             --total;
-            $("#countdown").text("(" + sec2hms(total) + " remaining)");
+            $("#countdown").text("(" + sec2hms(total) + " <?php echo _("remaining"); ?>)");
     },1000)
 }
 
@@ -319,7 +319,7 @@ function update_timers(sdelay) {
                     $("#clock-s").text(new Date(window.totals[a]*1000).toUTCString().slice(0,-4));
                 } else {
                     --window.totals[a];
-                    $("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " remaining)");
+                    $("#countdown-"+a).text("(" + sec2hms(window.totals[a]) + " <?php echo _("remaining"); ?>)");
                 }
             }
         })
@@ -374,7 +374,7 @@ function grab_token(pageid){
         $.mobile.hidePageLoadingMsg();
         if (reply == 0) {
             $.mobile.changePage($("#"+pageid));
-            showerror("Invalid Login");
+            showerror("<?php echo _("Invalid Login"); ?>");
         } else if (reply === "") {
             $("#"+pageid+"-autologin").val("off").slider("refresh");
             window.sliders["autologin"] = "off";
@@ -409,7 +409,7 @@ function update_weather() {
 }
 
 function logout(){
-    areYouSure("Are you sure you want to logout?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to logout?'); ?>", "", function() {
         $.mobile.changePage($("#login"));
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
@@ -465,7 +465,7 @@ function user_id_name(id) {
 
 function delete_user(id) {
     var name = user_id_name(id);
-    areYouSure("Are you sure you want to delete "+name+"?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to delete '); ?>"+name+"?", "", function() {
         $.mobile.showPageLoadingMsg();
         $.get("index.php","action=delete_user&name="+name,function(result){
             $.mobile.hidePageLoadingMsg();
@@ -488,7 +488,7 @@ function add_user() {
         if (result == 0) {
             comm_error()
         } else if (result == 3) {
-            showerror("User already exists")
+            showerror("<?php echo _("User already exists"); ?>")
         } else {
             show_users()
         }
@@ -505,7 +505,7 @@ function change_user(id) {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Password for "+name+" has been updated")
+            showerror("<?php echo _("Password for"); ?> "+name+" <?php echo _("has been updated"); ?>")
         }
     })    
 }
@@ -565,7 +565,7 @@ function get_logs() {
                 $("#placeholder").empty().hide();
                 $("#log_options").trigger("expand");
                 $("#zones, #graph_sort").hide();
-                $("#logs_list").show().html("<p class='center'>No entries found in the selected date range</p>");
+                $("#logs_list").show().html("<p class='center'><?php echo _('No entries found in the selected date range'); ?></p>");
             } else {
                 $("#logs_list").empty().hide();
                 var state = ($(window).height() > 680) ? "expand" : "collapse";
@@ -617,7 +617,7 @@ function get_logs() {
         $("#zones, #graph_sort").hide(); list.show();
         if (items.length == 154) {
             $("#log_options").trigger("expand");
-            list.html("<p class='center'>No entries found in the selected date range</p>");
+            list.html("<p class='center'><?php echo _('No entries found in the selected date range'); ?></p>");
         } else {
             $("#log_options").trigger("collapse");
             list.html(items).trigger("create");
@@ -699,14 +699,14 @@ function seriesChange() {
             grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
             xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
-            tickFormatter: function(v) { var dow=["Sun","Mon","Tue","Wed","Thr","Fri","Sat"]; return dow[v]; } }
+            tickFormatter: function(v) { var dow=["<?php echo _('Sun'); ?>","<?php echo _('Mon'); ?>","<?php echo _('Tue'); ?>","<?php echo _('Wed'); ?>","<?php echo _('Thr'); ?>","<?php echo _('Fri'); ?>","<?php echo _('Sat'); ?>"]; return dow[v]; } }
         });
     else if (grouping=='m')
         $.plot($('#placeholder'), pData, {
             grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
             xaxis: { tickDecimals: 0, min: 0.6, max: 12.4, tickSize: 1,
-            tickFormatter: function(v) { var mon=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return mon[v]; } }
+            tickFormatter: function(v) { var mon=["","<?php echo _('Jan'); ?>","<?php echo _('Feb'); ?>","<?php echo _('Mar'); ?>","<?php echo _('Apr'); ?>","<?php echo _('May'); ?>","<?php echo _('Jun'); ?>","<?php echo _('Jul'); ?>","<?php echo _('Aug'); ?>","<?php echo _('Sep'); ?>","<?php echo _('Oct'); ?>","<?php echo _('Nov'); ?>","<?php echo _('Dec'); ?>"]; return mon[v]; } }
         });
     else if (grouping=='n') {
         var minval = new Date($('#log_start').val()).getTime();
@@ -738,7 +738,7 @@ function get_runonce() {
         var list = $("#runonce_list"), i=0;
         list.html(items.page);
 
-        var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'>Quick Programs</option>";
+        var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'><?php echo _('Quick Programs'); ?></option>";
         var data = JSON.parse(localStorage.getItem("runonce"));
         if (data !== null) {
             list.find(":input[data-type='range']").each(function(a,b){
@@ -746,10 +746,10 @@ function get_runonce() {
                 i++;
             })
             window.rprogs["l"] = data;
-            progs += "<option value='l' selected='selected'>Last Used Program</option>";
+            progs += "<option value='l' selected='selected'><?php echo _('Last Used Program'); ?></option>";
         }
         for (i=0; i<items.progs.length; i++) {
-            progs += "<option value='"+i+"'>Program "+(i+1)+"</option>";
+            progs += "<option value='"+i+"'><?php echo _('Program'); ?> "+(i+1)+"</option>";
         };
         progs += "</select>";
         $("#runonce_list p").after(progs);
@@ -787,7 +787,7 @@ function get_preview() {
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
         var empty = true;
         if (items == "") {
-            $("#timeline").html("<p align='center'>No stations set to run on this day.</p>")
+            $("#timeline").html("<p align='center'><?php echo _('No stations set to run on this day.'); ?></p>")
         } else {
             empty = false
             var data = eval("["+items.substring(0, items.length - 1)+"]");
@@ -946,7 +946,7 @@ function add_program() {
 }
 
 function delete_program(id) {
-    areYouSure("Are you sure you want to delete program "+(parseInt(id)+1)+"?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to delete program '); ?>"+(parseInt(id)+1)+"?", "", function() {
         $.mobile.showPageLoadingMsg();
         $.get("index.php","action=delete_program&pid="+id,function(result){
             $.mobile.hidePageLoadingMsg();
@@ -973,9 +973,9 @@ function submit_program(id) {
         else if($("#days_even-"+id).is(':checked')) {days[0]|=0x80; days[1]=0;}
     } else if($("#days_n-"+id).is(':checked')) {
         days[1]=parseInt($("#every-"+id).val(),10);
-        if(!(days[1]>=2&&days[1]<=128)) {showerror("Error: Interval days must be between 2 and 128.");return;}
+        if(!(days[1]>=2&&days[1]<=128)) {showerror("<?php echo _('Error: Interval days must be between 2 and 128.'); ?>");return;}
         days[0]=parseInt($("#starting-"+id).val(),10);
-        if(!(days[0]>=0&&days[0]<days[1])) {showerror("Error: Starting in days wrong.");return;}
+        if(!(days[0]>=0&&days[0]<days[1])) {showerror("<?php echo _('Error: Starting in days wrong.'); ?>");return;}
         days[0]|=0x80;
     }
     program[1] = days[0]
@@ -986,7 +986,7 @@ function submit_program(id) {
     var end = $("#end-"+id).val().split(":")
     program[4] = parseInt(end[0])*60+parseInt(end[1])
 
-    if(!(program[3]<program[4])) {showerror("Error: Start time must be prior to end time.");return;}
+    if(!(program[3]<program[4])) {showerror("<?php echo _('Error: Start time must be prior to end time.'); ?>");return;}
 
     program[5] = parseInt($("#interval-"+id).val())
     program[6] = $("#duration-"+id).val() * 60
@@ -1006,7 +1006,7 @@ function submit_program(id) {
             }
         }
     }
-    if(station_selected==0) {showerror("Error: You have not selected any stations.");return;}
+    if(station_selected==0) {showerror("<?php echo _('Error: You have not selected any stations.'); ?>");return;}
     program = JSON.stringify(program.concat(stations))
     $.mobile.showPageLoadingMsg()
     if (id == "new") {
@@ -1016,7 +1016,7 @@ function submit_program(id) {
             if (result == 0) {
                 setTimeout(comm_error,400)
             } else {
-                setTimeout(function(){showerror("Program added successfully")},400)
+                setTimeout(function(){showerror("<?php echo _('Program added successfully'); ?>")},400)
             }
         });
     } else {
@@ -1026,7 +1026,7 @@ function submit_program(id) {
                 comm_error()
             } else {
                 update_program_header();
-                showerror("Program has been updated")
+                showerror("<?php echo _('Program has been updated'); ?>")
             }
         });
     }
@@ -1064,7 +1064,8 @@ function submit_settings() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Settings have been saved")
+			location.reload();
+            showerror("<?php echo _('Settings have been saved'); ?>")
         }
     })
 }
@@ -1079,7 +1080,7 @@ function submit_stations() {
                 if (data.length > 16) {
                     invalid = true
                     $item.focus()
-                    showerror("Station name must be 16 characters or less")
+                    showerror("<?php echo _('Station name must be 16 characters or less'); ?>")
                     return false
                 }
                 names[id] = encodeURIComponent(data)
@@ -1105,7 +1106,7 @@ function submit_stations() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Stations have been updated")
+            showerror("<?php echo _('Stations have been updated'); ?>")
         }
     })
 }
@@ -1121,7 +1122,7 @@ function submit_runonce() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Run-once program has been scheduled")
+            showerror("<?php echo _('Run-once program has been scheduled'); ?>")
         }
     })
     gohome();
@@ -1162,7 +1163,7 @@ function raindelay() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("Rain delay has been successfully set")
+            showerror("<?php echo _('Rain delay has been successfully set'); ?>")
         }
     });
 }
@@ -1178,15 +1179,15 @@ function auto_raindelay() {
         $.mobile.hidePageLoadingMsg();
         gohome();
         if (result == 2) {
-            showerror("Auto-delay changes were not saved. Check config.php permissions and try again.");
+            showerror("<?php echo _('Auto-delay changes were not saved. Check config.php permissions and try again.'); ?>");
         } else {
-            showerror("Auto-delay changes have been saved")
+            showerror("<?php echo _('Auto-delay changes have been saved'); ?>")
         }
     })
 }
 
 function clear_logs() {
-    areYouSure("Are you sure you want to clear all your log data?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to clear all your log data?'); ?>", "", function() {
         $.mobile.showPageLoadingMsg()
         $.get("index.php","action=clear_logs",function(result){
             $.mobile.hidePageLoadingMsg()
@@ -1194,14 +1195,14 @@ function clear_logs() {
             if (result == 0) {
                 comm_error()
             } else {
-                showerror("Logs have been cleared")
+                showerror("<?php echo _('Logs have been cleared'); ?>")
             }
         });
     },gohome);    
 }
 
 function rbt() {
-    areYouSure("Are you sure you want to reboot OpenSprinkler?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to reboot OpenSprinkler?'); ?>", "", function() {
         $.mobile.showPageLoadingMsg()
         $.get("index.php","action=rbt",function(result){
             $.mobile.hidePageLoadingMsg()
@@ -1209,14 +1210,14 @@ function rbt() {
             if (result == 0) {
                 comm_error()
             } else {
-                showerror("OpenSprinkler is rebooting now")
+                showerror("<?php echo _('OpenSprinkler is rebooting now'); ?>")
             }
         });
     },gohome);
 }
 
 function rsn() {
-    areYouSure("Are you sure you want to stop all stations?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to stop all stations?'); ?>", "", function() {
         $.mobile.showPageLoadingMsg()
         $.get("index.php","action=rsn",function(result){
             $.mobile.hidePageLoadingMsg()
@@ -1224,7 +1225,7 @@ function rsn() {
             if (result == 0) {
                 comm_error()
             } else {
-                showerror("All stations have been stopped")
+                showerror("<?php echo _('All stations have been stopped'); ?>")
             }
         });
     },gohome);
@@ -1239,7 +1240,7 @@ function export_config() {
             comm_error()
         } else {
             localStorage.setItem("backup", data);
-            showerror("Backup saved to your device");
+            showerror("<?php echo _('Backup saved to your device'); ?>");
         }
     })
 }
@@ -1247,11 +1248,11 @@ function export_config() {
 function import_config() {
     var data = localStorage.getItem("backup");
     if (data === null) {
-        showerror("No backup available on this device");
+        showerror("<?php echo _('No backup available on this device'); ?>");
         return;
     }
 
-    areYouSure("Are you sure you want to restore the configuration?", "", function() {
+    areYouSure("<?php echo _('Are you sure you want to restore the configuration?'); ?>", "", function() {
         $.mobile.showPageLoadingMsg();
         $.get("index.php","action=import_config&data="+data,function(reply){
             $.mobile.hidePageLoadingMsg();
@@ -1259,7 +1260,7 @@ function import_config() {
             if (reply == 0) {
                 comm_error()
             } else {
-                showerror("Backup restored to your device");
+                showerror("<?php echo _('Backup restored to your device'); ?>");
             }
         })
     },gohome);
