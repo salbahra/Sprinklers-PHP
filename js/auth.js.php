@@ -90,7 +90,7 @@ function dologin() {
     $.post("index.php",parameters,function(reply){
         if (reply == 0) {
             $.mobile.hidePageLoadingMsg();
-            showerror("Invalid Login");
+            showerror("<?php echo _("Invalid Login"); ?>");
         } else {
             $("body").append(reply);
             $("#sprinklers").page();
