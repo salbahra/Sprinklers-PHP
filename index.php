@@ -15,7 +15,7 @@ is_auth();
 <!DOCTYPE html>
 <html>
 	<head>
-    	<title>Sprinkler System</title> 
+    	<title><?php echo _("Sprinkler System"); ?></title> 
     	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
     	<meta content="yes" name="apple-mobile-web-app-capable">
@@ -38,22 +38,22 @@ is_auth();
         
         <div data-role="dialog" id="login" data-close-btn="none">
         	<div data-role="header" data-theme="b" data-position="fixed">
-                <h1>Welcome</h1>
+                <h1><?php echo _("Welcome"); ?></h1>
            </div>
         	<div data-role="content">
                 <form action="javascript:dologin()" method="post">
                     <fieldset>
-                        <label for="username" class="ui-hidden-accessible">Username:</label>
-                        <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" placeholder="username" />
-                        <label for="password" class="ui-hidden-accessible">Password:</label>
-                        <input type="password" name="password" id="password" value="" placeholder="password" />
-                        <label><input type="checkbox" id="remember" name="remember" />Remember Me</label>
-                        <button type="submit" data-theme="b">Sign in</button>
+                        <label for="username" class="ui-hidden-accessible"><?php echo _("Username:"); ?></label>
+                        <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" placeholder="<?php echo _("username"); ?>" />
+                        <label for="password" class="ui-hidden-accessible"><?php echo _("Password:"); ?></label>
+                        <input type="password" name="password" id="password" value="" placeholder="<?php echo _("password"); ?>" />
+                        <label><input type="checkbox" id="remember" name="remember" /><?php echo _("Remember Me"); ?></label>
+                        <button type="submit" data-theme="b"><?php echo _("Sign in"); ?></button>
                     </fieldset>
                 </form>
             </div>
         </div>
-        <?php
+		<?php
             if ($local_assets) {
                 echo '<script src="js/jquery.min.js"></script>';
                 echo '<script>'; include_once("js/auth.js.php"); echo '</script>';
