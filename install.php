@@ -128,7 +128,7 @@ function fail() {
 }
 
 function get_list_available_lang() {
-	$lang = 'en_GB.utf8';
+	$lang = 'en_US.utf8';
 	$locals = get_available_languages();			
 	foreach ($locals as $l=>$local) {
         $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
@@ -149,7 +149,7 @@ function get_list_available_lang() {
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="apple-mobile-web-app-title" content="Sprinklers">
         <link rel="apple-touch-icon" href="img/icon.png">
-    	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />
+    	<link rel="stylesheet" href="css/jquery.mobile.min.css" id="theme" />
         <style type="text/css">
             .desc {
                 font-size:smaller;
@@ -159,8 +159,8 @@ function get_list_available_lang() {
                 overflow:visible;
             }
         </style>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
         <script>
             //After jQuery mobile is loaded set intial configuration
             $(document).one("mobileinit", function(e){
@@ -180,7 +180,7 @@ function get_list_available_lang() {
                         var url = "css/jquery.mobile.flatui.min.css";
                         break;
                     default:
-                        var url = "//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css";
+                        var url = "css/jquery.mobile.min.css";
                         break;
                 }
                 return url;
@@ -258,7 +258,7 @@ function get_list_available_lang() {
 								<?php if ($localPi) { ?>
                                 <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
 								<?php } else {?>
-								<input type="text" name="lang" id="lang" value="en_GB.utf8" />
+								<input type="text" name="lang" id="lang" value="en_US.utf8" />
 								<?php } ?>
                                 <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
                                 <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />

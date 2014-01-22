@@ -256,7 +256,6 @@ function get_available_languages() {
      
     References :
     1. http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
-    2. http://blog.xoundboy.com/?p=235
 */
  
 	$language_codes = array(
@@ -416,7 +415,7 @@ function get_available_languages() {
 			}
 		}
 	}
-
-return $locale_data;
+	
+	return $locale_data;
 }
 ?>

@@ -12,1077 +12,753 @@ msgstr ""
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: d:\\xampp\\htdocs\\xampp\\ospi\n"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:18
 msgid "Sprinkler System"
 msgstr "Rega Automática"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:41
 msgid "Welcome"
 msgstr "Bem vindo"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:46
-#: d:\xampp\htdocs\xampp\ospi/install.php:237
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:328
 msgid "Username:"
 msgstr "Nome de usuário:"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:47
 msgid "username"
 msgstr "nome de usuário"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:48
-#: d:\xampp\htdocs\xampp\ospi/install.php:239
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:330
 msgid "Password:"
 msgstr "Senha:"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:49
 msgid "password"
 msgstr "senha"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:50
 msgid "Remember Me"
 msgstr "Lembrar de Mim"
 
-#: d:\xampp\htdocs\xampp\ospi/index.php:51
 msgid "Sign in"
 msgstr "Entre"
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:144
-#: d:\xampp\htdocs\xampp\ospi/install.php:227
 msgid "New Install"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:204
 msgid ""
 "Settings have been saved. Please wait while your redirected to the login "
 "screen!"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:208
 msgid ""
 "Settings have been saved. However, crontab was not added and must be added "
 "manually."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:213
 msgid "Settings have NOT been saved. Check IP and Port settings and try again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:216
 msgid ""
 "Settings have NOT been saved. Check folder permissions and file paths then "
 "try again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:228
-#: d:\xampp\htdocs\xampp\ospi/main.php:946
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:128
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:148
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:170
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:188
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:299
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:321
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:332
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:343
 msgid "Submit"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:233
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:325
 msgid "Add New User"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:235
 msgid "You can add additional users after logging in"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:248
 msgid "Open Sprinkler IP:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:250
 msgid "Open Sprinkler Password:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:255
 msgid "Advanced Configuration"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:257
 msgid "Localization:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:263
 msgid "Pass File Location:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:265
 msgid "Cache File Location:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:267
 msgid "Sprinkler Log File:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:269
 msgid "Force SSL"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/install.php:271
 msgid "Use Local Assets?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:734
-#: d:\xampp\htdocs\xampp\ospi/main.php:755
-#: d:\xampp\htdocs\xampp\ospi/main.php:777
 msgid "Running Now"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:781
 msgid "Runtime"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:781
 msgid "Date/Time"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:813
 msgid "run"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:813
 msgid "runs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:828
-#: d:\xampp\htdocs\xampp\ospi/main.php:875
-#: d:\xampp\htdocs\xampp\ospi/main.php:922
 msgid "min"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:828
-#: d:\xampp\htdocs\xampp\ospi/main.php:875
-#: d:\xampp\htdocs\xampp\ospi/main.php:922
 msgid "mins"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:828
-#: d:\xampp\htdocs\xampp\ospi/main.php:875
-#: d:\xampp\htdocs\xampp\ospi/main.php:922
 msgid "D, d M Y H:i"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:833
-#: d:\xampp\htdocs\xampp\ospi/main.php:860
 msgid "Rain Sensor"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:860
 msgid "switch"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:860
 msgid "switches"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:880
-#: d:\xampp\htdocs\xampp\ospi/main.php:907
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:47
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:156
 msgid "Rain Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:907
 msgid "change"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:907
 msgid "changes"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:937
 msgid ""
 "Value is in minutes. Zero means the station will be excluded from the run-"
 "once program."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:946
 msgid "Reset"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:966
 msgid ""
 "You have no programs currently added. Tap the Add button on the top right "
 "corner to get started."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:972
 msgid ""
 "Click any program below to expand/edit. Be sure to save changes by hitting "
 "submit below."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "M"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "T"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "W"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "R"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "F"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "Sa"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:988
 msgid "Su"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1000
-#: d:\xampp\htdocs\xampp\ospi/main.php:1350
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:752
 msgid "Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1001
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:272
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:285
 msgid "Enabled"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1003
 msgid "Weekly"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1004
 msgid "Interval"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1007
 msgid "Restrictions"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1008
-#: d:\xampp\htdocs\xampp\ospi/main.php:1263
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:216
 msgid "None"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1009
 msgid "Odd Days"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1010
 msgid "Even Days"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1013
 msgid "Days of the Week"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1022
 msgid "Interval (Days)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1023
 msgid "Starting In"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1026
 msgid "Stations:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1035
 msgid "Check All"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1036
 msgid "Uncheck All"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1040
 msgid "Start Time"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1041
 msgid "End Time"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1044
 msgid "Duration (minutes)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1045
 msgid "Interval (minutes)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1047
 msgid "Save New Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1049
 msgid "Save Changes to Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1050
 msgid "Delete Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1057
 msgid "Sprinkler Stations"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1078
 msgid "System Disabled"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1083
 msgid "Rain delay until"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1083
-#: d:\xampp\htdocs\xampp\ospi/main.php:1178
 msgid "D, d M Y H:i:s"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1088
 msgid "Rain detected"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1102
 msgid "is running on"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1102
 msgid "stations"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1103
-#: d:\xampp\htdocs\xampp\ospi/main.php:1116
-#: d:\xampp\htdocs\xampp\ospi/main.php:1155
-#: d:\xampp\htdocs\xampp\ospi/main.php:1158
-#: d:\xampp\htdocs\xampp\ospi/main.php:1351
 msgid "Manual program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1103
-#: d:\xampp\htdocs\xampp\ospi/main.php:1116
-#: d:\xampp\htdocs\xampp\ospi/main.php:1158
-#: d:\xampp\htdocs\xampp\ospi/main.php:1203
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:291
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:322
 msgid "remaining"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1115
 msgid "is running on station"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1125
 msgid "Manual mode enabled"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1157
 msgid "Running"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1157
 msgid "Scheduled"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1161
-#: d:\xampp\htdocs\xampp\ospi/main.php:1309
 msgid "(Master)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1178
 msgid "last ran station"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1178
 msgid "for"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1178
 msgid "m"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1178
 msgid "s on"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1202
 msgid "are"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1202
 msgid "is"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1202
 msgid "running"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1226
 msgid "Timezone"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1234
-#: d:\xampp\htdocs\xampp\ospi/main.php:1240
 msgid "Localization"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1244
 msgid "NTP Sync"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1251
 msgid "Auto Reconnect"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1254
 msgid "Extension Boards"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1257
 msgid "Sequential"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1260
 msgid "Station Delay (seconds)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1263
 msgid "Master Station"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1270
 msgid "Location"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1273
 msgid "Master On Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1276
 msgid "Master Off Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1279
 msgid "Use Rain Sensor"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1282
 msgid "Normally Open (Rain Sensor)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1285
 msgid "% Watering"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1288
 msgid "Ignore Password"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1302
 msgid "Station Name"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1302
 msgid "Activate Master?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1333
 msgid "Change Password"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1334
 msgid "Save Changes to"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1335
 msgid "Delete"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1352
 msgid "Run-once program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/main.php:1362
 msgid "Y-m-d H:i:s"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:24
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:238
 msgid "Settings"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:31
 msgid "Update Available"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:34
 msgid "Weather"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:38
 msgid "Information"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:39
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:91
 msgid "Current Status"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:40
 msgid "Preview Programs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:41
 msgid "View Logs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:44
 msgid "Program Control"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:45
 msgid "Edit Programs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:46
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:105
 msgid "Manual Control"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:48
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:126
 msgid "Run-Once Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:49
 msgid "Stop All Stations"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:54
 msgid "Logged in as:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:58
 msgid "Auto Login"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:62
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:114
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:182
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:253
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:260
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:274
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:287
 msgid "Off"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:63
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:115
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:183
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:254
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:261
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:275
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:288
 msgid "On"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:71
 msgid "Theme"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:75
 msgid "Legacy"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:76
 msgid "Flat"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:81
 msgid "Export Configuration"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:82
 msgid "Import Configuration"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:83
 msgid "Logout"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:84
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:374
 msgid "About"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:92
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:106
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:127
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:137
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:147
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:157
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:198
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:239
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:298
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:310
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:320
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:342
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:354
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:375
 msgid "Back"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:93
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:199
 msgid "Refresh"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:109
 msgid "With manual mode turned on, tap a station to toggle it."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:112
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:251
 msgid "Manual Mode"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:136
 msgid "Programs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:138
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:311
 msgid "Add"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:146
 msgid "Add Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:160
 msgid ""
 "Rain delay allows you to disable all programs for a set duration. You can "
 "manually set a rain delay or enable automatic rain delays."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:162
 msgid "Manual Rain Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:164
 msgid ""
 "Enable manual rain delay by entering a value into the input below. To turn "
 "off a currently enabled rain delay use a value of 0."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:167
 msgid "Duration (in hours):"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:175
 msgid "Automatic Rain Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:177
 msgid ""
 "When automatic rain delay is enabled, the weather will be checked for rain "
 "every hour. If the weather reports any condition suggesting rain, a rain "
 "delay is automatically issued using the below set delay duration."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:180
 msgid "Auto Rain Delay"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:186
 msgid "Delay Duration (hours)"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:197
 msgid "Logs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:204
 msgid "Graph"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:206
 msgid "Table"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:212
 msgid "Options"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:214
 msgid "Grouping:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:218
 msgid "Hour"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:220
 msgid "DOW"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:222
 msgid "Month"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:225
 msgid "Start:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:227
 msgid "End:"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:243
 msgid "Clear Logs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:244
 msgid "Device Options"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:245
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:341
 msgid "Edit Stations"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:246
 msgid "User Management"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:249
 msgid "System Control"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:258
 msgid "Operation"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:264
 msgid "Reboot OpenSprinkler"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:267
 msgid "Automatically Disable Manual Mode"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:269
 msgid ""
 "Automatically disable manual mode at midnight. Use this option to turn off "
 "manual mode and ensure programs run even if you forget manual mode enabled."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:280
 msgid "Local Assets"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:282
 msgid ""
 "Choose between local assets (javascript libraries and CSS) or public CDN "
 "(Google and cdnjs)."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:297
 msgid "OS Settings"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:309
 msgid "User Control"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:319
 msgid "Add User"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:353
 msgid "Program Preview"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:364
 msgid "Zoom in"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:365
 msgid "Zoom out"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:366
 msgid "Move left"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:367
 msgid "Move right"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:418
 msgid "Yes"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/sprinklers.php:419
 msgid "No"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/auth.js.php:93
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:377
 msgid "Invalid Login"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:40
 msgid "Connection timed-out. Please try again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:127
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:168
 msgid ""
 "Auto disable of manual mode was not changed. Check config.php permissions "
 "and try again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:136
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:176
 msgid ""
 "Asset location was not changed. Check config.php permissions and try again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:197
 msgid ""
 "Error communicating with OpenSprinkler. Please check your password is "
 "correct."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:412
 msgid "Are you sure you want to logout?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:468
 msgid "Are you sure you want to delete "
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:491
 msgid "User already exists"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:508
 msgid "Password for"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:508
 msgid "has been updated"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:568
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:620
 msgid "No entries found in the selected date range"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Sun"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Mon"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Tue"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Wed"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Thr"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Fri"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:702
 msgid "Sat"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Jan"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Feb"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Mar"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Apr"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "May"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Jun"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Jul"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Aug"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Sep"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Oct"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Nov"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:709
 msgid "Dec"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:741
 msgid "Quick Programs"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:749
 msgid "Last Used Program"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:790
 msgid "No stations set to run on this day."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:949
 msgid "Are you sure you want to delete program "
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:976
 msgid "Error: Interval days must be between 2 and 128."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:978
 msgid "Error: Starting in days wrong."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:989
 msgid "Error: Start time must be prior to end time."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1009
 msgid "Error: You have not selected any stations."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1019
 msgid "Program added successfully"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1029
 msgid "Program has been updated"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1068
 msgid "Settings have been saved"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1083
 msgid "Station name must be 16 characters or less"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1109
 msgid "Stations have been updated"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1125
 msgid "Run-once program has been scheduled"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1166
 msgid "Rain delay has been successfully set"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1182
 msgid ""
 "Auto-delay changes were not saved. Check config.php permissions and try "
 "again."
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1184
 msgid "Auto-delay changes have been saved"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1190
 msgid "Are you sure you want to clear all your log data?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1198
 msgid "Logs have been cleared"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1205
 msgid "Are you sure you want to reboot OpenSprinkler?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1213
 msgid "OpenSprinkler is rebooting now"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1220
 msgid "Are you sure you want to stop all stations?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1228
 msgid "All stations have been stopped"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1243
 msgid "Backup saved to your device"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1251
 msgid "No backup available on this device"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1255
 msgid "Are you sure you want to restore the configuration?"
 msgstr ""
 
-#: d:\xampp\htdocs\xampp\ospi/js/main.js.php:1263
 msgid "Backup restored to your device"
 msgstr ""
