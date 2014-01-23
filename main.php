@@ -28,6 +28,7 @@ if (function_exists('date_default_timezone_set')) {
 #Configure localization
 if (!isset($lang)) {
     $lang = 'en_US.utf8';
+    changeConfigString("lang",$lang);
 	submit_lang($lang);
 } else { 
 	submit_lang($lang);
