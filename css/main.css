@@ -154,7 +154,7 @@ a {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
-#manual ul {
+#manual ul, #forecast ul {
     max-width: 800px;
     margin: 16px auto;
 }

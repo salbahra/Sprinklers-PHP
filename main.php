@@ -28,7 +28,7 @@ if (function_exists('date_default_timezone_set')) {
 #Configure localization
 if (!isset($lang)) {
     $lang = 'en_US.utf8';
-    changeConfigString("lang",$lang);
+	changeConfigString("lang",$lang);
 	submit_lang($lang);
 } else { 
 	submit_lang($lang);
@@ -81,7 +81,7 @@ $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15
 if (isset($_REQUEST['action'])) {
     if (is_callable($_REQUEST['action'])) {
         if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config"))) {
+            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config","make_list_forecast"))) {
                 call_user_func($_REQUEST['action']);
             }
         } else {
@@ -115,10 +115,41 @@ function get_weather_data() {
     if ($region == "United States" || $region == "Bermuda" || $region == "Palau") {
         $temp = $newdata[3]."&#176;F";
     } else {
-        $temp = intval(($newdata[3]-32)*(5/9))."&#176;C";
+        $temp = intval(round(($newdata[3]-32)*(5/9)))."&#176;C";
     }
     $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$temp,"date"=>$newdata[4],"location"=>$loc[1]);
     return $weather;
+}
+
+#Get the forecast weather
+function get_forecast_data() {
+    global $woeid;
+    $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
+    if ($data === false) return array();
+	preg_match("/<yweather:location .*?country=\"(.*?)\"\/>/",$data,$region);
+	preg_match("/<title>Yahoo! Weather - (.*)<\/title>/",$data,$loc);
+	$region = $region[1];
+    $xml = simplexml_load_string($data); 
+	$item_yweather = $xml->channel->item->children("http://xml.weather.yahoo.com/ns/rss/1.0");
+	foreach($item_yweather as $x => $yw_item) {
+		foreach($yw_item->attributes() as $k => $attr) {
+			if($k == 'day') $day = $attr;
+			if($x == 'forecast') {
+				if (($k == 'low') || ($k == 'high')) {
+					if ($region == "United States" || $region == "Bermuda" || $region == "Palau") {
+						$yw_forecast[$x][$day . ''][$k] = $attr."&#176;F";
+					} else $yw_forecast[$x][$day . ''][$k] = intval(round(($attr-32)*(5/9)))."&#176;C";
+				} else $yw_forecast[$x][$day . ''][$k] = (string)$attr;
+			} else { 
+				if($k == 'temp') {
+					if ($region == "United States" || $region == "Bermuda" || $region == "Palau") $yw_forecast[$x][$k] = $attr."&#176;F";
+					else $yw_forecast[$x][$k] = intval(round(($attr-32)*(5/9)))."&#176;C";
+				} else $yw_forecast[$x][$k] = (string)$attr;
+			}
+		}
+	}
+	$yw_forecast['location'] = $loc[1];
+    return $yw_forecast;
 }
 
 #Lookup code and get the set delay
@@ -1345,6 +1376,33 @@ function make_user_list() {
         echo 2;
     }
     echo $list."</div>";
+}
+
+#Generate weather forecast
+function make_list_forecast() {
+	$forecasts = get_forecast_data();
+	$dateformat = _("d M Y");
+	$month = array("Jan"=>_("Jan"),"Feb"=>_("Feb"),"Mar"=>_("Mar"),"Apr"=>_("Apr"),"May"=>_("May"),"Jun"=>_("Jun"),"Jul"=>_("Jul"),"Aug"=>_("Aug"),"Sep"=>_("Sep"),"Oct"=>_("Oct"),"Nov"=>_("Nov"),"Dec"=>_("Dec"));
+	$days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thr"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
+	$dateformat = explode(" ",$dateformat);
+	$list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['location']."</li>";
+	$list .= "<li data-icon='false' style='text-align:center'><p title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></p><span>"._("Now")."</span><br><span>".$forecasts['condition']['temp']."</span></li>";
+	foreach ($forecasts as $k => $forecast) {
+		foreach ($forecast as $attr) {			
+			$date = explode(" ",$attr['date']);
+			$date = array("d"=>$date[0],"M"=>$date[1],"Y"=>$date[2]);
+			$displaydate = "";
+			foreach ($dateformat as $d) {
+				if ($d == "M") $date[$d] = $month[$date[$d]];
+				$displaydate .= $date[$d]." ";
+			}
+			foreach ($days as $w => $day) {
+				if ($w == $attr['day']) $displayday = $day;
+			}
+			if($k == 'forecast') $list .= "<li data-icon='false' style='text-align:center'><span>".$displaydate."</span><br><p title='".$attr['text']."' class='wicon cond".$attr['code']."'></p><span>".$displayday."</span><br><span>"._("Low").": ".$attr['low']."  "._("High").": ".$attr['high']."</span></li>";
+		}
+	}
+    echo $list;
 }
 
 function pidname($pid) {

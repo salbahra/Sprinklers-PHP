@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-01-21 14:48+0100\n"
-"PO-Revision-Date: 2014-01-21 15:10+0100\n"
+"POT-Creation-Date: 2014-01-24 17:08+0100\n"
+"PO-Revision-Date: 2014-01-25 18:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -373,6 +373,75 @@ msgstr "Változtatások mentése"
 msgid "Delete"
 msgstr "Törlés"
 
+msgid "d M Y"
+msgstr "Y M d"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Már"
+
+msgid "Apr"
+msgstr "Ápr"
+
+msgid "May"
+msgstr "Máj"
+
+msgid "Jun"
+msgstr "Jún"
+
+msgid "Jul"
+msgstr "Júl"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "Sep"
+msgstr "Szep"
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dec"
+
+msgid "Mon"
+msgstr "H"
+
+msgid "Tue"
+msgstr "K"
+
+msgid "Wed"
+msgstr "Sze"
+
+msgid "Thr"
+msgstr "Cs"
+
+msgid "Fri"
+msgstr "P"
+
+msgid "Sat"
+msgstr "Szo"
+
+msgid "Sun"
+msgstr "V"
+
+msgid "Now"
+msgstr "Most"
+
+msgid "Low"
+msgstr "Min"
+
+msgid "High"
+msgstr "Max"
+
 msgid "Run-once program"
 msgstr "Egyszeri öntözésű ütemterv"
 
@@ -447,6 +516,9 @@ msgstr "Kilépés"
 
 msgid "About"
 msgstr "Rólunk"
+
+msgid "Weather Forecast"
+msgstr "Időjárás előrejelzés"
 
 msgid "Back"
 msgstr "Vissza"
@@ -653,63 +725,6 @@ msgstr "frissítve"
 
 msgid "No entries found in the selected date range"
 msgstr "Nincs bejegyzés a kiválasztott dátum intervallumban"
-
-msgid "Sun"
-msgstr "V"
-
-msgid "Mon"
-msgstr "H"
-
-msgid "Tue"
-msgstr "K"
-
-msgid "Wed"
-msgstr "Sze"
-
-msgid "Thr"
-msgstr "Cs"
-
-msgid "Fri"
-msgstr "P"
-
-msgid "Sat"
-msgstr "Szo"
-
-msgid "Jan"
-msgstr "Jan"
-
-msgid "Feb"
-msgstr "Feb"
-
-msgid "Mar"
-msgstr "Már"
-
-msgid "Apr"
-msgstr "Ápr"
-
-msgid "May"
-msgstr "Máj"
-
-msgid "Jun"
-msgstr "Jún"
-
-msgid "Jul"
-msgstr "Júl"
-
-msgid "Aug"
-msgstr "Aug"
-
-msgid "Sep"
-msgstr "Szep"
-
-msgid "Oct"
-msgstr "Okt"
-
-msgid "Nov"
-msgstr "Nov"
-
-msgid "Dec"
-msgstr "Dec"
 
 msgid "Quick Programs"
 msgstr "Gyors ütemtervek"
