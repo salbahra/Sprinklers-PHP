@@ -28,7 +28,7 @@ $cache_file = "/var/www/sprinklers/.cache";
 $log_file = "/var/www/sprinklers/SprinklerChanges.txt";
 
 #Localization
-$lang = 'en_GB.utf8';
+$lang = 'en_US.utf8';
 
 #Enable/Disable Automatic Rain Delay Based on Weather
 $auto_delay = 0;
