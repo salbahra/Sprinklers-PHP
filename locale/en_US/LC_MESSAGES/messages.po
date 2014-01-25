@@ -1,0 +1,761 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenSprinkler\n"
+"POT-Creation-Date: 2014-01-21 14:01+0100\n"
+"PO-Revision-Date: 2014-01-21 14:01+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Sprinkler System"
+msgstr ""
+
+msgid "Welcome"
+msgstr ""
+
+msgid "Username:"
+msgstr ""
+
+msgid "username"
+msgstr ""
+
+msgid "Password:"
+msgstr ""
+
+msgid "password"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "Sign in"
+msgstr ""
+
+msgid "New Install"
+msgstr ""
+
+msgid ""
+"Settings have been saved. Please wait while your redirected to the login "
+"screen!"
+msgstr ""
+
+msgid ""
+"Settings have been saved. However, crontab was not added and must be added "
+"manually."
+msgstr ""
+
+msgid "Settings have NOT been saved. Check IP and Port settings and try again."
+msgstr ""
+
+msgid ""
+"Settings have NOT been saved. Check folder permissions and file paths then "
+"try again."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Add New User"
+msgstr ""
+
+msgid "You can add additional users after logging in"
+msgstr ""
+
+msgid "Open Sprinkler IP:"
+msgstr ""
+
+msgid "Open Sprinkler Password:"
+msgstr ""
+
+msgid "Advanced Configuration"
+msgstr ""
+
+msgid "Localization:"
+msgstr ""
+
+msgid "Pass File Location:"
+msgstr ""
+
+msgid "Cache File Location:"
+msgstr ""
+
+msgid "Sprinkler Log File:"
+msgstr ""
+
+msgid "Force SSL"
+msgstr ""
+
+msgid "Use Local Assets?"
+msgstr ""
+
+msgid "Running Now"
+msgstr ""
+
+msgid "Runtime"
+msgstr ""
+
+msgid "Date/Time"
+msgstr ""
+
+msgid "run"
+msgstr ""
+
+msgid "runs"
+msgstr ""
+
+msgid "min"
+msgstr ""
+
+msgid "mins"
+msgstr ""
+
+msgid "D, d M Y H:i"
+msgstr ""
+
+msgid "Rain Sensor"
+msgstr ""
+
+msgid "switch"
+msgstr ""
+
+msgid "switches"
+msgstr ""
+
+msgid "Rain Delay"
+msgstr ""
+
+msgid "change"
+msgstr ""
+
+msgid "changes"
+msgstr ""
+
+msgid ""
+"Value is in minutes. Zero means the station will be excluded from the run-"
+"once program."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid ""
+"You have no programs currently added. Tap the Add button on the top right "
+"corner to get started."
+msgstr ""
+
+msgid ""
+"Click any program below to expand/edit. Be sure to save changes by hitting "
+"submit below."
+msgstr ""
+
+msgid "M"
+msgstr ""
+
+msgid "T"
+msgstr ""
+
+msgid "W"
+msgstr ""
+
+msgid "R"
+msgstr ""
+
+msgid "F"
+msgstr ""
+
+msgid "Sa"
+msgstr ""
+
+msgid "Su"
+msgstr ""
+
+msgid "Program"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
+
+msgid "Interval"
+msgstr ""
+
+msgid "Restrictions"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Odd Days"
+msgstr ""
+
+msgid "Even Days"
+msgstr ""
+
+msgid "Days of the Week"
+msgstr ""
+
+msgid "Interval (Days)"
+msgstr ""
+
+msgid "Starting In"
+msgstr ""
+
+msgid "Stations:"
+msgstr ""
+
+msgid "Check All"
+msgstr ""
+
+msgid "Uncheck All"
+msgstr ""
+
+msgid "Start Time"
+msgstr ""
+
+msgid "End Time"
+msgstr ""
+
+msgid "Duration (minutes)"
+msgstr ""
+
+msgid "Interval (minutes)"
+msgstr ""
+
+msgid "Save New Program"
+msgstr ""
+
+msgid "Save Changes to Program"
+msgstr ""
+
+msgid "Delete Program"
+msgstr ""
+
+msgid "Sprinkler Stations"
+msgstr ""
+
+msgid "System Disabled"
+msgstr ""
+
+msgid "Rain delay until"
+msgstr ""
+
+msgid "D, d M Y H:i:s"
+msgstr ""
+
+msgid "Rain detected"
+msgstr ""
+
+msgid "is running on"
+msgstr ""
+
+msgid "stations"
+msgstr ""
+
+msgid "Manual program"
+msgstr ""
+
+msgid "remaining"
+msgstr ""
+
+msgid "is running on station"
+msgstr ""
+
+msgid "Manual mode enabled"
+msgstr ""
+
+msgid "Running"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "(Master)"
+msgstr ""
+
+msgid "last ran station"
+msgstr ""
+
+msgid "for"
+msgstr ""
+
+msgid "m"
+msgstr ""
+
+msgid "s on"
+msgstr ""
+
+msgid "are"
+msgstr ""
+
+msgid "is"
+msgstr ""
+
+msgid "running"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "Localization"
+msgstr ""
+
+msgid "NTP Sync"
+msgstr ""
+
+msgid "Auto Reconnect"
+msgstr ""
+
+msgid "Extension Boards"
+msgstr ""
+
+msgid "Sequential"
+msgstr ""
+
+msgid "Station Delay (seconds)"
+msgstr ""
+
+msgid "Master Station"
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Master On Delay"
+msgstr ""
+
+msgid "Master Off Delay"
+msgstr ""
+
+msgid "Use Rain Sensor"
+msgstr ""
+
+msgid "Normally Open (Rain Sensor)"
+msgstr ""
+
+msgid "% Watering"
+msgstr ""
+
+msgid "Ignore Password"
+msgstr ""
+
+msgid "Station Name"
+msgstr ""
+
+msgid "Activate Master?"
+msgstr ""
+
+msgid "Change Password"
+msgstr ""
+
+msgid "Save Changes to"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Run-once program"
+msgstr ""
+
+msgid "Y-m-d H:i:s"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Update Available"
+msgstr ""
+
+msgid "Weather"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid "Current Status"
+msgstr ""
+
+msgid "Preview Programs"
+msgstr ""
+
+msgid "View Logs"
+msgstr ""
+
+msgid "Program Control"
+msgstr ""
+
+msgid "Edit Programs"
+msgstr ""
+
+msgid "Manual Control"
+msgstr ""
+
+msgid "Run-Once Program"
+msgstr ""
+
+msgid "Stop All Stations"
+msgstr ""
+
+msgid "Logged in as:"
+msgstr ""
+
+msgid "Auto Login"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On"
+msgstr ""
+
+msgid "Theme"
+msgstr ""
+
+msgid "Legacy"
+msgstr ""
+
+msgid "Flat"
+msgstr ""
+
+msgid "Export Configuration"
+msgstr ""
+
+msgid "Import Configuration"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "With manual mode turned on, tap a station to toggle it."
+msgstr ""
+
+msgid "Manual Mode"
+msgstr ""
+
+msgid "Programs"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Add Program"
+msgstr ""
+
+msgid ""
+"Rain delay allows you to disable all programs for a set duration. You can "
+"manually set a rain delay or enable automatic rain delays."
+msgstr ""
+
+msgid "Manual Rain Delay"
+msgstr ""
+
+msgid ""
+"Enable manual rain delay by entering a value into the input below. To turn "
+"off a currently enabled rain delay use a value of 0."
+msgstr ""
+
+msgid "Duration (in hours):"
+msgstr ""
+
+msgid "Automatic Rain Delay"
+msgstr ""
+
+msgid ""
+"When automatic rain delay is enabled, the weather will be checked for rain "
+"every hour. If the weather reports any condition suggesting rain, a rain "
+"delay is automatically issued using the below set delay duration."
+msgstr ""
+
+msgid "Auto Rain Delay"
+msgstr ""
+
+msgid "Delay Duration (hours)"
+msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+msgid "Graph"
+msgstr ""
+
+msgid "Table"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Grouping:"
+msgstr ""
+
+msgid "Hour"
+msgstr ""
+
+msgid "DOW"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
+msgid "Start:"
+msgstr ""
+
+msgid "End:"
+msgstr ""
+
+msgid "Clear Logs"
+msgstr ""
+
+msgid "Device Options"
+msgstr ""
+
+msgid "Edit Stations"
+msgstr ""
+
+msgid "User Management"
+msgstr ""
+
+msgid "System Control"
+msgstr ""
+
+msgid "Operation"
+msgstr ""
+
+msgid "Reboot OpenSprinkler"
+msgstr ""
+
+msgid "Automatically Disable Manual Mode"
+msgstr ""
+
+msgid ""
+"Automatically disable manual mode at midnight. Use this option to turn off "
+"manual mode and ensure programs run even if you forget manual mode enabled."
+msgstr ""
+
+msgid "Local Assets"
+msgstr ""
+
+msgid ""
+"Choose between local assets (javascript libraries and CSS) or public CDN "
+"(Google and cdnjs)."
+msgstr ""
+
+msgid "OS Settings"
+msgstr ""
+
+msgid "User Control"
+msgstr ""
+
+msgid "Add User"
+msgstr ""
+
+msgid "Program Preview"
+msgstr ""
+
+msgid "Zoom in"
+msgstr ""
+
+msgid "Zoom out"
+msgstr ""
+
+msgid "Move left"
+msgstr ""
+
+msgid "Move right"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Invalid Login"
+msgstr ""
+
+msgid "Connection timed-out. Please try again."
+msgstr ""
+
+msgid ""
+"Auto disable of manual mode was not changed. Check config.php permissions "
+"and try again."
+msgstr ""
+
+msgid ""
+"Asset location was not changed. Check config.php permissions and try again."
+msgstr ""
+
+msgid ""
+"Error communicating with OpenSprinkler. Please check your password is "
+"correct."
+msgstr ""
+
+msgid "Are you sure you want to logout?"
+msgstr ""
+
+msgid "Are you sure you want to delete "
+msgstr ""
+
+msgid "User already exists"
+msgstr ""
+
+msgid "Password for"
+msgstr ""
+
+msgid "has been updated"
+msgstr ""
+
+msgid "No entries found in the selected date range"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thr"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "Quick Programs"
+msgstr ""
+
+msgid "Last Used Program"
+msgstr ""
+
+msgid "No stations set to run on this day."
+msgstr ""
+
+msgid "Are you sure you want to delete program "
+msgstr ""
+
+msgid "Error: Interval days must be between 2 and 128."
+msgstr ""
+
+msgid "Error: Starting in days wrong."
+msgstr ""
+
+msgid "Error: Start time must be prior to end time."
+msgstr ""
+
+msgid "Error: You have not selected any stations."
+msgstr ""
+
+msgid "Program added successfully"
+msgstr ""
+
+msgid "Program has been updated"
+msgstr ""
+
+msgid "Settings have been saved"
+msgstr ""
+
+msgid "Station name must be 16 characters or less"
+msgstr ""
+
+msgid "Stations have been updated"
+msgstr ""
+
+msgid "Run-once program has been scheduled"
+msgstr ""
+
+msgid "Rain delay has been successfully set"
+msgstr ""
+
+msgid ""
+"Auto-delay changes were not saved. Check config.php permissions and try "
+"again."
+msgstr ""
+
+msgid "Auto-delay changes have been saved"
+msgstr ""
+
+msgid "Are you sure you want to clear all your log data?"
+msgstr ""
+
+msgid "Logs have been cleared"
+msgstr ""
+
+msgid "Are you sure you want to reboot OpenSprinkler?"
+msgstr ""
+
+msgid "OpenSprinkler is rebooting now"
+msgstr ""
+
+msgid "Are you sure you want to stop all stations?"
+msgstr ""
+
+msgid "All stations have been stopped"
+msgstr ""
+
+msgid "Backup saved to your device"
+msgstr ""
+
+msgid "No backup available on this device"
+msgstr ""
+
+msgid "Are you sure you want to restore the configuration?"
+msgstr ""
+
+msgid "Backup restored to your device"
+msgstr ""
