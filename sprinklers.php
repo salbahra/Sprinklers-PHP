@@ -86,6 +86,18 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
 </div>
 
+<div data-role="page" id="forecast">
+    <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3><?php echo _("Weather Forecast"); ?></h3>
+        <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
+        <a href="#" data-onclick="get_forecast();" data-icon="refresh"><?php echo _("Refresh"); ?></a>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true" id="forecast_list">
+        </ul>
+    </div>
+</div>
+
 <div data-role="page" id="status">
     <div data-theme="a" data-role="header" data-position="fixed" data-tap-toggle="false">
         <h3><?php echo _("Current Status"); ?></h3>

@@ -390,6 +390,7 @@ function grab_token(pageid){
 
 function update_weather() {
     var $weather = $("#weather");
+	$("#weather").unbind("click");
     $weather.html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
@@ -401,7 +402,10 @@ function update_weather() {
             })
             return;
         }
-        $weather.html("<p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
+        $weather.html("<a href='' ><p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p></a><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
+		$("#weather").bind("click",function(){
+			get_forecast();
+		});
         $("#weather-list").animate({ 
             "margin-left": "0"
         },1000).show()
@@ -507,6 +511,17 @@ function change_user(id) {
         } else {
             showerror("<?php echo _("Password for"); ?> "+name+" <?php echo _("has been updated"); ?>")
         }
+    })    
+}
+
+function get_forecast() {
+	$.mobile.showPageLoadingMsg();
+    $.get("index.php","action=make_list_forecast",function(items){
+        var list = $("#forecast_list");
+        list.html(items).trigger("create");
+        if (list.hasClass("ui-listview")) list.listview("refresh");
+        $.mobile.hidePageLoadingMsg();
+        $.mobile.changePage($("#forecast"));
     })    
 }
 
