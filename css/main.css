@@ -254,8 +254,12 @@ div.ui-slider-switch {
     font-weight: normal;
     text-shadow: none !important;
 }
-.sname, .rem {
+.sname {
     margin: -.4em 0 !important;
+}
+.rem {
+    margin-bottom: 0 !important;
+    font-size: 0.71em !important;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
 div[class*='ui-block-'], #log_options, .center {

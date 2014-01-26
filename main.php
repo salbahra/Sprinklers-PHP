@@ -1243,7 +1243,7 @@ function make_list_status() {
         $numProg = count($allPnames);
         $allPnames = strrev(preg_replace(strrev("/, /"),strrev(" and "),strrev(implode(", ", $allPnames)),1));
         $pinfo = $allPnames." ".(($numProg > 1) ? _("are") : _("is") )." "._("running")." ";
-        $pinfo .= "<span id='countdown-p' class='nobr'>(".sec2hms($ptotal)." "._("remaining").")</span>";
+        $pinfo .= "<br><span id='countdown-p' class='nobr'>(".sec2hms($ptotal)." "._("remaining").")</span>";
         $runningTotal["p"] = $ptotal;
         $header .= "<br>".$pinfo;
     }
