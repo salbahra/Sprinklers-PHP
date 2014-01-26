@@ -278,7 +278,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider"><?php echo _("Local Assets"); ?></li>
             <li>
-                <p class="rain-desc"><?php echo _("Assets are javascript and CSS libraries that power the mobile web app. Choose between local assets or public content distibution network (CDN)."); ?></p>
+                <p class="rain-desc"><?php echo _("Assets are javascript and CSS libraries that power the mobile web app. Choose between local assets or content distibution network (CDN) hosted assets."); ?></p>
             </li>
             <li class="ui-field-contain">
                 <label for="local_assets"><b><?php echo _("Enabled"); ?></b></label>
