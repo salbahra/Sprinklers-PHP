@@ -1382,24 +1382,31 @@ function make_user_list() {
 function make_list_forecast() {
 	$forecasts = get_forecast_data();
 	$dateformat = _("d M Y");
+	$displaydate = "";
 	$month = array("Jan"=>_("Jan"),"Feb"=>_("Feb"),"Mar"=>_("Mar"),"Apr"=>_("Apr"),"May"=>_("May"),"Jun"=>_("Jun"),"Jul"=>_("Jul"),"Aug"=>_("Aug"),"Sep"=>_("Sep"),"Oct"=>_("Oct"),"Nov"=>_("Nov"),"Dec"=>_("Dec"));
-	$days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thr"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
+	$days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thu"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
 	$dateformat = explode(" ",$dateformat);
 	$list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['location']."</li>";
 	$list .= "<li data-icon='false' style='text-align:center'><p title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></p><span>"._("Now")."</span><br><span>".$forecasts['condition']['temp']."</span></li>";
-	foreach ($forecasts as $k => $forecast) {
-		foreach ($forecast as $attr) {			
-			$date = explode(" ",$attr['date']);
-			$date = array("d"=>$date[0],"M"=>$date[1],"Y"=>$date[2]);
-			$displaydate = "";
-			foreach ($dateformat as $d) {
-				if ($d == "M") $date[$d] = $month[$date[$d]];
-				$displaydate .= $date[$d]." ";
+	if (is_array($forecasts)) {
+		foreach ($forecasts as $k => $forecast) {
+			if (is_array($forecast)) {
+				foreach ($forecast as $attr) {			
+					if (isset($attr['date'])) {
+						$date = explode(" ",$attr['date']);
+						$date = array("d"=>$date[0],"M"=>$date[1],"Y"=>$date[2]);
+						$displaydate = "";
+						foreach ($dateformat as $d) {
+							if ((isset($d)) && ($d == "M")) $date[$d] = $month[$date[$d]];
+							$displaydate .= $date[$d]." ";
+						}
+					}
+					foreach ($days as $w => $day) {
+						if ((isset($attr['day'])) && ($w == $attr['day'])) $displayday = $day;
+					}
+					if($k == 'forecast') $list .= "<li data-icon='false' style='text-align:center'><span>".$displaydate."</span><br><p title='".$attr['text']."' class='wicon cond".$attr['code']."'></p><span>".$displayday."</span><br><span>"._("Low").": ".$attr['low']."  "._("High").": ".$attr['high']."</span></li>";
+				}
 			}
-			foreach ($days as $w => $day) {
-				if ($w == $attr['day']) $displayday = $day;
-			}
-			if($k == 'forecast') $list .= "<li data-icon='false' style='text-align:center'><span>".$displaydate."</span><br><p title='".$attr['text']."' class='wicon cond".$attr['code']."'></p><span>".$displayday."</span><br><span>"._("Low").": ".$attr['low']."  "._("High").": ".$attr['high']."</span></li>";
 		}
 	}
     echo $list;
