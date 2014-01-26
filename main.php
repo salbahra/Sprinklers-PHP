@@ -34,13 +34,12 @@ if (extension_loaded("gettext")) {
 
     if (!isset($lang)) {
         $lang = 'en_US.utf8';
-        changeConfigString("lang",$lang);
+        changeConfig("lang",$lang,"s");
     	change_lang($lang);
     } else { 
     	change_lang($lang);
     }
 }
-
 
 #Check if PHP has str_getcsv function or if it needs a fallback
 if (!function_exists('str_getcsv')) {
@@ -56,27 +55,27 @@ if (!function_exists('str_getcsv')) {
 
 #Help migrate older configurations
 if (!isset($local_assets)) {
-    changeConfig("local_assets",0);
+    changeConfig("local_assets",0,"i");
     $local_assets = 0;
 }
 if (!isset($auto_delay)) {
-    changeConfig("auto_delay",0);
+    changeConfig("auto_delay",0,"i");
     $auto_delay = 0;
 }
 
 if (!isset($auto_mm)) {
-    changeConfig("auto_mm",0);
+    changeConfig("auto_mm",0,"i");
     $auto_mm = 0;
 }
 
 if (!isset($auto_delay_duration)) {
-    changeConfig("auto_delay_duration",24);
+    changeConfig("auto_delay_duration",24,"i");
     $auto_delay_duration = 24;
 }
 
 if (!isset($woeid)) {
     $woeid = get_woeid();
-    changeConfig("woeid",$woeid);
+    changeConfig("woeid",$woeid,"i");
 }
 
 #Get Base URL of Site
@@ -583,7 +582,7 @@ function submit_autodelay() {
     $switch = ($autodelay["auto_delay"] === "on") ? 1 : 0;
     if ($switch !== $auto_delay) {
         $auto_delay = $switch;
-        if (!changeConfig("auto_delay",$switch)) {
+        if (!changeConfig("auto_delay",$switch,"i")) {
             echo 2;
             exit();
         }
@@ -591,7 +590,7 @@ function submit_autodelay() {
     $switch = intval($autodelay["auto_delay_duration"]);
     if ($switch !== $auto_delay_duration) {
         $auto_delay_duration = $switch;
-        if (!changeConfig("auto_delay_duration",$switch)) {
+        if (!changeConfig("auto_delay_duration",$switch,"i")) {
             echo 2;
             exit();
         }
@@ -604,8 +603,8 @@ function submit_options() {
     global $keyNames;
     if (isset($_SESSION["OSPi"])) {
         foreach (json_decode($_REQUEST["options"]) as $key => $value) {
-			if ($key == "lang") { 
-				changeConfigString("lang",$value);
+			if ($key == "lang") {
+				changeConfig("lang",$value,"s");
 			}
 			else {
 				if ($key !== "loc") {
@@ -619,10 +618,15 @@ function submit_options() {
         }
         send_to_os("/co?pw=&".http_build_query($data));
     } else {
-        send_to_os("/co?pw=&".http_build_query(json_decode($_REQUEST["options"])));
+        $data = json_decode($_REQUEST["options"], true);
+        if (array_key_exists("lang", $data)) {
+            changeConfig("lang",$data["lang"],"s");
+            unset($data["lang"]);
+        }
+        send_to_os("/co?pw=&".http_build_query($data));
     }
     $woeid = get_woeid();
-    changeConfig("woeid",$woeid);
+    changeConfig("woeid",$woeid,"i");
 }
 
 #Submit updated stations
@@ -683,7 +687,7 @@ function spoff() {
 
 #Switch to CDN hosted assets
 function local_assets_off() {
-    if (changeConfig("local_assets",0)) {
+    if (changeConfig("local_assets",0,"i")) {
         $local_assets = 0;
         echo 1;
         exit();
@@ -693,7 +697,7 @@ function local_assets_off() {
 
 #Switch to locally hosted assets
 function local_assets_on() {
-    if (changeConfig("local_assets",1)) {
+    if (changeConfig("local_assets",1,"i")) {
         $local_assets = 1;
         echo 1;
         exit();
@@ -702,7 +706,7 @@ function local_assets_on() {
 }
 #Turn off automatic disable of manual mode
 function auto_mm_off() {
-    if (changeConfig("auto_mm",0)) {
+    if (changeConfig("auto_mm",0,"i")) {
         $auto_mm = 0;
         echo 1;
         exit();
@@ -712,7 +716,7 @@ function auto_mm_off() {
 
 #Turn on automatic disable of manual mode
 function auto_mm_on() {
-    if (changeConfig("auto_mm",1)) {
+    if (changeConfig("auto_mm",1,"i")) {
         $auto_mm = 1;
         echo 1;
         exit();
@@ -1716,45 +1720,29 @@ function delLineFromFile($fileName, $lineToDelete){
     return true;
 }
 
-#Change a configuration value
-function changeConfig($variable, $value){
-    $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets");
-    #Only allow the above variables to be changed
-    if (!in_array($variable, $allowed)) return false;
-    #Sanatize input
-    $value = intval($value);
-    $found = false;
-    $arr = file("config.php");    
-    $fp = fopen("config.php", 'w+');
-    if ($fp === false) return false;
-    foreach($arr as $line) {
-        if (!$found && strpos($line, "\$".$variable) === 0) {
-            $line = "\$".$variable."=".$value.";\n";
-            $found = true;
-        }
-        if (!$found && strpos($line,"?>") === 0) fwrite($fp,"\$".$variable."=".$value.";\n");
-        fwrite($fp,$line);
-    }
-    fclose($fp);
-    return true;
-}
+function changeConfig($variable, $value, $type){
+    if ($type === "i") $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets");
+    else if ($type === "s") $allowed = array("lang");
+    else return false;
 
-#Change a configuration string
-function changeConfigString($variable, $string){
-    $allowed = array("lang");
     #Only allow the above variables to be changed
     if (!in_array($variable, $allowed)) return false;
+
     #Sanatize input
+    if ($type === "i") $value = intval($value);
+    else if ($type === "s") $value = filter_var($value, FILTER_SANITIZE_STRING);
+
     $found = false;
     $arr = file("config.php");    
     $fp = fopen("config.php", 'w+');
     if ($fp === false) return false;
     foreach($arr as $line) {
         if (!$found && strpos($line, "\$".$variable) === 0) {
-            $line = "\$".$variable." = '".$string."';\n";
+            if ($type === "i") $line = "\$".$variable."=".$value.";\n";
+            else if ($type === "s") $line = "\$".$variable." = '".$value."';\n";
             $found = true;
         }
-        if (!$found && strpos($line,"?>") === 0) fwrite($fp,"\$".$variable." = '".$string."';\n");
+        if (!$found && strpos($line,"?>") === 0) fwrite($fp,$line);
         fwrite($fp,$line);
     }
     fclose($fp);
