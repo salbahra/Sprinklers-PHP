@@ -1077,7 +1077,8 @@ function submit_settings() {
         if (result == 0) {
             comm_error()
         } else {
-			location.reload();
+            var lang = $("#lang");
+			if (lang.data("language") !== lang.val()) location.reload();
             showerror("<?php echo _('Settings have been saved'); ?>")
         }
     })

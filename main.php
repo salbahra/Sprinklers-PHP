@@ -1265,13 +1265,13 @@ function make_settings_list() {
 				$localPi = isValidUrl("http://127.0.0.1:8080");
 				if ($localPi) {
 					$locals = get_available_languages();
-					$list .= "<label for='lang' class='select'>"._("Localization")."</label><select data-mini='true' id='lang'>";
+					$list .= "<label for='lang' class='select'>"._("Localization")."</label><select data-mini='true' id='lang' data-language='".$lang."'>";
 					foreach ($locals as $l=>$local) {
 						$list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
 					}
 					$list .= "</select>";
 					} else {
-					$list .= "<label for='lang'>"._("Localization")."</label><input data-mini='true' type='text' id='lang' value='".$lang."' />";
+					$list .= "<label for='lang'>"._("Localization")."</label><input data-mini='true' type='text' id='lang' value='".$lang."' data-language='".$lang."' />";
 					}
                 continue 2;
             case 2:
