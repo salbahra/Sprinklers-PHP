@@ -1389,7 +1389,7 @@ function make_list_forecast() {
     }
     $dateformat = _("d M Y");
     $month = array("Jan"=>_("Jan"),"Feb"=>_("Feb"),"Mar"=>_("Mar"),"Apr"=>_("Apr"),"May"=>_("May"),"Jun"=>_("Jun"),"Jul"=>_("Jul"),"Aug"=>_("Aug"),"Sep"=>_("Sep"),"Oct"=>_("Oct"),"Nov"=>_("Nov"),"Dec"=>_("Dec"));
-    $days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thr"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
+    $days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thu"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
     $dateformat = explode(" ",$dateformat);
     $list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['location']."</li>";
     $list .= "<li data-icon='false' style='text-align:center'><div title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></div><span>"._("Now")."</span><br><span>".$forecasts['condition']['temp']."</span></li>";

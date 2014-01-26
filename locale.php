@@ -403,7 +403,7 @@ function get_available_languages() {
 	$locales = explode("\n" , $locales);
  
 	foreach($locales as $c => $l) {
-		if(strlen($l)) {
+		if(strlen($l) > 7) {
 			$parts = explode('.' , $l);		
 			$lc = $parts[0];         
 			list($lcode , $ccode) = explode('_' , $lc);         
