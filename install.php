@@ -210,7 +210,7 @@ function get_list_available_lang() {
                 <h1><?php echo _("New Install"); ?></h1>
                 <a href="javascript:submit_config()" class="ui-btn-right"><?php echo _("Submit"); ?></a>
            </div>
-        	<div data-role="content">
+        	<div class="ui-content" role="main">
                 <form action="javascript:submit_config()" method="post" id="options">
                     <ul data-inset="true" data-role="listview">
                         <li data-role="list-divider"><?php echo _("Add New User"); ?></li>

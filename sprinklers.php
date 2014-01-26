@@ -24,7 +24,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a data-icon="gear" data-iconpos="notext" href="#settings"><?php echo _("Settings"); ?></a>
         <h3 style="padding:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
     </div>
-    <div data-role="content" style="padding-top:0px">
+    <div class="ui-content" role="main" style="padding-top:0px">
         <div id="footer-running">
         </div>
         <div id="showupdate" class="red">
@@ -79,7 +79,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="get_forecast();" data-icon="refresh"><?php echo _("Refresh"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true" id="forecast_list">
         </ul>
     </div>
@@ -91,7 +91,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="get_status();" data-icon="refresh"><?php echo _("Refresh"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <p id="status_header"></p>
         <ul data-role="listview" data-inset="true" id="status_list">
         </ul>
@@ -104,7 +104,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3><?php echo _("Manual Control"); ?></h3>
         <a href="#" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <p style="text-align:center"><?php echo _("With manual mode turned on, tap a station to toggle it."); ?></p>
         <ul data-role="listview" data-inset="true">
             <li class="ui-field-contain">
@@ -126,7 +126,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="submit_runonce();"><?php echo _("Submit"); ?></a>
     </div>
-    <div data-role="content" id="runonce_list">
+    <div class="ui-content" role="main" id="runonce_list">
     </div>
 </div>
 
@@ -136,7 +136,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#addprogram" data-onclick="add_program();" data-icon="plus"><?php echo _("Add"); ?></a>
     </div>
-    <div data-role="content" id="programs_list">
+    <div class="ui-content" role="main" id="programs_list">
     </div>
 </div>
 
@@ -146,7 +146,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#programs" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="submit_program('new');"><?php echo _("Submit"); ?></a>
     </div>
-    <div data-role="content" id="newprogram">
+    <div class="ui-content" role="main" id="newprogram">
     </div>
 </div>
 
@@ -155,7 +155,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h1><?php echo _("Rain Delay"); ?></h1>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <p style="text-align:center"><?php echo _("Rain delay allows you to disable all programs for a set duration. You can manually set a rain delay or enable automatic rain delays."); ?></p>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider"><?php echo _("Manual Rain Delay"); ?></li>
@@ -197,7 +197,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="get_logs();" data-icon="refresh"><?php echo _("Refresh"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" class="log_type">
             <input data-mini="true" type="radio" name="log_type" id="log_graph" value="graph" checked="checked" />
             <label for="log_graph"><?php echo _("Graph"); ?></label>
@@ -237,7 +237,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3><?php echo _("Settings"); ?></h3>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true">
             <li><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
             <li><a href="#" data-onclick="show_settings();"><?php echo _("Device Options"); ?></a></li>
@@ -297,7 +297,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="submit_settings();"><?php echo _("Submit"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true" id="os-settings-list">
         </ul>
     </div>
@@ -309,7 +309,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#add-user" data-icon="plus"><?php echo _("Add"); ?></a>
     </div>
-    <div data-role="content" id="user-control-list">
+    <div class="ui-content" role="main" id="user-control-list">
     </div>
 </div>
 
@@ -319,7 +319,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#user-control" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="add_user();"><?php echo _("Submit"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <ul data-inset="true" data-role="listview">
             <li data-role="list-divider"><?php echo _("Add New User"); ?></li>
             <li>
@@ -341,7 +341,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
         <a href="#" data-onclick="submit_stations();"><?php echo _("Submit"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true" id="os-stations-list">
         </ul>
     </div>
@@ -352,7 +352,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3><?php echo _("Program Preview"); ?></h3>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <div id="preview_header">
             <a href="#" data-onclick="changeday(-1);"><img src="img/moveleft.png" /></a>
             <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
@@ -373,7 +373,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <h3><?php echo _("About"); ?></h3>
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
-    <div data-role="content">
+    <div class="ui-content" role="main">
         <div data-role="collapsible-set">
             <div data-role="collapsible">
                 <h3>Background</h3>
@@ -410,8 +410,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
 </div>
 
-<div data-role="dialog" id="sure" data-title="Are you sure?">
-    <div data-role="content">
+<div data-role="page" data-dialog="true" id="sure" data-title="Are you sure?">
+    <div class="ui-content" role="main">
         <h3 class="sure-1" style="text-align:center"></h3>
         <p class="sure-2" style="text-align:center"></p>
         <a class="sure-do" data-role="button" data-theme="b" href="#"><?php echo _("Yes"); ?></a>
