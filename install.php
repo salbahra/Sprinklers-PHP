@@ -13,7 +13,7 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
 }
 
 #Required file
-    require_once "locale.php";
+require_once "locale.php";
 
 #Detect local interval program
 $localPi = isValidUrl("http://127.0.0.1:8080");
@@ -167,24 +167,7 @@ function get_list_available_lang() {
                 $.mobile.defaultPageTransition = 'fade';
                 $.mobile.defaultDialogTransition = 'fade';
                 $.mobile.hashListeningEnabled = false;
-                var theme = localStorage.getItem("theme");
-                if (theme === null) {
-                    theme = "legacy";
-                    localStorage.setItem("theme",theme)
-                }
-                $("#theme").attr("href",getThemeUrl(theme));
             });
-            function getThemeUrl(theme) {
-                switch (theme) {
-                    case "flat":
-                        var url = "css/jquery.mobile.flatui.min.css";
-                        break;
-                    default:
-                        var url = "css/jquery.mobile.min.css";
-                        break;
-                }
-                return url;
-            }
             function showerror(msg) {
                 // show error message
                 $.mobile.loading( 'show', {
@@ -195,10 +178,10 @@ function get_list_available_lang() {
                 });
             }
             function submit_config() {
-                $.mobile.showPageLoadingMsg()
+                $.mobile.loading("show");
                 //Submit form data to the server
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
-                    $.mobile.hidePageLoadingMsg()
+                    $.mobile.loading("hide");
                     if (data == 1) {
                         //If successful
                         showerror("<?php echo _('Settings have been saved. Please wait while your redirected to the login screen!'); ?>")
@@ -233,7 +216,7 @@ function get_list_available_lang() {
                         <li data-role="list-divider"><?php echo _("Add New User"); ?></li>
                         <li>
                             <p class='desc'><?php echo _("You can add additional users after logging in"); ?></p>
-                            <div data-role="fieldcontain">
+                            <div class="ui-field-contain">
                                 <label for="username"><?php echo _("Username:"); ?></label>
                                 <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" />
                                 <label for="password"><?php echo _("Password:"); ?></label>
@@ -242,24 +225,26 @@ function get_list_available_lang() {
                         </li>
                     </ul>
                     <div data-role="collapsible-set">
-                        <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='a'" : "data-collapsed='false' data-theme='b'"; ?>>
-                            <legend><?php echo $localPi ? "Interval Program (detected)" : "OpenSprinkler IP/password"; ?></legend>
-                            <div data-role="fieldcontain">
+                        <fieldset data-role="collapsible" <?php echo $localPi ? "data-theme='b'" : "data-collapsed='false' data-theme='a'"; ?>>
+                            <legend><?php echo $localPi ? _("Interval Program (detected)") : _("OpenSprinkler IP/password"); ?></legend>
+                            <div class="ui-field-contain">
                                 <label for="os_ip"><?php echo _("Open Sprinkler IP:"); ?></label>
                                 <input type="text" name="os_ip" id="os_ip" <?php echo $localPi ? "value='127.0.0.1:8080'" : ""; ?> />
                                 <label for="os_pw"><?php echo _("Open Sprinkler Password:"); ?></label>
                                 <input type="password" name="os_pw" id="os_pw" <?php echo $localPi ? "value='opendoor'" : ""; ?> />
                             </div>
                         </fieldset>
-                        <fieldset data-role="collapsible" data-theme="a">
+                        <fieldset data-role="collapsible" data-theme="b">
                             <legend><?php echo _("Advanced Configuration"); ?></legend>
-                            <div data-role="fieldcontain">
+                            <div class="ui-field-contain">
 								<label for="lang"><?php echo _("Localization:"); ?></label>
-								<?php if ($localPi) { ?>
-                                <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
-								<?php } else {?>
-								<input type="text" name="lang" id="lang" value="en_US.utf8" />
-								<?php } ?>
+								<?php
+                                    if ($localPi) {
+                                        echo '<select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>';
+								    } else {
+								        echo '<input type="text" name="lang" id="lang" value="en_US.utf8" />';
+								    }
+                                ?>
                                 <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
                                 <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
                                 <label for="cache_file"><?php echo _("Cache File Location:"); ?></label>

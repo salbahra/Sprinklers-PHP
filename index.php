@@ -27,14 +27,14 @@ is_auth();
             if ($local_assets) {
                 echo '<link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" id="theme" />';
             } else {
-                echo '<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.css" id="theme" />';
+                echo '<link rel="stylesheet" type="text/css" href="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" id="theme" />';
             }
         ?>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="shortcut icon" href="img/favicon.ico">
     </head> 
     <body style="display:none">
-        <div data-role="page" data-theme="a" id="start"></div>
+        <div data-role="page" id="start"></div>
         
         <div data-role="dialog" id="login" data-close-btn="none">
         	<div data-role="header" data-theme="b" data-position="fixed">
@@ -48,7 +48,7 @@ is_auth();
                         <label for="password" class="ui-hidden-accessible"><?php echo _("Password:"); ?></label>
                         <input type="password" name="password" id="password" value="" placeholder="<?php echo _("password"); ?>" />
                         <label><input type="checkbox" id="remember" name="remember" /><?php echo _("Remember Me"); ?></label>
-                        <button type="submit" data-theme="b"><?php echo _("Sign in"); ?></button>
+                        <button type="submit" class="ui-btn ui-btn-b"><?php echo _("Sign in"); ?></button>
                     </fieldset>
                 </form>
             </div>
@@ -60,9 +60,9 @@ is_auth();
                 echo '<script src="js/jquery.mobile.min.js"></script>';
                 echo '<script src="js/jquery.flot.min.js"></script>';
             } else {
-                echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>';
+                echo '<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>';
                 echo '<script>'; include_once("js/auth.js.php"); echo '</script>';
-                echo '<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.3.2/jquery.mobile.min.js"></script>';
+                echo '<script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>';
                 echo '<script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>';
             }
         ?>

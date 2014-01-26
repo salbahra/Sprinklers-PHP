@@ -68,6 +68,7 @@ a {
 #logs_list table {
     color: black;
     text-align: center;
+    text-shadow: none;
     background: #fff;
     border: 1px solid #b4b4b4;
     font: bold 14px helvetica;
@@ -99,7 +100,7 @@ a {
     display: none;
     padding: 2px 0;
     font-size: medium;
-    margin: 0 -15px 0 -15px;
+    margin: 0 -16px 0 -16px;
     position: relative;
 }
 #running-icon {
@@ -120,8 +121,8 @@ a {
 }
 .rain-desc {
     word-wrap:normal;
-    white-space:normal;
-    overflow:visible;
+    white-space:normal !important;
+    overflow:visible !important;
     text-align:center;
 }
 #preview_header .ui-input-text {
@@ -172,10 +173,6 @@ a {
     #weather-list li:not(.ui-li-divider) {
         height: auto;
     }
-    #weather .location {
-        font-size:8px;
-        font-weight: none;
-    }
     #logs_list .ui-li-aside {
         width: 25% !important;
         font-size: smaller;
@@ -197,12 +194,26 @@ a {
         content: "M       ";
         white-space:pre;
     }
+    .ui-mini {
+        font-size: 12px;
+    }
 }
 @media (max-width: 940px) {
+    #weather .location {
+        font-size:8px;
+        font-weight: none;
+        white-space: normal !important;
+    }
     .wicon {
         zoom: .5;
         -moz-transform: scale(0.5);
         -o-transform: scale(0.5);
+        display: block !important;
+    }
+}
+@media (max-width: 940px) and (min-width: 480px) {
+    .wicon {
+       margin: 0 auto !important;
     }
 }
 div.ui-slider-switch {
@@ -229,24 +240,22 @@ div.ui-slider-switch {
     background-color: #C96161 !important;
     text-decoration: line-through;
 }
-.rem {
-    margin-bottom: 0;
-}
 .red {
-    background-color: #C96161;
-    background: #C96161;
-    color: #FFFFFF;
-    font-weight: normal;
-    text-shadow: none;
-    font-size: larger;
-}
-.green {
-    background-color: #16a085;
-    background: #16a085;
+    background-color: #C96161 !important;
+    background: #C96161 !important;
     color: #FFFFFF !important;
     font-weight: normal;
-    text-shadow: none;
-    font-size: larger;
+    text-shadow: none !important;
+}
+.green {
+    background-color: #16a085 !important;
+    background: #16a085 !important;
+    color: #FFFFFF !important;
+    font-weight: normal;
+    text-shadow: none !important;
+}
+.sname, .rem {
+    margin: -.4em 0 !important;
 }
 .ui-header .ui-title { margin-left: 1em; margin-right: 1em; }
 div[class*='ui-block-'], #log_options, .center {
@@ -282,18 +291,18 @@ div.timeline-navigation-move-right {
     background: url('../img/moveright.png') no-repeat center;
 }
 div.timeline-frame {
-    border-color: #16a085;
+    border-color: #5D99C3;
     border-radius: 5px;
     -moz-border-radius: 5px; /* For Firefox 3.6 and older */
 }
 div.timeline-axis {
-    border-color: #16a085;
-    background-color: #16a085;
+    border-color: #5D99C3;
+    background-color: #5D99C3;
 }
 div.timeline-axis-grid {
 }
 div.timeline-groups-axis {
-    border-color: #16a085;
+    border-color: #5D99C3;
 }
 div.timeline-axis-text {
     color: white;
@@ -309,6 +318,10 @@ div.timeline-event-content {
     padding: 5px;
 }
 
+#zones table {
+    margin: 0 auto;
+}
+
 #weather {
     text-align: center;
     overflow: hidden;
@@ -321,7 +334,12 @@ div.timeline-event-content {
     width: 150px; height: 150px; 
     margin: -40px -10px -25px -25px; 
     background: url(../img/weather-icons-sprite.png);
- }
+}
+
+#forecast .wicon {
+    margin: 0 auto !important;
+}
+
 /* Weather Icon Sprites 
  * http://www.alistapart.com/articles/sprites
  * http://developer.yahoo.com/weather/#codes

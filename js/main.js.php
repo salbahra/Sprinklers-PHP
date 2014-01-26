@@ -43,14 +43,14 @@ $(document).ajaxError(function(x,t,m) {
 });
 
 //After main page is processed, hide loading message and change to the page
-$(document).one("pageinit","#sprinklers", function(){
-    $.mobile.hidePageLoadingMsg();
+$(document).one("pagecreate","#sprinklers", function(){
+    $.mobile.loading("hide");
     var theme = localStorage.getItem("theme");
     $("#s-theme-select").val(theme).slider("refresh");
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
-    $.mobile.changePage($("#sprinklers"),{transition:"none"});
+    $("body").pagecontainer("change","#sprinklers",{transition:"none"});
     var curr = $("#commit").data("commit");
     if (curr !== null) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
@@ -109,7 +109,7 @@ $("select[data-role='slider']").change(function(){
                 if (localStorage.getItem("token") !== null) return;
                 $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
                 $("#login .ui-checkbox").hide();
-                $.mobile.changePage($("#login"));
+                $("body").pagecontainer("change","#login");
             }
             if (type === "en") {
                 $.get("index.php","action=en_on",function(result){
@@ -234,7 +234,7 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
-        $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+        $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
         setTimeout(check_status,1000);
     } else {
         var title = document.title;
@@ -263,7 +263,7 @@ function check_status() {
         data = JSON.parse(data);
         if (window.interval_id !== undefined) clearInterval(window.interval_id);
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
-        if (data.seconds != 0) update_timer(data.seconds,data.sdelay);
+        if (data.seconds > 1) update_timer(data.seconds,data.sdelay);
         footer.removeClass().addClass(data.color).html(data.line).slideDown();
     })
 }
@@ -275,14 +275,14 @@ function update_timer(total,sdelay) {
         var diff = now - window.lastCheck;
         if (diff > 3000) {
             clearInterval(window.interval_id);
-            $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
             check_status();
         }
         window.lastCheck = now;
 
         if (total <= 0) {
             clearInterval(window.interval_id);
-            $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+            $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
             if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
@@ -367,21 +367,21 @@ function highlight(button) {
 }
 
 function grab_token(pageid){
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     var parameters = "action=gettoken&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=true";
     $("#username, #password").val('');
     $.post("index.php",parameters,function(reply){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         if (reply == 0) {
-            $.mobile.changePage($("#"+pageid));
+            $("body").pagecontainer("change","#"+pageid);
             showerror("<?php echo _("Invalid Login"); ?>");
         } else if (reply === "") {
             $("#"+pageid+"-autologin").val("off").slider("refresh");
             window.sliders["autologin"] = "off";
-            $.mobile.changePage($("#"+pageid));
+            $("body").pagecontainer("change","#"+pageid);
         } else {
             localStorage.setItem('token',reply);
-            $.mobile.changePage($("#"+pageid));
+            $("body").pagecontainer("change","#"+pageid);
         }
         $("#login .ui-checkbox").show()
         $("#login form").attr("action","javascript:dologin()");
@@ -390,8 +390,8 @@ function grab_token(pageid){
 
 function update_weather() {
     var $weather = $("#weather");
-	$("#weather").unbind("click");
-    $weather.html("<p style='margin:0;text-align:center;opacity:0.18'><img src='img/ajax-loader.gif' class='mini-load' /></p>");
+    $("#weather").unbind("click");
+    $weather.html("<div style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></div>");
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
@@ -402,10 +402,8 @@ function update_weather() {
             })
             return;
         }
-        $weather.html("<a href='' ><p title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></p></a><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
-		$("#weather").bind("click",function(){
-			get_forecast();
-		});
+        $weather.html("<div title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></div><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
+        $("#weather").bind("click",get_forecast);
         $("#weather-list").animate({ 
             "margin-left": "0"
         },1000).show()
@@ -414,7 +412,7 @@ function update_weather() {
 
 function logout(){
     areYouSure("<?php echo _('Are you sure you want to logout?'); ?>", "", function() {
-        $.mobile.changePage($("#login"));
+        $("body").pagecontainer("change","#login");
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
             $("body div[data-role='page']:not('.ui-page-active')").remove();
@@ -426,38 +424,38 @@ function logout(){
 }
 
 function gohome() {
-    $.mobile.changePage($('#sprinklers'), {reverse: true});
+    $("body").pagecontainer("change","#sprinklers",{reverse: true});
 }
 
 function show_settings() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_settings_list",function(items){
         var list = $("#os-settings-list");
-        list.html(items).trigger("create");
+        list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#os-settings"));
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#os-settings");
     })    
 }
 
 function show_stations() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_stations_list",function(items){
         var list = $("#os-stations-list");
-        list.html(items).trigger("create");
+        list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#os-stations"));
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#os-stations");
     })    
 }
 
 function show_users() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_user_list",function(items){
         var list = $("#user-control-list");
-        list.html(items).trigger("create");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#user-control"));
+        list.html(items).enhanceWithin();
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#user-control");
     })
 }
 
@@ -470,9 +468,9 @@ function user_id_name(id) {
 function delete_user(id) {
     var name = user_id_name(id);
     areYouSure("<?php echo _('Are you sure you want to delete '); ?>"+name+"?", "", function() {
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading("show");
         $.get("index.php","action=delete_user&name="+name,function(result){
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading("hide");
             if (result == 0) {
                 comm_error()
             } else {
@@ -486,9 +484,9 @@ function add_user() {
     var nameEl = $("#name"), passEl = $("#pass");
     var name = nameEl.val(), pass = passEl.val();
     nameEl.val(""), passEl.val("");
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=add_user&name="+name+"&pass="+pass,function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         if (result == 0) {
             comm_error()
         } else if (result == 3) {
@@ -503,9 +501,9 @@ function change_user(id) {
     var name = user_id_name(id), cpu = $("#cpu-"+id);
     var pass = cpu.val();
     cpu.val("");
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=change_user&name="+name+"&pass="+pass,function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         if (result == 0) {
             comm_error()
         } else {
@@ -515,18 +513,18 @@ function change_user(id) {
 }
 
 function get_forecast() {
-	$.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_list_forecast",function(items){
         var list = $("#forecast_list");
-        list.html(items).trigger("create");
+        list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#forecast"));
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#forecast");
     })    
 }
 
 function get_status() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_list_status",function(items){
         var list = $("#status_list");
         items = JSON.parse(items)
@@ -537,8 +535,8 @@ function get_status() {
         window.totals = JSON.parse(items.totals);
         if (window.interval_id !== undefined) clearInterval(window.interval_id);
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#status"));
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#status");
         if (window.totals["d"] !== undefined) {
             delete window.totals["p"];
             setTimeout(get_status,window.totals["d"]*1000);
@@ -549,7 +547,7 @@ function get_status() {
 
 function get_logs() {
     $("#logs input").blur();
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     var parms = "action=make_list_logs&start=" + (new Date($("#log_start").val()).getTime() / 1000) + "&end=" + ((new Date($("#log_end").val()).getTime() / 1000) + 86340);
 
     if ($("#log_graph").prop("checked")) {
@@ -578,13 +576,13 @@ function get_logs() {
             })
             if (is_empty) {
                 $("#placeholder").empty().hide();
-                $("#log_options").trigger("expand");
+                $("#log_options").collapsible("expand");
                 $("#zones, #graph_sort").hide();
                 $("#logs_list").show().html("<p class='center'><?php echo _('No entries found in the selected date range'); ?></p>");
             } else {
                 $("#logs_list").empty().hide();
                 var state = ($(window).height() > 680) ? "expand" : "collapse";
-                setTimeout(function(){$("#log_options").trigger(state)},100);
+                setTimeout(function(){$("#log_options").collapsible(state)},100);
                 $("#placeholder").show();
                 var zones = $("#zones");
                 var freshLoad = zones.find("table").length;
@@ -621,7 +619,7 @@ function get_logs() {
                     showArrows();
                 }
             }
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading("hide");
         });
         return;
     }
@@ -630,14 +628,14 @@ function get_logs() {
         $("#placeholder").empty().hide();
         var list = $("#logs_list");
         $("#zones, #graph_sort").hide(); list.show();
-        if (items.length == 154) {
-            $("#log_options").trigger("expand");
+        if (items.length == 131) {
+            $("#log_options").collapsible("expand");
             list.html("<p class='center'><?php echo _('No entries found in the selected date range'); ?></p>");
         } else {
-            $("#log_options").trigger("collapse");
-            list.html(items).trigger("create");
+            $("#log_options").collapsible("collapse");
+            list.html(items).enhanceWithin();
         }
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
     })
 }
 
@@ -736,18 +734,18 @@ function seriesChange() {
 }
 
 function get_manual() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_list_manual",function(items){
         var list = $("#mm_list");
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#manual"));
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#manual");
     })
 }
 
 function get_runonce() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.getJSON("index.php","action=make_runonce",function(items){
         window.rprogs = items.progs;
         var list = $("#runonce_list"), i=0;
@@ -778,9 +776,9 @@ function get_runonce() {
             fill_runonce(list,window.rprogs[prog]);
         })
 
-        list.trigger("create");
-        $.mobile.hidePageLoadingMsg();
-        $.mobile.changePage($("#runonce"));
+        list.enhanceWithin();
+        $.mobile.loading("hide");
+        $("body").pagecontainer("change","#runonce");
     })
 }
 
@@ -798,7 +796,7 @@ function get_preview() {
     var date = $("#preview_date").val();
     if (date === "") return;
     date = date.split("-");
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
         var empty = true;
         if (items == "") {
@@ -849,7 +847,7 @@ function get_preview() {
             $("#timeline .timeline-groups-text:contains('Master')").addClass("skip-numbering")
             $("#timeline-navigation").show()
         }
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
     })
 }
 
@@ -871,7 +869,7 @@ function changeday(dir) {
 }
 
 function get_programs(pid) {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=make_all_programs",function(items){
         var list = $("#programs_list");
         list.html(items);
@@ -909,9 +907,9 @@ function get_programs(pid) {
         $("#programs [id^='delete-']").click(function(){
             delete_program($(this).attr("id").split("-")[1]);
         })
-        $.mobile.changePage($("#programs"));
-        $.mobile.hidePageLoadingMsg();
-        $("#programs").trigger("create");
+        $("body").pagecontainer("change","#programs");
+        $.mobile.loading("hide");
+        $("#programs").enhanceWithin();
         update_program_header();
     })
 }
@@ -930,7 +928,7 @@ function update_program_header() {
 }
 
 function add_program() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=fresh_program",function(items){
         var list = $("#newprogram");
         list.html(items);
@@ -954,17 +952,17 @@ function add_program() {
         $("#addprogram [id^='submit-']").click(function(){
             submit_program("new");
         })
-        $.mobile.changePage($("#addprogram"));
-        $.mobile.hidePageLoadingMsg();
-        $("#addprogram").trigger("create");
+        $("body").pagecontainer("change","#addprogram");
+        $.mobile.loading("hide");
+        $("#addprogram").enhanceWithin();
     })    
 }
 
 function delete_program(id) {
     areYouSure("<?php echo _('Are you sure you want to delete program '); ?>"+(parseInt(id)+1)+"?", "", function() {
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading("show");
         $.get("index.php","action=delete_program&pid="+id,function(result){
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading("hide");
             if (result == 0) {
                 comm_error()
             } else {
@@ -1023,10 +1021,10 @@ function submit_program(id) {
     }
     if(station_selected==0) {showerror("<?php echo _('Error: You have not selected any stations.'); ?>");return;}
     program = JSON.stringify(program.concat(stations))
-    $.mobile.showPageLoadingMsg()
+    $.mobile.loading("show");
     if (id == "new") {
         $.get("index.php","action=update_program&pid=-1&data="+program,function(result){
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.loading("hide");
             get_programs()
             if (result == 0) {
                 setTimeout(comm_error,400)
@@ -1036,7 +1034,7 @@ function submit_program(id) {
         });
     } else {
         $.get("index.php","action=update_program&pid="+id+"&data="+program,function(result){
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.loading("hide");
             if (result == 0) {
                 comm_error()
             } else {
@@ -1072,9 +1070,9 @@ function submit_settings() {
         opt[id] = encodeURIComponent(data)
     })
     if (invalid) return
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt),function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         gohome();
         if (result == 0) {
             comm_error()
@@ -1114,9 +1112,9 @@ function submit_stations() {
     m["m"+bid]=parseInt(v,2);
     if ($("[id^='um_']").length) masop = "&masop="+JSON.stringify(m);
     if (invalid) return
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=submit_stations&names="+JSON.stringify(names)+masop,function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         gohome();
         if (result == 0) {
             comm_error()
@@ -1171,9 +1169,9 @@ function toggle(anchor) {
 }
 
 function raindelay() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=raindelay&delay="+$("#delay").val(),function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         gohome();
         if (result == 0) {
             comm_error()
@@ -1184,14 +1182,14 @@ function raindelay() {
 }
 
 function auto_raindelay() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     var params = {
         "auto_delay": $("#auto_delay").val(),
         "auto_delay_duration": $("#auto_delay_duration").val()
     }
     params = JSON.stringify(params)
     $.get("index.php","action=submit_autodelay&autodelay="+params,function(result){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         gohome();
         if (result == 2) {
             showerror("<?php echo _('Auto-delay changes were not saved. Check config.php permissions and try again.'); ?>");
@@ -1203,9 +1201,9 @@ function auto_raindelay() {
 
 function clear_logs() {
     areYouSure("<?php echo _('Are you sure you want to clear all your log data?'); ?>", "", function() {
-        $.mobile.showPageLoadingMsg()
+        $.mobile.loading("show");
         $.get("index.php","action=clear_logs",function(result){
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.loading("hide");
             gohome();
             if (result == 0) {
                 comm_error()
@@ -1218,9 +1216,9 @@ function clear_logs() {
 
 function rbt() {
     areYouSure("<?php echo _('Are you sure you want to reboot OpenSprinkler?'); ?>", "", function() {
-        $.mobile.showPageLoadingMsg()
+        $.mobile.loading("show");
         $.get("index.php","action=rbt",function(result){
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.loading("hide");
             gohome();
             if (result == 0) {
                 comm_error()
@@ -1233,9 +1231,9 @@ function rbt() {
 
 function rsn() {
     areYouSure("<?php echo _('Are you sure you want to stop all stations?'); ?>", "", function() {
-        $.mobile.showPageLoadingMsg()
+        $.mobile.loading("show");
         $.get("index.php","action=rsn",function(result){
-            $.mobile.hidePageLoadingMsg()
+            $.mobile.loading("hide");
             gohome();
             if (result == 0) {
                 comm_error()
@@ -1247,9 +1245,9 @@ function rsn() {
 }
 
 function export_config() {
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.get("index.php","action=export_config",function(data){
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.loading("hide");
         $("#sprinklers-settings").panel("close")
         if (data === "") {
             comm_error()
@@ -1268,9 +1266,9 @@ function import_config() {
     }
 
     areYouSure("<?php echo _('Are you sure you want to restore the configuration?'); ?>", "", function() {
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading("show");
         $.get("index.php","action=import_config&data="+data,function(reply){
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading("hide");
             gohome();
             if (reply == 0) {
                 comm_error()
@@ -1290,7 +1288,7 @@ function areYouSure(text1, text2, callback, callback2) {
     $("#sure .sure-dont").unbind("click.sure").on("click.sure", function() {
         callback2();
     });
-    $.mobile.changePage("#sure");
+    $("body").pagecontainer("change","#sure");
 }
 
 function showTooltip(x, y, contents, color) {

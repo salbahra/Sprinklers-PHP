@@ -20,27 +20,17 @@ $(document).one("mobileinit", function(e){
     $.mobile.defaultPageTransition = 'fade';
     $.mobile.defaultDialogTransition = 'fade';
     $.mobile.hashListeningEnabled = false;
-    var theme = localStorage.getItem("theme");
-    if (theme === null) {
-        theme = "legacy";
-        localStorage.setItem("theme",theme)
-    } else if (theme === "flat") {
-        insert_fonts();
-    }
-    var themecss = $("#theme");
-    window.themeurl = themecss.attr("href");
-    themecss.attr("href",getThemeUrl(theme));
 });
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
-$("#start").on("pageinit",function(e){
+$("#start").on("pagecreate",function(e){
     $("body").show();
 });
 
 //On intial load check if a valid token exists, for auto login
 $("#start").on("pageshow",function(e){
     if (!check_token()) {
-        $.mobile.changePage($("#login"));
+        $("body").pagecontainer("change","#login");
     }
 });
 
@@ -64,12 +54,12 @@ function check_token() {
     var token = localStorage.getItem('token');
     var parameters = "action=checktoken&token=" + token;
     if (typeof(token) !== 'undefined' && token != null) {
-        $.mobile.showPageLoadingMsg();
+        $.mobile.loading("show");
         $.post("index.php",parameters,function(reply){
             if (reply == 0) {
-                $.mobile.hidePageLoadingMsg();
+                $.mobile.loading("hide");
                 localStorage.removeItem('token');
-                $.mobile.changePage($("#login"));
+                $("body").pagecontainer("change","#login");
                 return;
             } else {
                 $("body").append(reply);
@@ -86,10 +76,10 @@ function check_token() {
 function dologin() {
     var parameters = "action=login&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=" + $('#remember').is(':checked');
     $("#username, #password").val('');
-    $.mobile.showPageLoadingMsg();
+    $.mobile.loading("show");
     $.post("index.php",parameters,function(reply){
         if (reply == 0) {
-            $.mobile.hidePageLoadingMsg();
+            $.mobile.loading("hide");
             showerror("<?php echo _("Invalid Login"); ?>");
         } else {
             $("body").append(reply);
@@ -98,29 +88,13 @@ function dologin() {
     },"html");
 }
 
-function insert_fonts() {
-    if (!$("#fonts").length) $("<link href='//fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css' id='fonts'>").appendTo("head");
-}
-
-function getThemeUrl(theme) {
-    switch (theme) {
-        case "flat":
-            var url = "css/jquery.mobile.flatui.min.css";
-            break;
-        default:
-            var url = window.themeurl;
-            break;
-    }
-    return url;
-}
-
 // show error message
 function showerror(msg) {
         $.mobile.loading( 'show', {
             text: msg,
             textVisible: true,
             textonly: true,
-            theme: 'c'
+            theme: 'b'
             });
 	// hide after delay
 	setTimeout( function(){$.mobile.loading('hide')}, 1500);
