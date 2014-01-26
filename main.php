@@ -26,13 +26,21 @@ if (function_exists('date_default_timezone_set')) {
 }
 
 #Configure localization
-if (!isset($lang)) {
-    $lang = 'en_US.utf8';
-    changeConfigString("lang",$lang);
-	submit_lang($lang);
-} else { 
-	submit_lang($lang);
+if (extension_loaded("gettext")) {
+    $textdomain = "messages";
+    bindtextdomain($textdomain, "locale");
+    bind_textdomain_codeset($textdomain, "UTF-8");
+    textdomain($textdomain);
+
+    if (!isset($lang)) {
+        $lang = 'en_US.utf8';
+        changeConfigString("lang",$lang);
+    	change_lang($lang);
+    } else { 
+    	change_lang($lang);
+    }
 }
+
 
 #Check if PHP has str_getcsv function or if it needs a fallback
 if (!function_exists('str_getcsv')) {
@@ -563,12 +571,9 @@ function delete_program() {
 }
 
 #Submit language
-function submit_lang($lang) {
+function change_lang($lang) {
 	putenv("LC_ALL=$lang");
 	setlocale(LC_ALL, $lang);
-	bindtextdomain("messages", "locale");
-	bind_textdomain_codeset('messages', 'UTF-8');
-	textdomain("messages");
 }
 
 #Submit auto-delay settings
@@ -1532,7 +1537,7 @@ function add_user() {
 
 #Check if URL is valid by grabbing headers and verifying reply is: 200 OK
 function isValidUrl($url) {
-    $data = file_get_contents($url."/vs");
+    $data = @file_get_contents($url."/vs");
     if ($data === false) return false;
 
     preg_match("/<script>.*?snames=/",$data,$test);

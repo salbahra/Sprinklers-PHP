@@ -403,16 +403,15 @@ function get_available_languages() {
 	$locales = explode("\n" , $locales);
  
 	foreach($locales as $c => $l) {
-		if(strlen($l) > 7) {
-			$parts = explode('.' , $l);		
-			$lc = $parts[0];         
-			list($lcode , $ccode) = explode('_' , $lc);         
-			$lcode = strtolower($lcode);		         
-			$language = $language_codes[$lcode];
-			$country = $country_codes[$ccode];         
-			if(strlen($language) and strlen($country)) {
-				$locale_data[$l] = "$language - $country - {$parts[1]}";
-			}
+		$parts = explode('.' , $l);
+		$lc = $parts[0];
+		if (empty($lc) || !strpos($lc, "_")) continue;
+		list($lcode , $ccode) = explode('_' , $lc);
+		$lcode = strtolower($lcode);
+		$language = $language_codes[$lcode];
+		$country = $country_codes[$ccode];
+		if(strlen($language) and strlen($country)) {
+			$locale_data[$l] = "$language - $country - {$parts[1]}";
 		}
 	}
 	
