@@ -128,7 +128,7 @@ function fail() {
 }
 
 function get_list_available_lang() {
-	$lang = 'en_US.utf8';
+	$lang = 'en_US';
 	$locals = get_available_languages();			
 	foreach ($locals as $l=>$local) {
         $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
@@ -242,7 +242,7 @@ function get_list_available_lang() {
                                     if ($localPi) {
                                         echo '<select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>';
 								    } else {
-								        echo '<input type="text" name="lang" id="lang" value="en_US.utf8" />';
+								        echo '<input type="text" name="lang" id="lang" value="en_US" />';
 								    }
                                 ?>
                                 <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>

@@ -398,21 +398,23 @@ function get_available_languages() {
 		
 	$locale_data = array();
          
-	//Get locales from Linux terminal command locale
-	$locales = shell_exec('locale -a');
-	$locales = explode("\n" , $locales);
+	//Get locales from directory
+	$path = "./locale/";
+	$locales = scandir($path);
  
 	foreach($locales as $c => $l) {
-		$parts = explode('.' , $l);
-		$lc = $parts[0];
-		if (empty($lc) || !strpos($lc, "_")) continue;
-		list($lcode , $ccode) = explode('_' , $lc);
-		$lcode = strtolower($lcode);
-		$language = $language_codes[$lcode];
-		$country = $country_codes[$ccode];
-		if(strlen($language) and strlen($country)) {
-			$locale_data[$l] = "$language - $country - {$parts[1]}";
-		}
+	    if ($l === '.' or $l === '..') continue;
+	    if (is_dir($path . '/' . $l)) {
+			$parts = explode('.' , $l);
+			$lc = $parts[0];
+			list($lcode , $ccode) = explode('_' , $lc);
+			$lcode = strtolower($lcode);
+			$language = $language_codes[$lcode];
+			$country = $country_codes[$ccode];
+			if(strlen($language) and strlen($country)) {
+				$locale_data[$l] = "$language - $country";
+			}
+	    }
 	}
 	
 	return $locale_data;

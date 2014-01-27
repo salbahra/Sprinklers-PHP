@@ -27,17 +27,13 @@ if (function_exists('date_default_timezone_set')) {
 
 #Configure localization
 if (extension_loaded("gettext")) {
-    $textdomain = "messages";
-    bindtextdomain($textdomain, "locale");
-    bind_textdomain_codeset($textdomain, "UTF-8");
-    textdomain($textdomain);
-
     if (!isset($lang)) {
-        $lang = 'en_US.utf8';
+        $lang = 'en_US';
         changeConfig("lang",$lang,"s");
     	change_lang($lang);
-    } else { 
-    	change_lang($lang);
+    } else {
+        $lang = explode(".", $lang);
+    	change_lang($lang[0]);
     }
 }
 
@@ -571,8 +567,11 @@ function delete_program() {
 
 #Submit language
 function change_lang($lang) {
-	putenv("LC_ALL=$lang");
-	setlocale(LC_ALL, $lang);
+    setlocale(LC_ALL, "C.UTF-8");
+    $textdomain = "messages";
+    bindtextdomain($textdomain, "locale/$lang" );
+    bind_textdomain_codeset($textdomain, "UTF-8");
+    textdomain($textdomain);
 }
 
 #Submit auto-delay settings
@@ -1271,17 +1270,12 @@ function make_settings_list() {
                     $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
                 }
                 $list .= "</select>";
-				$localPi = isValidUrl("http://127.0.0.1:8080");
-				if ($localPi) {
-					$locals = get_available_languages();
-					$list .= "<label for='lang' class='select'>"._("Localization")."</label><select data-mini='true' id='lang' data-language='".$lang."'>";
-					foreach ($locals as $l=>$local) {
-						$list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
-					}
-					$list .= "</select>";
-					} else {
-					$list .= "<label for='lang'>"._("Localization")."</label><input data-mini='true' type='text' id='lang' value='".$lang."' data-language='".$lang."' />";
-					}
+				$locals = get_available_languages();
+				$list .= "<label for='lang' class='select'>"._("Localization")."</label><select data-mini='true' id='lang' data-language='".$lang."'>";
+				foreach ($locals as $l=>$local) {
+					$list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
+				}
+				$list .= "</select>";
                 continue 2;
             case 2:
                 $list .= "<input data-mini='true' id='o2' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o2'>"._("NTP Sync")."</label>";
