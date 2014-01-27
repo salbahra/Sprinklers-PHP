@@ -40,7 +40,7 @@ is_auth();
         	<div data-role="header" data-theme="b" data-position="fixed">
                 <h1><?php echo _("Welcome"); ?></h1>
            </div>
-        	<div data-role="content">
+        	<div class="ui-content" role="main">
                 <form action="javascript:dologin()" method="post">
                     <fieldset>
                         <label for="username" class="ui-hidden-accessible"><?php echo _("Username:"); ?></label>
