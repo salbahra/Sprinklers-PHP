@@ -206,7 +206,7 @@ function get_list_available_lang() {
     </head> 
     <body>
         <div data-role="page" id="install" data-close-btn="none">
-        	<div data-role="header" data-position="fixed">
+        	<div data-theme="b" data-role="header" data-position="fixed">
                 <h1><?php echo _("New Install"); ?></h1>
                 <a href="javascript:submit_config()" class="ui-btn-right"><?php echo _("Submit"); ?></a>
            </div>
@@ -238,13 +238,7 @@ function get_list_available_lang() {
                             <legend><?php echo _("Advanced Configuration"); ?></legend>
                             <div class="ui-field-contain">
 								<label for="lang"><?php echo _("Localization:"); ?></label>
-								<?php
-                                    if ($localPi) {
-                                        echo '<select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>';
-								    } else {
-								        echo '<input type="text" name="lang" id="lang" value="en_US" />';
-								    }
-                                ?>
+                                <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
                                 <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
                                 <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
                                 <label for="cache_file"><?php echo _("Cache File Location:"); ?></label>
