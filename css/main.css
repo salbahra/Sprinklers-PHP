@@ -8,6 +8,8 @@ a {
     position: absolute;
     height: 25px;
     display:none;
+    border: none;
+    background: none;
 }
 .hideZone {
     border: 5px solid rgba(255,255,255,0) !important;
