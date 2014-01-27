@@ -33,7 +33,9 @@ if (extension_loaded("gettext")) {
     	change_lang($lang);
     } else {
         $lang = explode(".", $lang);
-    	change_lang($lang[0]);
+        if (!empty($lang[1])) changeConfig("lang",$lang[0],"s");
+        $lang = $lang[0];
+        change_lang($lang);
     }
 }
 
