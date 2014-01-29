@@ -427,12 +427,14 @@ function gohome() {
     $("body").pagecontainer("change","#sprinklers",{reverse: true});
 }
 
-function show_about() {
+function changeFromPanel(func) {
     var $panel = $("#sprinklers-settings")
-    $panel.one("panelclose", function(e,ui){
-        $("body").pagecontainer("change","#about");
-    });
+    $panel.one("panelclose", func);
     $panel.panel("close");
+}
+
+function show_about() {
+    $("body").pagecontainer("change","#about");
 }
 
 function show_settings() {
