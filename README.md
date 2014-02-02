@@ -37,9 +37,9 @@ mkdir -m 777 /var/www/sprinklers
 git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers
 
 ```
-> If you don't have Git, you can download [ZIP][https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip] file and extract files to a local directory.
+> If you don't have Git, you can download [ZIP](https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip) file and extract files to a local directory.
 
-See the [Wiki - Install Instructions][https://github.com/salbahra/OpenSprinkler-Controller/wiki/Install-Instructions] for additional documentation.
+See the [Wiki - Install Instructions](https://github.com/salbahra/OpenSprinkler-Controller/wiki/Install-Instructions) for additional documentation.
 
 Update Instructions:
 --------------------
