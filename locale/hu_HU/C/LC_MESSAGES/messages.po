@@ -1,17 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-01-26 11:19-0600\n"
-"PO-Revision-Date: 2014-01-26 11:19-0600\n"
+"POT-Creation-Date: 2014-01-26 16:48-0600\n"
+"PO-Revision-Date: 2014-02-02 14:59-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: hu_HU\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.3\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 #: ../../../index.php:18
@@ -78,7 +77,7 @@ msgstr ""
 "A beállítások még nincsenek elmentve. Ellenőrizd a mappa jogosultságait és "
 "az elérési utat és próbáld újra."
 
-#: ../../../install.php:211 ../../../main.php:978 ../../../sprinklers.php:127
+#: ../../../install.php:211 ../../../main.php:987 ../../../sprinklers.php:127
 #: ../../../sprinklers.php:147 ../../../sprinklers.php:169
 #: ../../../sprinklers.php:187 ../../../sprinklers.php:298
 #: ../../../sprinklers.php:320 ../../../sprinklers.php:331
@@ -96,10 +95,9 @@ msgstr "További felhasználók hozzáadhatók bejelentkezés után"
 
 #: ../../../install.php:229
 msgid "Interval Program (detected)"
-msgstr ""
+msgstr "Interval program (kapcsolat létrejött)"
 
 #: ../../../install.php:229
-#, fuzzy
 msgid "OpenSprinkler IP/password"
 msgstr "Open Sprinkler Jelszó:"
 
@@ -139,64 +137,64 @@ msgstr "SSL használat"
 msgid "Use Local Assets?"
 msgstr "Megjelenítési eszközök helyi futtatása?"
 
-#: ../../../main.php:766 ../../../main.php:787 ../../../main.php:809
+#: ../../../main.php:775 ../../../main.php:796 ../../../main.php:818
 msgid "Running Now"
 msgstr "Most Aktív"
 
-#: ../../../main.php:813
+#: ../../../main.php:822
 msgid "Runtime"
 msgstr "Öntözési idő"
 
-#: ../../../main.php:813
+#: ../../../main.php:822
 msgid "Date/Time"
 msgstr "Dátum/Idő"
 
-#: ../../../main.php:845
+#: ../../../main.php:854
 msgid "run"
 msgstr "öntözés"
 
-#: ../../../main.php:845
+#: ../../../main.php:854
 msgid "runs"
 msgstr "öntözés"
 
-#: ../../../main.php:860 ../../../main.php:907 ../../../main.php:954
+#: ../../../main.php:869 ../../../main.php:916 ../../../main.php:963
 msgid "min"
 msgstr "perc"
 
-#: ../../../main.php:860 ../../../main.php:907 ../../../main.php:954
+#: ../../../main.php:869 ../../../main.php:916 ../../../main.php:963
 msgid "mins"
 msgstr "perc"
 
-#: ../../../main.php:860 ../../../main.php:907 ../../../main.php:954
+#: ../../../main.php:869 ../../../main.php:916 ../../../main.php:963
 msgid "D, d M Y H:i"
 msgstr "Y M d, D H:i"
 
-#: ../../../main.php:865 ../../../main.php:892
+#: ../../../main.php:874 ../../../main.php:901
 msgid "Rain Sensor"
 msgstr "Esőérzékelő"
 
-#: ../../../main.php:892
+#: ../../../main.php:901
 msgid "switch"
 msgstr "kapcsolás"
 
-#: ../../../main.php:892
+#: ../../../main.php:901
 msgid "switches"
 msgstr "kapcsolás"
 
-#: ../../../main.php:912 ../../../main.php:939 ../../../sprinklers.php:47
+#: ../../../main.php:921 ../../../main.php:948 ../../../sprinklers.php:47
 #: ../../../sprinklers.php:155
 msgid "Rain Delay"
 msgstr "Esőzés késleltetés"
 
-#: ../../../main.php:939
+#: ../../../main.php:948
 msgid "change"
 msgstr "változás"
 
-#: ../../../main.php:939
+#: ../../../main.php:948
 msgid "changes"
 msgstr "változás"
 
-#: ../../../main.php:969
+#: ../../../main.php:978
 msgid ""
 "Value is in minutes. Zero means the station will be excluded from the run-"
 "once program."
@@ -204,11 +202,11 @@ msgstr ""
 "Az értékek percben vannak megadva. A nulla azt jelenti, hogy az a kimenet "
 "nem lesz használva az egyszeri öntözésnél."
 
-#: ../../../main.php:978
+#: ../../../main.php:987
 msgid "Reset"
 msgstr "Újraindítás"
 
-#: ../../../main.php:998
+#: ../../../main.php:1007
 msgid ""
 "You have no programs currently added. Tap the Add button on the top right "
 "corner to get started."
@@ -216,7 +214,7 @@ msgstr ""
 "Nincs ütemterv hozzáadva. Kattints a Hozzáadás gombra a jobb felső sarokban "
 "a kezdéshez."
 
-#: ../../../main.php:1004
+#: ../../../main.php:1013
 msgid ""
 "Click any program below to expand/edit. Be sure to save changes by hitting "
 "submit below."
@@ -224,389 +222,391 @@ msgstr ""
 "Kattints az ütemtervre a kinyitáshoz/szerkesztéshez. Ügyelj a változtatások "
 "mentésére a Mentés gombra kattintva."
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "M"
 msgstr "H"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "T"
 msgstr "K"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "W"
 msgstr "Sze"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "R"
 msgstr "Cs"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "F"
 msgstr "P"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "Sa"
 msgstr "Szo"
 
-#: ../../../main.php:1020
+#: ../../../main.php:1029
 msgid "Su"
 msgstr "V"
 
-#: ../../../main.php:1032 ../../../main.php:1413 ../../../js/main.js.php:765
+#: ../../../main.php:1041 ../../../main.php:1422 ../../../js/main.js.php:765
 msgid "Program"
 msgstr "Ütemterv"
 
-#: ../../../main.php:1033 ../../../sprinklers.php:271
+#: ../../../main.php:1042 ../../../sprinklers.php:271
 #: ../../../sprinklers.php:284
 msgid "Enabled"
 msgstr "Engedélyezés"
 
-#: ../../../main.php:1035
+#: ../../../main.php:1044
 msgid "Weekly"
 msgstr "Heti"
 
-#: ../../../main.php:1036
+#: ../../../main.php:1045
 msgid "Interval"
 msgstr "Intervallum"
 
-#: ../../../main.php:1039
+#: ../../../main.php:1048
 msgid "Restrictions"
 msgstr "Korlátozások"
 
-#: ../../../main.php:1040 ../../../main.php:1297 ../../../sprinklers.php:215
+#: ../../../main.php:1049 ../../../main.php:1306 ../../../sprinklers.php:215
 msgid "None"
 msgstr "Nincs"
 
-#: ../../../main.php:1041
+#: ../../../main.php:1050
 msgid "Odd Days"
 msgstr "Páratlan napok"
 
-#: ../../../main.php:1042
+#: ../../../main.php:1051
 msgid "Even Days"
 msgstr "Páros napok"
 
-#: ../../../main.php:1045
+#: ../../../main.php:1054
 msgid "Days of the Week"
 msgstr "Hét napjai"
 
-#: ../../../main.php:1054
+#: ../../../main.php:1063
 msgid "Interval (Days)"
 msgstr "Intervallum (Napok)"
 
-#: ../../../main.php:1055
+#: ../../../main.php:1064
 msgid "Starting In"
 msgstr "Kezdő nap"
 
-#: ../../../main.php:1058
+#: ../../../main.php:1067
 msgid "Stations:"
 msgstr "Állomások:"
 
-#: ../../../main.php:1067
+#: ../../../main.php:1076
 msgid "Check All"
 msgstr "Mindent kijelöl"
 
-#: ../../../main.php:1068
+#: ../../../main.php:1077
 msgid "Uncheck All"
 msgstr "Kijelölések visszavonása"
 
-#: ../../../main.php:1072
+#: ../../../main.php:1081
 msgid "Start Time"
 msgstr "Kezdési idő"
 
-#: ../../../main.php:1073
+#: ../../../main.php:1082
 msgid "End Time"
 msgstr "Befejezési idő"
 
-#: ../../../main.php:1076
+#: ../../../main.php:1085
 msgid "Duration (minutes)"
 msgstr "Időtartam (perc)"
 
-#: ../../../main.php:1077
+#: ../../../main.php:1086
 msgid "Interval (minutes)"
 msgstr "Intervallum (perc)"
 
-#: ../../../main.php:1079
+#: ../../../main.php:1088
 msgid "Save New Program"
 msgstr "Új ütemterv mentése"
 
-#: ../../../main.php:1081
+#: ../../../main.php:1090
 msgid "Save Changes to Program"
 msgstr "Ütemterv változásainak mentése"
 
-#: ../../../main.php:1082
+#: ../../../main.php:1091
 msgid "Delete Program"
 msgstr "Ütemterv törlése"
 
-#: ../../../main.php:1089
+#: ../../../main.php:1098
 msgid "Sprinkler Stations"
 msgstr "Öntöző rendszer állomásai"
 
-#: ../../../main.php:1110
+#: ../../../main.php:1119
 msgid "System Disabled"
 msgstr "Rendszer Tiltva"
 
-#: ../../../main.php:1115
+#: ../../../main.php:1124
 msgid "Rain delay until"
 msgstr "Esőzés miatti késleltetés a következő időpontig: "
 
-#: ../../../main.php:1115 ../../../main.php:1210
+#: ../../../main.php:1124 ../../../main.php:1219
 msgid "D, d M Y H:i:s"
 msgstr "Y M d, D H:i:s"
 
-#: ../../../main.php:1120
+#: ../../../main.php:1129
 msgid "Rain detected"
 msgstr "Esőzés volt"
 
-#: ../../../main.php:1134
+#: ../../../main.php:1143
 msgid "is running on"
 msgstr "használja a"
 
-#: ../../../main.php:1134
+#: ../../../main.php:1143
 msgid "stations"
 msgstr "állomást"
 
-#: ../../../main.php:1135 ../../../main.php:1148 ../../../main.php:1187
-#: ../../../main.php:1190 ../../../main.php:1414
+#: ../../../main.php:1144 ../../../main.php:1157 ../../../main.php:1196
+#: ../../../main.php:1199 ../../../main.php:1423
 msgid "Manual program"
 msgstr "Kézi ütemterv"
 
-#: ../../../main.php:1135 ../../../main.php:1148 ../../../main.php:1190
-#: ../../../main.php:1237 ../../../js/main.js.php:291
+#: ../../../main.php:1144 ../../../main.php:1157 ../../../main.php:1199
+#: ../../../main.php:1246 ../../../js/main.js.php:291
 #: ../../../js/main.js.php:322
 msgid "remaining"
 msgstr "maradt"
 
-#: ../../../main.php:1147
+#: ../../../main.php:1156
 msgid "is running on station"
 msgstr "fut a következő állomáson:"
 
-#: ../../../main.php:1157
+#: ../../../main.php:1166
 msgid "Manual mode enabled"
 msgstr "Kézi üzemmód engedélyezve"
 
-#: ../../../main.php:1189
+#: ../../../main.php:1198
 msgid "Running"
 msgstr "Fut"
 
-#: ../../../main.php:1189
+#: ../../../main.php:1198
 msgid "Scheduled"
 msgstr "Tervezett"
 
-#: ../../../main.php:1193 ../../../main.php:1343
+#: ../../../main.php:1202 ../../../main.php:1352
 msgid "(Master)"
 msgstr "(Főkapcsoló)"
 
-#: ../../../main.php:1210
+#: ../../../main.php:1219
 msgid "last ran station"
 msgstr "futott a következő állomáson:"
 
-#: ../../../main.php:1210
+#: ../../../main.php:1219
 msgid "for"
 msgstr " "
 
-#: ../../../main.php:1210
+#: ../../../main.php:1219
 msgid "m"
 msgstr " percet"
 
-#: ../../../main.php:1210
+#: ../../../main.php:1219
 msgid "s on"
 msgstr " másodpercet, ekkor:"
 
-#: ../../../main.php:1236
+#: ../../../main.php:1245
 msgid "are"
 msgstr " "
 
-#: ../../../main.php:1236
+#: ../../../main.php:1245
 msgid "is"
 msgstr " "
 
-#: ../../../main.php:1236
+#: ../../../main.php:1245
 msgid "running"
 msgstr "Fut"
 
-#: ../../../main.php:1260
+#: ../../../main.php:1269
 msgid "Timezone"
 msgstr "Időzóna"
 
-#: ../../../main.php:1268 ../../../main.php:1274
+#: ../../../main.php:1277 ../../../main.php:1283
 msgid "Localization"
 msgstr "Nyelvválasztás"
 
-#: ../../../main.php:1278
+#: ../../../main.php:1287
 msgid "NTP Sync"
 msgstr "NTP szinkron"
 
-#: ../../../main.php:1285
+#: ../../../main.php:1294
 msgid "Auto Reconnect"
 msgstr "Automatikus újracsatlakozás"
 
-#: ../../../main.php:1288
+#: ../../../main.php:1297
 msgid "Extension Boards"
 msgstr "Állomás kiterjesztő áramkörök"
 
-#: ../../../main.php:1291
+#: ../../../main.php:1300
 msgid "Sequential"
 msgstr "Egymás utáni"
 
-#: ../../../main.php:1294
+#: ../../../main.php:1303
 msgid "Station Delay (seconds)"
 msgstr "Állomás késleltetés (másodperc)"
 
-#: ../../../main.php:1297
+#: ../../../main.php:1306
 msgid "Master Station"
 msgstr "Fő állomás"
 
-#: ../../../main.php:1304
+#: ../../../main.php:1313
 msgid "Location"
 msgstr "Helység"
 
-#: ../../../main.php:1307
+#: ../../../main.php:1316
 msgid "Master On Delay"
 msgstr "Fő állomás késleltetés"
 
-#: ../../../main.php:1310
+#: ../../../main.php:1319
 msgid "Master Off Delay"
 msgstr "Fő kikapcsolás késleltetés"
 
-#: ../../../main.php:1313
+#: ../../../main.php:1322
 msgid "Use Rain Sensor"
 msgstr "Esőérzékelő használata"
 
-#: ../../../main.php:1316
+#: ../../../main.php:1325
 msgid "Normally Open (Rain Sensor)"
 msgstr "Alapállapotba nyitott (esőérzékelő)"
 
-#: ../../../main.php:1319
+#: ../../../main.php:1328
 msgid "% Watering"
 msgstr "% Öntözés"
 
-#: ../../../main.php:1322
+#: ../../../main.php:1331
 msgid "Ignore Password"
 msgstr "Nincs jelszó"
 
-#: ../../../main.php:1336
+#: ../../../main.php:1345
 msgid "Station Name"
 msgstr "Állomás nevek"
 
-#: ../../../main.php:1336
+#: ../../../main.php:1345
 msgid "Activate Master?"
 msgstr "Legyen főkapcsoló?"
 
-#: ../../../main.php:1367
+#: ../../../main.php:1376
 msgid "Change Password"
 msgstr "Jelszó változtatás"
 
-#: ../../../main.php:1368
+#: ../../../main.php:1377
 msgid "Save Changes to"
 msgstr "Változtatások mentése"
 
-#: ../../../main.php:1369
+#: ../../../main.php:1378
 msgid "Delete"
 msgstr "Törlés"
 
-#: ../../../main.php:1387
+#: ../../../main.php:1396
 msgid ""
 "Forecast data could not be retrieved. Please try again later and/or check "
 "location setting."
 msgstr ""
+"Időjárás előrejelzés adatok nem elérhetőek. Kérlek próbálkozz később és/vagy "
+"ellenőrizd a hely beállítást."
 
-#: ../../../main.php:1390
+#: ../../../main.php:1399
 msgid "d M Y"
 msgstr "Y M d"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Jan"
 msgstr "Jan"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Feb"
 msgstr "Feb"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Mar"
 msgstr "Már"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Apr"
 msgstr "Ápr"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "May"
 msgstr "Máj"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Jun"
 msgstr "Jún"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Jul"
 msgstr "Júl"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Aug"
 msgstr "Aug"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Sep"
 msgstr "Szep"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Oct"
 msgstr "Okt"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Nov"
 msgstr "Nov"
 
-#: ../../../main.php:1391 ../../../js/main.js.php:722
+#: ../../../main.php:1400 ../../../js/main.js.php:722
 msgid "Dec"
 msgstr "Dec"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Mon"
 msgstr "H"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Tue"
 msgstr "K"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Wed"
 msgstr "Sze"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Thr"
 msgstr "Cs"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Fri"
 msgstr "P"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Sat"
 msgstr "Szo"
 
-#: ../../../main.php:1392 ../../../js/main.js.php:715
+#: ../../../main.php:1401 ../../../js/main.js.php:715
 msgid "Sun"
 msgstr "V"
 
-#: ../../../main.php:1395
+#: ../../../main.php:1404
 msgid "Now"
 msgstr "Most"
 
-#: ../../../main.php:1407
+#: ../../../main.php:1416
 msgid "Low"
 msgstr "Min"
 
-#: ../../../main.php:1407
+#: ../../../main.php:1416
 msgid "High"
 msgstr "Max"
 
-#: ../../../main.php:1415
+#: ../../../main.php:1424
 msgid "Run-once program"
 msgstr "Egyszeri öntözésű ütemterv"
 
-#: ../../../main.php:1425
+#: ../../../main.php:1434
 msgid "Y-m-d H:i:s"
 msgstr "Y-m-d H:i:s"
 
@@ -697,7 +697,6 @@ msgid "About"
 msgstr "Rólunk"
 
 #: ../../../sprinklers.php:78
-#, fuzzy
 msgid "Forecast"
 msgstr "Időjárás előrejelzés"
 
@@ -872,8 +871,11 @@ msgstr "Megjelenítéshez használt eszközök helyi futtatása"
 #: ../../../sprinklers.php:281
 msgid ""
 "Assets are javascript and CSS libraries that power the mobile web app. "
-"Choose between local assets or public content distibution network (CDN)."
+"Choose between local assets or content distibution network (CDN) hosted "
+"assets."
 msgstr ""
+"Javascript és CSS eszközök melyek segítik a mobil megjelenítést. Válassz a "
+"helyi vagy a nyilvános elérés között."
 
 #: ../../../sprinklers.php:296
 msgid "OS Settings"
@@ -1010,27 +1012,27 @@ msgstr "Ütemterv sikeresen hozzáadva"
 msgid "Program has been updated"
 msgstr "Ütemterv sikeresen frissítve"
 
-#: ../../../js/main.js.php:1081
+#: ../../../js/main.js.php:1082
 msgid "Settings have been saved"
 msgstr "Beállítások elmentve"
 
-#: ../../../js/main.js.php:1096
+#: ../../../js/main.js.php:1097
 msgid "Station name must be 16 characters or less"
 msgstr "Állomás neve maximum 16 karakter hosszúságú lehet"
 
-#: ../../../js/main.js.php:1122
+#: ../../../js/main.js.php:1123
 msgid "Stations have been updated"
 msgstr "Állomások frissítve"
 
-#: ../../../js/main.js.php:1138
+#: ../../../js/main.js.php:1139
 msgid "Run-once program has been scheduled"
 msgstr "Egyszeri öntözés tervezve"
 
-#: ../../../js/main.js.php:1179
+#: ../../../js/main.js.php:1180
 msgid "Rain delay has been successfully set"
 msgstr "Esőzés késleltetés sikeresen beállítva"
 
-#: ../../../js/main.js.php:1195
+#: ../../../js/main.js.php:1196
 msgid ""
 "Auto-delay changes were not saved. Check config.php permissions and try "
 "again."
@@ -1038,62 +1040,46 @@ msgstr ""
 "Automatikus késleltetés változásainak mentése nem sikerült. Ellenőrizd a "
 "config.php jogosultságait és próbáld újra."
 
-#: ../../../js/main.js.php:1197
+#: ../../../js/main.js.php:1198
 msgid "Auto-delay changes have been saved"
 msgstr "Automatikus késleltetés változásai elmentve."
 
-#: ../../../js/main.js.php:1203
+#: ../../../js/main.js.php:1204
 msgid "Are you sure you want to clear all your log data?"
 msgstr "Biztosan törölni akarod az összes korábbi log bejegyzést?"
 
-#: ../../../js/main.js.php:1211
+#: ../../../js/main.js.php:1212
 msgid "Logs have been cleared"
 msgstr "A korábbi log bejegyzések törölve"
 
-#: ../../../js/main.js.php:1218
+#: ../../../js/main.js.php:1219
 msgid "Are you sure you want to reboot OpenSprinkler?"
 msgstr "Biztosan újraindítod az OpneSprinkler rendszerét?"
 
-#: ../../../js/main.js.php:1226
+#: ../../../js/main.js.php:1227
 msgid "OpenSprinkler is rebooting now"
 msgstr "OpenSprinkler újraindul"
 
-#: ../../../js/main.js.php:1233
+#: ../../../js/main.js.php:1234
 msgid "Are you sure you want to stop all stations?"
 msgstr "Biztosan ki akarod kapcsolni az összes állomást?"
 
-#: ../../../js/main.js.php:1241
+#: ../../../js/main.js.php:1242
 msgid "All stations have been stopped"
 msgstr "Minden állomás kikapcsolva"
 
-#: ../../../js/main.js.php:1256
+#: ../../../js/main.js.php:1257
 msgid "Backup saved to your device"
 msgstr "Biztonsági mentés elkészült"
 
-#: ../../../js/main.js.php:1264
+#: ../../../js/main.js.php:1265
 msgid "No backup available on this device"
 msgstr "Nincs biztonsági mentés"
 
-#: ../../../js/main.js.php:1268
+#: ../../../js/main.js.php:1269
 msgid "Are you sure you want to restore the configuration?"
 msgstr "Biztosan vissza szeretnéd állítani a korábbi beállításokat?"
 
-#: ../../../js/main.js.php:1276
+#: ../../../js/main.js.php:1277
 msgid "Backup restored to your device"
 msgstr "A visszaállítás sikeres"
-
-#~ msgid "Theme"
-#~ msgstr "Téma"
-
-#~ msgid "Legacy"
-#~ msgstr "Örökölt"
-
-#~ msgid "Flat"
-#~ msgstr "Sima"
-
-#~ msgid ""
-#~ "Choose between local assets (javascript libraries and CSS) or public CDN "
-#~ "(Google and cdnjs)."
-#~ msgstr ""
-#~ "Beállítható, hogy a megjelenítés eszközeniek forrása helyi (javascript "
-#~ "könyvtár és CSS fájlok) vagy nyilvános (Google és cdnjs) legyen."

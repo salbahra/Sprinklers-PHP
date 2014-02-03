@@ -427,6 +427,16 @@ function gohome() {
     $("body").pagecontainer("change","#sprinklers",{reverse: true});
 }
 
+function changeFromPanel(func) {
+    var $panel = $("#sprinklers-settings")
+    $panel.one("panelclose", func);
+    $panel.panel("close");
+}
+
+function show_about() {
+    $("body").pagecontainer("change","#about");
+}
+
 function show_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=make_settings_list",function(items){
