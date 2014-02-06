@@ -24,7 +24,7 @@ function new_config() {
     $config = "<?php\n";
 
     #Define all the required variables for config.php
-    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file","lang");
+    $needed = array("os_ip","os_pw","pass_file","cache_file","log_file","lang","weather_provider","wapikey");
 
     #Cycle through each needed key
     foreach ($needed as $key) {
@@ -239,16 +239,23 @@ function get_list_available_lang() {
                             <div class="ui-field-contain">
 								<label for="lang"><?php echo _("Localization:"); ?></label>
                                 <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
+								<label for="weather_provider"><?php echo _("Weather Provider"); ?></label>
+								<select name="weather_provider" id="weather_provider"><option selected="" value="yahoo"><?php echo _("Yahoo!"); ?></option>
+								<option value="wunderground"><?php echo _("Wunderground"); ?></option></select>
+								<label for="wapikey"><?php echo _("Wunderground Api Key"); ?></label>
+								<input type="text" name="wapikey" id="wapikey" value="" />
                                 <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
                                 <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
                                 <label for="cache_file"><?php echo _("Cache File Location:"); ?></label>
                                 <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
                                 <label for="log_file"><?php echo _("Sprinkler Log File:"); ?></label>
                                 <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-                                <label for="force_ssl"><?php echo _("Force SSL"); ?></label>
-                                <input type="checkbox" name="force_ssl" id="force_ssl" />
-								<label for="local_assets"><?php echo _("Use Local Assets?"); ?></label>
-                                <input type="checkbox" name="local_assets" id="local_assets" />
+								<fieldset>
+									<label for="force_ssl"><?php echo _("Force SSL"); ?></label>
+									<input type="checkbox" name="force_ssl" id="force_ssl" />
+									<label for="local_assets"><?php echo _("Use Local Assets?"); ?></label>
+									<input type="checkbox" name="local_assets" id="local_assets" />
+								</fieldset>
                             </div>
                         </fieldset>
                     </div>

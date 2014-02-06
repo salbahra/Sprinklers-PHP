@@ -218,12 +218,11 @@ a {
        margin: 0 auto !important;
     }
 }
-div.ui-slider-switch {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 44%;
+
+div.ui-slider-switch, .ui-field-contain div.ui-slider-switch, .ui-field-contain.ui-hide-label div.ui-slider-switch {
+    width: 4.6em;
 }
+
 .master {
     background-color: #DEAD5D !important;    
 }
@@ -399,4 +398,48 @@ div.timeline-event-content {
 .wicon.cond45 { background-position: -300px -150px; } /*  45  thundershowers            */ 
 .wicon.cond46 { background-position:    0px -450px; } /*  46  snow showers              */ 
 .wicon.cond47 { background-position: -300px -150px; } /*  47  isolated thundershowers   */ 
-.wicon.cond3200 { background: none; display: none; } /* 3200  not available             */ 
+.wicon.cond3200 { background: none; display: none; } /* 3200  not available             */
+
+.wicon.condclear  { background-position: -450px    0px; }			/*  Clear                    */
+.wicon.condcloudy  { background-position: -300px    0px; }			/*  Cloudy                   */
+.wicon.condflurries { background-position: -450px -150px; }			/*  Flurries                 */
+.wicon.condfog { background-position: -150px -600px; }				/*  Fog                      */ 
+.wicon.condhazy { background-position: -150px -600px; }				/*  Haze                     */
+.wicon.condmostlycloudy { background-position:    0px -300px; }		/*  Mostly Cloudy            */
+.wicon.condpartlycloudy { background-position: -150px    0px; }		/*  Partly Cloudy            */  
+.wicon.condmostlysunny { background-position: -150px    0px; }		/*  Mostly Sunny             */ 
+.wicon.condpartlysunny { background-position:    0px -300px; }		/*  Partly Sunny             */
+.wicon.condsleet { background-position:    0px -450px; }				/*  Freezing Rain            */ 
+.wicon.condrain { background-position:    0px    0px; }				/*  Rain                     */ 
+.wicon.condsleet { background-position: -150px -450px; }				/*  Sleet                    */ 
+.wicon.condsnow { background-position: -450px -150px; }				/*  Snow                     */ 
+.wicon.condsunny  { background-position: -450px    0px; }			/*  Sunny                    */
+.wicon.condtstorms  { background-position: -300px -150px; }			/*  Thunderstorms            */
+.wicon.condunknown { background: none; display: none; }				/*  Unknown                  */
+.wicon.condchanceflurries { background-position: -450px -150px; }	/*  Chance of Flurries       */ 
+.wicon.condchancerain { background-position: -150px -300px; }		/*  Chance of Rain           */ 
+.wicon.condchancesleet { background-position: -150px -450px; }		/*  Chance of Sleet          */ 
+.wicon.condchancesnow { background-position: -300px -300px; }		/*  Chance of Snow           */ 
+.wicon.condchancetstorms  { background-position: -300px -150px; }	/*  Chance of Thunderstorms  */
+
+.wicon.condnt_clear  { background-position: -450px -450px; }			/*  Clear (night)                   */
+.wicon.condnt_cloudy  { background-position: -300px    0px; }		/*  Cloudy (night)                  */
+.wicon.condnt_flurries { background-position: -450px -150px; }		/*  Flurries (night)                */
+.wicon.condnt_fog { background-position: -150px -600px; }			/*  Fog (night)                     */ 
+.wicon.condnt_hazy { background-position: -150px -600px; }			/*  Haze (night)                    */
+.wicon.condnt_mostlycloudy { background-position: -300px -600px; }	/*  Mostly Cloudy (night)           */
+.wicon.condnt_partlycloudy { background-position: -450px -600px; }	/*  Partly Cloudy (night)           */  
+.wicon.condnt_mostlysunny { background-position: -450px -600px; }	/*  Mostly Sunny (night)            */ 
+.wicon.condnt_partlysunny { background-position: -300px -600px; }	/*  Partly Sunny (night)            */
+.wicon.condnt_sleet { background-position:    0px -450px; }			/*  Freezing Rain (night)           */ 
+.wicon.condnt_rain { background-position:    0px    0px; }			/*  Rain (night)                    */ 
+.wicon.condnt_sleet { background-position: -150px -450px; }			/*  Sleet (night)                   */ 
+.wicon.condnt_snow { background-position: -450px -150px; }			/*  Snow (night)                    */ 
+.wicon.condnt_sunny  { background-position: -450px -450px; }			/*  Sunny (night)                   */
+.wicon.condnt_tstorms  { background-position: -300px -150px; }		/*  Thunderstorms (night)           */
+.wicon.condnt_unknown { background: none; display: none; }			/*  Unknown (night)                 */
+.wicon.condnt_chanceflurries { background-position: -450px -150px; }	/*  Chance of Flurries (night)      */ 
+.wicon.condnt_chancerain { background-position: -150px -300px; }		/*  Chance of Rain (night)          */ 
+.wicon.condnt_chancesleet { background-position: -150px -450px; }	/*  Chance of Sleet (night)         */ 
+.wicon.condnt_chancesnow { background-position: -300px -300px; }		/*  Chance of Snow (night)          */ 
+.wicon.condnt_chancetstorms  { background-position: -300px -150px; }	/*  Chance of Thunderstorms (night) */

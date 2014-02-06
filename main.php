@@ -71,9 +71,21 @@ if (!isset($auto_delay_duration)) {
     $auto_delay_duration = 24;
 }
 
+#Configure weather
+
+if (!isset($weather_provider)) {
+    $weather_provider = "yahoo";
+    changeConfig("weather_provider",$weather_provider,"s");
+}
+
 if (!isset($woeid)) {
     $woeid = get_woeid();
     changeConfig("woeid",$woeid,"i");
+}
+
+if (!isset($lid)) {
+    $lid = get_wunderground_lid();
+    changeConfig("lid",$lid,"s");
 }
 
 #Get Base URL of Site
@@ -104,13 +116,14 @@ if (isset($_REQUEST['action'])) {
 function get_woeid() {
     $options = get_options();
     $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".urlencode($options["loc"])."%22");
-    preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid);
-    return intval($woeid[1]);
+    if (preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid) == 1) return intval($woeid[1]);
+	else return 0;
 }
 
 #Get the current weather code and temp
 function get_weather_data() {
     global $woeid;
+	if ($woeid == 0) return array();
     $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
     if ($data === false) return array();
     preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
@@ -123,6 +136,43 @@ function get_weather_data() {
         $temp = intval(round(($newdata[3]-32)*(5/9)))."&#176;C";
     }
     $weather = array("text"=>$newdata[1],"code"=>$newdata[2],"temp"=>$temp,"date"=>$newdata[4],"location"=>$loc[1]);
+    return $weather;
+}
+
+#Resolve location to LID
+function get_wunderground_lid() {
+    $options = get_options();
+    if (preg_match("/pws:/",$options["loc"]) == 1) {
+		$lid = $options["loc"];
+	} else {
+		$data = file_get_contents("http://autocomplete.wunderground.com/aq?h=0&query=".urlencode($options["loc"]));
+		$data = json_decode($data);
+		if ($data == []) return "";
+		$lid = "zmw:".$data->{'RESULTS'}[0]->{'zmw'};
+	}
+    return $lid;
+}
+
+#Get the current weather code and temp from wunderground
+function get_wunderground_weather_data() {
+    global $lang, $lid, $wapikey;
+	if ($lid == "") return array();
+	$lgcode = get_wunderground_languages($lang);
+    $data = file_get_contents("http://api.wunderground.com/api/".$wapikey."/conditions/lang:".$lgcode."/q/".$lid.".json");
+    if ($data === false) return array();
+	$data = json_decode($data);
+	if (isset($data->{'response'}->{'error'}->{'type'})) return array();
+    $region = $data->{'current_observation'}->{'display_location'}->{'country_iso3166'};
+	$temp_c = $data->{'current_observation'}->{'temp_c'};
+	$temp_f = $data->{'current_observation'}->{'temp_f'};
+    if ($region == "US" || $region == "BM" || $region == "PW") {
+        $temp = $temp_f."&#176;F";
+    } else {
+        $temp = $temp_c."&#176;C";
+    }
+	if (strpos($data->{'current_observation'}->{'icon_url'},"nt_") !== false) { $code = "nt_".$data->{'current_observation'}->{'icon'}; }
+	else $code = $data->{'current_observation'}->{'icon'};
+    $weather = array("text"=>$data->{'current_observation'}->{'weather'}, "code"=>$code, "temp"=>$temp,"date"=>$data->{'current_observation'}->{'observation_time'}, "location"=>$data->{'current_observation'}->{'display_location'}->{'full'});
     return $weather;
 }
 
@@ -157,26 +207,51 @@ function get_forecast_data() {
     return $yw_forecast;
 }
 
+function get_wunderground_forecast_data() {
+    global $lang, $lid, $wapikey;
+	$lgcode = get_wunderground_languages($lang);
+    $data = file_get_contents("http://api.wunderground.com/api/".$wapikey."/conditions/forecast/lang:".$lgcode."/q/".$lid.".json");
+    if ($data === false) return array();
+	$data = json_decode($data);
+	if (isset($data->{'response'}->{'error'}->{'type'})) return array();
+	if (strpos($data->{'current_observation'}->{'icon_url'},"nt_") !== false) { $code = "nt_".$data->{'current_observation'}->{'icon'}; }
+	else $code = $data->{'current_observation'}->{'icon'};
+    $ww_forecast = array("condition" => array ("text"=>$data->{'current_observation'}->{'weather'},"code"=>$code, "temp_c"=>$data->{'current_observation'}->{'temp_c'}, "temp_f"=>$data->{'current_observation'}->{'temp_f'}, "date"=>$data->{'current_observation'}->{'observation_time'},"location"=>$data->{'current_observation'}->{'display_location'}->{'full'}, "region"=>$data->{'current_observation'}->{'display_location'}->{'country_iso3166'}, "precip_today_in"=>$data->{'current_observation'}->{'precip_today_in'}, "precip_today_metric"=>$data->{'current_observation'}->{'precip_today_metric'}, "type"=>'wunderground'));
+	foreach ($data->{'forecast'}->{'simpleforecast'}->{'forecastday'} as $k => $attr) {
+		 $ww_forecast["simpleforecast"][$k] = $attr;
+	}
+    return $ww_forecast;
+}
+
 #Lookup code and get the set delay
 function code_to_delay($code) {
-    global $auto_delay_duration;
+    global $auto_delay_duration, $weather_provider;
     $adverse_codes = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,35,37,38,39,40,41,42,43,44,45,46,47);
     $reset_codes = array(36);
-    if (in_array($code, $adverse_codes)) return $auto_delay_duration;
-    if (in_array($code, $reset_codes)) return 0;
+	$adverse_codes_wunderground = array ("flurries","sleet","rain","sleet","snow","tstorms","nt_flurries","nt_sleet","nt_rain","nt_sleet","nt_snow","nt_tstorms");
+	$reset_codes_wunderground = array("sunny","nt_sunny");
+	if ($weather_provider == "yahoo") {
+		if (in_array($code, $adverse_codes)) return $auto_delay_duration;
+		if (in_array($code, $reset_codes)) return 0;
+	} else {
+		if (in_array($code, $adverse_codes_wunderground)) return $auto_delay_duration;
+		if (in_array($code, $reset_codes_wunderground)) return 0;
+	}
     return false;
 }
 
 #Check the current weather for the devices location, and set the appropriate delay, if needed
 function weather_to_delay() {
-    $weather = get_weather_data();
+	global $weather_provider;
+    $weather = ($weather_provider == "yahoo") ? get_weather_data() : get_wunderground_weather_data();
     $delay = code_to_delay($weather["code"]);
     if ($delay === false) return;
     send_to_os("/cv?pw=&rd=".$delay);
 }
 
 function get_weather() {
-    echo json_encode(get_weather_data());
+	global $weather_provider;
+    echo json_encode(($weather_provider == "yahoo") ? get_weather_data() : get_wunderground_weather_data());
 }
 
 #Export/Import
@@ -606,28 +681,45 @@ function submit_options() {
         foreach (json_decode($_REQUEST["options"]) as $key => $value) {
 			if ($key == "lang") {
 				changeConfig("lang",$value,"s");
-			}
-			else {
-				if ($key !== "loc") {
-					$key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
-					$data[$keyNames[$key]] = $value;
+			} else {
+				if ($key == "weather_provider") {
+					changeConfig("weather_provider",$value,"s");
 				} else {
-					$key = "o".$key;
-					$data[$key] = $value;
-				}
+				if ($key == "wapikey") {
+					changeConfig("wapikey",$value,"s");
+				} else {
+					if ($key !== "loc") {
+						$key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
+						$data[$keyNames[$key]] = $value;
+					} else {
+						$key = "o".$key;
+						$data[$key] = $value;
+						}
+					}
+				} 
 			}
         }
-        send_to_os("/co?pw=&".http_build_query($data));
+		send_to_os("/co?pw=&".http_build_query($data));
     } else {
         $data = json_decode($_REQUEST["options"], true);
         if (array_key_exists("lang", $data)) {
             changeConfig("lang",$data["lang"],"s");
             unset($data["lang"]);
         }
+		if (array_key_exists("weather_provider", $data)) {
+            changeConfig("weather_provider",$data["weather_provider"],"s");
+            unset($data["weather_provider"]);
+        }
+		if (array_key_exists("wapikey", $data)) {
+            changeConfig("wapikey",$data["wapikey"],"s");
+            unset($data["wapikey"]);
+        }
         send_to_os("/co?pw=&".http_build_query($data));
     }
     $woeid = get_woeid();
     changeConfig("woeid",$woeid,"i");
+	$lid = get_wunderground_lid();
+	changeConfig("lid",$lid,"s");
 }
 
 #Submit updated stations
@@ -1138,7 +1230,7 @@ function current_status() {
             $tmp = $settings["ps"][$value][1];
             if ($tmp > $ptotal) $ptotal = $tmp;
         }
-        $sample = $open[0];
+        $sample = $open[1];
         $pname = pidname($settings["ps"][$sample][0]);
         $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
         $line .= $pname." "._("is running on")." ".count($open)." "._("stations")." ";
@@ -1185,7 +1277,7 @@ function make_list_status() {
     
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
-
+	$master = false;
     $i = 0;
     foreach ($stations as $station) {
         $info = "";
@@ -1200,7 +1292,10 @@ function make_list_status() {
             if ($pname != _("Manual program")) $info .= " <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." "._("remaining").")</span>";
             $info .= "</p>";
         }
-        if ($settings["mas"] == $i+1) $station .= " "._("(Master)");
+        if ($settings["mas"] == $i+1) {
+			$station .= " "._("(Master)");
+			$master = true;
+		}
         if ($status[$i]) {
             $color = "green";
         } else {
@@ -1228,7 +1323,7 @@ function make_list_status() {
         $time = $valve[1];
         if (($pid==255||$pid==99) && $time < 2) continue;
         if ($pid) {
-            if ($open > 1) {
+            if ((!$master) && ($open > 1)) {
                 if ($time > $ptotal) $ptotal = $time;            
             } else {
                 $ptotal += $time;
@@ -1254,7 +1349,7 @@ function make_list_status() {
 
 #Generate settings page
 function make_settings_list() {	
-    global $lang;
+    global $lang, $weather_provider, $wapikey;
 	$options = get_options();
     $settings = get_settings();
     $vs = get_stations();
@@ -1307,6 +1402,10 @@ function make_settings_list() {
                     $i++;
                 }
                 $list .= "</select><label for='loc'>"._("Location")."</label><input data-mini='true' type='text' id='loc' value='".$options["loc"]."' />";
+				$list .= "<label for='weather_provider' class='select'>"._("Weather Provider")."</label><select data-mini='true' id='weather_provider'>";
+				$list .= "<option ".(($weather_provider == "yahoo") ? "selected" : "")." value='yahoo'>"._("Yahoo!")."</option>";
+				$list .= "<option ".(($weather_provider == "wunderground") ? "selected" : "")." value='wunderground'>"._("Wunderground")."</option></select>";
+				$list .= "<label for='wapikey'>"._("Wunderground Api Key")."</label><input data-mini='true' type='text' id='wapikey' value='".$wapikey."' />";
                 continue 2;
             case 19:
                 $list .= "<label for='o19'>"._("Master On Delay")."</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";
@@ -1387,31 +1486,58 @@ function make_user_list() {
 
 #Generate weather forecast
 function make_list_forecast() {
-    $forecasts = get_forecast_data();
-    if (empty($forecasts)) {
-        echo "<p style='text-align:center'>"._("Forecast data could not be retrieved. Please try again later and/or check location setting.")."</p>";
-        return;
-    }
-    $dateformat = _("d M Y");
-    $month = array("Jan"=>_("Jan"),"Feb"=>_("Feb"),"Mar"=>_("Mar"),"Apr"=>_("Apr"),"May"=>_("May"),"Jun"=>_("Jun"),"Jul"=>_("Jul"),"Aug"=>_("Aug"),"Sep"=>_("Sep"),"Oct"=>_("Oct"),"Nov"=>_("Nov"),"Dec"=>_("Dec"));
-    $days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thu"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
-    $dateformat = explode(" ",$dateformat);
-    $list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['location']."</li>";
-    $list .= "<li data-icon='false' style='text-align:center'><div title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></div><span>"._("Now")."</span><br><span>".$forecasts['condition']['temp']."</span></li>";
-    foreach ($forecasts["forecast"] as $attr) {
-        $date = explode(" ",$attr['date']);
-        $date = array("d"=>$date[0],"M"=>$date[1],"Y"=>$date[2]);
-        $displaydate = "";
-        foreach ($dateformat as $d) {
-            if ($d == "M") $date[$d] = $month[$date[$d]];
-            $displaydate .= $date[$d]." ";
-        }
-        foreach ($days as $w => $day) {
-            if ($w == $attr['day']) $displayday = $day;
-        }
-        $list .= "<li data-icon='false' style='text-align:center'><span>".$displaydate."</span><br><div title='".$attr['text']."' class='wicon cond".$attr['code']."'></div><span>".$displayday."</span><br><span>"._("Low").": ".$attr['low']."  "._("High").": ".$attr['high']."</span></li>";
-    }
-    echo $list;
+    global $weather_provider;
+	if ($weather_provider == 'yahoo') {
+			$forecasts = get_forecast_data();
+		if (empty($forecasts)) {
+			echo "<p style='text-align:center'>"._("Forecast data could not be retrieved. Please try again later and/or check location setting.")."</p>";
+			return;
+		}
+		$dateformat = _("d M Y");
+		$month = array("Jan"=>_("Jan"),"Feb"=>_("Feb"),"Mar"=>_("Mar"),"Apr"=>_("Apr"),"May"=>_("May"),"Jun"=>_("Jun"),"Jul"=>_("Jul"),"Aug"=>_("Aug"),"Sep"=>_("Sep"),"Oct"=>_("Oct"),"Nov"=>_("Nov"),"Dec"=>_("Dec"));
+		$days = array("Mon"=>_("Mon"),"Tue"=>_("Tue"),"Wed"=>_("Wed"),"Thu"=>_("Thr"),"Fri"=>_("Fri"),"Sat"=>_("Sat"),"Sun"=>_("Sun"));
+		$dateformat = explode(" ",$dateformat);
+		$list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['location']."</li>";
+		$list .= "<li data-icon='false' style='text-align:center'><div title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></div><span>"._("Now")."</span><br><span>".$forecasts['condition']['temp']."</span></li>";
+		foreach ($forecasts["forecast"] as $attr) {
+			$date = explode(" ",$attr['date']);
+			$date = array("d"=>$date[0],"M"=>$date[1],"Y"=>$date[2]);
+			$displaydate = "";
+			foreach ($dateformat as $d) {
+				if ($d == "M") $date[$d] = $month[$date[$d]];
+				$displaydate .= $date[$d]." ";
+			}
+			foreach ($days as $w => $day) {
+				if ($w == $attr['day']) $displayday = $day;
+			}
+			$list .= "<li data-icon='false' style='text-align:center'><span>".$displaydate."</span><br><div title='".$attr['text']."' class='wicon cond".$attr['code']."'></div><span>".$displayday."</span><br><span>"._("Low").": ".$attr['low']."  "._("High").": ".$attr['high']."</span></li>";
+		}
+		echo $list;
+	} else {
+		$forecasts = get_wunderground_forecast_data();
+		if (empty($forecasts)) {
+			echo "<p style='text-align:center'>"._("Forecast data could not be retrieved. Please try again later and/or check location/api key settings.")."</p>";
+			return;
+		}
+		$region = $forecasts['condition']['region'];
+		if ($region == "US" || $region == "BM" || $region == "PW") {
+			$temp = $forecasts['condition']['temp_f']."&#176;F";
+			$precip = $forecasts['condition']['precip_today_in']." in";
+		} else {
+			$temp = $forecasts['condition']['temp_c']."&#176;C";
+			$precip = $forecasts['condition']['precip_today_metric']." mm";
+		}
+		$list = "<li data-role='list-divider' data-theme='a' style='text-align:center'>".$forecasts['condition']['location']."</li>";
+		$list .= "<li data-icon='false' style='text-align:center'><div title='".$forecasts['condition']['text']."' class='wicon cond".$forecasts['condition']['code']."'></div><span>"._("Now")."</span><br><span>".$temp."</span><br><span>"._("Precip").": ".$precip."</span></li>";
+		foreach ($forecasts["simpleforecast"] as $k => $attr) {
+			if ($region == "US" || $region == "BM" || $region == "PW") {
+				$list .= "<li data-icon='false' style='text-align:center'><span>".$attr->{'date'}->{'monthname_short'}." ".$attr->{'date'}->{'day'}."</span><br><div title='".$attr->{'conditions'}."' class='wicon cond".$attr->{'icon'}."'></div><span>".$attr->{'date'}->{'weekday_short'}."</span><br><span>"._("Low").": ".$attr->{'low'}->{'fahrenheit'}."&#176;F  "._("High").": ".$attr->{'high'}->{'fahrenheit'}."&#176;F</span><br><span>"._("Precip").": ".$attr->{'qpf_allday'}->{'in'}." in</span></li>";
+				} else {
+				$list .= "<li data-icon='false' style='text-align:center'><span>".$attr->{'date'}->{'monthname_short'}." ".$attr->{'date'}->{'day'}."</span><br><div title='".$attr->{'conditions'}."' class='wicon cond".$attr->{'icon'}."'></div><span>".$attr->{'date'}->{'weekday_short'}."</span><br><span>"._("Low").": ".$attr->{'low'}->{'celsius'}."&#176;C  "._("High").": ".$attr->{'high'}->{'celsius'}."&#176;C</span><br><span>"._("Precip").": ".$attr->{'qpf_allday'}->{'mm'}." mm</span></li>";
+				}
+			}
+		echo $list;
+	}
 }
 
 function pidname($pid) {
@@ -1718,7 +1844,7 @@ function delLineFromFile($fileName, $lineToDelete){
 
 function changeConfig($variable, $value, $type){
     if ($type === "i") $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets");
-    else if ($type === "s") $allowed = array("lang");
+    else if ($type === "s") $allowed = array("lang","weather_provider","lid","wapikey");
     else return false;
 
     #Only allow the above variables to be changed
@@ -1738,7 +1864,10 @@ function changeConfig($variable, $value, $type){
             else if ($type === "s") $line = "\$".$variable." = '".$value."';\n";
             $found = true;
         }
-        if (!$found && strpos($line,"?>") === 0) fwrite($fp,$line);
+        if (!$found && strpos($line,"?>") === 0) {
+			if ($type === "i") $line = "\$".$variable."=".$value.";\n?>";
+            else if ($type === "s") $line = "\$".$variable." = '".$value."';\n?>";
+		}
         fwrite($fp,$line);
     }
     fclose($fp);
