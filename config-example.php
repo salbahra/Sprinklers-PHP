@@ -30,6 +30,12 @@ $log_file = "/var/www/sprinklers/SprinklerChanges.txt";
 #Localization
 $lang = 'en_US';
 
+#Weather Provider
+$weather_provider = 'yahoo';
+
+#Wunderground api key
+$wapikey = '';
+
 #Enable/Disable Automatic Rain Delay Based on Weather
 $auto_delay = 0;
 
