@@ -174,7 +174,7 @@ function get_list_available_lang() {
                     text: msg,
                     textVisible: true,
                     textonly: true,
-                    theme: 'c'
+                    theme: 'b'
                 });
             }
             function submit_config() {
