@@ -219,8 +219,10 @@ a {
     }
 }
 
-div.ui-slider-switch, .ui-field-contain div.ui-slider-switch, .ui-field-contain.ui-hide-label div.ui-slider-switch {
-    width: 4.6em;
+div.ui-slider-switch {
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 
 .master {
