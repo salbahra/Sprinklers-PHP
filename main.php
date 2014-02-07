@@ -166,7 +166,7 @@ function get_wunderground_weather_data() {
 	$temp_c = $data->{'current_observation'}->{'temp_c'};
 	$temp_f = $data->{'current_observation'}->{'temp_f'};
     if ($region == "US" || $region == "BM" || $region == "PW") {
-        $temp = $temp_f."&#176;F";
+        $temp = round($temp_f)."&#176;F";
     } else {
         $temp = $temp_c."&#176;C";
     }
