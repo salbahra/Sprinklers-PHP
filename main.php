@@ -117,13 +117,13 @@ function get_woeid() {
     $options = get_options();
     $data = file_get_contents("http://query.yahooapis.com/v1/public/yql?q=select%20woeid%20from%20geo.placefinder%20where%20text=%22".urlencode($options["loc"])."%22");
     if (preg_match("/<woeid>(\d+)<\/woeid>/", $data, $woeid) == 1) return intval($woeid[1]);
-	else return 0;
+	return 0;
 }
 
 #Get the current weather code and temp
 function get_weather_data() {
     global $woeid;
-	if ($woeid == 0) return array();
+	if (!$woeid) return array();
     $data = file_get_contents("http://weather.yahooapis.com/forecastrss?w=".$woeid);
     if ($data === false) return array();
     preg_match("/<yweather:condition\s+text=\"([\w|\s]+)\"\s+code=\"(\d+)\"\s+temp=\"(\d+)\"\s+date=\"(.*)\"/", $data, $newdata);
@@ -226,17 +226,15 @@ function get_wunderground_forecast_data() {
 #Lookup code and get the set delay
 function code_to_delay($code) {
     global $auto_delay_duration, $weather_provider;
-    $adverse_codes = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,35,37,38,39,40,41,42,43,44,45,46,47);
-    $reset_codes = array(36);
-	$adverse_codes_wunderground = array ("flurries","sleet","rain","sleet","snow","tstorms","nt_flurries","nt_sleet","nt_rain","nt_sleet","nt_snow","nt_tstorms");
-	$reset_codes_wunderground = array("sunny","nt_sunny");
-	if ($weather_provider == "yahoo") {
-		if (in_array($code, $adverse_codes)) return $auto_delay_duration;
-		if (in_array($code, $reset_codes)) return 0;
-	} else {
-		if (in_array($code, $adverse_codes_wunderground)) return $auto_delay_duration;
-		if (in_array($code, $reset_codes_wunderground)) return 0;
-	}
+    if ($weather_provider == "yahoo") {
+        $adverse_codes = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,35,37,38,39,40,41,42,43,44,45,46,47);
+        $reset_codes = array(36);
+    } else {
+        $adverse_codes = array("flurries","sleet","rain","sleet","snow","tstorms","nt_flurries","nt_sleet","nt_rain","nt_sleet","nt_snow","nt_tstorms");
+        $reset_codes = array("sunny","nt_sunny");        
+    }
+	if (in_array($code, $adverse_codes)) return $auto_delay_duration;
+	if (in_array($code, $reset_codes)) return 0;
     return false;
 }
 
@@ -1488,7 +1486,7 @@ function make_user_list() {
 function make_list_forecast() {
     global $weather_provider;
 	if ($weather_provider == 'yahoo') {
-			$forecasts = get_forecast_data();
+		$forecasts = get_forecast_data();
 		if (empty($forecasts)) {
 			echo "<p style='text-align:center'>"._("Forecast data could not be retrieved. Please try again later and/or check location setting.")."</p>";
 			return;
