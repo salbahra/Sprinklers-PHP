@@ -168,6 +168,9 @@ function get_list_available_lang() {
                 $.mobile.defaultDialogTransition = 'fade';
                 $.mobile.hashListeningEnabled = false;
             });
+            $(document).on("change","#weather_provider",function(){
+                $("#wapikey").parent().parent().toggle();
+            })
             function showerror(msg) {
                 // show error message
                 $.mobile.loading( 'show', {
@@ -236,27 +239,23 @@ function get_list_available_lang() {
                         </fieldset>
                         <fieldset data-role="collapsible" data-theme="b">
                             <legend><?php echo _("Advanced Configuration"); ?></legend>
-                            <div class="ui-field-contain">
-								<label for="lang"><?php echo _("Localization:"); ?></label>
-                                <select name="lang" id="lang" /><?php get_list_available_lang(); ?></select>
-								<label for="weather_provider"><?php echo _("Weather Provider"); ?></label>
-								<select name="weather_provider" id="weather_provider"><option selected="" value="yahoo"><?php echo _("Yahoo!"); ?></option>
-								<option value="wunderground"><?php echo _("Wunderground"); ?></option></select>
-								<label for="wapikey"><?php echo _("Wunderground Api Key"); ?></label>
-								<input type="text" name="wapikey" id="wapikey" value="" />
-                                <label for="pass_file"><?php echo _("Pass File Location:"); ?></label>
-                                <input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" />
-                                <label for="cache_file"><?php echo _("Cache File Location:"); ?></label>
-                                <input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" />
-                                <label for="log_file"><?php echo _("Sprinkler Log File:"); ?></label>
-                                <input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" />
-								<fieldset>
-									<label for="force_ssl"><?php echo _("Force SSL"); ?></label>
-									<input type="checkbox" name="force_ssl" id="force_ssl" />
-									<label for="local_assets"><?php echo _("Use Local Assets?"); ?></label>
-									<input type="checkbox" name="local_assets" id="local_assets" />
-								</fieldset>
-                            </div>
+							<label for="lang"><?php echo _("Localization:"); ?><select name="lang" id="lang"><?php get_list_available_lang(); ?></select></label>
+							<label for="weather_provider"><?php echo _("Weather Provider"); ?>
+    							<select name="weather_provider" id="weather_provider">
+                                    <option selected value="yahoo"><?php echo _("Yahoo!"); ?></option>
+    							    <option value="wunderground"><?php echo _("Wunderground"); ?></option>
+                                </select>
+                            </label>
+							<label style="display:none" for="wapikey"><?php echo _("Wunderground Api Key"); ?><input type="text" name="wapikey" id="wapikey" value="" /></label>
+                            <label for="pass_file"><?php echo _("Pass File Location:"); ?><input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" /></label>
+                            <label for="cache_file"><?php echo _("Cache File Location:"); ?><input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" /></label>
+                            <label for="log_file"><?php echo _("Sprinkler Log File:"); ?><input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" /></label>
+							<fieldset>
+								<label for="force_ssl"><?php echo _("Force SSL"); ?></label>
+								<input type="checkbox" name="force_ssl" id="force_ssl" />
+								<label for="local_assets"><?php echo _("Use Local Assets?"); ?></label>
+								<input type="checkbox" name="local_assets" id="local_assets" />
+							</fieldset>
                         </fieldset>
                     </div>
                     <input type="submit" value="Submit" />
