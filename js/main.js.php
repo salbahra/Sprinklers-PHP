@@ -638,7 +638,7 @@ function get_logs() {
         $("#placeholder").empty().hide();
         var list = $("#logs_list");
         $("#zones, #graph_sort").hide(); list.show();
-        if (items.length == 131) {
+        if (items == 0) {
             $("#log_options").collapsible("expand");
             list.html("<p class='center'><?php echo _('No entries found in the selected date range'); ?></p>");
         } else {
