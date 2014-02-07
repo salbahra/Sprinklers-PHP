@@ -822,7 +822,7 @@ function make_list_logs() {
     
     $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
 
-    if (!$graphing) $list = "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>";
+    if (!$graphing) $list = "";
     $vs = get_stations();
     $ValveName = $vs["stations"];
     $settings = get_settings();
@@ -1060,7 +1060,11 @@ function make_list_logs() {
     if ($graphing) {
         echo json_encode(array("data" => $data, "stations" => $ValveName));    
     } else {
-        echo $list."</div>";
+        if (empty($list)) {
+            echo 0;
+            return;
+        }
+        echo "<div data-role='collapsible-set' data-inset='true' data-theme='b' data-collapsed-icon='arrow-d' data-expanded-icon='arrow-u'>".$list."</div>";
     }
 }
 
