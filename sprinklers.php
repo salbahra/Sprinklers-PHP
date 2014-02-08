@@ -354,16 +354,16 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div class="ui-content" role="main">
         <div id="preview_header">
-            <a onclick="changeday(-1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-l"></a>
+            <a onclick="changeday(-1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-l btn-no-border"></a>
             <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
-            <a onclick="changeday(1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-r"></a>
+            <a onclick="changeday(1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-r btn-no-border"></a>
         </div>
         <div id="timeline"></div>
-        <div id="timeline-navigation" style="display:none;width:144px;margin:0 auto">
-            <div class="timeline-navigation-zoom-in" onclick="timeline.zoom(0.4)" title="<?php echo _("Zoom in"); ?>"></div>
-            <div class="timeline-navigation-zoom-out" onclick="timeline.zoom(-0.4)" title="<?php echo _("Zoom out"); ?>"></div>
-            <div class="timeline-navigation-move-left" onclick="timeline.move(-0.2)" title="<?php echo _("Move left"); ?>"></div>
-            <div class="timeline-navigation-move-right" onclick="timeline.move(0.2)" title="<?php echo _("Move right"); ?>"></div>
+        <div data-role="controlgroup" data-type="horizontal" id="timeline-navigation">
+            <a href="#" onclick="timeline.zoom(0.4)" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-notext btn-no-border" title="<?php echo _("Zoom in"); ?>"></a>
+            <a href="#" onclick="timeline.zoom(-0.4)" class="ui-btn ui-corner-all ui-icon-minus ui-btn-icon-notext btn-no-border" title="<?php echo _("Zoom out"); ?>"></a>
+            <a href="#" onclick="timeline.move(-0.2)" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext btn-no-border" title="<?php echo _("Move left"); ?>"></a>
+            <a href="#" onclick="timeline.move(0.2)" class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-notext btn-no-border" title="<?php echo _("Move right"); ?>"></a>
         </div>
     </div>
 </div>
