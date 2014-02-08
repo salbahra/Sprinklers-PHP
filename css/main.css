@@ -130,15 +130,20 @@ a {
 #preview_header .ui-input-text {
     display: inline-block;
     width:75%;
+    vertical-align: text-top;
 }
 #preview_header {
-    margin: 0 -13px 0 -13px;
     width:100%;
     white-space:nowrap;
     text-align:center
 }
 #preview_header a {
-    padding:10px;
+    padding-top: 10px;
+    display: inline-block;
+    border: none;
+    vertical-align: text-top;
+    height: 25px;
+    background: none;
 }
 .use_master .ui-btn-inner {
     border-top: 0;
