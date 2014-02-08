@@ -6,10 +6,12 @@ a {
 }
 #graphScrollLeft, #graphScrollRight {
     position: absolute;
-    height: 25px;
     display:none;
+}
+.btn-no-border {
     border: none;
-    background: none;
+    background: none !important;
+    height: 25px;
 }
 .hideZone {
     border: 5px solid rgba(255,255,255,0) !important;
@@ -140,10 +142,7 @@ a {
 #preview_header a {
     padding-top: 10px;
     display: inline-block;
-    border: none;
     vertical-align: text-top;
-    height: 25px;
-    background: none;
 }
 .use_master .ui-btn-inner {
     border-top: 0;
@@ -279,29 +278,11 @@ div[class*='ui-block-'], #log_options, .center {
 body{
     margin: 0;
 }
+#timeline-navigation {
+    text-align: center;
+    display: none;
+}
 div.timeline-frame{border:1px solid #bebebe;overflow:hidden}div.timeline-axis{border-color:#bebebe;border-width:1px;border-top-style:solid}div.timeline-axis-grid{border-left-style:solid;border-width:1px}div.timeline-axis-grid-minor{border-color:#e5e5e5}div.timeline-axis-grid-major{border-color:#bfbfbf}div.timeline-axis-text{color:#4d4d4d;padding:3px;white-space:nowrap}div.timeline-event{color:#1a1a1a;border-color:#97b0f8;background-color:#d5ddf6;display:inline-block}div.timeline-event-selected{border-color:#ffc200;background-color:#fff785;z-index:999}div.timeline-event-cluster div.timeline-event-dot{border-color:#d5ddf6}div.timeline-event-box{text-align:center;border-style:solid;border-width:1px;border-radius:5px;-moz-border-radius:5px}div.timeline-event-dot{border-style:solid;border-width:5px;border-radius:5px;-moz-border-radius:5px}div.timeline-event-range{border-style:solid;border-width:1px;border-radius:2px;-moz-border-radius:2px}div.timeline-event-range-drag-left{cursor:w-resize;z-index:1000}div.timeline-event-range-drag-right{cursor:e-resize;z-index:1000}div.timeline-event-line{border-left-width:1px;border-left-style:solid}div.timeline-event-content{margin:5px;white-space:nowrap;overflow:hidden}div.timeline-groups-axis{border-color:#bebebe;border-width:1px}div.timeline-groups-text{color:#4d4d4d;padding-left:10px;padding-right:10px}div.timeline-currenttime{background-color:#ff7f6e;width:2px}div.timeline-customtime{background-color:#6e94ff;width:2px;cursor:move}
-div.timeline-navigation-zoom-in,  div.timeline-navigation-zoom-out,
-div.timeline-navigation-move-left, div.timeline-navigation-move-right {
-    cursor: pointer;
-    padding: 10px 10px;
-    float: left;
-    text-decoration: none;
-
-    width: 16px;
-    height: 16px;
-}
-div.timeline-navigation-zoom-in {
-    background: url('../img/zoomin.png') no-repeat center;
-}
-div.timeline-navigation-zoom-out {
-    background: url('../img/zoomout.png') no-repeat center;
-}
-div.timeline-navigation-move-left {
-    background: url('../img/moveleft.png') no-repeat center;
-}
-div.timeline-navigation-move-right {
-    background: url('../img/moveright.png') no-repeat center;
-}
 div.timeline-frame {
     border-color: #5D99C3;
     border-radius: 5px;
