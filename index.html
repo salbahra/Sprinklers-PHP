@@ -35,7 +35,7 @@
 <a name="opensprinkler-controller" class="anchor" href="#opensprinkler-controller"><span class="octicon octicon-link"></span></a><a href="http://salbahra.github.io/OpenSprinkler-Controller">OpenSprinkler Controller</a>
 </h1>
 
-<p>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, weather-based automatic rain delay, change OpenSprinkler settings and view logs. Screenshots available <a href="http://albahra.com/journal/2013/06/opensprinkler-with-custom-web-app">here</a>.</p>
+<p>A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, weather-based automatic rain delay, change OpenSprinkler settings and view logs. Screenshots available below.</p>
 
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview:</h2>
@@ -55,114 +55,34 @@
 <h2>
 <a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots:</h2>
 
-<p><img src="http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png" alt="Splash Screen"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-18-2013-6.36.32-PM-169x300.png" alt="Home Screen"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-23-2013-6.24.41-PM-169x300.png" alt="Status Page"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.46.37-PM-169x300.png" alt="Program Preview"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.39.39-PM-169x300.png" alt="Log Viewer"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-27-2013-5.55.42-PM-169x300.png" alt="Program Editor"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.30.53-PM-169x300.png" alt="Manual Program"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-2-2013-10.56.03-PM-169x300.png" alt="Rain Delay"><img src="http://albahra.com/journal/wp-content/uploads/2013/07/iOS-Simulator-Screen-shot-Jul-31-2013-8.40.23-PM-169x300.png" alt="Run Once"><img src="http://albahra.com/journal/wp-content/uploads/2013/08/iOS-Simulator-Screen-shot-Aug-1-2013-6.52.25-PM-169x300.png" alt="Settings"></p>
+<p><img src="http://albahra.com/journal/wp-content/uploads/2013/07/startup-iphone5-retina-175x300.png" alt="Splash Screen"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.15.37-PM-169x300.png" alt="Home Screen"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.15.45-PM-169x300.png" alt="Status Page"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.19.52-PM-169x300.png" alt="Program Preview"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.50.54-PM-169x300.png" alt="Log Viewer"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.24.09-PM-169x300.png" alt="Program Editor"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.24.18-PM-169x300.png" alt="Manual Program"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.24.44-PM-169x300.png" alt="Rain Delay"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.24.54-PM-169x300.png" alt="Run Once"><img src="http://albahra.com/journal/wp-content/uploads/2014/02/iOS-Simulator-Screen-shot-Jan-26-2014-7.25.08-PM-169x300.png" alt="Settings"></p>
 
 <h2>
-<a name="raspberry-pi-users" class="anchor" href="#raspberry-pi-users"><span class="octicon octicon-link"></span></a>Raspberry Pi Users:</h2>
-
-<ul>
-<li>
-<p>The application should also operate on the OpenSprinkler for Raspberry Pi so long the Raspberry Pi has the interval program installed. More information is available on  <a href="http://rayshobby.net/?p=6339">Ray's Blog Post</a>.</p>
-
-<ul>
-<li> This is a seperate program that needs to be running on the Raspberry Pi.</li>
-<li>Please rememeber this is a front end for a hardware device. In the case of the OpenSprinkler Pi, the hardware happens to be the Pi combined with the interval program software.</li>
-</ul>
-</li>
-<li>
-<p>The application can be hosted on the Raspberry Pi itself removing any requirment for a server. You would need to install a web deamon and PHP on the Rasberry Pi. This can be done using the linux instructions posted below as the Raspberry Pi typically run Raspbian which is based on Debian.</p>
-
-<ul>
-<li>In order to run both the interval program and the mobile web app on the same RPi you need to specify different ports for each application. The interval program defaults to port 8080 which is perfect since the typical HTTP port, 80, is used by Apache2. When defining the IP in the web app be sure to specify the port. Example: 127.0.0.1:8080</li>
-</ul>
-</li>
-<li><p>In order for the interval program to be 100% compatibile with the web app you must be using an interval program built on or after June 22, 2013.</p></li>
-</ul><h2>
 <a name="install-instructions" class="anchor" href="#install-instructions"><span class="octicon octicon-link"></span></a>Install Instructions:</h2>
 
-<ul>
-<li>
-<p>You first need a working OpenSprinkler setup that you can access via a browser</p>
+<div class="highlight highlight-sh"><pre><span class="c">#create directory with write permissions</span>
+mkdir -m 777 /var/www/sprinklers
 
-<ul>
-<li>For further information please refer to the OpenSprinkler online user manual available on <a href="http://rayshobby.net/?page_id=192">Ray's Website</a>
-</li>
-</ul>
-</li>
-<li>
-<p>Install prerequisites as needed (example for Debian using Apache web server)</p>
+<span class="c">#install files</span>
+git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers
 
-<ul>
-<li>
-<code>apt-get install apache2 php5 libapache2-mod-php5 git</code> </li>
-</ul>
-</li>
-<li>
-<p>Create the directory you wish to place the files in (ex. /var/www/sprinklers for http://yourwebsite/sprinklers)</p>
+</pre></div>
 
-<ul>
-<li><code>mkdir -m 777 /var/www/sprinklers</code></li>
-</ul>
-</li>
-<li>
-<p>Download the files to your web directory using git</p>
+<blockquote>
+<p>If you don't have Git, you can download <a href="https://github.com/salbahra/OpenSprinkler-Controller/archive/master.zip">ZIP</a> file and extract files to a local directory.</p>
+</blockquote>
 
-<ul>
-<li><code>git clone https://github.com/salbahra/OpenSprinkler-Controller.git /var/www/sprinklers</code></li>
-</ul>
-</li>
-<li><p>From there you may attempt to access the front end which will guide you through the rest of the install process.</p></li>
-</ul><h2>
+<p>See the <a href="https://github.com/salbahra/OpenSprinkler-Controller/wiki/Install-Instructions">Wiki - Install Instructions</a> for additional documentation.</p>
+
+<h2>
 <a name="update-instructions" class="anchor" href="#update-instructions"><span class="octicon octicon-link"></span></a>Update Instructions:</h2>
 
-<ul>
-<li>
-<p>Navigate to the web directory where the files are stored</p>
+<div class="highlight highlight-sh"><pre><span class="c">#change to the install directory</span>
+<span class="nb">cd</span> /var/www/sprinklers
 
-<ul>
-<li><code>cd /var/www/sprinklers</code></li>
-</ul>
-</li>
-<li>
-<p>Trigger a remote update using git</p>
-
-<ul>
-<li><code>git pull</code></li>
-</ul>
-</li>
-</ul><h2>
-<a name="php-safe-mode" class="anchor" href="#php-safe-mode"><span class="octicon octicon-link"></span></a>PHP Safe Mode:</h2>
-
-<ul>
-<li>If PHP denies exec, crontab for watcher will need to be added manually. The installer will notify you of this. Example of how to do this:
-
-<ul>
-<li> <code>crontab -e</code>
-</li>
-<li> <code>* * * * * cd /var/www/sprinklers; php /var/www/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code>
-</li>
-</ul>
-</li>
-</ul><h2>
-<a name="synology-specific" class="anchor" href="#synology-specific"><span class="octicon octicon-link"></span></a>Synology Specific:</h2>
-
-<ul>
-<li><p>There is no crontab editor on Synology, you have to edit /etc/crontab file manually.</p></li>
-<li>
-<p>The cron line parameters (* * * * *) must be separated by tabs, example:</p>
-
-<ul>
-<li><code>*  * * * * cd /volume1/web/sprinklers; php /volume1/web/sprinklers/watcher.php &gt;/dev/null 2&gt;&amp;1</code></li>
-</ul>
-</li>
-<li>
-<p>Cron service has to be restarted manually after updating the crontab by running</p>
-
-<ul>
-<li><code>/usr/syno/etc/rc.d/S04crond.sh stop; /usr/syno/etc/rc.d/S04crond.sh</code></li>
-</ul>
-</li>
-</ul>
+<span class="c">#perform update</span>
+git pull
+</pre></div>
         </section>
 
         <footer>
