@@ -809,7 +809,7 @@ function get_preview() {
     $.mobile.loading("show");
     $.get("index.php","action=get_preview&d="+date[2]+"&m="+date[1]+"&y="+date[0],function(items){
         var empty = true;
-        if (items == "") {
+        if ($.trim(items) == "") {
             $("#timeline").html("<p align='center'><?php echo _('No stations set to run on this day.'); ?></p>")
         } else {
             empty = false
