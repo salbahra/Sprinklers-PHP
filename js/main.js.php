@@ -256,7 +256,7 @@ function check_status() {
     //Check if a program is running
     $.get("index.php","action=current_status",function(data){
         var footer = $("#footer-running")
-        if (data === "") {
+        if ($.trim(data) === "") {
             footer.slideUp();
             return;
         }
