@@ -74,18 +74,18 @@ if (!isset($auto_delay_duration)) {
 #Configure weather
 
 if (!isset($weather_provider)) {
-    $weather_provider = "yahoo";
     changeConfig("weather_provider",$weather_provider,"s");
+    $weather_provider = "yahoo";
 }
 
 if (!isset($woeid)) {
-    $woeid = get_woeid();
     changeConfig("woeid",$woeid,"i");
+    $woeid = get_woeid();
 }
 
 if (!isset($lid)) {
-    $lid = get_wunderground_lid();
     changeConfig("lid",$lid,"s");
+    $lid = get_wunderground_lid();
 }
 
 #Get Base URL of Site
@@ -98,7 +98,7 @@ $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15
 if (isset($_REQUEST['action'])) {
     if (is_callable($_REQUEST['action'])) {
         if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","get_autodelay","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config","make_list_forecast"))) {
+            if (in_array($_REQUEST["action"], array("submit_localization","submit_weather_settings","get_weather_settings","clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config","make_list_forecast"))) {
                 call_user_func($_REQUEST['action']);
             }
         } else {
@@ -610,11 +610,6 @@ function start_data() {
     return array("en"=>$en,"mm"=>$mm,"ver"=>$ver);
 }
 
-function get_autodelay() {
-    global $auto_delay,$auto_delay_duration;
-    echo json_encode(array("auto_delay"=>$auto_delay,"auto_delay_duration"=>$auto_delay_duration));
-}
-
 #Send command to OpenSprinkler
 function send_to_os($url) {
     global $os_ip, $os_pw;
@@ -672,46 +667,50 @@ function submit_autodelay() {
     echo 1;
 }
 
+function submit_weather_settings() {
+    global $weather_provider, $wapikey;
+    foreach (json_decode($_REQUEST["options"]) as $key => $value) {
+        switch ($key) {
+            case 'weather_provider':
+                $weather_provider = $value;
+                changeConfig("weather_provider",$value,"s");
+                continue;
+            case 'wapikey':
+                $wapikey = $value;
+                changeConfig("wapikey",$value,"s");
+            default:
+                continue;
+        }
+    }
+    echo 1;
+}
+
+function submit_localization() {
+    global $lang;
+    if (isset($_REQUEST["locale"])) {
+        changeConfig("lang",$_REQUEST["locale"],"s");
+        echo 1;
+        return;
+    }
+    echo 0;
+}
+
 #Submit updated options
 function submit_options() {
     global $keyNames;
     if (isset($_SESSION["OSPi"])) {
         foreach (json_decode($_REQUEST["options"]) as $key => $value) {
-			if ($key == "lang") {
-				changeConfig("lang",$value,"s");
-			} else {
-				if ($key == "weather_provider") {
-					changeConfig("weather_provider",$value,"s");
-				} else {
-				if ($key == "wapikey") {
-					changeConfig("wapikey",$value,"s");
-				} else {
-					if ($key !== "loc") {
-						$key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
-						$data[$keyNames[$key]] = $value;
-					} else {
-						$key = "o".$key;
-						$data[$key] = $value;
-						}
-					}
-				} 
-			}
+    		if ($key !== "loc") {
+    			$key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
+    			$data[$keyNames[$key]] = $value;
+    		} else {
+    			$key = "o".$key;
+    			$data[$key] = $value;
+    		}
         }
 		send_to_os("/co?pw=&".http_build_query($data));
     } else {
         $data = json_decode($_REQUEST["options"], true);
-        if (array_key_exists("lang", $data)) {
-            changeConfig("lang",$data["lang"],"s");
-            unset($data["lang"]);
-        }
-		if (array_key_exists("weather_provider", $data)) {
-            changeConfig("weather_provider",$data["weather_provider"],"s");
-            unset($data["weather_provider"]);
-        }
-		if (array_key_exists("wapikey", $data)) {
-            changeConfig("wapikey",$data["wapikey"],"s");
-            unset($data["wapikey"]);
-        }
         send_to_os("/co?pw=&".http_build_query($data));
     }
     $woeid = get_woeid();
@@ -1349,9 +1348,14 @@ function make_list_status() {
     echo json_encode(array("list" => $list,"header" => $header,"footer" => $footer, "sdelay" => $options[17]["val"], "totals" => json_encode($runningTotal)));
 }
 
+#Return current weather based settings
+function get_weather_settings() {
+    global $weather_provider, $wapikey, $auto_delay,$auto_delay_duration;
+    echo json_encode(array("auto_delay"=>$auto_delay,"auto_delay_duration"=>$auto_delay_duration,"weather_provider"=>$weather_provider, "wapikey"=>$wapikey));
+}
+
 #Generate settings page
 function make_settings_list() {	
-    global $lang, $weather_provider, $wapikey;
 	$options = get_options();
     $settings = get_settings();
     $vs = get_stations();
@@ -1369,12 +1373,6 @@ function make_settings_list() {
                     $list .= "<option ".(($timezone == $tz) ? "selected" : "")." value='".$timezone."'>".$timezone."</option>";
                 }
                 $list .= "</select>";
-				$locals = get_available_languages();
-				$list .= "<label for='lang' class='select'>"._("Localization")."</label><select data-mini='true' id='lang' data-language='".$lang."'>";
-				foreach ($locals as $l=>$local) {
-					$list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
-				}
-				$list .= "</select>";
                 continue 2;
             case 2:
                 $list .= "<input data-mini='true' id='o2' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o2'>"._("NTP Sync")."</label>";
@@ -1403,11 +1401,7 @@ function make_settings_list() {
                     if ($i == 8) break;
                     $i++;
                 }
-                $list .= "</select><label for='loc'>"._("Location")."</label><input data-mini='true' type='text' id='loc' value='".$options["loc"]."' />";
-				$list .= "<label for='weather_provider' class='select'>"._("Weather Provider")."</label><select data-mini='true' id='weather_provider'>";
-				$list .= "<option ".(($weather_provider == "yahoo") ? "selected" : "")." value='yahoo'>"._("Yahoo!")."</option>";
-				$list .= "<option ".(($weather_provider == "wunderground") ? "selected" : "")." value='wunderground'>"._("Wunderground")."</option></select>";
-				$list .= "<label for='wapikey'>"._("Wunderground Api Key")."</label><input data-mini='true' type='text' id='wapikey' value='".$wapikey."' />";
+                $list .= "</select><label for='loc'>Location</label><input data-mini='true' type='text' id='loc' value='".$options["loc"]."' />";
                 continue 2;
             case 19:
                 $list .= "<label for='o19'>"._("Master On Delay")."</label><input data-highlight='true' data-mini='true' type='number' pattern='[0-9]*' data-type='range' min='0' max='60' id='o19' value='".$data["val"]."' />";

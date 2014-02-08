@@ -60,6 +60,10 @@ $(document).one("pagecreate","#sprinklers", function(){
     }
 });
 
+$(document).on("change","#weather_provider",function(){
+    $("#wapikey").parent().parent().toggle();
+})
+
 $(window).resize(function(){
     var currpage = $(".ui-page-active").attr("id");
     if (currpage == "logs") {
@@ -446,6 +450,26 @@ function show_settings() {
         $.mobile.loading("hide");
         $("body").pagecontainer("change","#os-settings");
     })    
+}
+
+function show_weather_settings() {
+    $.mobile.loading("show");
+    $.get("index.php","action=get_weather_settings",function(data){
+        data = JSON.parse(data)
+        $('#weather_provider').val(data.weather_provider);
+        if (data.weather_provider == "wunderground") {
+            $("#wapikey").parent().parent().show();
+        } else {
+            $("#wapikey").parent().parent().hide();
+        }
+        $('#wapikey').val(data.wapikey);
+        if (data["auto_delay"]) {
+            $("#auto_delay").val("on")
+        }
+        $("#auto_delay_duration").val(data["auto_delay_duration"]);
+
+        $("body").pagecontainer("change","#weather-settings");
+   });
 }
 
 function show_stations() {
@@ -1087,8 +1111,6 @@ function submit_settings() {
         if (result == 0) {
             comm_error()
         } else {
-            var lang = $("#lang");
-			if (lang.data("language") !== lang.val()) location.reload();
             showerror("<?php echo _('Settings have been saved'); ?>")
         }
     })
@@ -1150,6 +1172,37 @@ function submit_runonce() {
         }
     })
     gohome();
+}
+
+function submit_weather_settings() {
+    $.mobile.loading("show");
+    var opt = new Object();
+    opt["weather_provider"] = $("#weather_provider").val();
+    opt["wapikey"] = $("#wapikey").val();
+    $.get("index.php","action=submit_weather_settings&options="+JSON.stringify(opt),function(result){
+        $.mobile.loading("hide");
+        gohome();
+        if (result == 0) {
+            comm_error()
+        } else {
+            showerror("<?php echo _('Weather settings have been saved'); ?>")
+        }
+    })
+}
+
+function submit_localization(locale) {
+    $.mobile.loading("show");
+    $.get("index.php","action=submit_localization&locale="+locale,function(result){
+        $.mobile.loading("hide");
+        gohome();
+        if (result == 0) {
+            comm_error()
+        } else {
+            var lang = $("#lang");
+            if (lang.data("language") !== locale) location.reload();
+            showerror("<?php echo _('Localization settings have been saved'); ?>")
+        }
+    })    
 }
 
 function toggle(anchor) {
