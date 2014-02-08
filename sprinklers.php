@@ -156,7 +156,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
     </div>
     <div class="ui-content" role="main">
-        <p style="text-align:center"><?php echo _("Rain delay allows you to disable all programs for a set duration. You can manually set a rain delay or enable automatic rain delays."); ?></p>
+        <p style="text-align:center"><?php echo _("Rain delay allows you to disable all programs for a set duration."); ?></p>
         <ul data-role="listview" data-inset="true">
             <li data-role="list-divider"><?php echo _("Manual Rain Delay"); ?></li>
             <li>
@@ -166,24 +166,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         <label for="delay"><?php echo _("Duration (in hours):"); ?></label>
                         <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' value='0' min='0' max='96' id='delay' />
                     </div>
-                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
-                </form>
-            </li>
-        </ul>
-        <ul data-role='listview' data-inset='true'>
-            <li data-role='list-divider'><?php echo _("Automatic Rain Delay"); ?></li>
-            <li>
-                <p class="rain-desc"><?php echo _("When automatic rain delay is enabled, the weather will be checked for rain every hour. If the weather reports any condition suggesting rain, a rain delay is automatically issued using the below set delay duration."); ?></p>
-                <form action="javascript:auto_raindelay()">
-                    <div data-role='fieldcontain'>
-                        <label for='auto_delay'><?php echo _("Auto Rain Delay"); ?></label>
-                        <select name='auto_delay' id='auto_delay' data-role='slider'>
-                            <option value='off'><?php echo _("Off"); ?></option>
-                            <option value='on'><?php echo _("On"); ?></option>
-                        </select>
-                    </div>
-                    <label for='auto_delay_duration'><?php echo _("Delay Duration (hours)"); ?></label>
-                    <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
                     <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
                 </form>
             </li>
@@ -239,13 +221,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true">
-            <li><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
-            <li><a href="#" data-onclick="show_settings();"><?php echo _("Device Options"); ?></a></li>
-            <li><a href="#" data-onclick="show_stations();"><?php echo _("Edit Stations"); ?></a></li>
-            <li><a href="#" data-onclick="show_users();"><?php echo _("User Management"); ?></a></li>
-        </ul>
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider"><?php echo _("System Control"); ?></li>
+            <li data-role="list-divider" data-theme="b"><?php echo _("Device Settings"); ?></li>
             <li class="ui-field-contain">
                 <label for="mm"><b><?php echo _("Manual Mode"); ?></b></label>
                 <select name="mm" id="mm" data-role="slider">
@@ -260,34 +236,55 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     <option <?php echo $_SESSION["data"]["en"]; ?> value="on"><?php echo _("On"); ?></option>
                 </select>
             </li>
+            <li><a href="#" data-onclick="show_settings();"><?php echo _("Device Options"); ?></a></li>
+            <li><a href="#" data-onclick="show_stations();"><?php echo _("Edit Stations"); ?></a></li>
             <li data-icon="alert"><a href="#" data-onclick="rbt();"><?php echo _("Reboot OpenSprinkler"); ?></a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider"><?php echo _("Automatically Disable Manual Mode"); ?></li>
-            <li>
-                <p class="rain-desc"><?php echo _("Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled."); ?></p>
-            </li>
+            <li data-role="list-divider" data-theme="b"><?php echo _("Mobile Application Settings"); ?></li>
             <li class="ui-field-contain">
-                <label for="auto_mm"><b><?php echo _("Enabled"); ?></b></label>
-                <select name="auto_mm" id="auto_mm" data-role="slider">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php global $auto_mm; echo (($auto_mm) ? "selected" : "") ?> value="on"><?php echo _("On"); ?></option>
-				</select>
-            </li>
-        </ul>
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider"><?php echo _("Local Assets"); ?></li>
-            <li>
-                <p class="rain-desc"><?php echo _("Assets are javascript and CSS libraries that power the mobile web app. Choose between local assets or content distibution network (CDN) hosted assets."); ?></p>
-            </li>
-            <li class="ui-field-contain">
-                <label for="local_assets"><b><?php echo _("Enabled"); ?></b></label>
+                <label for="local_assets"><b><?php echo _("Local Assets"); ?></b></label>
                 <select name="local_assets" id="local_assets" data-role="slider">
                     <option value="off"><?php echo _("Off"); ?></option>
                     <option <?php global $local_assets; echo (($local_assets) ? "selected" : "") ?> value="on"><?php echo _("On"); ?></option>
                 </select>
             </li>
+            <li>
+                <p class="rain-desc"><?php echo _("Assets are javascript and CSS libraries that power the mobile web app. Choose between local assets or content distibution network (CDN) hosted assets."); ?></p>
+            </li>
+            <li class="ui-field-contain">
+                <label for="auto_mm"><b><?php echo _("Manual Auto-Off"); ?></b></label>
+                <select name="auto_mm" id="auto_mm" data-role="slider">
+                    <option value="off"><?php echo _("Off"); ?></option>
+                    <option <?php global $auto_mm; echo (($auto_mm) ? "selected" : "") ?> value="on"><?php echo _("On"); ?></option>
+                </select>
+            </li>
+            <li>
+                <p class="rain-desc"><?php echo _("Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled."); ?></p>
+            </li>
+            <li><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
+            <li><a href="#" data-onclick="$('body').pagecontainer('change','#localization');"><?php echo _("Localization"); ?></a></li>
+            <li><a href="#" data-onclick="show_users();"><?php echo _("User Management"); ?></a></li>
+            <li><a href="#" data-onclick="show_weather_settings();"><?php echo _("Weather Settings"); ?></a></li>
         </ul>
+    </div>
+</div>
+
+<div data-role="page" id="localization">
+    <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3><?php echo _("Localization"); ?></h3>
+        <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
+    </div>
+    <div class="ui-content" role="main">
+        <?php
+            global $lang;
+            $locals = get_available_languages();
+            echo "<ul data-inset='true' data-role='listview' id='lang' data-language='".$lang."'>";
+            foreach ($locals as $l=>$local) {
+                echo "<li data-icon='".(($lang == $l) ? "check" : "false")."'><a href='#' data-onclick='submit_localization(\"".$l."\");'>".$local."</a></li>";
+            }
+            echo "</ul>";
+        ?>
     </div>
 </div>
 
@@ -299,6 +296,48 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div class="ui-content" role="main">
         <ul data-role="listview" data-inset="true" id="os-settings-list">
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="weather-settings">
+    <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
+        <h3><?php echo _("Weather Settings"); ?></h3>
+        <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
+    </div>
+    <div class="ui-content" role="main">
+        <ul data-role='listview' data-inset='true'>
+            <li data-role='list-divider'><?php echo _("Weather Provider"); ?></li>
+            <li>
+                <form action="javascript:submit_weather_settings()">
+                    <label for='weather_provider'><?php echo _("Weather Provider"); ?>
+                        <select data-mini='true' id='weather_provider'>
+                            <option value='yahoo'><?php echo _("Yahoo!"); ?></option>
+                            <option value='wunderground'><?php echo _("Wunderground"); ?></option>
+                        </select>
+                    </label>
+                    <label for='wapikey'><?php echo _("Wunderground Api Key"); ?><input data-mini='true' type='text' id='wapikey' /></label>
+                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
+                </form>
+            </li>
+        </ul>
+        <ul data-role='listview' data-inset='true'>
+            <li data-role='list-divider'><?php echo _("Automatic Rain Delay"); ?></li>
+            <li>
+                <p class="rain-desc"><?php echo _("When automatic rain delay is enabled, the weather will be checked for rain every hour. If the weather reports any condition suggesting rain, a rain delay is automatically issued using the below set delay duration."); ?></p>
+                <form action="javascript:auto_raindelay()">
+                    <div data-role='fieldcontain'>
+                        <label for='auto_delay'><?php echo _("Auto Rain Delay"); ?></label>
+                        <select name='auto_delay' id='auto_delay' data-role='slider'>
+                            <option value='off'><?php echo _("Off"); ?></option>
+                            <option value='on'><?php echo _("On"); ?></option>
+                        </select>
+                    </div>
+                    <label for='auto_delay_duration'><?php echo _("Delay Duration (hours)"); ?></label>
+                    <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
+                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
+                </form>
+            </li>
         </ul>
     </div>
 </div>
