@@ -354,9 +354,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div class="ui-content" role="main">
         <div id="preview_header">
-            <a href="#" data-onclick="changeday(-1);"><img src="img/moveleft.png" /></a>
+            <a onclick="changeday(-1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-l"></a>
             <input style="text-align:center" type="date" name="preview_date" id="preview_date" />
-            <a href="#" data-onclick="changeday(1);"><img src="img/moveright.png" /></a>
+            <a onclick="changeday(1);" class="ui-btn ui-btn-icon-notext ui-icon-carat-r"></a>
         </div>
         <div id="timeline"></div>
         <div id="timeline-navigation" style="display:none;width:144px;margin:0 auto">
