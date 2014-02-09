@@ -648,10 +648,9 @@ function change_lang($lang) {
 function submit_autodelay() {
     global $auto_delay,$auto_delay_duration;
     $autodelay = json_decode($_REQUEST["autodelay"],true);
-    $switch = ($autodelay["auto_delay"] === "on") ? 1 : 0;
-    if ($switch !== $auto_delay) {
-        $auto_delay = $switch;
-        if (!changeConfig("auto_delay",$switch,"i")) {
+    if ($autodelay["auto_delay"] !== $auto_delay) {
+        $auto_delay = $autodelay["auto_delay"];
+        if (!changeConfig("auto_delay",$autodelay["auto_delay"],"i")) {
             echo 2;
             exit();
         }

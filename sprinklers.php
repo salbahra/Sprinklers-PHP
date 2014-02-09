@@ -73,10 +73,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         <label for="autologin"><?php echo _("Auto Login"); ?></label>
                     </div>
                     <div class="ui-block-b">
-                        <select name="autologin" id="s-autologin" data-role="slider">
-                            <option value="off"><?php echo _("Off"); ?></option>
-                            <option value="on"><?php echo _("On"); ?></option>
-                        </select>
+                        <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="autologin" id="s-autologin">
                     </div>
                 </div>
             </li>
@@ -124,7 +121,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li class="ui-field-contain">
                 <label for="mmm"><b><?php echo _("Manual Mode"); ?></b></label>
-                <select name="mmm" id="mmm" data-role="slider">
+                <select name="mmm" id="mmm" data-role="flipswitch">
                     <option value="off"><?php echo _("Off"); ?></option>
                     <option <?php echo $_SESSION["data"]["mm"]; ?> value="on"><?php echo _("On"); ?></option>
                 </select>
@@ -216,17 +213,11 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li data-role="list-divider" data-theme="b"><?php echo _("Device Settings"); ?></li>
             <li class="ui-field-contain">
                 <label for="mm"><b><?php echo _("Manual Mode"); ?></b></label>
-                <select name="mm" id="mm" data-role="slider">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php echo $_SESSION["data"]["mm"]; ?> value="on"><?php echo _("On"); ?></option>
-                </select>
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="mm" id="mm" <?php if ($_SESSION["data"]["mm"]) echo "checked"; ?>>
             </li>
             <li class="ui-field-contain">
                 <label for="en"><b><?php echo _("Operation"); ?></b></label>
-                <select name="en" id="en" data-role="slider">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php echo $_SESSION["data"]["en"]; ?> value="on"><?php echo _("On"); ?></option>
-                </select>
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="en" id="en" <?php if ($_SESSION["data"]["en"]) echo "checked"; ?>>
             </li>
             <li><a href="#" data-onclick="show_settings();"><?php echo _("Device Options"); ?></a></li>
             <li><a href="#" data-onclick="show_stations();"><?php echo _("Edit Stations"); ?></a></li>
@@ -236,20 +227,14 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li data-role="list-divider" data-theme="b"><?php echo _("Mobile Application Settings"); ?></li>
             <li class="ui-field-contain">
                 <label for="local_assets"><b><?php echo _("Local Assets"); ?></b></label>
-                <select name="local_assets" id="local_assets" data-role="slider">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php global $local_assets; echo (($local_assets) ? "selected" : "") ?> value="on"><?php echo _("On"); ?></option>
-                </select>
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="local_assets" id="local_assets" <?php global $local_assets; if ($local_assets) echo "checked"; ?>>
             </li>
             <li>
                 <p class="rain-desc"><?php echo _("Assets are javascript and CSS libraries that power the mobile web app. Choose between local assets or content distibution network (CDN) hosted assets."); ?></p>
             </li>
             <li class="ui-field-contain">
                 <label for="auto_mm"><b><?php echo _("Manual Auto-Off"); ?></b></label>
-                <select name="auto_mm" id="auto_mm" data-role="slider">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php global $auto_mm; echo (($auto_mm) ? "selected" : "") ?> value="on"><?php echo _("On"); ?></option>
-                </select>
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="auto_mm" id="auto_mm" <?php global $auto_mm; if ($auto_mm) echo "checked"; ?>>
             </li>
             <li>
                 <p class="rain-desc"><?php echo _("Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled."); ?></p>
@@ -313,10 +298,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <form action="javascript:auto_raindelay()">
                     <div data-role='fieldcontain'>
                         <label for='auto_delay'><?php echo _("Auto Rain Delay"); ?></label>
-                        <select name='auto_delay' id='auto_delay' data-role='slider'>
-                            <option value='off'><?php echo _("Off"); ?></option>
-                            <option value='on'><?php echo _("On"); ?></option>
-                        </select>
+                        <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="auto_delay" id="auto_delay">
                     </div>
                     <label for='auto_delay_duration'><?php echo _("Delay Duration (hours)"); ?></label>
                     <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
