@@ -74,18 +74,18 @@ if (!isset($auto_delay_duration)) {
 #Configure weather
 
 if (!isset($weather_provider)) {
-    changeConfig("weather_provider",$weather_provider,"s");
     $weather_provider = "yahoo";
+    changeConfig("weather_provider",$weather_provider,"s");
 }
 
 if (!isset($woeid)) {
-    changeConfig("woeid",$woeid,"i");
     $woeid = get_woeid();
+    changeConfig("woeid",$woeid,"i");
 }
 
 if (!isset($lid)) {
-    changeConfig("lid",$lid,"s");
     $lid = get_wunderground_lid();
+    changeConfig("lid",$lid,"s");
 }
 
 #Get Base URL of Site
