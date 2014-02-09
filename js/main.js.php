@@ -432,27 +432,24 @@ function show_about() {
 }
 
 function show_raindelay() {
-    var content = '\
-    <ul data-role="listview" data-inset="true">\
-        <li data-role="list-divider"><?php echo _("Change Rain Delay"); ?></li>\
-        <li>\
-            <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>\
-            <form action="javascript:raindelay()">\
-                <div class="ui-field-contain">\
-                    <label for="delay"><?php echo _("Duration (in hours):"); ?></label>\
-                    <input type="number" pattern="[0-9]*" data-highlight="true" data-type="range" value="0" min="0" max="96" id="delay" />\
-                </div>\
-                <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />\
-            </form>\
-        </li>\
-    </ul>';
-
-    // Popup body
-    var popup = $("<div id='raindelay'/>", {
-        "data-role": "popup"
-    }).css({
+    var popup = $('\
+    <div data-role="popup" id="raindelay" data-overlay-theme="b">\
+        <ul data-role="listview" data-inset="true">\
+            <li data-role="list-divider"><?php echo _("Change Rain Delay"); ?></li>\
+            <li>\
+                <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>\
+                <form action="javascript:raindelay()">\
+                    <div class="ui-field-contain">\
+                        <label for="delay"><?php echo _("Duration (in hours):"); ?></label>\
+                        <input type="number" pattern="[0-9]*" data-highlight="true" data-type="range" value="0" min="0" max="96" id="delay" />\
+                    </div>\
+                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />\
+                </form>\
+            </li>\
+        </ul>\
+    </div>').css({
         "width": "250px"
-    }).append(content);
+    })
 
     // Append it to active page
     $(".ui-page-active").append(popup);
@@ -1375,7 +1372,7 @@ function import_config() {
 
 function areYouSure(text1, text2, callback) {
     var popup = $('\
-    <div data-role="popup" id="sure">\
+    <div data-role="popup" class="ui-content" data-overlay-theme="b" id="sure">\
         <h3 class="sure-1" style="text-align:center">'+text1+'</h3>\
         <p class="sure-2" style="text-align:center">'+text2+'</p>\
         <a class="sure-do" data-role="button" data-theme="b" href="#"><?php echo _("Yes"); ?></a>\
