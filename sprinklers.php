@@ -121,10 +121,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-role="listview" data-inset="true">
             <li class="ui-field-contain">
                 <label for="mmm"><b><?php echo _("Manual Mode"); ?></b></label>
-                <select name="mmm" id="mmm" data-role="flipswitch">
-                    <option value="off"><?php echo _("Off"); ?></option>
-                    <option <?php echo $_SESSION["data"]["mm"]; ?> value="on"><?php echo _("On"); ?></option>
-                </select>
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="mmm" id="mmm">
             </li>
         </ul>
         <ul data-role="listview" data-inset="true" id="mm_list">
