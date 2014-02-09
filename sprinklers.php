@@ -42,9 +42,9 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
         <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider"><?php echo _("Program Control"); ?></li>
+            <li><a href="#raindelay" data-onclick="show_raindelay();"><?php echo _("Change Rain Delay"); ?></a></li>
             <li><a href="#programs" data-onclick="get_programs();"><?php echo _("Edit Programs"); ?></a></li>
             <li><a href="#manual" data-onclick="get_manual();"><?php echo _("Manual Control"); ?></a></li>
-            <li><a href="#raindelay" data-onclick="show_raindelay();"><?php echo _("Change Rain Delay"); ?></a></li>
             <li><a href="#runonce" data-onclick="get_runonce();"><?php echo _("Run-Once Program"); ?></a></li>
             <li><a href="#" data-onclick="rsn();"><?php echo _("Stop All Stations"); ?></a></li>
         </ul>
