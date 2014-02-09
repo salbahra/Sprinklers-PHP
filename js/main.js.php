@@ -45,8 +45,6 @@ $(document).ajaxError(function(x,t,m) {
 //After main page is processed, hide loading message and change to the page
 $(document).one("pagecreate","#sprinklers", function(){
     $.mobile.loading("hide");
-    var theme = localStorage.getItem("theme");
-    $("#s-theme-select").val(theme).slider("refresh");
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
@@ -93,34 +91,30 @@ $("#preview_date").change(function(){
 });
 
 //Bind changes to the flip switches
-$("select[data-role='slider']").change(function(){
+$("input[data-role='flipswitch']").change(function(){
     var slide = $(this);
     var type = this.name;
     var pageid = slide.closest(".ui-page-active").attr("id");
     //Find out what the switch was changed to
-    var changedTo = slide.val();
+    var changedTo = slide.is(":checked");
     if(window.sliders[type]!==changedTo){
         window.sliders[type] = changedTo;
-        if (type == "theme-select") {
-            localStorage.setItem("theme",changedTo);
-            if (changedTo === "flat") insert_fonts();
-            $("#theme").attr("href",getThemeUrl(changedTo));
-            return;
-        }
-        if (changedTo=="on") {
+        if (changedTo) {
             //If chanegd to on
             if (type === "autologin") {
                 if (localStorage.getItem("token") !== null) return;
                 $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
                 $("#login .ui-checkbox").hide();
-                $("body").pagecontainer("change","#login");
+                $(".ui-panel-open").one("panelclose",function(){
+                    $("body").pagecontainer("change","#login");
+                }).panel("close")
             }
             if (type === "en") {
                 $.get("index.php","action=en_on",function(result){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
                         comm_error()
-                        $("#en").val("off").slider("refresh")
+                        $("#en").prop("checked",false).flipswitch("refresh");
                     }
                 });
             }
@@ -129,7 +123,7 @@ $("select[data-role='slider']").change(function(){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
                         showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").val("off").slider("refresh")
+                        $("#auto_mm").prop("checked",false).flipswitch("refresh");
                     }
                 });
             }
@@ -138,7 +132,7 @@ $("select[data-role='slider']").change(function(){
                     //If switch failed then change the switch back and show error
                     if (result == 0) {
                         showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").val("off").slider("refresh")
+                        $("#local_assets").prop("checked",false).flipswitch("refresh");
                     }
                 });
             }
@@ -146,15 +140,15 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=mm_on",function(result){
                     if (result == 0) {
                         comm_error()
-                        $("#mm,#mmm").val("off").slider("refresh")
+                        $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
                     }
                 });
                 //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
                 $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").val("on").slider("refresh");
+                $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
             }
         } else {
-            //If chanegd to off
+            //If changed to off
             if (type === "autologin") {
                 localStorage.removeItem(typeToKey(type));
             }
@@ -162,7 +156,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=en_off",function(result){
                     if (result == 0) {
                         comm_error()
-                        $("#en").val("on").slider("refresh")
+                        $("#en").prop("checked",true).flipswitch("refresh");
                     }
                 });
             }
@@ -170,7 +164,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=auto_mm_off",function(result){
                     if (result == 0) {
                         showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").val("on").slider("refresh")
+                        $("#auto_mm").prop("checked",true).flipswitch("refresh");
                     }
                 });
             }
@@ -178,7 +172,7 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=local_assets_off",function(result){
                     if (result == 0) {
                         showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").val("on").slider("refresh")
+                        $("#local_assets").prop("checked",true).flipswitch("refresh");
                     }
                 });
             }
@@ -186,12 +180,12 @@ $("select[data-role='slider']").change(function(){
                 $.get("index.php","action=mm_off",function(result){
                     if (result == 0) {
                         comm_error()
-                        $("#mm,#mmm").val("on").slider("refresh")
+                        $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
                     }
                 });
                 //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
                 $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").val("off").slider("refresh");
+                $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
             }
         }
     }
@@ -207,7 +201,7 @@ $(document).on("pageshow",function(e,data){
 
     if (newpage == "sprinklers") {
         //Automatically update sliders on page load in settings panel
-        check_auto($("#"+newpage+" select[data-role='slider']"));
+        check_auto($("#"+newpage+" input[data-role='flipswitch']"));
     } else if (newpage == "preview") {
         get_preview();
     } else if (newpage == "logs") {
@@ -337,10 +331,10 @@ function check_auto(sliders){
         if (!item) return;
         if (localStorage.getItem(item) != null) {
             window.sliders[type] = "on";
-            $(this).val("on").slider("refresh");
+            $(this).prop("checked",true).flipswitch("refresh");
         } else {
             window.sliders[type] = "off";
-            $(this).val("off").slider("refresh");
+            $(this).prop("checked",false).flipswitch("refresh");
         }
     })
 }
@@ -366,11 +360,12 @@ function grab_token(pageid){
     $("#username, #password").val('');
     $.post("index.php",parameters,function(reply){
         $.mobile.loading("hide");
+        reply = $.trim(reply);
         if (reply == 0) {
             $("body").pagecontainer("change","#"+pageid);
             showerror("<?php echo _("Invalid Login"); ?>");
         } else if (reply === "") {
-            $("#"+pageid+"-autologin").val("off").slider("refresh");
+            $("#"+pageid+"-autologin").val("off").flipswitch("refresh");
             window.sliders["autologin"] = "off";
             $("body").pagecontainer("change","#"+pageid);
         } else {
@@ -464,7 +459,7 @@ function show_weather_settings() {
         }
         $('#wapikey').val(data.wapikey);
         if (data["auto_delay"]) {
-            $("#auto_delay").val("on")
+            $("#auto_delay").prop("checked",true);
         }
         $("#auto_delay_duration").val(data["auto_delay_duration"]);
 
@@ -1271,7 +1266,7 @@ function raindelay() {
 function auto_raindelay() {
     $.mobile.loading("show");
     var params = {
-        "auto_delay": $("#auto_delay").val(),
+        "auto_delay": $("#auto_delay").is(":checked"),
         "auto_delay_duration": $("#auto_delay_duration").val()
     }
     params = JSON.stringify(params)
