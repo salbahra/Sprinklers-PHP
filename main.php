@@ -1442,7 +1442,7 @@ function make_stations_list() {
             if ($settings["mas"] == $i+1) {
                 $list .= "</td><td class='use_master'><p id='um_".$i."' style='text-align:center'>"._("(Master)")."</p></td></tr>";
             } else {
-                $list .= "</td><td class='use_master'><input id='um_".$i."' type='checkbox' ".(($masop[intval($i/8)]&(1<<($i%8))) ? "checked='checked'" : "")." /><label for='um_".$i."'></label></td></tr>";
+                $list .= "</td><td data-role='controlgroup' data-type='horizontal' class='use_master'><input id='um_".$i."' type='checkbox' ".(($masop[intval($i/8)]&(1<<($i%8))) ? "checked='checked'" : "")." /><label for='um_".$i."'></label></td></tr>";
             }
         }
         $i++;
