@@ -165,6 +165,9 @@ a {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
+#raindelay {
+    width: 250px;
+}
 #manual ul, #forecast ul {
     max-width: 800px;
     margin: 16px auto;

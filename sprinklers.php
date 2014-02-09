@@ -49,6 +49,21 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li><a href="#" data-onclick="rsn();"><?php echo _("Stop All Stations"); ?></a></li>
         </ul>
     </div>
+    <div data-role="popup" id="raindelay" data-overlay-theme="b">
+        <ul data-role="listview" data-inset="true">
+            <li data-role="list-divider"><?php echo _("Change Rain Delay"); ?></li>
+            <li>
+                <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>
+                <form action="javascript:raindelay()">
+                    <div class="ui-field-contain">
+                        <label for="delay"><?php echo _("Duration (in hours):"); ?></label>
+                        <input type="number" pattern="[0-9]*" data-highlight="true" data-type="range" value="0" min="0" max="96" id="delay" />
+                    </div>
+                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
+                </form>
+            </li>
+        </ul>
+    </div>
     <div data-role="panel" id="sprinklers-settings" data-position-fixed="true" data-theme="b">
         <ul data-role="listview" data-theme="b">
             <li><?php echo _("Logged in as:"); ?> <?php echo $_SESSION["username"] ?></li>
@@ -240,23 +255,16 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 <p class="rain-desc"><?php echo _("Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled."); ?></p>
             </li>
             <li><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
-            <li><a href="#" data-onclick="$('body').pagecontainer('change','#localization');"><?php echo _("Localization"); ?></a></li>
+            <li><a href="#" data-onclick="show_localization();"><?php echo _("Localization"); ?></a></li>
             <li><a href="#" data-onclick="show_users();"><?php echo _("User Management"); ?></a></li>
             <li><a href="#" data-onclick="show_weather_settings();"><?php echo _("Weather Settings"); ?></a></li>
         </ul>
     </div>
-</div>
-
-<div data-role="page" id="localization">
-    <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
-        <h3><?php echo _("Localization"); ?></h3>
-        <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
-    </div>
-    <div class="ui-content" role="main">
+    <div data-role="popup" data-overlay-theme="b" id="localization">
         <?php
             global $lang;
             $locals = get_available_languages();
-            echo "<ul data-inset='true' data-role='listview' id='lang' data-language='".$lang."'>";
+            echo "<ul data-inset='true' data-role='listview' id='lang' data-language='".$lang."'><li data-role='list-divider'>"._("Localization")."</li>";
             foreach ($locals as $l=>$local) {
                 echo "<li data-icon='".(($lang == $l) ? "check" : "false")."'><a href='#' data-onclick='submit_localization(\"".$l."\");'>".$local."</a></li>";
             }
