@@ -432,37 +432,12 @@ function show_about() {
 }
 
 function show_raindelay() {
-    var popup = $('\
-    <div data-role="popup" id="raindelay" data-overlay-theme="b">\
-        <ul data-role="listview" data-inset="true">\
-            <li data-role="list-divider"><?php echo _("Change Rain Delay"); ?></li>\
-            <li>\
-                <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>\
-                <form action="javascript:raindelay()">\
-                    <div class="ui-field-contain">\
-                        <label for="delay"><?php echo _("Duration (in hours):"); ?></label>\
-                        <input type="number" pattern="[0-9]*" data-highlight="true" data-type="range" value="0" min="0" max="96" id="delay" />\
-                    </div>\
-                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />\
-                </form>\
-            </li>\
-        </ul>\
-    </div>').css({
-        "width": "250px"
-    })
+    var popup = $("#raindelay");
 
-    // Append it to active page
-    $(".ui-page-active").append(popup);
-
-    // Create it and add listener to delete it once it's closed
-    // add listener to change its' position if you want
-    $("#raindelay").on("popupafterclose", function(){
-        $(this).remove();
-    }).on("popupafteropen", function(){
+    popup.on("popupafteropen", function(){
         $(this).popup("reposition", {
             "positionTo": "window"
         });
-    // enhance popup and open it
     }).popup().trigger("create").popup("open");
 }
 
@@ -495,6 +470,15 @@ function show_weather_settings() {
 
         $("body").pagecontainer("change","#weather-settings");
    });
+}
+
+function show_localization() {
+    var popup = $("#localization").on("popupafteropen", function(){
+        $(this).popup("reposition", {
+            "positionTo": "window"
+        });
+    // enhance popup and open it
+    }).popup().trigger("create").popup("open");
 }
 
 function show_stations() {
