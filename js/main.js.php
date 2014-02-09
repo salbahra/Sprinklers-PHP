@@ -238,7 +238,7 @@ $(document).on("pagebeforeshow",function(e,data){
 
     if (newpage == "sprinklers") {
         update_weather();
-        $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
+        $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
         setTimeout(check_status,1000);
     } else {
         var title = document.title;
@@ -269,14 +269,14 @@ function update_timer(total,sdelay) {
         var diff = now - window.lastCheck;
         if (diff > 3000) {
             clearInterval(window.interval_id);
-            $("#footer-running").html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
+            $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
             check_status();
         }
         window.lastCheck = now;
 
         if (total <= 0) {
             clearInterval(window.interval_id);
-            $("#footer-running").slideUp().html("<p style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></p>");
+            $("#footer-running").slideUp().html("<p class='ui-icon ui-icon-loading mini-load'></p>");
             if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
             window.timeout_id = setTimeout(check_status,(sdelay*1000));
         }
@@ -385,7 +385,7 @@ function grab_token(pageid){
 function update_weather() {
     var $weather = $("#weather");
     $("#weather").unbind("click");
-    $weather.html("<div style='margin:0;text-align:center;opacity:0.18'><img src='css/images/ajax-loader.gif' class='mini-load' /></div>");
+    $weather.html("<p class='ui-icon ui-icon-loading mini-load'></p>");
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
@@ -1268,6 +1268,7 @@ function raindelay() {
         if (result == 0) {
             comm_error()
         } else {
+            $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
             setTimeout(check_status,1000);
             showerror("<?php echo _('Rain delay has been successfully set'); ?>");
         }

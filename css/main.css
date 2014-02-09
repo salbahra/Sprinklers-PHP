@@ -44,6 +44,10 @@ a {
 }
 .mini-load {
     zoom: 0.5;
+    height: 2.875em;
+    width: 2.875em;
+    margin:0 auto;
+    opacity:0.18;
 }
 #weather-list .ui-li-divider {
     padding: 0.5em 0;
