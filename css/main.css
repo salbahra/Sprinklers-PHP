@@ -46,7 +46,7 @@ a {
     zoom: 0.5;
     height: 2.875em;
     width: 2.875em;
-    margin:0 auto;
+    margin:0 auto !important;
     opacity:0.18;
 }
 #weather-list .ui-li-divider {
