@@ -301,7 +301,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                             <option value='wunderground'><?php echo _("Wunderground"); ?></option>
                         </select>
                     </label>
-                    <label for='wapikey'><?php echo _("Wunderground Api Key"); ?><input data-mini='true' type='text' id='wapikey' /></label>
+                    <label for='wapikey'><?php echo _("Wunderground API Key"); ?><input data-mini='true' type='text' id='wapikey' /></label>
                     <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
                 </form>
             </li>

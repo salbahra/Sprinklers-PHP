@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-09 11:05-0600\n"
-"PO-Revision-Date: 2014-02-09 11:05-0600\n"
+"POT-Creation-Date: 2014-02-09 12:00-0600\n"
+"PO-Revision-Date: 2014-02-09 12:00-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -128,7 +128,7 @@ msgid "Wunderground"
 msgstr ""
 
 #: ../../../../install.php:249 ../../../../sprinklers.php:304
-msgid "Wunderground Api Key"
+msgid "Wunderground API Key"
 msgstr ""
 
 #: ../../../../install.php:250

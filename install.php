@@ -246,7 +246,7 @@ function get_list_available_lang() {
     							    <option value="wunderground"><?php echo _("Wunderground"); ?></option>
                                 </select>
                             </label>
-							<label style="display:none" for="wapikey"><?php echo _("Wunderground Api Key"); ?><input type="text" name="wapikey" id="wapikey" value="" /></label>
+							<label style="display:none" for="wapikey"><?php echo _("Wunderground API Key"); ?><input type="text" name="wapikey" id="wapikey" value="" /></label>
                             <label for="pass_file"><?php echo _("Pass File Location:"); ?><input type="text" name="pass_file" id="pass_file" value="<?php echo dirname(__FILE__); ?>/.htpasswd" /></label>
                             <label for="cache_file"><?php echo _("Cache File Location:"); ?><input type="text" name="cache_file" id="cache_file" value="<?php echo dirname(__FILE__); ?>/.cache" /></label>
                             <label for="log_file"><?php echo _("Sprinkler Log File:"); ?><input type="text" name="log_file" id="log_file" value="<?php echo dirname(__FILE__); ?>/SprinklerChanges.txt" /></label>
