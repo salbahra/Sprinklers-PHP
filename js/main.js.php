@@ -414,7 +414,11 @@ function logout(){
                 $(this).remove();
             })
         });
-    },gohome);
+    },close_popup);
+}
+
+function close_popup() {
+    $(".ui-popup-active div").popup("close");
 }
 
 function gohome() {
@@ -1305,7 +1309,7 @@ function clear_logs() {
                 showerror("<?php echo _('Logs have been cleared'); ?>")
             }
         });
-    },gohome);    
+    },close_popup);    
 }
 
 function rbt() {
@@ -1320,7 +1324,7 @@ function rbt() {
                 showerror("<?php echo _('OpenSprinkler is rebooting now'); ?>")
             }
         });
-    },gohome);
+    },close_popup);
 }
 
 function rsn() {
@@ -1335,7 +1339,7 @@ function rsn() {
                 showerror("<?php echo _('All stations have been stopped'); ?>")
             }
         });
-    },gohome);
+    },close_popup);
 }
 
 function export_config() {
@@ -1370,19 +1374,35 @@ function import_config() {
                 showerror("<?php echo _('Backup restored to your device'); ?>");
             }
         })
-    },gohome);
+    },close_popup);
 }
 
 function areYouSure(text1, text2, callback, callback2) {
-    $("#sure .sure-1").text(text1);
-    $("#sure .sure-2").text(text2);
-    $("#sure .sure-do").unbind("click.sure").on("click.sure", function() {
+    var popup = $('\
+    <div data-role="popup" id="sure">\
+        <h3 class="sure-1" style="text-align:center">'+text1+'</h3>\
+        <p class="sure-2" style="text-align:center">'+text2+'</p>\
+        <a class="sure-do" data-role="button" data-theme="b" href="#"><?php echo _("Yes"); ?></a>\
+        <a class="sure-dont" data-role="button" data-theme="a" href="#"><?php echo _("No"); ?></a>\
+    </div>');
+
+    $(".ui-page-active").append(popup);
+
+    $("#sure").on("popupafterclose", function(){
+        $(this).remove();
+    }).on("popupafteropen", function(){
+        $(this).popup("reposition", {
+            "positionTo": "window"
+        });
+    }).popup().trigger("create").popup("open");
+
+    //Bind buttons
+    $("#sure .sure-do").on("click.sure", function() {
         callback();
     });
-    $("#sure .sure-dont").unbind("click.sure").on("click.sure", function() {
+    $("#sure .sure-dont").on("click.sure", function() {
         callback2();
     });
-    $("body").pagecontainer("change","#sure");
 }
 
 function showTooltip(x, y, contents, color) {
