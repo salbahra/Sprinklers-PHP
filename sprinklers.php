@@ -81,8 +81,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                 </div>
             </li>
             <li data-icon="forward"><a href="#" data-onclick="export_config();"><?php echo _("Export Configuration"); ?></a></li>
-            <li data-icon="back"><a href="#" data-onclick="changeFromPanel(import_config);"><?php echo _("Import Configuration"); ?></a></li>
-            <li data-icon="delete"><a href="#" data-onclick="changeFromPanel(logout);"><?php echo _("Logout"); ?></a></li>
+            <li data-icon="back"><a href="#" data-onclick="import_config();"><?php echo _("Import Configuration"); ?></a></li>
+            <li data-icon="delete"><a href="#" data-onclick="logout();"><?php echo _("Logout"); ?></a></li>
             <li data-icon="info"><a href="#" data-onclick="changeFromPanel(show_about);"><?php echo _("About"); ?></a></li>
         </ul>
     </div>

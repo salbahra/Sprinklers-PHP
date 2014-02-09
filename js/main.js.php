@@ -422,7 +422,7 @@ function gohome() {
 }
 
 function changeFromPanel(func) {
-    var $panel = $("#sprinklers-settings")
+    var $panel = $("#sprinklers-settings");
     $panel.one("panelclose", func);
     $panel.panel("close");
 }
