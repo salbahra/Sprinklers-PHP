@@ -182,6 +182,10 @@ function get_list_available_lang() {
             }
             function submit_config() {
                 $.mobile.loading("show");
+                if ($("#password").val() != $("#password-confirm").val()) {
+                    showerror("<?php echo _('Password confirmation doesn\'t match password.'); ?>");
+                    return;                    
+                }
                 //Submit form data to the server
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
                     $.mobile.loading("hide");
@@ -224,6 +228,8 @@ function get_list_available_lang() {
                                 <input autocapitalize="off" autocorrect="off" type="text" name="username" id="username" value="" />
                                 <label for="password"><?php echo _("Password:"); ?></label>
                                 <input type="password" name="password" id="password" value="" />
+                                <label for="password-confirm"><?php echo _("Confirm Password:"); ?></label>
+                                <input type="password" name="password-confirm" id="password-confirm" value="" />
                             </div>
                         </li>
                     </ul>

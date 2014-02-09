@@ -1465,6 +1465,7 @@ function make_user_list() {
                 $list .= "<fieldset id='user-".$i."' data-role='collapsible'>";
                 $list .= "<legend>".$user."</legend>";
                 $list .= "<label for='cpu-".$i."'>"._("Change Password")."</label><input id='cpu-".$i."' type='password' />";
+                $list .= "<label for='cpu-".$i."-confirm'>"._("Confirm Password")."</label><input id='cpu-".$i."-confirm' type='password' />";
                 $list .= "<a data-role='button' data-onclick='change_user(".$i.")'>"._("Save Changes to")." ".$user."</a>";
                 $list .= "<a data-role='button' data-onclick='delete_user(".$i.")' data-theme='b'>"._("Delete")." ".$user."</a>";
                 $list .= "</fieldset>";

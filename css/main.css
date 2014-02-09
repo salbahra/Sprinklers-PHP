@@ -165,10 +165,10 @@ a {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
-#raindelay {
-    width: 250px;
+#raindelay, #sure {
+    width: 300px;
 }
-#manual ul, #forecast ul {
+#manual ul, #forecast ul, #user-control-list {
     max-width: 800px;
     margin: 16px auto;
 }
@@ -189,6 +189,9 @@ a {
     #logs_list .ui-li-aside {
         width: 25% !important;
         font-size: smaller;
+    }
+    #raindelay, #sure {
+        width: 250px;
     }
     div.timeline-frame {
         counter-reset: station;
