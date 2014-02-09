@@ -414,11 +414,7 @@ function logout(){
                 $(this).remove();
             })
         });
-    },close_popup);
-}
-
-function close_popup() {
-    $(".ui-popup-active div").popup("close");
+    });
 }
 
 function gohome() {
@@ -543,7 +539,7 @@ function delete_user(id) {
                 show_users()
             }
         })
-    },show_users)
+    })
 }
 
 function add_user() {
@@ -1035,7 +1031,7 @@ function delete_program(id) {
                 get_programs(false)
             }
         })
-    },get_programs)
+    })
 }
 
 function reset_runonce() {
@@ -1309,7 +1305,7 @@ function clear_logs() {
                 showerror("<?php echo _('Logs have been cleared'); ?>")
             }
         });
-    },close_popup);    
+    });    
 }
 
 function rbt() {
@@ -1324,7 +1320,7 @@ function rbt() {
                 showerror("<?php echo _('OpenSprinkler is rebooting now'); ?>")
             }
         });
-    },close_popup);
+    });
 }
 
 function rsn() {
@@ -1339,7 +1335,7 @@ function rsn() {
                 showerror("<?php echo _('All stations have been stopped'); ?>")
             }
         });
-    },close_popup);
+    });
 }
 
 function export_config() {
@@ -1374,10 +1370,10 @@ function import_config() {
                 showerror("<?php echo _('Backup restored to your device'); ?>");
             }
         })
-    },close_popup);
+    });
 }
 
-function areYouSure(text1, text2, callback, callback2) {
+function areYouSure(text1, text2, callback) {
     var popup = $('\
     <div data-role="popup" id="sure">\
         <h3 class="sure-1" style="text-align:center">'+text1+'</h3>\
@@ -1401,7 +1397,7 @@ function areYouSure(text1, text2, callback, callback2) {
         callback();
     });
     $("#sure .sure-dont").on("click.sure", function() {
-        callback2();
+        $("#sure").popup("close");
     });
 }
 
