@@ -159,7 +159,7 @@ a {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
 }
-#raindelay, #sure {
+#raindelay, #sure, #add-user {
     width: 300px;
 }
 #manual ul, #forecast ul, #user-control-list {
@@ -184,7 +184,7 @@ a {
         width: 25% !important;
         font-size: smaller;
     }
-    #raindelay, #sure {
+    #raindelay, #sure, #add-user {
         width: 250px;
     }
     div.timeline-frame {
