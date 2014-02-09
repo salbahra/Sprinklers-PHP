@@ -244,16 +244,6 @@ $(document).on("pagebeforeshow",function(e,data){
         var title = document.title;
         document.title = "OpenSprinkler: "+title;
     }
-
-    if (newpage == "raindelay") {
-        $.get("index.php","action=get_autodelay",function(data){
-            data = JSON.parse(data)
-            if (data["auto_delay"]) {
-                $("#auto_delay").val("on").slider("refresh")
-            }
-            $("#auto_delay_duration").val(data["auto_delay_duration"]).slider("refresh");
-        })
-    }
 })
 
 function check_status() {
@@ -439,6 +429,44 @@ function changeFromPanel(func) {
 
 function show_about() {
     $("body").pagecontainer("change","#about");
+}
+
+function show_raindelay() {
+    var content = '\
+    <ul data-role="listview" data-inset="true">\
+        <li data-role="list-divider"><?php echo _("Change Rain Delay"); ?></li>\
+        <li>\
+            <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>\
+            <form action="javascript:raindelay()">\
+                <div class="ui-field-contain">\
+                    <label for="delay"><?php echo _("Duration (in hours):"); ?></label>\
+                    <input type="number" pattern="[0-9]*" data-highlight="true" data-type="range" value="0" min="0" max="96" id="delay" />\
+                </div>\
+                <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />\
+            </form>\
+        </li>\
+    </ul>';
+
+    // Popup body
+    var popup = $("<div id='raindelay'/>", {
+        "data-role": "popup"
+    }).css({
+        "width": "250px"
+    }).append(content);
+
+    // Append it to active page
+    $(".ui-page-active").append(popup);
+
+    // Create it and add listener to delete it once it's closed
+    // add listener to change its' position if you want
+    $("#raindelay").on("popupafterclose", function(){
+        $(this).remove();
+    }).on("popupafteropen", function(){
+        $(this).popup("reposition", {
+            "positionTo": "window"
+        });
+    // enhance popup and open it
+    }).popup().trigger("create").popup("open");
 }
 
 function show_settings() {
@@ -1240,7 +1268,8 @@ function raindelay() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("<?php echo _('Rain delay has been successfully set'); ?>")
+            setTimeout(check_status,1000);
+            showerror("<?php echo _('Rain delay has been successfully set'); ?>");
         }
     });
 }

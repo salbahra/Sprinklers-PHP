@@ -44,7 +44,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li data-role="list-divider"><?php echo _("Program Control"); ?></li>
             <li><a href="#programs" data-onclick="get_programs();"><?php echo _("Edit Programs"); ?></a></li>
             <li><a href="#manual" data-onclick="get_manual();"><?php echo _("Manual Control"); ?></a></li>
-            <li><a href="#raindelay"><?php echo _("Rain Delay"); ?></a></li>
+            <li><a href="#raindelay" data-onclick="show_raindelay();"><?php echo _("Change Rain Delay"); ?></a></li>
             <li><a href="#runonce" data-onclick="get_runonce();"><?php echo _("Run-Once Program"); ?></a></li>
             <li><a href="#" data-onclick="rsn();"><?php echo _("Stop All Stations"); ?></a></li>
         </ul>
@@ -147,29 +147,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <a href="#" data-onclick="submit_program('new');"><?php echo _("Submit"); ?></a>
     </div>
     <div class="ui-content" role="main" id="newprogram">
-    </div>
-</div>
-
-<div data-role="page" id="raindelay">
-    <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
-        <h1><?php echo _("Rain Delay"); ?></h1>
-        <a href="#sprinklers" data-onclick="gohome();" data-icon="back"><?php echo _("Back"); ?></a>
-    </div>
-    <div class="ui-content" role="main">
-        <p style="text-align:center"><?php echo _("Rain delay allows you to disable all programs for a set duration."); ?></p>
-        <ul data-role="listview" data-inset="true">
-            <li data-role="list-divider"><?php echo _("Manual Rain Delay"); ?></li>
-            <li>
-                <p class="rain-desc"><?php echo _("Enable manual rain delay by entering a value into the input below. To turn off a currently enabled rain delay use a value of 0."); ?></p>
-                <form action="javascript:raindelay()">
-                    <div class="ui-field-contain">
-                        <label for="delay"><?php echo _("Duration (in hours):"); ?></label>
-                        <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' value='0' min='0' max='96' id='delay' />
-                    </div>
-                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
-                </form>
-            </li>
-        </ul>
     </div>
 </div>
 
