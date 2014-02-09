@@ -425,12 +425,3 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
          </p>
     </div>
 </div>
-
-<div data-role="page" data-dialog="true" id="sure" data-title="Are you sure?">
-    <div class="ui-content" role="main">
-        <h3 class="sure-1" style="text-align:center"></h3>
-        <p class="sure-2" style="text-align:center"></p>
-        <a class="sure-do" data-role="button" data-theme="b" href="#"><?php echo _("Yes"); ?></a>
-        <a class="sure-dont" data-role="button" data-theme="a" href="#"><?php echo _("No"); ?></a>
-    </div>
-</div>
