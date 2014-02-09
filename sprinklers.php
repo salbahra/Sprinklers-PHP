@@ -42,7 +42,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         </ul>
         <ul data-role="listview" data-inset="true" id="program-control-list">
             <li data-role="list-divider"><?php echo _("Program Control"); ?></li>
-            <li><a href="#raindelay" data-onclick="show_raindelay();"><?php echo _("Change Rain Delay"); ?></a></li>
+            <li><a href="#raindelay" data-onclick="open_popup('#raindelay');"><?php echo _("Change Rain Delay"); ?></a></li>
             <li><a href="#programs" data-onclick="get_programs();"><?php echo _("Edit Programs"); ?></a></li>
             <li><a href="#manual" data-onclick="get_manual();"><?php echo _("Manual Control"); ?></a></li>
             <li><a href="#runonce" data-onclick="get_runonce();"><?php echo _("Run-Once Program"); ?></a></li>
@@ -264,7 +264,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <?php
             global $lang;
             $locals = get_available_languages();
-            echo "<ul data-inset='true' data-role='listview' id='lang' data-language='".$lang."'><li data-role='list-divider'>"._("Localization")."</li>";
+            echo "<ul data-inset='true' data-role='listview' id='lang' data-language='".$lang."'><li data-role='list-divider' data-theme='b'>"._("Localization")."</li>";
             foreach ($locals as $l=>$local) {
                 echo "<li data-icon='".(($lang == $l) ? "check" : "false")."'><a href='#' data-onclick='submit_localization(\"".$l."\");'>".$local."</a></li>";
             }
@@ -292,7 +292,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
     </div>
     <div class="ui-content" role="main">
         <ul data-role='listview' data-inset='true'>
-            <li data-role='list-divider'><?php echo _("Weather Provider"); ?></li>
+            <li data-role='list-divider' data-theme='b'><?php echo _("Weather Provider"); ?></li>
             <li>
                 <form action="javascript:submit_weather_settings()">
                     <label for='weather_provider'><?php echo _("Weather Provider"); ?>
@@ -302,12 +302,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                         </select>
                     </label>
                     <label for='wapikey'><?php echo _("Wunderground API Key"); ?><input data-mini='true' type='text' id='wapikey' /></label>
-                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
+                    <input type="submit" value="<?php echo _("Submit"); ?>" />
                 </form>
             </li>
         </ul>
         <ul data-role='listview' data-inset='true'>
-            <li data-role='list-divider'><?php echo _("Automatic Rain Delay"); ?></li>
+            <li data-role='list-divider' data-theme='b'><?php echo _("Automatic Rain Delay"); ?></li>
             <li>
                 <p class="rain-desc"><?php echo _("When automatic rain delay is enabled, the weather will be checked for rain every hour. If the weather reports any condition suggesting rain, a rain delay is automatically issued using the below set delay duration."); ?></p>
                 <form action="javascript:auto_raindelay()">
@@ -320,7 +320,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                     <label for='auto_delay_duration'><?php echo _("Delay Duration (hours)"); ?></label>
                     <input type='number' pattern='[0-9]*' data-highlight='true' data-type='range' min='0' max='96' id='auto_delay_duration' />
-                    <input type="submit" value="<?php echo _("Submit"); ?>" data-theme="b" />
+                    <input type="submit" value="<?php echo _("Submit"); ?>" />
                 </form>
             </li>
         </ul>
@@ -329,29 +329,23 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 
 <div data-role="page" id="user-control">
     <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
-        <h3><?php echo _("User Control"); ?></h3>
+        <h3><?php echo _("User Management"); ?></h3>
         <a href="#settings" data-icon="back"><?php echo _("Back"); ?></a>
-        <a href="#add-user" data-icon="plus"><?php echo _("Add"); ?></a>
+        <a href="#" data-onclick="open_popup('#add-user');" data-icon="plus"><?php echo _("Add"); ?></a>
     </div>
     <div class="ui-content" role="main" id="user-control-list">
     </div>
-</div>
-
-<div data-role="page" id="add-user">
-    <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
-        <h3><?php echo _("Add User"); ?></h3>
-        <a href="#user-control" data-icon="back"><?php echo _("Back"); ?></a>
-        <a href="#" data-onclick="add_user();"><?php echo _("Submit"); ?></a>
-    </div>
-    <div class="ui-content" role="main">
+    <div data-role="popup" id="add-user" data-overlay-theme="b">
         <ul data-inset="true" data-role="listview">
-            <li data-role="list-divider"><?php echo _("Add New User"); ?></li>
+            <li data-role="list-divider" data-theme="b"><?php echo _("Add New User"); ?></li>
             <li>
                 <div class="ui-field-contain">
                     <label for="name"><?php echo _("Username:"); ?></label>
                     <input autocapitalize="off" autocorrect="off" type="text" id="name" value="" />
                     <label for="pass"><?php echo _("Password:"); ?></label>
                     <input type="password" id="pass" value="" />
+                    <label for="pass-confirm"><?php echo _("Confirm Password:"); ?></label>
+                    <input type="password" id="pass-confirm" value="" />
                     <a data-role="button" href="#" data-onclick="add_user();" data-theme="a"><?php echo _("Submit"); ?></a>
                 </div>
             </li>

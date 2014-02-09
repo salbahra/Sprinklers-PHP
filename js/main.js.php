@@ -431,8 +431,8 @@ function show_about() {
     $("body").pagecontainer("change","#about");
 }
 
-function show_raindelay() {
-    var popup = $("#raindelay");
+function open_popup(id) {
+    var popup = $(id);
 
     popup.on("popupafteropen", function(){
         $(this).popup("reposition", {
@@ -503,7 +503,7 @@ function show_users() {
 }
 
 function user_id_name(id) {
-    var name = $("#user-"+id+" .ui-btn-text").first().text()
+    var name = $("#user-"+id+" [role='heading'] a").text()
     name = name.replace(/ click to (collapse|expand) contents/g,"")
     return name;
 }
@@ -526,6 +526,12 @@ function delete_user(id) {
 function add_user() {
     var nameEl = $("#name"), passEl = $("#pass");
     var name = nameEl.val(), pass = passEl.val();
+
+    if (pass != $("#pass-confirm").val()) {
+        showerror("<?php echo _('Password confirmation doesn\'t match password.'); ?>");
+        return;
+    }
+
     nameEl.val(""), passEl.val("");
     $.mobile.loading("show");
     $.get("index.php","action=add_user&name="+name+"&pass="+pass,function(result){
@@ -543,6 +549,12 @@ function add_user() {
 function change_user(id) {
     var name = user_id_name(id), cpu = $("#cpu-"+id);
     var pass = cpu.val();
+
+    if (pass != $("#cpu-"+id+"-confirm").val()) {
+        showerror("<?php echo _('Password confirmation doesn\'t match password.'); ?>");
+        return;
+    }
+
     cpu.val("");
     $.mobile.loading("show");
     $.get("index.php","action=change_user&name="+name+"&pass="+pass,function(result){
