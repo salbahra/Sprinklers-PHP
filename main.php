@@ -1077,7 +1077,7 @@ function make_runonce() {
         $list .= "<label for='zone-".$n."'>".$station.":</label><input type='number' data-highlight='true' data-type='range' name='zone-".$n."' min='0' max='50' id='zone-".$n."' value='0'>";
         $n++;
     }
-    $list .= "</div><a data-role='button' onclick='submit_runonce();'>"._("Submit")."</a><a data-role='button' data-theme='b' onclick='reset_runonce();'>"._("Reset")."</a>";
+    $list .= "</div><a class='ui-btn ui-corner-all ui-shadow' onclick='submit_runonce();'>"._("Submit")."</a><a class='ui-btn ui-btn-b ui-corner-all ui-shadow' onclick='reset_runonce();'>"._("Reset")."</a>";
     $progs = array();
     if (count($data["programs"])) {
         foreach ($data["programs"] as $program) {
