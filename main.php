@@ -98,7 +98,7 @@ $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15
 if (isset($_REQUEST['action'])) {
     if (is_callable($_REQUEST['action'])) {
         if (($_REQUEST['action'] == "gettoken" || $_REQUEST['action'] == "checktoken" || $_REQUEST['action'] == "login") || is_auth()) {
-            if (in_array($_REQUEST["action"], array("submit_localization","submit_weather_settings","get_weather_settings","clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config","make_list_forecast"))) {
+            if (in_array($_REQUEST["action"], array("submit_localization","submit_weather_settings","get_weather_settings","clear_config","clear_logs","change_user","add_user","delete_user","make_user_list","local_assets_on","local_assets_off","auto_mm_on","auto_mm_off","current_status","submit_stations","make_stations_list","submit_autodelay","get_weather","make_list_logs","gettoken","checktoken","login","runonce","send_en_mm","make_settings_list","make_list_status","make_list_manual","fresh_program","make_all_programs","make_runonce","spoff","spon","mm_off","mm_on","en_on","en_off","rbt","rsn","raindelay","submit_options","delete_program","update_program","get_preview","import_config","export_config","make_list_forecast"))) {
                 call_user_func($_REQUEST['action']);
             }
         } else {
@@ -1559,6 +1559,10 @@ function clear_logs() {
     } else {
         echo 0;
     }
+}
+
+function clear_config() {
+    echo intval(unlink("config.php"));
 }
 
 function delete_user() {

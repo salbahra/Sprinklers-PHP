@@ -1281,6 +1281,22 @@ function auto_raindelay() {
     })
 }
 
+function clear_config() {
+    areYouSure("<?php echo _('Are you sure you want to delete all settings and return to the default settings (this will delete the configuration file)?'); ?>", "", function() {
+        $.mobile.loading("show");
+        $.get("index.php","action=clear_config",function(result){
+            $.mobile.loading("hide");
+            gohome();
+            if (result == 0) {
+                comm_error()
+            } else {
+                showerror("<?php echo _('Configuration has been deleted. Please wait while you are redirected to the installer.'); ?>");
+                setTimeout(function(){location.reload()},2500);
+            }
+        });
+    });    
+}
+
 function clear_logs() {
     areYouSure("<?php echo _('Are you sure you want to clear all your log data?'); ?>", "", function() {
         $.mobile.loading("show");
