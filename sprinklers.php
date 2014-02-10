@@ -326,7 +326,7 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     <input type="password" id="pass" value="" />
                     <label for="pass-confirm"><?php echo _("Confirm Password:"); ?></label>
                     <input type="password" id="pass-confirm" value="" />
-                    <a data-role="button" href="#" data-onclick="add_user();" data-theme="a"><?php echo _("Submit"); ?></a>
+                    <a class="ui-btn ui-corner-all ui-shadow" href="#" data-onclick="add_user();"><?php echo _("Submit"); ?></a>
                 </div>
             </li>
         </ul>

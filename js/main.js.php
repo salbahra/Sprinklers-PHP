@@ -433,7 +433,7 @@ function open_popup(id) {
         $(this).popup("reposition", {
             "positionTo": "window"
         });
-    }).popup().trigger("create").popup("open");
+    }).popup().enhanceWithin().popup("open");
 }
 
 function show_settings() {
@@ -473,7 +473,7 @@ function show_localization() {
             "positionTo": "window"
         });
     // enhance popup and open it
-    }).popup().trigger("create").popup("open");
+    }).popup().enhanceWithin().popup("open");
 }
 
 function show_stations() {
@@ -644,7 +644,7 @@ function get_logs() {
                         k++;
                     }
                     output += '</tr></tbody></table>';
-                    zones.empty().append(output).trigger('create');
+                    zones.empty().append(output).enhanceWithin();
                 }
                 window.plotdata = items.data;
                 seriesChange();
@@ -1382,8 +1382,8 @@ function areYouSure(text1, text2, callback) {
     <div data-role="popup" class="ui-content" data-overlay-theme="b" id="sure">\
         <h3 class="sure-1" style="text-align:center">'+text1+'</h3>\
         <p class="sure-2" style="text-align:center">'+text2+'</p>\
-        <a class="sure-do" data-role="button" data-theme="b" href="#"><?php echo _("Yes"); ?></a>\
-        <a class="sure-dont" data-role="button" data-theme="a" href="#"><?php echo _("No"); ?></a>\
+        <a class="sure-do ui-btn ui-btn-b ui-corner-all ui-shadow" href="#"><?php echo _("Yes"); ?></a>\
+        <a class="sure-dont ui-btn ui-corner-all ui-shadow" href="#"><?php echo _("No"); ?></a>\
     </div>');
 
     $(".ui-page-active").append(popup);
@@ -1394,7 +1394,7 @@ function areYouSure(text1, text2, callback) {
         $(this).popup("reposition", {
             "positionTo": "window"
         });
-    }).popup().trigger("create").popup("open");
+    }).popup().enhanceWithin().popup("open");
 
     //Bind buttons
     $("#sure .sure-do").on("click.sure", function() {
