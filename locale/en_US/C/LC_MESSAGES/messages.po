@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-09 18:06-0600\n"
-"PO-Revision-Date: 2014-02-09 18:06-0600\n"
+"POT-Creation-Date: 2014-02-09 19:24-0600\n"
+"PO-Revision-Date: 2014-02-09 19:24-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -22,7 +22,7 @@ msgid "Welcome"
 msgstr ""
 
 #: ../../../../index.php:46 ../../../../install.php:227
-#: ../../../../sprinklers.php:322
+#: ../../../../sprinklers.php:323
 msgid "Username:"
 msgstr ""
 
@@ -31,7 +31,7 @@ msgid "username"
 msgstr ""
 
 #: ../../../../index.php:48 ../../../../install.php:229
-#: ../../../../sprinklers.php:324
+#: ../../../../sprinklers.php:325
 msgid "Password:"
 msgstr ""
 
@@ -80,13 +80,13 @@ msgstr ""
 
 #: ../../../../install.php:218 ../../../../main.php:1080
 #: ../../../../sprinklers.php:62 ../../../../sprinklers.php:136
-#: ../../../../sprinklers.php:156 ../../../../sprinklers.php:262
-#: ../../../../sprinklers.php:287 ../../../../sprinklers.php:302
-#: ../../../../sprinklers.php:328 ../../../../sprinklers.php:339
+#: ../../../../sprinklers.php:156 ../../../../sprinklers.php:263
+#: ../../../../sprinklers.php:288 ../../../../sprinklers.php:303
+#: ../../../../sprinklers.php:329 ../../../../sprinklers.php:340
 msgid "Submit"
 msgstr ""
 
-#: ../../../../install.php:223 ../../../../sprinklers.php:319
+#: ../../../../install.php:223 ../../../../sprinklers.php:320
 msgid "Add New User"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgstr ""
 msgid "You can add additional users after logging in"
 msgstr ""
 
-#: ../../../../install.php:231 ../../../../sprinklers.php:326
+#: ../../../../install.php:231 ../../../../sprinklers.php:327
 msgid "Confirm Password:"
 msgstr ""
 
@@ -122,20 +122,20 @@ msgstr ""
 msgid "Localization:"
 msgstr ""
 
-#: ../../../../install.php:249 ../../../../sprinklers.php:277
-#: ../../../../sprinklers.php:280
+#: ../../../../install.php:249 ../../../../sprinklers.php:278
+#: ../../../../sprinklers.php:281
 msgid "Weather Provider"
 msgstr ""
 
-#: ../../../../install.php:251 ../../../../sprinklers.php:282
+#: ../../../../install.php:251 ../../../../sprinklers.php:283
 msgid "Yahoo!"
 msgstr ""
 
-#: ../../../../install.php:252 ../../../../sprinklers.php:283
+#: ../../../../install.php:252 ../../../../sprinklers.php:284
 msgid "Wunderground"
 msgstr ""
 
-#: ../../../../install.php:255 ../../../../sprinklers.php:286
+#: ../../../../install.php:255 ../../../../sprinklers.php:287
 msgid "Wunderground API Key"
 msgstr ""
 
@@ -710,14 +710,14 @@ msgstr ""
 #: ../../../../sprinklers.php:76 ../../../../sprinklers.php:124
 #: ../../../../sprinklers.php:213 ../../../../sprinklers.php:217
 #: ../../../../sprinklers.php:227 ../../../../sprinklers.php:234
-#: ../../../../sprinklers.php:298
+#: ../../../../sprinklers.php:299
 msgid "On"
 msgstr ""
 
 #: ../../../../sprinklers.php:76 ../../../../sprinklers.php:124
 #: ../../../../sprinklers.php:213 ../../../../sprinklers.php:217
 #: ../../../../sprinklers.php:227 ../../../../sprinklers.php:234
-#: ../../../../sprinklers.php:298
+#: ../../../../sprinklers.php:299
 msgid "Off"
 msgstr ""
 
@@ -733,7 +733,7 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: ../../../../sprinklers.php:83 ../../../../sprinklers.php:370
+#: ../../../../sprinklers.php:83 ../../../../sprinklers.php:371
 msgid "About"
 msgstr ""
 
@@ -745,9 +745,9 @@ msgstr ""
 #: ../../../../sprinklers.php:117 ../../../../sprinklers.php:135
 #: ../../../../sprinklers.php:145 ../../../../sprinklers.php:155
 #: ../../../../sprinklers.php:165 ../../../../sprinklers.php:206
-#: ../../../../sprinklers.php:261 ../../../../sprinklers.php:273
-#: ../../../../sprinklers.php:312 ../../../../sprinklers.php:338
-#: ../../../../sprinklers.php:350 ../../../../sprinklers.php:371
+#: ../../../../sprinklers.php:262 ../../../../sprinklers.php:274
+#: ../../../../sprinklers.php:313 ../../../../sprinklers.php:339
+#: ../../../../sprinklers.php:351 ../../../../sprinklers.php:372
 msgid "Back"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Programs"
 msgstr ""
 
-#: ../../../../sprinklers.php:146 ../../../../sprinklers.php:313
+#: ../../../../sprinklers.php:146 ../../../../sprinklers.php:314
 msgid "Add"
 msgstr ""
 
@@ -828,7 +828,7 @@ msgstr ""
 msgid "Device Options"
 msgstr ""
 
-#: ../../../../sprinklers.php:220 ../../../../sprinklers.php:337
+#: ../../../../sprinklers.php:220 ../../../../sprinklers.php:338
 msgid "Edit Stations"
 msgstr ""
 
@@ -862,61 +862,65 @@ msgid ""
 msgstr ""
 
 #: ../../../../sprinklers.php:239
+msgid "Clear Configuration"
+msgstr ""
+
+#: ../../../../sprinklers.php:240
 msgid "Clear Logs"
 msgstr ""
 
-#: ../../../../sprinklers.php:240 ../../../../sprinklers.php:249
+#: ../../../../sprinklers.php:241 ../../../../sprinklers.php:250
 msgid "Localization"
 msgstr ""
 
-#: ../../../../sprinklers.php:241 ../../../../sprinklers.php:311
+#: ../../../../sprinklers.php:242 ../../../../sprinklers.php:312
 msgid "User Management"
 msgstr ""
 
-#: ../../../../sprinklers.php:242 ../../../../sprinklers.php:272
+#: ../../../../sprinklers.php:243 ../../../../sprinklers.php:273
 msgid "Weather Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:260
+#: ../../../../sprinklers.php:261
 msgid "OS Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:292
+#: ../../../../sprinklers.php:293
 msgid "Automatic Rain Delay"
 msgstr ""
 
-#: ../../../../sprinklers.php:294
+#: ../../../../sprinklers.php:295
 msgid ""
 "When automatic rain delay is enabled, the weather will be checked for rain "
 "every hour. If the weather reports any condition suggesting rain, a rain "
 "delay is automatically issued using the below set delay duration."
 msgstr ""
 
-#: ../../../../sprinklers.php:297
+#: ../../../../sprinklers.php:298
 msgid "Auto Rain Delay"
 msgstr ""
 
-#: ../../../../sprinklers.php:300
+#: ../../../../sprinklers.php:301
 msgid "Delay Duration (hours)"
 msgstr ""
 
-#: ../../../../sprinklers.php:349
+#: ../../../../sprinklers.php:350
 msgid "Program Preview"
 msgstr ""
 
-#: ../../../../sprinklers.php:360
+#: ../../../../sprinklers.php:361
 msgid "Zoom in"
 msgstr ""
 
-#: ../../../../sprinklers.php:361
+#: ../../../../sprinklers.php:362
 msgid "Zoom out"
 msgstr ""
 
-#: ../../../../sprinklers.php:362
+#: ../../../../sprinklers.php:363
 msgid "Move left"
 msgstr ""
 
-#: ../../../../sprinklers.php:363
+#: ../../../../sprinklers.php:364
 msgid "Move right"
 msgstr ""
 
@@ -1048,49 +1052,61 @@ msgid "Auto-delay changes have been saved"
 msgstr ""
 
 #: ../../../../js/main.js.php:1285
-msgid "Are you sure you want to clear all your log data?"
+msgid ""
+"Are you sure you want to delete all settings and return to the default "
+"settings (this will delete the configuration file)?"
 msgstr ""
 
 #: ../../../../js/main.js.php:1293
+msgid ""
+"Configuration has been deleted. Please wait while you are redirected to the "
+"installer."
+msgstr ""
+
+#: ../../../../js/main.js.php:1301
+msgid "Are you sure you want to clear all your log data?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1309
 msgid "Logs have been cleared"
 msgstr ""
 
-#: ../../../../js/main.js.php:1300
+#: ../../../../js/main.js.php:1316
 msgid "Are you sure you want to reboot OpenSprinkler?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1308
+#: ../../../../js/main.js.php:1324
 msgid "OpenSprinkler is rebooting now"
 msgstr ""
 
-#: ../../../../js/main.js.php:1315
+#: ../../../../js/main.js.php:1331
 msgid "Are you sure you want to stop all stations?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1323
+#: ../../../../js/main.js.php:1339
 msgid "All stations have been stopped"
 msgstr ""
 
-#: ../../../../js/main.js.php:1338
+#: ../../../../js/main.js.php:1354
 msgid "Backup saved to your device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1346
+#: ../../../../js/main.js.php:1362
 msgid "No backup available on this device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1350
+#: ../../../../js/main.js.php:1366
 msgid "Are you sure you want to restore the configuration?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1358
+#: ../../../../js/main.js.php:1374
 msgid "Backup restored to your device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1369
+#: ../../../../js/main.js.php:1385
 msgid "Yes"
 msgstr ""
 
-#: ../../../../js/main.js.php:1370
+#: ../../../../js/main.js.php:1386
 msgid "No"
 msgstr ""

@@ -236,7 +236,8 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
             <li>
                 <p class="rain-desc"><?php echo _("Automatically disable manual mode at midnight. Use this option to turn off manual mode and ensure programs run even if you forget manual mode enabled."); ?></p>
             </li>
-            <li><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
+            <li data-icon="alert"><a href="#" data-onclick="clear_config();"><?php echo _("Clear Configuration"); ?></a></li>
+            <li data-icon="alert"><a href="#" data-onclick="clear_logs();"><?php echo _("Clear Logs"); ?></a></li>
             <li><a href="#" data-onclick="show_localization();"><?php echo _("Localization"); ?></a></li>
             <li><a href="#" data-onclick="show_users();"><?php echo _("User Management"); ?></a></li>
             <li><a href="#" data-onclick="show_weather_settings();"><?php echo _("Weather Settings"); ?></a></li>
