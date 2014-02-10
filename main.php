@@ -1562,7 +1562,7 @@ function clear_logs() {
 }
 
 function clear_config() {
-    echo intval(unlink("config.php"));
+    echo intval(rename("config.php","config.php.bak"));
 }
 
 function delete_user() {
