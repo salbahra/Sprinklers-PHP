@@ -60,6 +60,7 @@ $(document).one("pagecreate","#sprinklers", function(){
 
 $(document).on("change","#weather_provider",function(){
     $("#wapikey").parent().parent().toggle();
+	$("#wapikey").parent().show();
 })
 
 $(window).resize(function(){
@@ -455,7 +456,7 @@ function show_weather_settings() {
         if (data.weather_provider == "wunderground") {
             $("#wapikey").parent().parent().show();
         } else {
-            $("#wapikey").parent().parent().hide();
+            $("#wapikey").parent().hide();
         }
         $('#wapikey').val(data.wapikey);
         if (data["auto_delay"]) {
