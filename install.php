@@ -128,7 +128,7 @@ function fail() {
 }
 
 function get_list_available_lang() {
-	$lang = 'en_US';
+	$lang = 'en_US'; $list = "";
 	$locals = get_available_languages();			
 	foreach ($locals as $l=>$local) {
         $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
