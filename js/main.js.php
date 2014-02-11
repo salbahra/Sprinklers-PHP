@@ -1345,10 +1345,10 @@ function rsn() {
         $.mobile.loading("show");
         $.get("index.php","action=rsn",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
+                setTimeout(check_status,1000);
                 showerror("<?php echo _('All stations have been stopped'); ?>")
             }
         });
