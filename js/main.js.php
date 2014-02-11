@@ -1342,6 +1342,7 @@ function rbt() {
 
 function rsn() {
     areYouSure("<?php echo _('Are you sure you want to stop all stations?'); ?>", "", function() {
+        $("#sure").popup("close");
         $.mobile.loading("show");
         $.get("index.php","action=rsn",function(result){
             $.mobile.loading("hide");
