@@ -18,7 +18,6 @@ if(!defined('Sprinklers')) {
 //After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
     $.mobile.defaultPageTransition = 'fade';
-    $.mobile.hashListeningEnabled = false;
 });
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
