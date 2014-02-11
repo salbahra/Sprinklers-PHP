@@ -668,20 +668,23 @@ function submit_autodelay() {
 
 function submit_weather_settings() {
     global $weather_provider, $wapikey;
-    foreach (json_decode($_REQUEST["options"]) as $key => $value) {
-        switch ($key) {
-            case 'weather_provider':
-                $weather_provider = $value;
-                changeConfig("weather_provider",$value,"s");
-                continue;
-            case 'wapikey':
-                $wapikey = $value;
-                changeConfig("wapikey",$value,"s");
-            default:
-                continue;
+
+    $newdata = json_decode($_REQUEST["options"],true);
+    if ($newdata["weather_provider"] !== $weather_provider) {
+        $weather_provider = $newdata["weather_provider"];
+        if (!changeConfig("weather_provider",$weather_provider,"s")) {
+            echo 2;
+            exit();
         }
     }
-    echo 1;
+
+    if ($newdata["wapikey"] !== $wapikey) {
+        $wapikey = $newdata["wapikey"];
+        if (!changeConfig("wapikey",$wapikey,"s")) {
+            echo 2;
+            exit();
+        }
+    }
 }
 
 function submit_localization() {

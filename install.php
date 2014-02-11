@@ -169,7 +169,7 @@ function get_list_available_lang() {
                 $.mobile.hashListeningEnabled = false;
             });
             $(document).on("change","#weather_provider",function(){
-                $("#wapikey").parent().parent().toggle();
+                $("#wapikey").closest("label").toggle("fast");
             })
             function showerror(msg) {
                 // show error message

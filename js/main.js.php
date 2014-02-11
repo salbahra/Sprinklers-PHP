@@ -59,7 +59,12 @@ $(document).one("pagecreate","#sprinklers", function(){
 });
 
 $(document).on("change","#weather_provider",function(){
-    $("#wapikey").parent().parent().toggle();
+    var val = $(this).val();
+    if (val === "wunderground") {
+        $("#wapikey").closest("label").show("fast");
+    } else {
+        $("#wapikey").closest("label").hide("fast");
+    }
 })
 
 $(window).resize(function(){
@@ -450,17 +455,22 @@ function show_settings() {
 function show_weather_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=get_weather_settings",function(data){
-        data = JSON.parse(data)
-        $('#weather_provider').val(data.weather_provider);
+        var data = JSON.parse(data), $provider = $('#weather_provider');
+
+        $provider.val(data.weather_provider);
+        if (!$provider.parent().is("label")) $provider.selectmenu("refresh", true);
+
         if (data.weather_provider == "wunderground") {
-            $("#wapikey").parent().parent().show();
+            $("#wapikey").closest("label").show();
         } else {
-            $("#wapikey").parent().parent().hide();
+            $("#wapikey").closest("label").hide();
         }
         $('#wapikey').val(data.wapikey);
-        if (data["auto_delay"]) {
-            $("#auto_delay").prop("checked",true);
-        }
+
+        var $auto_delay = $("#auto_delay");
+        $auto_delay.prop("checked",data["auto_delay"]);
+        if ($auto_delay.hasClass("ui-flipswitch-input")) $auto_delay.flipswitch("refresh");
+
         $("#auto_delay_duration").val(data["auto_delay_duration"]);
 
         $("body").pagecontainer("change","#weather-settings");
@@ -1192,14 +1202,17 @@ function submit_runonce() {
 
 function submit_weather_settings() {
     $.mobile.loading("show");
-    var opt = new Object();
-    opt["weather_provider"] = $("#weather_provider").val();
-    opt["wapikey"] = $("#wapikey").val();
-    $.get("index.php","action=submit_weather_settings&options="+JSON.stringify(opt),function(result){
+
+    var params = {
+        "weather_provider": $("#weather_provider").val(),
+        "wapikey": $("#wapikey").val()
+    }
+    params = JSON.stringify(params)
+    $.get("index.php","action=submit_weather_settings&options="+params,function(result){
         $.mobile.loading("hide");
         gohome();
-        if (result == 0) {
-            comm_error()
+        if (result == 2) {
+            showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
         } else {
             showerror("<?php echo _('Weather settings have been saved'); ?>")
         }
