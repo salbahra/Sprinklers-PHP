@@ -147,10 +147,23 @@ function get_wunderground_lid() {
 	} else {
 		$data = file_get_contents("http://autocomplete.wunderground.com/aq?h=0&query=".urlencode($options["loc"]));
 		$data = json_decode($data);
-		if ($data == []) return "";
+		if (empty($data)) return "";
 		$lid = "zmw:".$data->{'RESULTS'}[0]->{'zmw'};
 	}
     return $lid;
+}
+
+#Update the weather ID
+function update_weather_id() {
+    global $weather_provider;
+
+    if ($weather_provider == "yahoo") {
+        $woeid = get_woeid();
+        changeConfig("woeid",$woeid,"i");
+    } else {
+        $lid = get_wunderground_lid();
+        changeConfig("lid",$lid,"s");
+    }
 }
 
 #Get the current weather code and temp from wunderground
@@ -676,6 +689,7 @@ function submit_weather_settings() {
             echo 2;
             exit();
         }
+        update_weather_id();
     }
 
     if ($newdata["wapikey"] !== $wapikey) {
@@ -715,10 +729,7 @@ function submit_options() {
         $data = json_decode($_REQUEST["options"], true);
         send_to_os("/co?pw=&".http_build_query($data));
     }
-    $woeid = get_woeid();
-    changeConfig("woeid",$woeid,"i");
-	$lid = get_wunderground_lid();
-	changeConfig("lid",$lid,"s");
+    update_weather_id();
 }
 
 #Submit updated stations
