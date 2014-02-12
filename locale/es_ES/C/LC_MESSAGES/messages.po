@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-10 21:38-0600\n"
-"PO-Revision-Date: 2014-02-10 21:39-0600\n"
+"POT-Creation-Date: 2014-02-11 18:35-0600\n"
+"PO-Revision-Date: 2014-02-11 18:35-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -954,7 +954,7 @@ msgstr "Mover a la Izquierda"
 msgid "Move right"
 msgstr "Mover a la Derecha"
 
-#: ../../../../js/auth.js.php:83 ../../../../js/main.js.php:371
+#: ../../../../js/auth.js.php:81 ../../../../js/main.js.php:371
 msgid "Invalid Login"
 msgstr "Acceso no Valido"
 
@@ -1069,6 +1069,8 @@ msgstr "Programa Run-once ha sido actualizado"
 msgid ""
 "Weather settings were not saved. Check config.php permissions and try again."
 msgstr ""
+"Los ajustes de Clima no han sido guardados. Verifique los permisos en config."
+"php he intentelo de nuevo."
 
 #: ../../../../js/main.js.php:1217
 msgid "Weather settings have been saved"

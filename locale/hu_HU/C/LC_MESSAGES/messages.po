@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-10 21:40-0600\n"
-"PO-Revision-Date: 2014-02-10 21:40-0600\n"
+"POT-Creation-Date: 2014-02-11 18:35-0600\n"
+"PO-Revision-Date: 2014-02-11 18:35-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -952,7 +952,7 @@ msgstr "Balra"
 msgid "Move right"
 msgstr "Jobbra"
 
-#: ../../../../js/auth.js.php:83 ../../../../js/main.js.php:371
+#: ../../../../js/auth.js.php:81 ../../../../js/main.js.php:371
 msgid "Invalid Login"
 msgstr "Hibás bejelentkezés"
 
@@ -1067,6 +1067,8 @@ msgstr "Egyszeri öntözés tervezve"
 msgid ""
 "Weather settings were not saved. Check config.php permissions and try again."
 msgstr ""
+"Az időjárás beállítások nem lettek elmentve. Ellenőrizd a config.php fájl "
+"jogosultságait és próbáld újra."
 
 #: ../../../../js/main.js.php:1217
 msgid "Weather settings have been saved"
