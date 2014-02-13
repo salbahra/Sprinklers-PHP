@@ -1333,9 +1333,9 @@ function make_list_status() {
     $open = count(array_keys($status,true));
     if ($master) unset($open[$master-1]);
 
-    $ptotal = 0; $i = -1;
+    $ptotal = 0;
     foreach ($settings["ps"] as $valve) {
-        $pid = $valve[0]; $time = $valve[1]; $i++;
+        $pid = $valve[0]; $time = $valve[1];
         if (($pid==255||$pid==99) && $time < 2) continue;
         if ($pid) {
             if ($open > 1) {
