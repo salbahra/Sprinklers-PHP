@@ -1238,13 +1238,15 @@ function current_status() {
     }
 
     $open = array_keys($status,true);
+    if ($settings["mas"]) unset($open[$settings["mas"]-1]);
+
     if (count($open) >= 2) {
         $ptotal = 0;
         foreach ($open as $key => $value) {
             $tmp = $settings["ps"][$value][1];
             if ($tmp > $ptotal) $ptotal = $tmp;
         }
-        $sample = $open[1];
+        $sample = $open[0];
         $pname = pidname($settings["ps"][$sample][0]);
         $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
         $line .= $pname." "._("is running on")." ".count($open)." "._("stations")." ";
@@ -1291,11 +1293,14 @@ function make_list_status() {
     
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
-	$master = false;
+	$master = 0;
     $i = 0;
     foreach ($stations as $station) {
         $info = "";
-        if ($settings["ps"][$i][0]) {
+        if ($settings["mas"] == $i+1) {
+            $station .= " "._("(Master)");
+            $master = $settings["mas"];
+        } else if ($settings["ps"][$i][0]) {
             $rem=$settings["ps"][$i][1];
             $remm=$rem/60>>0;
             $rems=$rem%60;
@@ -1306,10 +1311,6 @@ function make_list_status() {
             if ($pname != _("Manual program")) $info .= " <span id='countdown-".$i."' class='nobr'>(".($remm/10>>0).($remm%10).":".($rems/10>>0).($rems%10)." "._("remaining").")</span>";
             $info .= "</p>";
         }
-        if ($settings["mas"] == $i+1) {
-			$station .= " "._("(Master)");
-			$master = true;
-		}
         if ($status[$i]) {
             $color = "green";
         } else {
@@ -1330,14 +1331,14 @@ function make_list_status() {
     }
 
     $open = count(array_keys($status,true));
+    if ($master) unset($open[$master-1]);
 
-    $ptotal = 0;
+    $ptotal = 0; $i = -1;
     foreach ($settings["ps"] as $valve) {
-        $pid = $valve[0];
-        $time = $valve[1];
+        $pid = $valve[0]; $time = $valve[1]; $i++;
         if (($pid==255||$pid==99) && $time < 2) continue;
         if ($pid) {
-            if ((!$master) && ($open > 1)) {
+            if ($open > 1) {
                 if ($time > $ptotal) $ptotal = $time;            
             } else {
                 $ptotal += $time;
