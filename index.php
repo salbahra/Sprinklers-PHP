@@ -36,7 +36,7 @@ is_auth();
     <body style="display:none">
         <div data-role="page" id="start"></div>
 
-        <div data-role="popup" id="login" style="display:none" data-theme="a" data-overlay-theme="b" data-dismissible="false">
+        <div data-role="popup" id="login" data-theme="a" data-overlay-theme="b" data-dismissible="false">
             <div data-role="header" data-theme="b">
                 <h1><?php echo _("Welcome"); ?></h1>
            </div>

@@ -401,13 +401,9 @@ function update_weather() {
 
 function logout(){
     areYouSure("<?php echo _('Are you sure you want to logout?'); ?>", "", function() {
-        $("body").pagecontainer("change","#login");
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
-            $("body div[data-role='page']:not('.ui-page-active')").remove();
-            $('.ui-page-active').one("pagehide",function(){
-                $(this).remove();
-            })
+            location.reload();
         });
     });
 }

@@ -23,8 +23,8 @@ $(document).one("mobileinit", function(e){
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
 $("#start").on("pagecreate",function(e){
+    $("#login").enhanceWithin().popup();
     $("body").show();
-    $("#login").enhanceWithin().popup().show();
 });
 
 //On intial load check if a valid token exists, for auto login
