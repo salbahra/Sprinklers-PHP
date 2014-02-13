@@ -35,12 +35,12 @@ is_auth();
     </head> 
     <body style="display:none">
         <div data-role="page" id="start"></div>
-        
-        <div data-role="dialog" id="login" data-close-btn="none">
-        	<div data-role="header" data-theme="b" data-position="fixed">
+
+        <div data-role="popup" id="login" style="display:none" data-theme="a" data-overlay-theme="b" data-dismissible="false">
+            <div data-role="header" data-theme="b">
                 <h1><?php echo _("Welcome"); ?></h1>
            </div>
-        	<div class="ui-content" role="main">
+            <div class="ui-content">
                 <form action="javascript:dologin()" method="post">
                     <fieldset>
                         <label for="username" class="ui-hidden-accessible"><?php echo _("Username:"); ?></label>
@@ -53,6 +53,7 @@ is_auth();
                 </form>
             </div>
         </div>
+
 		<?php
             if ($local_assets) {
                 echo '<script src="js/jquery.min.js"></script>';

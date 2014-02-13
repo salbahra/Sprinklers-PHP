@@ -108,11 +108,9 @@ $("input[data-role='flipswitch']").change(function(){
             //If chanegd to on
             if (type === "autologin") {
                 if (localStorage.getItem("token") !== null) return;
-                $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
+                $("#login form").attr("action","javascript:grab_token()");
                 $("#login .ui-checkbox").hide();
-                $(".ui-panel-open").one("panelclose",function(){
-                    $("body").pagecontainer("change","#login");
-                }).panel("close")
+                $("#login").popup("open");
             }
             if (type === "en") {
                 $.get("index.php","action=en_on",function(result){
@@ -359,7 +357,8 @@ function highlight(button) {
     });
 }
 
-function grab_token(pageid){
+function grab_token(){
+    $("#login").popup("close");
     $.mobile.loading("show");
     var parameters = "action=gettoken&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=true";
     $("#username, #password").val('');
@@ -367,15 +366,11 @@ function grab_token(pageid){
         $.mobile.loading("hide");
         reply = $.trim(reply);
         if (reply == 0) {
-            $("body").pagecontainer("change","#"+pageid);
             showerror("<?php echo _("Invalid Login"); ?>");
-        } else if (reply === "") {
-            $("#"+pageid+"-autologin").val("off").flipswitch("refresh");
+            $("#s-autologin").prop("checked",false).flipswitch("refresh");
             window.sliders["autologin"] = "off";
-            $("body").pagecontainer("change","#"+pageid);
         } else {
             localStorage.setItem('token',reply);
-            $("body").pagecontainer("change","#"+pageid);
         }
         $("#login .ui-checkbox").show()
         $("#login form").attr("action","javascript:dologin()");

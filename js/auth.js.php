@@ -18,19 +18,17 @@ if(!defined('Sprinklers')) {
 //After jQuery mobile is loaded set intial configuration
 $(document).one("mobileinit", function(e){
     $.mobile.defaultPageTransition = 'fade';
+    $.mobile.hashListeningEnabled = false;
 });
 
 //When the start page is intialized show the body (this prevents the flicker as jQuery mobile loads to process the page)
 $("#start").on("pagecreate",function(e){
     $("body").show();
+    $("#login").enhanceWithin().popup().show();
 });
 
 //On intial load check if a valid token exists, for auto login
-$("#start").on("pageshow",function(e){
-    if (!check_token()) {
-        $("body").pagecontainer("change","#login");
-    }
-});
+$("#start").on("pageshow",check_token);
 
 //Insert the startup images for iOS
 (function(){
@@ -54,10 +52,10 @@ function check_token() {
     if (typeof(token) !== 'undefined' && token != null) {
         $.mobile.loading("show");
         $.post("index.php",parameters,function(reply){
+            $.mobile.loading("hide");
             if (reply == 0) {
-                $.mobile.loading("hide");
                 localStorage.removeItem('token');
-                $("body").pagecontainer("change","#login");
+                $("#login").popup("open");
                 return;
             } else {
                 $("body").append(reply);
@@ -65,9 +63,8 @@ function check_token() {
             }
         }, "html");
     } else {
-        return false;
+        $("#login").popup("open");
     }
-    return true;
 }
 
 //Submit login information to server
@@ -76,8 +73,8 @@ function dologin() {
     $("#username, #password").val('');
     $.mobile.loading("show");
     $.post("index.php",parameters,function(reply){
+        $.mobile.loading("hide");
         if (reply == 0) {
-            $.mobile.loading("hide");
             showerror("<?php echo _("Invalid Login"); ?>");
         } else {
             $("body").append(reply);
