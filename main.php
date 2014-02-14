@@ -1296,16 +1296,15 @@ function make_list_status() {
     
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
-	$master = 0; $i = 0; $ptotal = 0;
+	$master = $settings["mas"]-1; $i = 0; $ptotal = 0;
 
     $open = count(array_keys($status,true));
-    if ($settings["ps"][$settings["mas"]-1][0]) $open--;
+    if ($settings["ps"][$master][0]) $open--;
 
     foreach ($stations as $station) {
         $info = "";
         if ($settings["mas"] == $i+1) {
             $station .= " "._("(Master)");
-            $master = $settings["mas"];
         } else if ($settings["ps"][$i][0]) {
             $rem=$settings["ps"][$i][1];
             if ($open > 1) {
