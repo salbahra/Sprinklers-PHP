@@ -1238,7 +1238,10 @@ function current_status() {
     }
 
     $open = array_keys($status,true);
-    if ($settings["mas"]) unset($open[$settings["mas"]-1]);
+    if ($settings["mas"]) {
+        unset($open[$settings["mas"]-1]);
+        $open = array_values($open);
+    }
 
     if (count($open) >= 2) {
         $ptotal = 0;
@@ -1259,7 +1262,7 @@ function current_status() {
     $i = 0;
     foreach ($stations as $station) {
         $info = "";
-        if ($settings["ps"][$i][0] && $status[$i]) {
+        if ($settings["ps"][$i][0] && $status[$i] && $settings["mas"] != $i+1) {
             $pname= pidname($settings["ps"][$i][0]);
             $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
             $line .= $pname." "._("is running on station")." <span class='nobr'>".$station."</span> ";
@@ -1293,8 +1296,11 @@ function make_list_status() {
     
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
-	$master = 0;
-    $i = 0;
+	$master = 0; $i = 0; $ptotal = 0;
+
+    $open = count(array_keys($status,true));
+    if ($settings["ps"][$settings["mas"]-1][0]) $open--;
+
     foreach ($stations as $station) {
         $info = "";
         if ($settings["mas"] == $i+1) {
@@ -1302,9 +1308,14 @@ function make_list_status() {
             $master = $settings["mas"];
         } else if ($settings["ps"][$i][0]) {
             $rem=$settings["ps"][$i][1];
+            if ($open > 1) {
+                if ($rem > $ptotal) $ptotal = $rem;
+            } else {
+                $ptotal+=$rem;
+            }
             $remm=$rem/60>>0;
             $rems=$rem%60;
-            $pname= pidname($settings["ps"][$i][0]);
+            $pname=pidname($settings["ps"][$i][0]);
             if ($status[$i] && $pname != _("Manual program")) $runningTotal[$i] = $rem;
             $allPnames[$i] = $pname;
             $info = "<p class='rem'>".(($status[$i]) ? _("Running") : _("Scheduled") )." ".$pname;
@@ -1328,22 +1339,6 @@ function make_list_status() {
         $pname= pidname($lrpid);
 
         $footer = '<p>'.$pname.' '._("last ran station").' '.$stations[$settings["lrun"][0]].' '._("for").' '.($lrdur/60>>0).''._("m").' '.($lrdur%60).''._("s on").' '.gmdate(_("D, d M Y H:i:s"),$settings["lrun"][3]).'</p>';
-    }
-
-    $open = count(array_keys($status,true));
-    if ($master) unset($open[$master-1]);
-
-    $ptotal = 0;
-    foreach ($settings["ps"] as $valve) {
-        $pid = $valve[0]; $time = $valve[1];
-        if (($pid==255||$pid==99) && $time < 2) continue;
-        if ($pid) {
-            if ($open > 1) {
-                if ($time > $ptotal) $ptotal = $time;            
-            } else {
-                $ptotal += $time;
-            }
-        }
     }
 
     if ($ptotal) {
