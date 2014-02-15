@@ -200,30 +200,18 @@ function comm_error() {
 }
 
 $(document).on("pageshow",function(e,data){
-    var newpage = e.target.id;
-    var currpage = $(e.target);
+    var newpage = "#"+e.target.id;
 
-    if (newpage == "sprinklers") {
+    if (newpage == "#sprinklers") {
         //Automatically update sliders on page load in settings panel
-        check_auto($("#"+newpage+" input[data-role='flipswitch']"));
-    } else if (newpage == "preview") {
+        check_auto($(newpage+" input[data-role='flipswitch']"));
+    } else if (newpage == "#preview") {
         get_preview();
-    } else if (newpage == "logs") {
+    } else if (newpage == "#logs") {
         get_logs();
     }
 
-    currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
-        e.preventDefault(); e.stopImmediatePropagation();
-        highlight(this);
-        $(".ui-page-active [id$=settings]").panel("open");
-    });
-    currpage.find("a[data-onclick]").unbind("vclick").on('vclick', function (e) {
-        e.preventDefault(); e.stopImmediatePropagation();
-        var func = $(this).data("onclick");
-        highlight(this);
-        eval(func);
-    });
-
+    bind_links(newpage);
 });
 
 $(document).on("pagebeforeshow",function(e,data){
@@ -242,6 +230,22 @@ $(document).on("pagebeforeshow",function(e,data){
         document.title = "OpenSprinkler: "+title;
     }
 })
+
+function bind_links(page) {
+    var currpage = $(page);
+
+    currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        highlight(this);
+        $(".ui-page-active [id$=settings]").panel("open");
+    });
+    currpage.find("a[data-onclick]").unbind("vclick").on('vclick', function (e) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        var func = $(this).data("onclick");
+        highlight(this);
+        eval(func);
+    });
+}
 
 function check_status() {
     //Check if a program is running
@@ -412,6 +416,15 @@ function gohome() {
     $("body").pagecontainer("change","#sprinklers",{reverse: true});
 }
 
+function changePage(toPage) {
+    var curr = "#"+$("body").pagecontainer("getActivePage").attr("id");
+    if (curr === toPage) {
+        bind_links(curr);
+    } else {
+        $("body").pagecontainer("change",toPage);
+    }
+}
+
 function changeFromPanel(func) {
     var $panel = $("#sprinklers-settings");
     $panel.one("panelclose", func);
@@ -419,7 +432,7 @@ function changeFromPanel(func) {
 }
 
 function show_about() {
-    $("body").pagecontainer("change","#about");
+    changePage("#about");
 }
 
 function open_popup(id) {
@@ -439,7 +452,7 @@ function show_settings() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#os-settings");
+        changePage("#os-settings");
     })    
 }
 
@@ -464,7 +477,7 @@ function show_weather_settings() {
 
         $("#auto_delay_duration").val(data["auto_delay_duration"]);
 
-        $("body").pagecontainer("change","#weather-settings");
+        changePage("#weather-settings");
    });
 }
 
@@ -484,7 +497,7 @@ function show_stations() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#os-stations");
+        changePage("#os-stations");
     })    
 }
 
@@ -494,7 +507,7 @@ function show_users() {
         var list = $("#user-control-list");
         list.html(items).enhanceWithin();
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#user-control");
+        changePage("#user-control");
     })
 }
 
@@ -530,6 +543,7 @@ function add_user() {
 
     nameEl.val(""), passEl.val("");
     $.mobile.loading("show");
+    $("#add-user").popup("close");
     $.get("index.php","action=add_user&name="+name+"&pass="+pass,function(result){
         $.mobile.loading("hide");
         if (result == 0) {
@@ -570,7 +584,7 @@ function get_forecast() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#forecast");
+        changePage("#forecast");
     })    
 }
 
@@ -587,7 +601,7 @@ function get_status() {
         if (window.interval_id !== undefined) clearInterval(window.interval_id);
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#status");
+        changePage("#status");
         if (window.totals["d"] !== undefined) {
             delete window.totals["p"];
             setTimeout(get_status,window.totals["d"]*1000);
@@ -791,7 +805,7 @@ function get_manual() {
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#manual");
+        changePage("#manual");
     })
 }
 
@@ -829,7 +843,7 @@ function get_runonce() {
 
         list.enhanceWithin();
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#runonce");
+        changePage("#runonce");
     })
 }
 
@@ -969,7 +983,7 @@ function get_programs(pid) {
             runonce.push(0);
             submit_runonce(runonce);
         })
-        $("body").pagecontainer("change","#programs");
+        changePage("#programs");
         $.mobile.loading("hide");
         $("#programs").enhanceWithin();
         update_program_header();
@@ -1014,7 +1028,7 @@ function add_program() {
         $("#addprogram [id^='submit-']").click(function(){
             submit_program("new");
         })
-        $("body").pagecontainer("change","#addprogram");
+        changePage("#addprogram");
         $.mobile.loading("hide");
         $("#addprogram").enhanceWithin();
     })    
@@ -1135,7 +1149,7 @@ function submit_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt),function(result){
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#settings");
+        changePage("#settings");
         if (result == 0) {
             comm_error()
         } else {
@@ -1176,7 +1190,7 @@ function submit_stations() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_stations&names="+JSON.stringify(names)+masop,function(result){
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#settings");
+        changePage("#settings");
         if (result == 0) {
             comm_error()
         } else {
@@ -1201,7 +1215,7 @@ function submit_runonce(runonce) {
             showerror("<?php echo _('Run-once program has been scheduled'); ?>")
         }
     })
-    $("body").pagecontainer("change","#sprinklers");
+    changePage("#sprinklers");
 }
 
 function submit_weather_settings() {
@@ -1214,7 +1228,7 @@ function submit_weather_settings() {
     params = JSON.stringify(params)
     $.get("index.php","action=submit_weather_settings&options="+params,function(result){
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#settings");
+        changePage("#settings");
         if (result == 2) {
             showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
         } else {
@@ -1290,7 +1304,7 @@ function auto_raindelay() {
     params = JSON.stringify(params)
     $.get("index.php","action=submit_autodelay&autodelay="+params,function(result){
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#settings");
+        changePage("#settings");
         if (result == 2) {
             showerror("<?php echo _('Auto-delay changes were not saved. Check config.php permissions and try again.'); ?>");
         } else {

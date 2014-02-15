@@ -320,15 +320,15 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-inset="true" data-role="listview">
             <li data-role="list-divider" data-theme="b"><?php echo _("Add New User"); ?></li>
             <li>
-                <div class="ui-field-contain">
+                <form action="javascript:add_user()">
                     <label for="name"><?php echo _("Username:"); ?></label>
                     <input autocapitalize="off" autocorrect="off" type="text" id="name" value="" />
                     <label for="pass"><?php echo _("Password:"); ?></label>
                     <input type="password" id="pass" value="" />
                     <label for="pass-confirm"><?php echo _("Confirm Password:"); ?></label>
                     <input type="password" id="pass-confirm" value="" />
-                    <a class="ui-btn ui-corner-all ui-shadow" href="#" data-onclick="add_user();"><?php echo _("Submit"); ?></a>
-                </div>
+                    <input type="submit" value="<?php echo _("Submit"); ?>" />
+                </form>
             </li>
         </ul>
     </div>
