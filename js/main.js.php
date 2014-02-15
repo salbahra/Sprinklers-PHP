@@ -45,6 +45,7 @@ $(document).ajaxError(function(x,t,m) {
 //After main page is processed, hide loading message and change to the page
 $(document).one("pagecreate","#sprinklers", function(){
     $.mobile.loading("hide");
+    update_weather();
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
@@ -234,7 +235,6 @@ $(document).on("pagebeforeshow",function(e,data){
     if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
 
     if (newpage == "sprinklers") {
-        update_weather();
         $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
         setTimeout(check_status,1000);
     } else {
