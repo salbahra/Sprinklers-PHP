@@ -1218,7 +1218,8 @@ function submit_weather_settings() {
         if (result == 2) {
             showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
         } else {
-            showerror("<?php echo _('Weather settings have been saved'); ?>")
+            showerror("<?php echo _('Weather settings have been saved'); ?>");
+            update_weather();
         }
     })
 }
