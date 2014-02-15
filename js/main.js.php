@@ -1371,14 +1371,14 @@ function export_config(toFile) {
         if (data === "") {
             comm_error()
         } else {
-            localStorage.setItem("backup", data);
+            localStorage.setItem("backup", JSON.stringify(data));
             showerror("<?php echo _('Backup saved to your device'); ?>");
         }
     })
 }
 
-function import_config(config) {
-    if (!config) {
+function import_config(data) {
+    if (typeof data === "undefined") {
         var data = localStorage.getItem("backup");
         if (data === null) {
             showerror("<?php echo _('No backup available on this device'); ?>");
@@ -1412,7 +1412,7 @@ function handleConfig(files) {
     reader.onload = function(e){
         try{
             var obj=JSON.parse($.trim(e.target.result));
-            import_config(obj);
+            import_config(JSON.stringify(obj));
         }catch(e){
             showerror("<?php echo _('Unable to read configuration file. Please check the file and try again.'); ?>");
         }
