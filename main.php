@@ -1243,9 +1243,10 @@ function current_status() {
         echo json_encode(array("color" => "red","line" => $line,"seconds" => 0,"sdelay" => $options[17]["val"])); return;
     }
 
+    $master = $settings["mas"];
     $open = array_keys($status,true);
-    if ($settings["mas"]) {
-        unset($open[$settings["mas"]-1]);
+    if ($master) {
+        unset($open[$master-1]);
         $open = array_values($open);
     }
 
@@ -1302,10 +1303,10 @@ function make_list_status() {
     
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
-	$master = $settings["mas"]-1; $i = 0; $ptotal = 0;
+	$master = $settings["mas"]; $i = 0; $ptotal = 0;
 
     $open = count(array_keys($status,true));
-    if ($settings["ps"][$master][0]) $open--;
+    if ($master && $status[$master-1]) $open--;
 
     foreach ($stations as $station) {
         $info = "";
