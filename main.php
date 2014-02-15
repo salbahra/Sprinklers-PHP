@@ -1445,7 +1445,7 @@ function make_settings_list() {
                 continue 2;
             case 25:
                 $list .= "<input data-mini='true' id='o25' type='checkbox' ".(($data["val"] == "1") ? "checked='checked'" : "")." /><label for='o25'>"._("Ignore Password")."</label>";
-                continue 2;             
+                continue 2;
         }
     }
     $list .= "</fieldset></div></li>";
@@ -1554,10 +1554,10 @@ function make_list_forecast() {
         foreach ($forecasts["simpleforecast"] as $k => $attr) {
             if ($region == "US" || $region == "BM" || $region == "PW") {
                 $list .= "<li data-icon='false' style='text-align:center'><span>".$attr->{'date'}->{'monthname_short'}." ".$attr->{'date'}->{'day'}."</span><br><div title='".$attr->{'conditions'}."' class='wicon cond".$attr->{'icon'}."'></div><span>".$attr->{'date'}->{'weekday_short'}."</span><br><span>"._("Low").": ".$attr->{'low'}->{'fahrenheit'}."&#176;F  "._("High").": ".$attr->{'high'}->{'fahrenheit'}."&#176;F</span><br><span>"._("Precip").": ".$attr->{'qpf_allday'}->{'in'}." in</span></li>";
-                } else {
+            } else {
                 $list .= "<li data-icon='false' style='text-align:center'><span>".$attr->{'date'}->{'monthname_short'}." ".$attr->{'date'}->{'day'}."</span><br><div title='".$attr->{'conditions'}."' class='wicon cond".$attr->{'icon'}."'></div><span>".$attr->{'date'}->{'weekday_short'}."</span><br><span>"._("Low").": ".$attr->{'low'}->{'celsius'}."&#176;C  "._("High").": ".$attr->{'high'}->{'celsius'}."&#176;C</span><br><span>"._("Precip").": ".$attr->{'qpf_allday'}->{'mm'}." mm</span></li>";
-                }
             }
+        }
         echo $list;
     }
 }
