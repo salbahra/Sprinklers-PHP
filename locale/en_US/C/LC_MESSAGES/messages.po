@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-15 16:43-0600\n"
-"PO-Revision-Date: 2014-02-15 16:43-0600\n"
+"POT-Creation-Date: 2014-02-15 17:56-0600\n"
+"PO-Revision-Date: 2014-02-15 17:56-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -51,8 +51,8 @@ msgstr ""
 msgid "New Install"
 msgstr ""
 
-#: ../../../../install.php:186 ../../../../js/main.js.php:527
-#: ../../../../js/main.js.php:550
+#: ../../../../install.php:186 ../../../../js/main.js.php:540
+#: ../../../../js/main.js.php:564
 msgid "Password confirmation doesn't match password."
 msgstr ""
 
@@ -157,6 +157,11 @@ msgstr ""
 
 #: ../../../../install.php:262
 msgid "Use Local Assets?"
+msgstr ""
+
+#: ../../../../main.php:551 ../../../../main.php:560
+#: ../../../../js/main.js.php:912
+msgid "Master"
 msgstr ""
 
 #: ../../../../main.php:893 ../../../../main.php:914 ../../../../main.php:936
@@ -269,7 +274,7 @@ msgid "Su"
 msgstr ""
 
 #: ../../../../main.php:1163 ../../../../main.php:1566
-#: ../../../../js/main.js.php:816
+#: ../../../../js/main.js.php:830
 msgid "Program"
 msgstr ""
 
@@ -394,7 +399,7 @@ msgstr ""
 
 #: ../../../../main.php:1273 ../../../../main.php:1286
 #: ../../../../main.php:1338 ../../../../main.php:1368
-#: ../../../../js/main.js.php:282 ../../../../js/main.js.php:313
+#: ../../../../js/main.js.php:286 ../../../../js/main.js.php:317
 msgid "remaining"
 msgstr ""
 
@@ -532,79 +537,79 @@ msgstr ""
 msgid "d M Y"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Jan"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Feb"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Mar"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Apr"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "May"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Jun"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Jul"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Aug"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Sep"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Oct"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Nov"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:773
+#: ../../../../main.php:1519 ../../../../js/main.js.php:787
 msgid "Dec"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Mon"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Tue"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Wed"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Thr"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Fri"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Sat"
 msgstr ""
 
-#: ../../../../main.php:1520 ../../../../js/main.js.php:766
+#: ../../../../main.php:1520 ../../../../js/main.js.php:780
 msgid "Sun"
 msgstr ""
 
@@ -928,7 +933,7 @@ msgstr ""
 msgid "Move right"
 msgstr ""
 
-#: ../../../../js/auth.js.php:78 ../../../../js/main.js.php:369
+#: ../../../../js/auth.js.php:78 ../../../../js/main.js.php:373
 msgid "Invalid Login"
 msgstr ""
 
@@ -953,178 +958,182 @@ msgid ""
 "correct."
 msgstr ""
 
-#: ../../../../js/main.js.php:403
+#: ../../../../js/main.js.php:308
+msgid "Station delay"
+msgstr ""
+
+#: ../../../../js/main.js.php:407
 msgid "Are you sure you want to logout?"
 msgstr ""
 
-#: ../../../../js/main.js.php:509
+#: ../../../../js/main.js.php:522
 msgid "Are you sure you want to delete "
 msgstr ""
 
-#: ../../../../js/main.js.php:538
+#: ../../../../js/main.js.php:552
 msgid "User already exists"
 msgstr ""
 
-#: ../../../../js/main.js.php:561
+#: ../../../../js/main.js.php:575
 msgid "Password for"
 msgstr ""
 
-#: ../../../../js/main.js.php:561
+#: ../../../../js/main.js.php:575
 msgid "has been updated"
 msgstr ""
 
-#: ../../../../js/main.js.php:632 ../../../../js/main.js.php:684
+#: ../../../../js/main.js.php:646 ../../../../js/main.js.php:698
 msgid "No entries found in the selected date range"
 msgstr ""
 
-#: ../../../../js/main.js.php:805
+#: ../../../../js/main.js.php:819
 msgid "Quick Programs"
 msgstr ""
 
-#: ../../../../js/main.js.php:813
+#: ../../../../js/main.js.php:827
 msgid "Last Used Program"
 msgstr ""
 
-#: ../../../../js/main.js.php:854
+#: ../../../../js/main.js.php:868
 msgid "No stations set to run on this day."
 msgstr ""
 
-#: ../../../../js/main.js.php:1024
+#: ../../../../js/main.js.php:1038
 msgid "Are you sure you want to delete program "
 msgstr ""
 
-#: ../../../../js/main.js.php:1051
+#: ../../../../js/main.js.php:1065
 msgid "Error: Interval days must be between 2 and 128."
 msgstr ""
 
-#: ../../../../js/main.js.php:1053
+#: ../../../../js/main.js.php:1067
 msgid "Error: Starting in days wrong."
 msgstr ""
 
-#: ../../../../js/main.js.php:1064
+#: ../../../../js/main.js.php:1078
 msgid "Error: Start time must be prior to end time."
 msgstr ""
 
-#: ../../../../js/main.js.php:1084
+#: ../../../../js/main.js.php:1098
 msgid "Error: You have not selected any stations."
 msgstr ""
 
-#: ../../../../js/main.js.php:1094
+#: ../../../../js/main.js.php:1108
 msgid "Program added successfully"
 msgstr ""
 
-#: ../../../../js/main.js.php:1104
+#: ../../../../js/main.js.php:1118
 msgid "Program has been updated"
 msgstr ""
 
-#: ../../../../js/main.js.php:1142
+#: ../../../../js/main.js.php:1156
 msgid "Settings have been saved"
 msgstr ""
 
-#: ../../../../js/main.js.php:1157
+#: ../../../../js/main.js.php:1171
 msgid "Station name must be 16 characters or less"
 msgstr ""
 
-#: ../../../../js/main.js.php:1183
+#: ../../../../js/main.js.php:1197
 msgid "Stations have been updated"
 msgstr ""
 
-#: ../../../../js/main.js.php:1201
+#: ../../../../js/main.js.php:1215
 msgid "Run-once program has been scheduled"
 msgstr ""
 
-#: ../../../../js/main.js.php:1219
+#: ../../../../js/main.js.php:1233
 msgid ""
 "Weather settings were not saved. Check config.php permissions and try again."
 msgstr ""
 
-#: ../../../../js/main.js.php:1221
+#: ../../../../js/main.js.php:1235
 msgid "Weather settings have been saved"
 msgstr ""
 
-#: ../../../../js/main.js.php:1236
+#: ../../../../js/main.js.php:1251
 msgid "Localization settings have been saved"
 msgstr ""
 
-#: ../../../../js/main.js.php:1278
+#: ../../../../js/main.js.php:1293
 msgid "Rain delay has been successfully set"
 msgstr ""
 
-#: ../../../../js/main.js.php:1294
+#: ../../../../js/main.js.php:1309
 msgid ""
 "Auto-delay changes were not saved. Check config.php permissions and try "
 "again."
 msgstr ""
 
-#: ../../../../js/main.js.php:1296
+#: ../../../../js/main.js.php:1311
 msgid "Auto-delay changes have been saved"
 msgstr ""
 
-#: ../../../../js/main.js.php:1302
+#: ../../../../js/main.js.php:1317
 msgid ""
 "Are you sure you want to delete all settings and return to the default "
 "settings (this will delete the configuration file)?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1309
+#: ../../../../js/main.js.php:1324
 msgid ""
 "Configuration has been deleted. Please wait while you are redirected to the "
 "installer."
 msgstr ""
 
-#: ../../../../js/main.js.php:1317
+#: ../../../../js/main.js.php:1332
 msgid "Are you sure you want to clear all your log data?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1324
+#: ../../../../js/main.js.php:1339
 msgid "Logs have been cleared"
 msgstr ""
 
-#: ../../../../js/main.js.php:1331
+#: ../../../../js/main.js.php:1346
 msgid "Are you sure you want to reboot OpenSprinkler?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1338
+#: ../../../../js/main.js.php:1353
 msgid "OpenSprinkler is rebooting now"
 msgstr ""
 
-#: ../../../../js/main.js.php:1345
+#: ../../../../js/main.js.php:1360
 msgid "Are you sure you want to stop all stations?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1353
+#: ../../../../js/main.js.php:1368
 msgid "All stations have been stopped"
 msgstr ""
 
-#: ../../../../js/main.js.php:1364 ../../../../js/main.js.php:1403
+#: ../../../../js/main.js.php:1379 ../../../../js/main.js.php:1418
 msgid "File API is not supported by your browser"
 msgstr ""
 
-#: ../../../../js/main.js.php:1375
+#: ../../../../js/main.js.php:1390
 msgid "Backup saved to your device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1384
+#: ../../../../js/main.js.php:1399
 msgid "No backup available on this device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1388
+#: ../../../../js/main.js.php:1403
 msgid "Are you sure you want to restore the configuration?"
 msgstr ""
 
-#: ../../../../js/main.js.php:1395
+#: ../../../../js/main.js.php:1410
 msgid "Backup restored to your device"
 msgstr ""
 
-#: ../../../../js/main.js.php:1417
+#: ../../../../js/main.js.php:1432
 msgid ""
 "Unable to read the configuration file. Please check the file and try again."
 msgstr ""
 
-#: ../../../../js/main.js.php:1428
+#: ../../../../js/main.js.php:1443
 msgid "Yes"
 msgstr ""
 
-#: ../../../../js/main.js.php:1429
+#: ../../../../js/main.js.php:1444
 msgid "No"
 msgstr ""

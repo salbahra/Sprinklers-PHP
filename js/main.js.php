@@ -305,7 +305,7 @@ function update_timers(sdelay) {
                 if (a == "p") {
                     get_status();
                 } else {
-                    $("#countdown-"+a).parent("p").text("Station delay").parent("li").removeClass("green").addClass("red");
+                    $("#countdown-"+a).parent("p").text("<?php echo _('Station delay'); ?>").parent("li").removeClass("green").addClass("red");
                     window.timeout_id = setTimeout(get_status,(sdelay*1000));
                 }
             } else {
@@ -909,7 +909,7 @@ function get_preview() {
                 var currRange = timeline.getVisibleChartRange();
                 if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
             }
-            $("#timeline .timeline-groups-text:contains('Master')").addClass("skip-numbering")
+            $("#timeline .timeline-groups-text:contains('<?php echo _('Master'); ?>')").addClass("skip-numbering")
             $("#timeline-navigation").show()
         }
         $.mobile.loading("hide");
