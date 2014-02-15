@@ -958,6 +958,17 @@ function get_programs(pid) {
         $("#programs [id^='delete-']").click(function(){
             delete_program($(this).attr("id").split("-")[1]);
         })
+        $("#programs [id^='run-']").click(function(){
+            var id = $(this).attr("id").split("-")[1];
+            var durr = parseInt($("#duration-"+id).val());
+            var stations = $("[id^='station_'][id$='-"+id+"']");
+            var runonce = [];
+            $.each(stations,function(a,b){
+                if ($(b).is(":checked")) runonce.push(durr*60);
+            });
+            runonce.push(0);
+            submit_runonce(runonce);
+        })
         $("body").pagecontainer("change","#programs");
         $.mobile.loading("hide");
         $("#programs").enhanceWithin();
@@ -1174,12 +1185,14 @@ function submit_stations() {
     })
 }
 
-function submit_runonce() {
-    var runonce = []
-    $("#runonce").find(":input[data-type='range']").each(function(a,b){
-        runonce.push(parseInt($(b).val())*60)
-    })
-    runonce.push(0);
+function submit_runonce(runonce) {
+    if (typeof runonce === 'undefined') {
+        var runonce = []
+        $("#runonce").find(":input[data-type='range']").each(function(a,b){
+            runonce.push(parseInt($(b).val())*60)
+        })
+        runonce.push(0);
+    }
     localStorage.setItem("runonce",JSON.stringify(runonce));
     $.get("index.php","action=runonce&data="+JSON.stringify(runonce),function(result){
         if (result == 0) {

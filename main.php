@@ -1201,6 +1201,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
         $list .= "<input data-mini='true' type='submit' name='submit-".$n."' id='submit-".$n."' value='"._("Save New Program")."'></fieldset>";
     } else {
         $list .= "<input data-mini='true' type='submit' name='submit-".$n."' id='submit-".$n."' value='"._("Save Changes to Program")." ".($n + 1)."'>";
+        $list .= "<input data-mini='true' type='submit' name='run-".$n."' id='run-".$n."' value='"._("Run Program")." ".($n + 1)."'>";
         $list .= "<input data-mini='true' data-theme='b' type='submit' name='delete-".$n."' id='delete-".$n."' value='"._("Delete Program")." ".($n + 1)."'></fieldset>";
     }
     return $list;
@@ -1310,7 +1311,7 @@ function make_list_status() {
 
     foreach ($stations as $station) {
         $info = "";
-        if ($settings["mas"] == $i+1) {
+        if ($master == $i+1) {
             $station .= " "._("(Master)");
         } else if ($settings["ps"][$i][0]) {
             $rem=$settings["ps"][$i][1];
