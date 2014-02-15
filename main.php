@@ -95,7 +95,7 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15 => "onbrd",16 => "oseq",17 => "osdt",18 => "omas",19 => "omton",20 => "omtoff",21 => "ours",22 => "orst",23 => "owl",25 => "oipas");
 
 #Check which device the app is interfacing with
-isOSPi();
+if (isset($_SESSION["OSPi"])) isOSPi();
 
 #Call action if requested and allowed
 if (isset($_REQUEST['action'])) {
