@@ -1124,7 +1124,7 @@ function submit_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt),function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("body").pagecontainer("change","#settings");
         if (result == 0) {
             comm_error()
         } else {
@@ -1165,7 +1165,7 @@ function submit_stations() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_stations&names="+JSON.stringify(names)+masop,function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("body").pagecontainer("change","#settings");
         if (result == 0) {
             comm_error()
         } else {
@@ -1188,7 +1188,7 @@ function submit_runonce() {
             showerror("<?php echo _('Run-once program has been scheduled'); ?>")
         }
     })
-    gohome();
+    $("body").pagecontainer("change","#sprinklers");
 }
 
 function submit_weather_settings() {
@@ -1201,7 +1201,7 @@ function submit_weather_settings() {
     params = JSON.stringify(params)
     $.get("index.php","action=submit_weather_settings&options="+params,function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("body").pagecontainer("change","#settings");
         if (result == 2) {
             showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
         } else {
@@ -1214,7 +1214,7 @@ function submit_localization(locale) {
     $.mobile.loading("show");
     $.get("index.php","action=submit_localization&locale="+locale,function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("#localization").popup("close");
         if (result == 0) {
             comm_error()
         } else {
@@ -1256,7 +1256,7 @@ function raindelay() {
     $.mobile.loading("show");
     $.get("index.php","action=raindelay&delay="+$("#delay").val(),function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("#raindelay").popup("close");
         if (result == 0) {
             comm_error()
         } else {
@@ -1276,7 +1276,7 @@ function auto_raindelay() {
     params = JSON.stringify(params)
     $.get("index.php","action=submit_autodelay&autodelay="+params,function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("body").pagecontainer("change","#settings");
         if (result == 2) {
             showerror("<?php echo _('Auto-delay changes were not saved. Check config.php permissions and try again.'); ?>");
         } else {
@@ -1290,7 +1290,6 @@ function clear_config() {
         $.mobile.loading("show");
         $.get("index.php","action=clear_config",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1306,7 +1305,6 @@ function clear_logs() {
         $.mobile.loading("show");
         $.get("index.php","action=clear_logs",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1321,7 +1319,6 @@ function rbt() {
         $.mobile.loading("show");
         $.get("index.php","action=rbt",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1333,7 +1330,6 @@ function rbt() {
 
 function rsn() {
     areYouSure("<?php echo _('Are you sure you want to stop all stations?'); ?>", "", function() {
-        $("#sure").popup("close");
         $.mobile.loading("show");
         $.get("index.php","action=rsn",function(result){
             $.mobile.loading("hide");
@@ -1347,11 +1343,18 @@ function rsn() {
     });
 }
 
-function export_config() {
+function export_config(toFile) {
+    if (toFile) {
+        if (!navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
+            window.location.href="index.php?action=export_config";
+        } else {
+            showerror("<?php echo _('File API is not supported in your browser'); ?>")
+        }
+        return;
+    }
     $.mobile.loading("show");
     $.get("index.php","action=export_config",function(data){
         $.mobile.loading("hide");
-        $("#sprinklers-settings").panel("close")
         if (data === "") {
             comm_error()
         } else {
@@ -1361,18 +1364,18 @@ function export_config() {
     })
 }
 
-function import_config() {
-    var data = localStorage.getItem("backup");
-    if (data === null) {
-        showerror("<?php echo _('No backup available on this device'); ?>");
-        return;
+function import_config(config) {
+    if (!config) {
+        var data = localStorage.getItem("backup");
+        if (data === null) {
+            showerror("<?php echo _('No backup available on this device'); ?>");
+            return;
+        }
     }
-
     areYouSure("<?php echo _('Are you sure you want to restore the configuration?'); ?>", "", function() {
         $.mobile.loading("show");
         $.get("index.php","action=import_config&data="+data,function(reply){
             $.mobile.loading("hide");
-            gohome();
             if (reply == 0) {
                 comm_error()
             } else {
@@ -1380,6 +1383,28 @@ function import_config() {
             }
         })
     });
+}
+
+function getConfigFile() {
+    if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) || !window.FileReader) {
+        showerror("<?php echo _('File API is not supported in your browser'); ?>");
+        return;
+    }
+    $('#configInput').click();
+}
+
+function handleConfig(files) {
+    var config = files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+        try{
+            var obj=JSON.parse($.trim(e.target.result));
+            import_config(obj);
+        }catch(e){
+            showerror("<?php echo _('Unable to read configuration file. Please check the file and try again.'); ?>");
+        }
+    };
+    reader.readAsText(config);
 }
 
 function areYouSure(text1, text2, callback) {
@@ -1403,6 +1428,7 @@ function areYouSure(text1, text2, callback) {
 
     //Bind buttons
     $("#sure .sure-do").on("click.sure", function() {
+        $("#sure").popup("close");
         callback();
     });
     $("#sure .sure-dont").on("click.sure", function() {

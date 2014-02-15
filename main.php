@@ -270,13 +270,17 @@ function export_config() {
     $data = get_from_os("/gp?d=0");
 
     preg_match("/pd=\[\];(.*);/", $data, $progs);
-    $progs = explode(";", $progs[1]);
+    if (empty($progs)) {
+        $newdata["programs"] = array();
+    } else {
+        $progs = explode(";", $progs[1]);
 
-    $i = 0;
-    foreach ($progs as $prog) {
-        $tmp = explode("=", $prog);
-        $newdata["programs"][$i] = $tmp[1];
-        $i++;
+        $i = 0;
+        foreach ($progs as $prog) {
+            $tmp = explode("=", $prog);
+            $newdata["programs"][$i] = $tmp[1];
+            $i++;
+        }
     }
     $newdata["options"] = get_options();
 
@@ -284,6 +288,8 @@ function export_config() {
     $newdata["stations"] = $vs["stations"];
     $newdata["masop"] = $vs["masop"];
 
+    header("Content-disposition: attachment; filename=config.json");
+    header("Content-type: application/json");
     echo json_encode($newdata);
 }
 
@@ -354,7 +360,7 @@ function get_programs() {
     }
 
     preg_match("/pd=\[\];(.*);/", $data, $progs);
-    if (empty($progs)) return $progs;
+    if (empty($progs)) return array("programs"=>array());
     $progs = explode(";", $progs[1]);
 
     $i = 0;
