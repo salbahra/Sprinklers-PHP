@@ -1361,7 +1361,7 @@ function export_config(toFile) {
         if (!navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
             window.location.href="index.php?action=export_config";
         } else {
-            showerror("<?php echo _('File API is not supported in your browser'); ?>")
+            showerror("<?php echo _('File API is not supported by your browser'); ?>")
         }
         return;
     }
@@ -1400,7 +1400,7 @@ function import_config(data) {
 
 function getConfigFile() {
     if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) || !window.FileReader) {
-        showerror("<?php echo _('File API is not supported in your browser'); ?>");
+        showerror("<?php echo _('File API is not supported by your browser'); ?>");
         return;
     }
     $('#configInput').click();
@@ -1414,7 +1414,7 @@ function handleConfig(files) {
             var obj=JSON.parse($.trim(e.target.result));
             import_config(JSON.stringify(obj));
         }catch(e){
-            showerror("<?php echo _('Unable to read configuration file. Please check the file and try again.'); ?>");
+            showerror("<?php echo _('Unable to read the configuration file. Please check the file and try again.'); ?>");
         }
     };
     reader.readAsText(config);
