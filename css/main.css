@@ -195,13 +195,8 @@ a {
         overflow: hidden;
         text-overflow: clip;
     }
-    div.timeline-groups-text:not(.skip-numbering):before {
-        content: "S" counter(station) "     ";
-        white-space:pre;
-        counter-increment: station;
-    }
-    div.skip-numbering:before {
-        content: "M       ";
+    div.timeline-groups-text:before {
+        content: attr(data-shortname) "     ";
         white-space:pre;
     }
     .ui-mini {

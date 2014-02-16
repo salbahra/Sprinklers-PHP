@@ -865,12 +865,14 @@ function get_preview() {
         if ($.trim(items) == "") {
             $("#timeline").html("<p align='center'><?php echo _('No stations set to run on this day.'); ?></p>")
         } else {
-            empty = false
+            empty = false;
             var data = eval("["+items.substring(0, items.length - 1)+"]");
+            var shortnames = [];
             $.each(data, function(){
                 this.start = new Date(date[0],date[1]-1,date[2],0,0,this.start);
                 this.end = new Date(date[0],date[1]-1,date[2],0,0,this.end);
-            })
+                shortnames[this.group] = this.shortname;
+            });
             var options = {
                 'width':  '100%',
                 'editable': false,
@@ -907,7 +909,11 @@ function get_preview() {
                 var currRange = timeline.getVisibleChartRange();
                 if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
             }
-            $("#timeline .timeline-groups-text:contains('<?php echo _('Master'); ?>')").addClass("skip-numbering")
+            $("#timeline .timeline-groups-text").each(function(a,b){
+                var stn = $(b);
+                var name = shortnames[stn.text()];
+                stn.attr("data-shortname",name);
+            })
             $("#timeline-navigation").show()
         }
         $.mobile.loading("hide");
