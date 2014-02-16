@@ -44,12 +44,22 @@ $(document).ajaxError(function(x,t,m) {
 
 //After main page is processed, hide loading message and change to the page
 $(document).one("pagecreate","#sprinklers", function(){
-    $.mobile.loading("hide");
+    //Update login popup for use in-app. Logout forces page reload so we don't need to conserve original function
+    $("#login form").attr("action","javascript:grab_token()");
+    $("#login .ui-checkbox").hide();
+    //Overlay was moved here since start page has no height causing the overlay to be too short on iPod/iPhone devices
+    $("#login").popup("option","overlayTheme","b");
+
     update_weather();
+    //Use the user's local time for preview and log range calculation
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
+
+    //Open the main page
     $("body").pagecontainer("change","#sprinklers",{transition:"none"});
+
+    //Check for updates
     var curr = $("#commit").data("commit");
     if (curr !== null) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
@@ -57,8 +67,12 @@ $(document).one("pagecreate","#sprinklers", function(){
             if (newest != curr) $("#showupdate").slideDown().delay(2000).slideUp();
         })
     }
+
+    //Indicate loading is complete
+    $.mobile.loading("hide");
 });
 
+//Handle provider select change on weather settings
 $(document).on("change","#weather_provider",function(){
     var val = $(this).val();
     if (val === "wunderground") {
@@ -76,21 +90,26 @@ $(window).resize(function(){
     }
 });
 
+//Automatically update log viewer when switching graphing method
 $("#logs input:radio[name='log_type'],#graph_sort input[name='g']").change(get_logs)
 
+//Automatically update the log viewer when changing the date range
 $("#log_start,#log_end").change(function(){
     clearTimeout(window.logtimeout);
     window.logtimeout = setTimeout(get_logs,500);
 })
 
+//Show tooltip (station name) when point is clicked on the graph
 $("#placeholder").on("plothover", function(event, pos, item) {
     $("#tooltip").remove();
     clearTimeout(window.hovertimeout);
     if (item) window.hovertimeout = setTimeout(function(){showTooltip(item.pageX, item.pageY, item.series.label, item.series.color)}, 100);
 });
 
+//Update left/right arrows when zones are scrolled on log page
 $("#zones").scroll(showArrows)
 
+//Update the preview page on date change
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
@@ -100,97 +119,99 @@ $("#preview_date").change(function(){
 $("input[data-role='flipswitch']").change(function(){
     var slide = $(this);
     var type = this.name;
-    var pageid = slide.closest(".ui-page-active").attr("id");
+    var pageid = $("body").pagecontainer("getActivePage").attr("id");
+
     //Find out what the switch was changed to
     var changedTo = slide.is(":checked");
-    if(window.sliders[type]!==changedTo){
-        window.sliders[type] = changedTo;
-        if (changedTo) {
-            //If chanegd to on
-            if (type === "autologin") {
-                if (localStorage.getItem("token") !== null) return;
-                $("#login form").attr("action","javascript:grab_token()");
-                $("#login .ui-checkbox").hide();
-                $("#login").popup("open");
-            }
-            if (type === "en") {
-                $.get("index.php","action=en_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        comm_error()
-                        $("#en").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "auto_mm") {
-                $.get("index.php","action=auto_mm_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "local_assets") {
-                $.get("index.php","action=local_assets_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_on",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-                //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
-                $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-            }
-        } else {
-            //If changed to off
-            if (type === "autologin") {
-                localStorage.removeItem(typeToKey(type));
-            }
-            if (type === "en") {
-                $.get("index.php","action=en_off",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#en").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "auto_mm") {
-                $.get("index.php","action=auto_mm_off",function(result){
-                    if (result == 0) {
-                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "local_assets") {
-                $.get("index.php","action=local_assets_off",function(result){
-                    if (result == 0) {
-                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_off",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-                //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
-                $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
-            }
+
+    //If changed to on
+    if (changedTo) {
+        //Autologin
+        if (type === "autologin") {
+            if (localStorage.getItem("token") !== null) return;
+            $("#login").popup("open");
+        }
+        //OpenSprinkler Operation
+        if (type === "en") {
+            $.get("index.php","action=en_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    comm_error()
+                    $("#en").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Auto disable manual mode
+        if (type === "auto_mm") {
+            $.get("index.php","action=auto_mm_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
+                    $("#auto_mm").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Local assets
+        if (type === "local_assets") {
+            $.get("index.php","action=local_assets_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
+                    $("#local_assets").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Manual mode, manual mode and settings page
+        if (type === "mm" || type === "mmm") {
+            $.get("index.php","action=mm_on",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
+                }
+            });
+            //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
+            $("#manual a.green").removeClass("green");
+            $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
+        }
+    } else {
+        //If changed to off
+        if (type === "autologin") {
+            localStorage.removeItem("token");
+        }
+        if (type === "en") {
+            $.get("index.php","action=en_off",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#en").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "auto_mm") {
+            $.get("index.php","action=auto_mm_off",function(result){
+                if (result == 0) {
+                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
+                    $("#auto_mm").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "local_assets") {
+            $.get("index.php","action=local_assets_off",function(result){
+                if (result == 0) {
+                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
+                    $("#local_assets").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "mm" || type === "mmm") {
+            $.get("index.php","action=mm_off",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
+                }
+            });
+            //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
+            $("#manual a.green").removeClass("green");
+            $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
         }
     }
 });
@@ -203,8 +224,8 @@ $(document).on("pageshow",function(e,data){
     var newpage = "#"+e.target.id;
 
     if (newpage == "#sprinklers") {
-        //Automatically update sliders on page load in settings panel
-        check_auto($(newpage+" input[data-role='flipswitch']"));
+        //Automatically update autologin slider on page load in settings panel
+        if (localStorage.getItem("token")) $("#s-autologin").prop("checked",true).flipswitch("refresh");
     } else if (newpage == "#preview") {
         get_preview();
     } else if (newpage == "#logs") {
@@ -217,12 +238,15 @@ $(document).on("pageshow",function(e,data){
 $(document).on("pagebeforeshow",function(e,data){
     var newpage = e.target.id;
 
-    $.mobile.silentScroll(0);
+    //Remove lingering tooltip from preview page
     $("#tooltip").remove();
+
+    //Remove any status timers that may be running
     if (window.interval_id !== undefined) clearInterval(window.interval_id);
     if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
 
     if (newpage == "sprinklers") {
+        //Reset status bar to loading while an update is done
         $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
         setTimeout(check_status,1000);
     } else {
@@ -231,6 +255,7 @@ $(document).on("pagebeforeshow",function(e,data){
     }
 })
 
+//Converts data-onclick attributes on page to vclick bound functions. This removes the 300ms lag on mobile devices (iOS/Android)
 function bind_links(page) {
     var currpage = $(page);
 
@@ -330,30 +355,6 @@ function sec2hms(diff) {
     return str+pad(minutes)+":"+pad(seconds);
 }
 
-function check_auto(sliders){
-    if (typeof(window.sliders) !== "object") window.sliders = [];
-    sliders.each(function(i){
-        var type = this.name;
-        var item = typeToKey(type);
-        if (!item) return;
-        if (localStorage.getItem(item) != null) {
-            window.sliders[type] = "on";
-            $(this).prop("checked",true).flipswitch("refresh");
-        } else {
-            window.sliders[type] = "off";
-            $(this).prop("checked",false).flipswitch("refresh");
-        }
-    })
-}
-
-function typeToKey(type) {
-    if (type == "autologin") {
-        return "token";
-    } else {
-        return false;
-    }
-}
-
 function highlight(button) {
     $(button).addClass("ui-btn-active").delay(150).queue(function(next){
         $(this).removeClass("ui-btn-active");
@@ -372,12 +373,9 @@ function grab_token(){
         if (reply == 0) {
             showerror("<?php echo _("Invalid Login"); ?>");
             $("#s-autologin").prop("checked",false).flipswitch("refresh");
-            window.sliders["autologin"] = "off";
         } else {
             localStorage.setItem('token',reply);
         }
-        $("#login .ui-checkbox").show()
-        $("#login form").attr("action","javascript:dologin()");
     }, "text");
 }
 
