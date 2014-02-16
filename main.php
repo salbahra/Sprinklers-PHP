@@ -729,7 +729,7 @@ function submit_localization() {
 #Submit updated options
 function submit_options() {
     global $keyNames, $is_ospi;
-    if (isset($is_ospi)) {
+    if ($is_ospi) {
         foreach (json_decode($_REQUEST["options"]) as $key => $value) {
             if ($key !== "loc") {
                 $key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
