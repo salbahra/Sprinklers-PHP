@@ -71,6 +71,8 @@ if (!isset($auto_delay_duration)) {
     $auto_delay_duration = 24;
 }
 
+if (!isset($is_ospi)) isOSPi();
+
 #Configure weather
 
 if (!isset($weather_provider)) {
@@ -93,9 +95,6 @@ if (isset($_SERVER['SERVER_NAME'])) $base_url = (($force_ssl) ? "https://" : "ht
 
 #Define key names for options
 $keyNames = array(1 => "otz",2 => "ntp",12 => "ohtp",13 => "ohtp2",14 => "ar",15 => "onbrd",16 => "oseq",17 => "osdt",18 => "omas",19 => "omton",20 => "omtoff",21 => "ours",22 => "orst",23 => "owl",25 => "oipas");
-
-#Check which device the app is interfacing with
-if (isset($_SESSION["OSPi"])) isOSPi();
 
 #Call action if requested and allowed
 if (isset($_REQUEST['action'])) {
@@ -297,7 +296,7 @@ function export_config() {
 }
 
 function import_config() {
-    global $keyNames;
+    global $keyNames, $is_ospi;
 
     if (!isset($_REQUEST["data"])) echo 0;
     $data = json_decode($_REQUEST["data"],true);
@@ -306,9 +305,9 @@ function import_config() {
     foreach ($data["options"] as $key => $value) {
         if (is_array($value)) {
             if (in_array($key, array(2,14,16,21,22,25)) && $value["val"] == 0) continue; 
-            $co .= "&".(($_SESSION["OSPi"]) ? $keyNames[$key] : "o".$key)."=".$value["val"];
+            $co .= "&".(($is_ospi) ? $keyNames[$key] : "o".$key)."=".$value["val"];
         } else if ($key == "loc") {
-            $co .= "&".(($_SESSION["OSPi"]) ? "o".$key : $key)."=".urlencode($value);
+            $co .= "&".(($is_ospi) ? "o".$key : $key)."=".urlencode($value);
         }
     }
     send_to_os($co);
@@ -332,9 +331,10 @@ function import_config() {
 
 #Check if device is OSPi/OSBo or OpenSprinkler
 function isOSPi() {
-    $data = get_from_os("/vo");
-    preg_match("/var opts=\[(.*)\];/", $data,$opts);
-    $_SESSION["OSPi"] = empty($opts);
+    global $is_ospi;
+
+    $is_ospi = preg_match("/<script>\s*var sd/",get_from_os(""));
+    changeConfig("is_ospi",$is_ospi,"i");
 }
 
 #Get station names
@@ -569,14 +569,14 @@ function time_to_text($sid,$start,$pid,$end,$data,$simt) {
 
 #Get OpenSprinkler options
 function get_options() {
-    global $keyNames;
+    global $keyNames, $is_ospi;
 
     $data = get_from_os("/vo");
 
     preg_match("/loc\s?[=|:]\s?[\"|'](.*)[\"|']/",$data,$loc);
     $newdata["loc"] = $loc[1];
 
-    if ($_SESSION["OSPi"]) {
+    if ($is_ospi) {
         preg_match_all("/(tz|htp|htp2|nbrd|seq|sdt|mas|mton|mtoff|urs|rst|wl|ipas)\s?[=|:]\s?([\w|\d|.\"]+)/", $data, $opts);
         $i = 0;
         foreach ($opts[1] as $var) {
@@ -728,8 +728,8 @@ function submit_localization() {
 
 #Submit updated options
 function submit_options() {
-    global $keyNames;
-    if (isset($_SESSION["OSPi"])) {
+    global $keyNames, $is_ospi;
+    if (isset($is_ospi)) {
         foreach (json_decode($_REQUEST["options"]) as $key => $value) {
             if ($key !== "loc") {
                 $key = filter_var($key, FILTER_SANITIZE_NUMBER_INT);
@@ -1869,7 +1869,7 @@ function delLineFromFile($fileName, $lineToDelete){
 }
 
 function changeConfig($variable, $value, $type){
-    if ($type === "i") $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets");
+    if ($type === "i") $allowed = array("auto_delay","auto_delay_duration","woeid","auto_mm","local_assets","is_ospi");
     else if ($type === "s") $allowed = array("lang","weather_provider","lid","wapikey");
     else return false;
 

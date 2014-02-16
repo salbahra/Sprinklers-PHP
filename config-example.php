@@ -12,6 +12,9 @@ $os_ip = "192.168.1.30";
 #Set OpenSprinkler password
 $os_pw = "opendoor";
 
+#Is the device an OpenSprinkler or OSPi
+$is_ospi = 0;
+
 #Force SSL
 $force_ssl = 0;
 

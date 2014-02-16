@@ -1153,7 +1153,8 @@ function submit_settings() {
         if (result == 0) {
             comm_error()
         } else {
-            showerror("<?php echo _('Settings have been saved'); ?>")
+            showerror("<?php echo _('Settings have been saved'); ?>");
+            update_weather();
         }
     })
 }
