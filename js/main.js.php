@@ -44,11 +44,22 @@ $(document).ajaxError(function(x,t,m) {
 
 //After main page is processed, hide loading message and change to the page
 $(document).one("pagecreate","#sprinklers", function(){
-    $.mobile.loading("hide");
+    //Update login popup for use in-app. Logout forces page reload so we don't need to conserve original function
+    $("#login form").attr("action","javascript:grab_token()");
+    $("#login .ui-checkbox").hide();
+    //Overlay was moved here since start page has no height causing the overlay to be too short on iPod/iPhone devices
+    $("#login").popup("option","overlayTheme","b");
+
+    update_weather();
+    //Use the user's local time for preview and log range calculation
     var now = new Date();
     $("#log_start").val(new Date(now.getTime() - 604800000).toISOString().slice(0,10));
     $("#preview_date, #log_end").val(now.toISOString().slice(0,10));
+
+    //Open the main page
     $("body").pagecontainer("change","#sprinklers",{transition:"none"});
+
+    //Check for updates
     var curr = $("#commit").data("commit");
     if (curr !== null) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
@@ -56,11 +67,19 @@ $(document).one("pagecreate","#sprinklers", function(){
             if (newest != curr) $("#showupdate").slideDown().delay(2000).slideUp();
         })
     }
+
+    //Indicate loading is complete
+    $.mobile.loading("hide");
 });
 
+//Handle provider select change on weather settings
 $(document).on("change","#weather_provider",function(){
-    $("#wapikey").parent().parent().toggle();
-	$("#wapikey").parent().show();
+    var val = $(this).val();
+    if (val === "wunderground") {
+        $("#wapikey").closest("label").show("fast");
+    } else {
+        $("#wapikey").closest("label").hide("fast");
+    }
 })
 
 $(window).resize(function(){
@@ -71,21 +90,26 @@ $(window).resize(function(){
     }
 });
 
+//Automatically update log viewer when switching graphing method
 $("#logs input:radio[name='log_type'],#graph_sort input[name='g']").change(get_logs)
 
+//Automatically update the log viewer when changing the date range
 $("#log_start,#log_end").change(function(){
     clearTimeout(window.logtimeout);
     window.logtimeout = setTimeout(get_logs,500);
 })
 
+//Show tooltip (station name) when point is clicked on the graph
 $("#placeholder").on("plothover", function(event, pos, item) {
     $("#tooltip").remove();
     clearTimeout(window.hovertimeout);
     if (item) window.hovertimeout = setTimeout(function(){showTooltip(item.pageX, item.pageY, item.series.label, item.series.color)}, 100);
 });
 
+//Update left/right arrows when zones are scrolled on log page
 $("#zones").scroll(showArrows)
 
+//Update the preview page on date change
 $("#preview_date").change(function(){
     var id = $(".ui-page-active").attr("id");
     if (id == "preview") get_preview()
@@ -95,99 +119,99 @@ $("#preview_date").change(function(){
 $("input[data-role='flipswitch']").change(function(){
     var slide = $(this);
     var type = this.name;
-    var pageid = slide.closest(".ui-page-active").attr("id");
+    var pageid = $("body").pagecontainer("getActivePage").attr("id");
+
     //Find out what the switch was changed to
     var changedTo = slide.is(":checked");
-    if(window.sliders[type]!==changedTo){
-        window.sliders[type] = changedTo;
-        if (changedTo) {
-            //If chanegd to on
-            if (type === "autologin") {
-                if (localStorage.getItem("token") !== null) return;
-                $("#login form").attr("action","javascript:grab_token('"+pageid+"')");
-                $("#login .ui-checkbox").hide();
-                $(".ui-panel-open").one("panelclose",function(){
-                    $("body").pagecontainer("change","#login");
-                }).panel("close")
-            }
-            if (type === "en") {
-                $.get("index.php","action=en_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        comm_error()
-                        $("#en").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "auto_mm") {
-                $.get("index.php","action=auto_mm_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "local_assets") {
-                $.get("index.php","action=local_assets_on",function(result){
-                    //If switch failed then change the switch back and show error
-                    if (result == 0) {
-                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_on",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
-                    }
-                });
-                //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
-                $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-            }
-        } else {
-            //If changed to off
-            if (type === "autologin") {
-                localStorage.removeItem(typeToKey(type));
-            }
-            if (type === "en") {
-                $.get("index.php","action=en_off",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#en").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "auto_mm") {
-                $.get("index.php","action=auto_mm_off",function(result){
-                    if (result == 0) {
-                        showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                        $("#auto_mm").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "local_assets") {
-                $.get("index.php","action=local_assets_off",function(result){
-                    if (result == 0) {
-                        showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                        $("#local_assets").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-            }
-            if (type === "mm" || type === "mmm") {
-                $.get("index.php","action=mm_off",function(result){
-                    if (result == 0) {
-                        comm_error()
-                        $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-                    }
-                });
-                //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
-                $("#manual a.green").removeClass("green");
-                $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
-            }
+
+    //If changed to on
+    if (changedTo) {
+        //Autologin
+        if (type === "autologin") {
+            if (localStorage.getItem("token") !== null) return;
+            $("#login").popup("open");
+        }
+        //OpenSprinkler Operation
+        if (type === "en") {
+            $.get("index.php","action=en_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    comm_error()
+                    $("#en").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Auto disable manual mode
+        if (type === "auto_mm") {
+            $.get("index.php","action=auto_mm_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
+                    $("#auto_mm").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Local assets
+        if (type === "local_assets") {
+            $.get("index.php","action=local_assets_on",function(result){
+                //If switch failed then change the switch back and show error
+                if (result == 0) {
+                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
+                    $("#local_assets").prop("checked",false).flipswitch("refresh");
+                }
+            });
+        }
+        //Manual mode, manual mode and settings page
+        if (type === "mm" || type === "mmm") {
+            $.get("index.php","action=mm_on",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
+                }
+            });
+            //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
+            $("#manual a.green").removeClass("green");
+            $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
+        }
+    } else {
+        //If changed to off
+        if (type === "autologin") {
+            localStorage.removeItem("token");
+        }
+        if (type === "en") {
+            $.get("index.php","action=en_off",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#en").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "auto_mm") {
+            $.get("index.php","action=auto_mm_off",function(result){
+                if (result == 0) {
+                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
+                    $("#auto_mm").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "local_assets") {
+            $.get("index.php","action=local_assets_off",function(result){
+                if (result == 0) {
+                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
+                    $("#local_assets").prop("checked",true).flipswitch("refresh");
+                }
+            });
+        }
+        if (type === "mm" || type === "mmm") {
+            $.get("index.php","action=mm_off",function(result){
+                if (result == 0) {
+                    comm_error()
+                    $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
+                }
+            });
+            //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
+            $("#manual a.green").removeClass("green");
+            $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
         }
     }
 });
@@ -197,17 +221,43 @@ function comm_error() {
 }
 
 $(document).on("pageshow",function(e,data){
-    var newpage = e.target.id;
-    var currpage = $(e.target);
+    var newpage = "#"+e.target.id;
 
-    if (newpage == "sprinklers") {
-        //Automatically update sliders on page load in settings panel
-        check_auto($("#"+newpage+" input[data-role='flipswitch']"));
-    } else if (newpage == "preview") {
+    if (newpage == "#sprinklers") {
+        //Automatically update autologin slider on page load in settings panel
+        if (localStorage.getItem("token")) $("#s-autologin").prop("checked",true).flipswitch("refresh");
+    } else if (newpage == "#preview") {
         get_preview();
-    } else if (newpage == "logs") {
+    } else if (newpage == "#logs") {
         get_logs();
     }
+
+    bind_links(newpage);
+});
+
+$(document).on("pagebeforeshow",function(e,data){
+    var newpage = e.target.id;
+
+    //Remove lingering tooltip from preview page
+    $("#tooltip").remove();
+
+    //Remove any status timers that may be running
+    if (window.interval_id !== undefined) clearInterval(window.interval_id);
+    if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
+
+    if (newpage == "sprinklers") {
+        //Reset status bar to loading while an update is done
+        $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
+        setTimeout(check_status,1000);
+    } else {
+        var title = document.title;
+        document.title = "OpenSprinkler: "+title;
+    }
+})
+
+//Converts data-onclick attributes on page to vclick bound functions. This removes the 300ms lag on mobile devices (iOS/Android)
+function bind_links(page) {
+    var currpage = $(page);
 
     currpage.find("a[href='#"+currpage.attr('id')+"-settings']").unbind("vclick").on('vclick', function (e) {
         e.preventDefault(); e.stopImmediatePropagation();
@@ -220,26 +270,7 @@ $(document).on("pageshow",function(e,data){
         highlight(this);
         eval(func);
     });
-
-});
-
-$(document).on("pagebeforeshow",function(e,data){
-    var newpage = e.target.id;
-
-    $.mobile.silentScroll(0);
-    $("#tooltip").remove();
-    if (window.interval_id !== undefined) clearInterval(window.interval_id);
-    if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
-
-    if (newpage == "sprinklers") {
-        update_weather();
-        $("#footer-running").html("<p class='ui-icon ui-icon-loading mini-load'></p>");
-        setTimeout(check_status,1000);
-    } else {
-        var title = document.title;
-        document.title = "OpenSprinkler: "+title;
-    }
-})
+}
 
 function check_status() {
     //Check if a program is running
@@ -299,7 +330,7 @@ function update_timers(sdelay) {
                 if (a == "p") {
                     get_status();
                 } else {
-                    $("#countdown-"+a).parent("p").text("Station delay").parent("li").removeClass("green").addClass("red");
+                    $("#countdown-"+a).parent("p").text("<?php echo _('Station delay'); ?>").parent("li").removeClass("green").addClass("red");
                     window.timeout_id = setTimeout(get_status,(sdelay*1000));
                 }
             } else {
@@ -324,30 +355,6 @@ function sec2hms(diff) {
     return str+pad(minutes)+":"+pad(seconds);
 }
 
-function check_auto(sliders){
-    if (typeof(window.sliders) !== "object") window.sliders = [];
-    sliders.each(function(i){
-        var type = this.name;
-        var item = typeToKey(type);
-        if (!item) return;
-        if (localStorage.getItem(item) != null) {
-            window.sliders[type] = "on";
-            $(this).prop("checked",true).flipswitch("refresh");
-        } else {
-            window.sliders[type] = "off";
-            $(this).prop("checked",false).flipswitch("refresh");
-        }
-    })
-}
-
-function typeToKey(type) {
-    if (type == "autologin") {
-        return "token";
-    } else {
-        return false;
-    }
-}
-
 function highlight(button) {
     $(button).addClass("ui-btn-active").delay(150).queue(function(next){
         $(this).removeClass("ui-btn-active");
@@ -355,7 +362,8 @@ function highlight(button) {
     });
 }
 
-function grab_token(pageid){
+function grab_token(){
+    $("#login").popup("close");
     $.mobile.loading("show");
     var parameters = "action=gettoken&username=" + $('#username').val() + "&password=" + $('#password').val() + "&remember=true";
     $("#username, #password").val('');
@@ -363,18 +371,11 @@ function grab_token(pageid){
         $.mobile.loading("hide");
         reply = $.trim(reply);
         if (reply == 0) {
-            $("body").pagecontainer("change","#"+pageid);
             showerror("<?php echo _("Invalid Login"); ?>");
-        } else if (reply === "") {
-            $("#"+pageid+"-autologin").val("off").flipswitch("refresh");
-            window.sliders["autologin"] = "off";
-            $("body").pagecontainer("change","#"+pageid);
+            $("#s-autologin").prop("checked",false).flipswitch("refresh");
         } else {
             localStorage.setItem('token',reply);
-            $("body").pagecontainer("change","#"+pageid);
         }
-        $("#login .ui-checkbox").show()
-        $("#login form").attr("action","javascript:dologin()");
     }, "text");
 }
 
@@ -402,19 +403,24 @@ function update_weather() {
 
 function logout(){
     areYouSure("<?php echo _('Are you sure you want to logout?'); ?>", "", function() {
-        $("body").pagecontainer("change","#login");
         $.get("index.php", "action=logout",function(){
             localStorage.removeItem('token');
-            $("body div[data-role='page']:not('.ui-page-active')").remove();
-            $('.ui-page-active').one("pagehide",function(){
-                $(this).remove();
-            })
+            location.reload();
         });
     });
 }
 
 function gohome() {
     $("body").pagecontainer("change","#sprinklers",{reverse: true});
+}
+
+function changePage(toPage) {
+    var curr = "#"+$("body").pagecontainer("getActivePage").attr("id");
+    if (curr === toPage) {
+        bind_links(curr);
+    } else {
+        $("body").pagecontainer("change",toPage);
+    }
 }
 
 function changeFromPanel(func) {
@@ -424,7 +430,7 @@ function changeFromPanel(func) {
 }
 
 function show_about() {
-    $("body").pagecontainer("change","#about");
+    changePage("#about");
 }
 
 function open_popup(id) {
@@ -444,27 +450,32 @@ function show_settings() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#os-settings");
+        changePage("#os-settings");
     })    
 }
 
 function show_weather_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=get_weather_settings",function(data){
-        data = JSON.parse(data)
-        $('#weather_provider').val(data.weather_provider);
+        var data = JSON.parse(data), $provider = $('#weather_provider');
+
+        $provider.val(data.weather_provider);
+        if (!$provider.parent().is("label")) $provider.selectmenu("refresh", true);
+
         if (data.weather_provider == "wunderground") {
-            $("#wapikey").parent().parent().show();
+            $("#wapikey").closest("label").show();
         } else {
-            $("#wapikey").parent().hide();
+            $("#wapikey").closest("label").hide();
         }
         $('#wapikey').val(data.wapikey);
-        if (data["auto_delay"]) {
-            $("#auto_delay").prop("checked",true);
-        }
+
+        var $auto_delay = $("#auto_delay");
+        $auto_delay.prop("checked",data["auto_delay"]);
+        if ($auto_delay.hasClass("ui-flipswitch-input")) $auto_delay.flipswitch("refresh");
+
         $("#auto_delay_duration").val(data["auto_delay_duration"]);
 
-        $("body").pagecontainer("change","#weather-settings");
+        changePage("#weather-settings");
    });
 }
 
@@ -484,7 +495,7 @@ function show_stations() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#os-stations");
+        changePage("#os-stations");
     })    
 }
 
@@ -494,7 +505,7 @@ function show_users() {
         var list = $("#user-control-list");
         list.html(items).enhanceWithin();
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#user-control");
+        changePage("#user-control");
     })
 }
 
@@ -530,6 +541,7 @@ function add_user() {
 
     nameEl.val(""), passEl.val("");
     $.mobile.loading("show");
+    $("#add-user").popup("close");
     $.get("index.php","action=add_user&name="+name+"&pass="+pass,function(result){
         $.mobile.loading("hide");
         if (result == 0) {
@@ -570,7 +582,7 @@ function get_forecast() {
         list.html(items).enhanceWithin();
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#forecast");
+        changePage("#forecast");
     })    
 }
 
@@ -587,7 +599,7 @@ function get_status() {
         if (window.interval_id !== undefined) clearInterval(window.interval_id);
         if (window.timeout_id !== undefined) clearTimeout(window.timeout_id);
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#status");
+        changePage("#status");
         if (window.totals["d"] !== undefined) {
             delete window.totals["p"];
             setTimeout(get_status,window.totals["d"]*1000);
@@ -791,7 +803,7 @@ function get_manual() {
         list.html(items);
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#manual");
+        changePage("#manual");
     })
 }
 
@@ -829,7 +841,7 @@ function get_runonce() {
 
         list.enhanceWithin();
         $.mobile.loading("hide");
-        $("body").pagecontainer("change","#runonce");
+        changePage("#runonce");
     })
 }
 
@@ -853,12 +865,14 @@ function get_preview() {
         if ($.trim(items) == "") {
             $("#timeline").html("<p align='center'><?php echo _('No stations set to run on this day.'); ?></p>")
         } else {
-            empty = false
+            empty = false;
             var data = eval("["+items.substring(0, items.length - 1)+"]");
+            var shortnames = [];
             $.each(data, function(){
                 this.start = new Date(date[0],date[1]-1,date[2],0,0,this.start);
                 this.end = new Date(date[0],date[1]-1,date[2],0,0,this.end);
-            })
+                shortnames[this.group] = this.shortname;
+            });
             var options = {
                 'width':  '100%',
                 'editable': false,
@@ -895,7 +909,11 @@ function get_preview() {
                 var currRange = timeline.getVisibleChartRange();
                 if ((currRange.end.getTime() - currRange.start.getTime()) > 6000000) timeline.setVisibleChartRange(currRange.start,new Date(currRange.start.getTime()+6000000))
             }
-            $("#timeline .timeline-groups-text:contains('Master')").addClass("skip-numbering")
+            $("#timeline .timeline-groups-text").each(function(a,b){
+                var stn = $(b);
+                var name = shortnames[stn.text()];
+                stn.attr("data-shortname",name);
+            })
             $("#timeline-navigation").show()
         }
         $.mobile.loading("hide");
@@ -958,7 +976,18 @@ function get_programs(pid) {
         $("#programs [id^='delete-']").click(function(){
             delete_program($(this).attr("id").split("-")[1]);
         })
-        $("body").pagecontainer("change","#programs");
+        $("#programs [id^='run-']").click(function(){
+            var id = $(this).attr("id").split("-")[1];
+            var durr = parseInt($("#duration-"+id).val());
+            var stations = $("[id^='station_'][id$='-"+id+"']");
+            var runonce = [];
+            $.each(stations,function(a,b){
+                if ($(b).is(":checked")) runonce.push(durr*60);
+            });
+            runonce.push(0);
+            submit_runonce(runonce);
+        })
+        changePage("#programs");
         $.mobile.loading("hide");
         $("#programs").enhanceWithin();
         update_program_header();
@@ -1003,7 +1032,7 @@ function add_program() {
         $("#addprogram [id^='submit-']").click(function(){
             submit_program("new");
         })
-        $("body").pagecontainer("change","#addprogram");
+        changePage("#addprogram");
         $.mobile.loading("hide");
         $("#addprogram").enhanceWithin();
     })    
@@ -1124,11 +1153,12 @@ function submit_settings() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_options&options="+JSON.stringify(opt),function(result){
         $.mobile.loading("hide");
-        gohome();
+        changePage("#settings");
         if (result == 0) {
             comm_error()
         } else {
-            showerror("<?php echo _('Settings have been saved'); ?>")
+            showerror("<?php echo _('Settings have been saved'); ?>");
+            update_weather();
         }
     })
 }
@@ -1165,7 +1195,7 @@ function submit_stations() {
     $.mobile.loading("show");
     $.get("index.php","action=submit_stations&names="+JSON.stringify(names)+masop,function(result){
         $.mobile.loading("hide");
-        gohome();
+        changePage("#settings");
         if (result == 0) {
             comm_error()
         } else {
@@ -1174,12 +1204,14 @@ function submit_stations() {
     })
 }
 
-function submit_runonce() {
-    var runonce = []
-    $("#runonce").find(":input[data-type='range']").each(function(a,b){
-        runonce.push(parseInt($(b).val())*60)
-    })
-    runonce.push(0);
+function submit_runonce(runonce) {
+    if (typeof runonce === 'undefined') {
+        var runonce = []
+        $("#runonce").find(":input[data-type='range']").each(function(a,b){
+            runonce.push(parseInt($(b).val())*60)
+        })
+        runonce.push(0);
+    }
     localStorage.setItem("runonce",JSON.stringify(runonce));
     $.get("index.php","action=runonce&data="+JSON.stringify(runonce),function(result){
         if (result == 0) {
@@ -1188,21 +1220,25 @@ function submit_runonce() {
             showerror("<?php echo _('Run-once program has been scheduled'); ?>")
         }
     })
-    gohome();
+    changePage("#sprinklers");
 }
 
 function submit_weather_settings() {
     $.mobile.loading("show");
-    var opt = new Object();
-    opt["weather_provider"] = $("#weather_provider").val();
-    opt["wapikey"] = $("#wapikey").val();
-    $.get("index.php","action=submit_weather_settings&options="+JSON.stringify(opt),function(result){
+
+    var params = {
+        "weather_provider": $("#weather_provider").val(),
+        "wapikey": $("#wapikey").val()
+    }
+    params = JSON.stringify(params)
+    $.get("index.php","action=submit_weather_settings&options="+params,function(result){
         $.mobile.loading("hide");
-        gohome();
-        if (result == 0) {
-            comm_error()
+        changePage("#settings");
+        if (result == 2) {
+            showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
         } else {
-            showerror("<?php echo _('Weather settings have been saved'); ?>")
+            showerror("<?php echo _('Weather settings have been saved'); ?>");
+            update_weather();
         }
     })
 }
@@ -1211,7 +1247,7 @@ function submit_localization(locale) {
     $.mobile.loading("show");
     $.get("index.php","action=submit_localization&locale="+locale,function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("#localization").popup("close");
         if (result == 0) {
             comm_error()
         } else {
@@ -1253,7 +1289,7 @@ function raindelay() {
     $.mobile.loading("show");
     $.get("index.php","action=raindelay&delay="+$("#delay").val(),function(result){
         $.mobile.loading("hide");
-        gohome();
+        $("#raindelay").popup("close");
         if (result == 0) {
             comm_error()
         } else {
@@ -1273,7 +1309,7 @@ function auto_raindelay() {
     params = JSON.stringify(params)
     $.get("index.php","action=submit_autodelay&autodelay="+params,function(result){
         $.mobile.loading("hide");
-        gohome();
+        changePage("#settings");
         if (result == 2) {
             showerror("<?php echo _('Auto-delay changes were not saved. Check config.php permissions and try again.'); ?>");
         } else {
@@ -1287,7 +1323,6 @@ function clear_config() {
         $.mobile.loading("show");
         $.get("index.php","action=clear_config",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1303,7 +1338,6 @@ function clear_logs() {
         $.mobile.loading("show");
         $.get("index.php","action=clear_logs",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1318,7 +1352,6 @@ function rbt() {
         $.mobile.loading("show");
         $.get("index.php","action=rbt",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
@@ -1333,42 +1366,49 @@ function rsn() {
         $.mobile.loading("show");
         $.get("index.php","action=rsn",function(result){
             $.mobile.loading("hide");
-            gohome();
             if (result == 0) {
                 comm_error()
             } else {
+                setTimeout(check_status,1000);
                 showerror("<?php echo _('All stations have been stopped'); ?>")
             }
         });
     });
 }
 
-function export_config() {
+function export_config(toFile) {
+    if (toFile) {
+        if (!navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
+            window.location.href="index.php?action=export_config";
+        } else {
+            showerror("<?php echo _('File API is not supported by your browser'); ?>")
+        }
+        return;
+    }
     $.mobile.loading("show");
     $.get("index.php","action=export_config",function(data){
         $.mobile.loading("hide");
-        $("#sprinklers-settings").panel("close")
         if (data === "") {
             comm_error()
         } else {
-            localStorage.setItem("backup", data);
+            localStorage.setItem("backup", JSON.stringify(data));
             showerror("<?php echo _('Backup saved to your device'); ?>");
         }
     })
 }
 
-function import_config() {
-    var data = localStorage.getItem("backup");
-    if (data === null) {
-        showerror("<?php echo _('No backup available on this device'); ?>");
-        return;
+function import_config(data) {
+    if (typeof data === "undefined") {
+        var data = localStorage.getItem("backup");
+        if (data === null) {
+            showerror("<?php echo _('No backup available on this device'); ?>");
+            return;
+        }
     }
-
     areYouSure("<?php echo _('Are you sure you want to restore the configuration?'); ?>", "", function() {
         $.mobile.loading("show");
         $.get("index.php","action=import_config&data="+data,function(reply){
             $.mobile.loading("hide");
-            gohome();
             if (reply == 0) {
                 comm_error()
             } else {
@@ -1376,6 +1416,28 @@ function import_config() {
             }
         })
     });
+}
+
+function getConfigFile() {
+    if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) || !window.FileReader) {
+        showerror("<?php echo _('File API is not supported by your browser'); ?>");
+        return;
+    }
+    $('#configInput').click();
+}
+
+function handleConfig(files) {
+    var config = files[0];
+    var reader = new FileReader();
+    reader.onload = function(e){
+        try{
+            var obj=JSON.parse($.trim(e.target.result));
+            import_config(JSON.stringify(obj));
+        }catch(e){
+            showerror("<?php echo _('Unable to read the configuration file. Please check the file and try again.'); ?>");
+        }
+    };
+    reader.readAsText(config);
 }
 
 function areYouSure(text1, text2, callback) {
@@ -1399,6 +1461,7 @@ function areYouSure(text1, text2, callback) {
 
     //Bind buttons
     $("#sure .sure-do").on("click.sure", function() {
+        $("#sure").popup("close");
         callback();
     });
     $("#sure .sure-dont").on("click.sure", function() {

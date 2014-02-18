@@ -77,11 +77,12 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
                     </div>
                 </div>
             </li>
-            <li data-icon="forward"><a href="#" data-onclick="export_config();"><?php echo _("Export Configuration"); ?></a></li>
-            <li data-icon="back"><a href="#" data-onclick="import_config();"><?php echo _("Import Configuration"); ?></a></li>
+            <li data-icon="action"><a href="#" data-onclick="export_config();"><?php echo _("Export Configuration"); ?></a><a href="#" data-onclick="export_config(1);"></a></li>
+            <li data-icon="cloud"><a href="#" data-onclick="import_config();"><?php echo _("Import Configuration"); ?></a></a><a href="#" data-onclick="getConfigFile()"></a></li>
             <li data-icon="delete"><a href="#" data-onclick="logout();"><?php echo _("Logout"); ?></a></li>
             <li data-icon="info"><a href="#" data-onclick="changeFromPanel(show_about);"><?php echo _("About"); ?></a></li>
         </ul>
+        <input type="file" id="configInput" data-role="none" onchange="handleConfig(this.files)" style="visibility:hidden;position:absolute;top:-50;left:-50"/>
     </div>
 </div>
 
@@ -319,15 +320,15 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
         <ul data-inset="true" data-role="listview">
             <li data-role="list-divider" data-theme="b"><?php echo _("Add New User"); ?></li>
             <li>
-                <div class="ui-field-contain">
+                <form action="javascript:add_user()">
                     <label for="name"><?php echo _("Username:"); ?></label>
                     <input autocapitalize="off" autocorrect="off" type="text" id="name" value="" />
                     <label for="pass"><?php echo _("Password:"); ?></label>
                     <input type="password" id="pass" value="" />
                     <label for="pass-confirm"><?php echo _("Confirm Password:"); ?></label>
                     <input type="password" id="pass-confirm" value="" />
-                    <a class="ui-btn ui-corner-all ui-shadow" href="#" data-onclick="add_user();"><?php echo _("Submit"); ?></a>
-                </div>
+                    <input type="submit" value="<?php echo _("Submit"); ?>" />
+                </form>
             </li>
         </ul>
     </div>

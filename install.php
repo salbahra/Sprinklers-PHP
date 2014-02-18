@@ -35,8 +35,9 @@ function new_config() {
         $data = $_REQUEST[$key];
 
         #If processing OS IP then check if the IP is valid and if not, fail with error code 2
-        if ($key == "os_ip" && !isValidUrl("http://".$data)) {
-            echo 2; exit();
+        if ($key == "os_ip") {
+            if (!isValidUrl("http://".$data)) { echo 2; exit(); }
+            $config .= "\$is_ospi = ".isOSPi("http://".$data).";\n";
         }
 
         #If processing password file then go ahead and generate it with proper username/password hash
@@ -61,7 +62,7 @@ function new_config() {
         if ($key == "cache_file" || $key == "log_file") make_file($data);
 
         #Append current key/data pair to config.php string.
-        $config .= "$".$key." = '".$data."';\n";            
+        $config .= "$".$key." = '".$data."';\n";
     }
 
     if (isset($_REQUEST["force_ssl"])) {
@@ -114,6 +115,11 @@ function isValidUrl($url) {
     return true;
 }
 
+#Check if device is OSPi/OSBo or OpenSprinkler
+function isOSPi($url) {
+    return preg_match("/<script>\s*var sd/",file_get_contents($url));
+}
+
 #Attempt to make file or fail if unable
 function make_file($data) {
     $file = fopen($data, "w");
@@ -128,7 +134,7 @@ function fail() {
 }
 
 function get_list_available_lang() {
-	$lang = 'en_US';
+	$lang = 'en_US'; $list = "";
 	$locals = get_available_languages();			
 	foreach ($locals as $l=>$local) {
         $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
@@ -169,7 +175,7 @@ function get_list_available_lang() {
                 $.mobile.hashListeningEnabled = false;
             });
             $(document).on("change","#weather_provider",function(){
-                $("#wapikey").parent().parent().toggle();
+                $("#wapikey").closest("label").toggle("fast");
             })
             function showerror(msg) {
                 // show error message

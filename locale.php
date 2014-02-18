@@ -471,6 +471,7 @@ function get_available_languages() {
 	    }
 	}
 	
+	asort($locale_data);
 	return $locale_data;
 }
 
