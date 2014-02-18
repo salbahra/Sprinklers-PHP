@@ -37,6 +37,10 @@ if (extension_loaded("gettext")) {
         $lang = $lang[0];
         change_lang($lang);
     }
+} else {
+    function _($str) {
+        echo $str;
+    }
 }
 
 #Check if PHP has str_getcsv function or if it needs a fallback
