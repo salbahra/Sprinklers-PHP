@@ -4,7 +4,7 @@
 ini_set('default_socket_timeout', 5);
 
 #If config exists then redirect to the app
-if (file_exists("config.php")) header("Location: index.php");
+#if (file_exists("config.php")) header("Location: index.php");
 
 #If an action is new_config and config file does not exist then process the information
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
@@ -113,7 +113,7 @@ function new_config() {
 
 #Check if URL is valid by grabbing headers and verifying reply is: 200 OK
 function isValidUrl($url) {
-    $data = file_get_contents($url."/vs");
+    $data = @file_get_contents($url."/vs");
     if ($data === false) return false;
 
     preg_match("/<script>.*?snames=/",$data,$test);
@@ -124,7 +124,7 @@ function isValidUrl($url) {
 
 #Check if device is OSPi/OSBo or OpenSprinkler
 function isOSPi($url) {
-    return preg_match("/<script>\s*var sd/",file_get_contents($url));
+    return preg_match("/<script>\s*var sd/",@file_get_contents($url));
 }
 
 #Attempt to make file or fail if unable
