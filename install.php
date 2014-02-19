@@ -15,6 +15,13 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_e
 #Required file
 require_once "locale.php";
 
+#Bypass localization if it isn't installed
+if (!extension_loaded("gettext")) {
+    function _($str) {
+        echo $str;
+    }
+}
+
 #Detect local interval program
 $localPi = isValidUrl("http://127.0.0.1:8080");
 
