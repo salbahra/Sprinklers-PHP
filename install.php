@@ -4,7 +4,7 @@
 ini_set('default_socket_timeout', 5);
 
 #If config exists then redirect to the app
-#if (file_exists("config.php")) header("Location: index.php");
+if (file_exists("config.php")) header("Location: index.php");
 
 #If an action is new_config and config file does not exist then process the information
 if (isset($_REQUEST['action']) && $_REQUEST['action'] == "new_config" && !file_exists("config.php")) {
