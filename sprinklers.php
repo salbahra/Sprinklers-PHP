@@ -9,13 +9,18 @@ if(!defined('Sprinklers')) {
     #Required files
     require_once "main.php";
 }
-#Get data needed to render home page
-$_SESSION["data"] = start_data();
 
 #Redirect if not authenticated or grabbing page directly
 if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {header('Location: '.$base_url); exit();}
+
+#Include the main javascript file
+echo "<script>";
+include_once("js/main.js.php");
+echo "</script>";
+
+#Get data needed to render home page
+$_SESSION["data"] = start_data();
 ?>
-<script><?php include_once("js/main.js.php"); ?></script>
 
 <div data-role="page" id="sprinklers">
     <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
