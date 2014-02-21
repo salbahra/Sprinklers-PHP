@@ -1,8 +1,7 @@
 <?php
-#Start session
-if(!isset($_SESSION)) session_start();
-
 if(!defined('Sprinklers')) {
+    #Start session
+    if(!isset($_SESSION)) session_start();
 
     #Tell main we are calling it
     define('Sprinklers', TRUE);

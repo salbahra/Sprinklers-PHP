@@ -1,6 +1,6 @@
 <?php
 #Start session
-if(!isset($_SESSION)) session_start(); 
+session_start(); 
 
 #Tell main we are calling it
 define('Sprinklers', TRUE);
