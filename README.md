@@ -1,7 +1,7 @@
 [OpenSprinkler Controller](http://salbahra.github.io/OpenSprinkler-Controller)
 ========================
 
-A mobile frontend for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiate a run-once program, view status, adjust rain delay, weather-based automatic rain delay, change OpenSprinkler settings and view logs. Screenshots available below.
+A mobile interface for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiation of a run-once program, viewing device status, adjusting rain delay, viewing logs, and changing of OpenSprinkler settings. Screenshots available below.
 
 Overview:
 ---------
