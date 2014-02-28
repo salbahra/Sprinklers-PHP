@@ -63,7 +63,7 @@ $(document).one("pagecreate","#sprinklers", function(){
     if (curr !== null) {
         $.getJSON("https://api.github.com/repos/salbahra/OpenSprinkler-Controller/git/refs/heads/master").done(function(data){
             var newest = data.object.sha;
-            if (newest != curr) $("#showupdate").slideDown().delay(2000).slideUp();
+            if (newest != curr) $("#showupdate").slideDown().delay(5000).slideUp();
         })
     }
 
@@ -115,10 +115,13 @@ $("#preview_date").change(function(){
 });
 
 //Bind changes to the flip switches
+var switching = false;
 $("input[data-role='flipswitch']").change(function(){
-    var slide = $(this);
-    var type = this.name;
-    var pageid = $("body").pagecontainer("getActivePage").attr("id");
+    if (switching) return;
+
+    var type = this.name,
+        slide = $(this),
+        defer;
 
     //Find out what the switch was changed to
     var changedTo = slide.is(":checked");
@@ -131,88 +134,46 @@ $("input[data-role='flipswitch']").change(function(){
             $("#login").popup("open");
         }
         //OpenSprinkler Operation
-        if (type === "en") {
-            $.get("index.php","action=en_on",function(result){
-                //If switch failed then change the switch back and show error
-                if (result == 0) {
-                    comm_error()
-                    $("#en").prop("checked",false).flipswitch("refresh");
-                }
-            });
-        }
+        if (type === "en") defer = $.get("index.php","action=en_on");
         //Auto disable manual mode
-        if (type === "auto_mm") {
-            $.get("index.php","action=auto_mm_on",function(result){
-                //If switch failed then change the switch back and show error
-                if (result == 0) {
-                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                    $("#auto_mm").prop("checked",false).flipswitch("refresh");
-                }
-            });
-        }
+        if (type === "auto_mm") defer = $.get("index.php","action=auto_mm_on");
         //Local assets
-        if (type === "local_assets") {
-            $.get("index.php","action=local_assets_on",function(result){
-                //If switch failed then change the switch back and show error
-                if (result == 0) {
-                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                    $("#local_assets").prop("checked",false).flipswitch("refresh");
-                }
-            });
-        }
+        if (type === "local_assets") defer = $.get("index.php","action=local_assets_on");
         //Manual mode, manual mode and settings page
-        if (type === "mm" || type === "mmm") {
-            $.get("index.php","action=mm_on",function(result){
-                if (result == 0) {
-                    comm_error()
-                    $("#mm,#mmm").prop("checked",false).flipswitch("refresh");
-                }
-            });
-            //If switched to off, unhighlight all of the zones highlighted in green since all will be disabled automatically
-            $("#manual a.green").removeClass("green");
-            $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-        }
+        if (type === "mm" || type === "mmm") defer = $.get("index.php","action=mm_on");
     } else {
         //If changed to off
-        if (type === "autologin") {
-            localStorage.removeItem("token");
-        }
-        if (type === "en") {
-            $.get("index.php","action=en_off",function(result){
-                if (result == 0) {
-                    comm_error()
-                    $("#en").prop("checked",true).flipswitch("refresh");
-                }
-            });
-        }
-        if (type === "auto_mm") {
-            $.get("index.php","action=auto_mm_off",function(result){
-                if (result == 0) {
-                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>")
-                    $("#auto_mm").prop("checked",true).flipswitch("refresh");
-                }
-            });
-        }
-        if (type === "local_assets") {
-            $.get("index.php","action=local_assets_off",function(result){
-                if (result == 0) {
-                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>")
-                    $("#local_assets").prop("checked",true).flipswitch("refresh");
-                }
-            });
-        }
+        if (type === "autologin") localStorage.removeItem("token");
+        if (type === "en") defer = $.get("index.php","action=en_off");
+        if (type === "auto_mm") defer = $.get("index.php","action=auto_mm_off");
+        if (type === "local_assets") defer = $.get("index.php","action=local_assets_off");
         if (type === "mm" || type === "mmm") {
-            $.get("index.php","action=mm_off",function(result){
-                if (result == 0) {
-                    comm_error()
-                    $("#mm,#mmm").prop("checked",true).flipswitch("refresh");
-                }
+            defer = $.get("index.php","action=mm_off").done(function(){
+                $("#manual a.green").removeClass("green");
             });
-            //If switched to off, unhighlight all of the manual zones highlighted in green since all will be disabled automatically
-            $("#manual a.green").removeClass("green");
-            $("#mm,#mmm").prop("checked",false).flipswitch("refresh")
         }
     }
+
+    $.when(defer).then(function(reply){
+        if (reply == 0) {
+            switching = true;
+            setTimeout(function(){
+                switching = false;
+            },200);
+            slide.prop("checked",!changedTo).flipswitch("refresh");
+            switch (type) {
+                case "auto_mm":
+                    showerror("<?php echo _("Auto disable of manual mode was not changed. Check config.php permissions and try again."); ?>");
+                    break;
+                case "local_assets":
+                    showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>");
+                    break;
+                default:
+                    comm_error();
+                    break;
+            }
+        }
+    })
 });
 
 function comm_error() {
