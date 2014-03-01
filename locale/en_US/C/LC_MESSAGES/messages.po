@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-02-15 20:40-0600\n"
-"PO-Revision-Date: 2014-02-15 20:40-0600\n"
+"POT-Creation-Date: 2014-03-01 08:28-0600\n"
+"PO-Revision-Date: 2014-03-01 08:28-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.4\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../../../..\n"
@@ -22,8 +22,8 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
-#: ../../../../index.php:46 ../../../../install.php:233
-#: ../../../../sprinklers.php:324
+#: ../../../../index.php:46 ../../../../install.php:240
+#: ../../../../sprinklers.php:328
 msgid "Username:"
 msgstr ""
 
@@ -31,8 +31,8 @@ msgstr ""
 msgid "username"
 msgstr ""
 
-#: ../../../../index.php:48 ../../../../install.php:235
-#: ../../../../sprinklers.php:326
+#: ../../../../index.php:48 ../../../../install.php:242
+#: ../../../../sprinklers.php:330
 msgid "Password:"
 msgstr ""
 
@@ -48,1093 +48,1092 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: ../../../../install.php:150 ../../../../install.php:223
+#: ../../../../install.php:157 ../../../../install.php:230
 msgid "New Install"
 msgstr ""
 
-#: ../../../../install.php:192 ../../../../js/main.js.php:538
-#: ../../../../js/main.js.php:562
+#: ../../../../install.php:199 ../../../../js/main.js.php:498
+#: ../../../../js/main.js.php:522
 msgid "Password confirmation doesn't match password."
 msgstr ""
 
-#: ../../../../install.php:200
+#: ../../../../install.php:207
 msgid ""
 "Settings have been saved. Please wait while your redirected to the login "
 "screen!"
 msgstr ""
 
-#: ../../../../install.php:204
+#: ../../../../install.php:211
 msgid ""
 "Settings have been saved. However, crontab was not added and must be added "
 "manually."
 msgstr ""
 
-#: ../../../../install.php:209
+#: ../../../../install.php:216
 msgid "Settings have NOT been saved. Check IP and Port settings and try again."
 msgstr ""
 
-#: ../../../../install.php:212
+#: ../../../../install.php:219
 msgid ""
 "Settings have NOT been saved. Check folder permissions and file paths then "
 "try again."
 msgstr ""
 
-#: ../../../../install.php:224 ../../../../main.php:1109
-#: ../../../../sprinklers.php:62 ../../../../sprinklers.php:137
-#: ../../../../sprinklers.php:157 ../../../../sprinklers.php:264
-#: ../../../../sprinklers.php:289 ../../../../sprinklers.php:304
-#: ../../../../sprinklers.php:330 ../../../../sprinklers.php:341
+#: ../../../../install.php:231 ../../../../main.php:1113
+#: ../../../../sprinklers.php:66 ../../../../sprinklers.php:141
+#: ../../../../sprinklers.php:161 ../../../../sprinklers.php:268
+#: ../../../../sprinklers.php:293 ../../../../sprinklers.php:308
+#: ../../../../sprinklers.php:334 ../../../../sprinklers.php:345
 msgid "Submit"
 msgstr ""
 
-#: ../../../../install.php:229 ../../../../sprinklers.php:321
+#: ../../../../install.php:236 ../../../../sprinklers.php:325
 msgid "Add New User"
 msgstr ""
 
-#: ../../../../install.php:231
+#: ../../../../install.php:238
 msgid "You can add additional users after logging in"
 msgstr ""
 
-#: ../../../../install.php:237 ../../../../sprinklers.php:328
+#: ../../../../install.php:244 ../../../../sprinklers.php:332
 msgid "Confirm Password:"
 msgstr ""
 
-#: ../../../../install.php:244
+#: ../../../../install.php:251
 msgid "Interval Program (detected)"
 msgstr ""
 
-#: ../../../../install.php:244
+#: ../../../../install.php:251
 msgid "OpenSprinkler IP/password"
 msgstr ""
 
-#: ../../../../install.php:246
+#: ../../../../install.php:253
 msgid "Open Sprinkler IP:"
 msgstr ""
 
-#: ../../../../install.php:248
+#: ../../../../install.php:255
 msgid "Open Sprinkler Password:"
 msgstr ""
 
-#: ../../../../install.php:253
+#: ../../../../install.php:260
 msgid "Advanced Configuration"
 msgstr ""
 
-#: ../../../../install.php:254
+#: ../../../../install.php:261
 msgid "Localization:"
 msgstr ""
 
-#: ../../../../install.php:255 ../../../../sprinklers.php:279
-#: ../../../../sprinklers.php:282
+#: ../../../../install.php:262 ../../../../sprinklers.php:283
+#: ../../../../sprinklers.php:286
 msgid "Weather Provider"
 msgstr ""
 
-#: ../../../../install.php:257 ../../../../sprinklers.php:284
+#: ../../../../install.php:264 ../../../../sprinklers.php:288
 msgid "Yahoo!"
 msgstr ""
 
-#: ../../../../install.php:258 ../../../../sprinklers.php:285
+#: ../../../../install.php:265 ../../../../sprinklers.php:289
 msgid "Wunderground"
 msgstr ""
 
-#: ../../../../install.php:261 ../../../../sprinklers.php:288
+#: ../../../../install.php:268 ../../../../sprinklers.php:292
 msgid "Wunderground API Key"
 msgstr ""
 
-#: ../../../../install.php:262
+#: ../../../../install.php:269
 msgid "Pass File Location:"
 msgstr ""
 
-#: ../../../../install.php:263
+#: ../../../../install.php:270
 msgid "Cache File Location:"
 msgstr ""
 
-#: ../../../../install.php:264
+#: ../../../../install.php:271
 msgid "Sprinkler Log File:"
 msgstr ""
 
-#: ../../../../install.php:266
+#: ../../../../install.php:273
 msgid "Force SSL"
 msgstr ""
 
-#: ../../../../install.php:268
+#: ../../../../install.php:275
 msgid "Use Local Assets?"
 msgstr ""
 
-#: ../../../../main.php:551 ../../../../main.php:560
-#: ../../../../js/main.js.php:910
+#: ../../../../js/auth.js.php:77 ../../../../js/main.js.php:334
+msgid "Invalid Login"
+msgstr ""
+
+#: ../../../../js/main.js.php:39
+msgid "Connection timed-out. Please try again."
+msgstr ""
+
+#: ../../../../js/main.js.php:166
+msgid ""
+"Auto disable of manual mode was not changed. Check config.php permissions "
+"and try again."
+msgstr ""
+
+#: ../../../../js/main.js.php:169
+msgid ""
+"Asset location was not changed. Check config.php permissions and try again."
+msgstr ""
+
+#: ../../../../js/main.js.php:180
+msgid ""
+"Error communicating with OpenSprinkler. Please check your password is "
+"correct."
+msgstr ""
+
+#: ../../../../js/main.js.php:271 ../../../../js/main.js.php:302
+#: ../../../../main.php:1277 ../../../../main.php:1290
+#: ../../../../main.php:1342 ../../../../main.php:1372
+msgid "remaining"
+msgstr ""
+
+#: ../../../../js/main.js.php:293
+msgid "Station delay"
+msgstr ""
+
+#: ../../../../js/main.js.php:365
+msgid "Are you sure you want to logout?"
+msgstr ""
+
+#: ../../../../js/main.js.php:480
+msgid "Are you sure you want to delete "
+msgstr ""
+
+#: ../../../../js/main.js.php:510
+msgid "User already exists"
+msgstr ""
+
+#: ../../../../js/main.js.php:533
+msgid "Password for"
+msgstr ""
+
+#: ../../../../js/main.js.php:533
+msgid "has been updated"
+msgstr ""
+
+#: ../../../../js/main.js.php:604 ../../../../js/main.js.php:656
+msgid "No entries found in the selected date range"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Sun"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Mon"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Tue"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Wed"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Thr"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Fri"
+msgstr ""
+
+#: ../../../../js/main.js.php:738 ../../../../main.php:1524
+msgid "Sat"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Jan"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Feb"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Mar"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Apr"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "May"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Jun"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Jul"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Aug"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Sep"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Oct"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Nov"
+msgstr ""
+
+#: ../../../../js/main.js.php:745 ../../../../main.php:1523
+msgid "Dec"
+msgstr ""
+
+#: ../../../../js/main.js.php:777
+msgid "Quick Programs"
+msgstr ""
+
+#: ../../../../js/main.js.php:785
+msgid "Last Used Program"
+msgstr ""
+
+#: ../../../../js/main.js.php:788 ../../../../main.php:1167
+#: ../../../../main.php:1570
+msgid "Program"
+msgstr ""
+
+#: ../../../../js/main.js.php:826
+msgid "No stations set to run on this day."
+msgstr ""
+
+#: ../../../../js/main.js.php:1002
+msgid "Are you sure you want to delete program "
+msgstr ""
+
+#: ../../../../js/main.js.php:1029
+msgid "Error: Interval days must be between 2 and 128."
+msgstr ""
+
+#: ../../../../js/main.js.php:1031
+msgid "Error: Starting in days wrong."
+msgstr ""
+
+#: ../../../../js/main.js.php:1042
+msgid "Error: Start time must be prior to end time."
+msgstr ""
+
+#: ../../../../js/main.js.php:1062
+msgid "Error: You have not selected any stations."
+msgstr ""
+
+#: ../../../../js/main.js.php:1072
+msgid "Program added successfully"
+msgstr ""
+
+#: ../../../../js/main.js.php:1082
+msgid "Program has been updated"
+msgstr ""
+
+#: ../../../../js/main.js.php:1120
+msgid "Settings have been saved"
+msgstr ""
+
+#: ../../../../js/main.js.php:1136
+msgid "Station name must be 16 characters or less"
+msgstr ""
+
+#: ../../../../js/main.js.php:1162
+msgid "Stations have been updated"
+msgstr ""
+
+#: ../../../../js/main.js.php:1180
+msgid "Run-once program has been scheduled"
+msgstr ""
+
+#: ../../../../js/main.js.php:1198
+msgid ""
+"Weather settings were not saved. Check config.php permissions and try again."
+msgstr ""
+
+#: ../../../../js/main.js.php:1200
+msgid "Weather settings have been saved"
+msgstr ""
+
+#: ../../../../js/main.js.php:1216
+msgid "Localization settings have been saved"
+msgstr ""
+
+#: ../../../../js/main.js.php:1258
+msgid "Rain delay has been successfully set"
+msgstr ""
+
+#: ../../../../js/main.js.php:1274
+msgid ""
+"Auto-delay changes were not saved. Check config.php permissions and try "
+"again."
+msgstr ""
+
+#: ../../../../js/main.js.php:1276
+msgid "Auto-delay changes have been saved"
+msgstr ""
+
+#: ../../../../js/main.js.php:1282
+msgid ""
+"Are you sure you want to delete all settings and return to the default "
+"settings (this will delete the configuration file)?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1289
+msgid ""
+"Configuration has been deleted. Please wait while you are redirected to the "
+"installer."
+msgstr ""
+
+#: ../../../../js/main.js.php:1297
+msgid "Are you sure you want to clear all your log data?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1304
+msgid "Logs have been cleared"
+msgstr ""
+
+#: ../../../../js/main.js.php:1311
+msgid "Are you sure you want to reboot OpenSprinkler?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1318
+msgid "OpenSprinkler is rebooting now"
+msgstr ""
+
+#: ../../../../js/main.js.php:1325
+msgid "Are you sure you want to stop all stations?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1333
+msgid "All stations have been stopped"
+msgstr ""
+
+#: ../../../../js/main.js.php:1344 ../../../../js/main.js.php:1383
+msgid "File API is not supported by your browser"
+msgstr ""
+
+#: ../../../../js/main.js.php:1355
+msgid "Backup saved to your device"
+msgstr ""
+
+#: ../../../../js/main.js.php:1364
+msgid "No backup available on this device"
+msgstr ""
+
+#: ../../../../js/main.js.php:1368
+msgid "Are you sure you want to restore the configuration?"
+msgstr ""
+
+#: ../../../../js/main.js.php:1375
+msgid "Backup restored to your device"
+msgstr ""
+
+#: ../../../../js/main.js.php:1397
+msgid ""
+"Unable to read the configuration file. Please check the file and try again."
+msgstr ""
+
+#: ../../../../js/main.js.php:1408
+msgid "Yes"
+msgstr ""
+
+#: ../../../../js/main.js.php:1409
+msgid "No"
+msgstr ""
+
+#: ../../../../main.php:555 ../../../../main.php:564
 msgid "Master"
 msgstr ""
 
-#: ../../../../main.php:893 ../../../../main.php:914 ../../../../main.php:936
+#: ../../../../main.php:897 ../../../../main.php:918 ../../../../main.php:940
 msgid "Running Now"
 msgstr ""
 
-#: ../../../../main.php:940
+#: ../../../../main.php:944
 msgid "Runtime"
 msgstr ""
 
-#: ../../../../main.php:940
+#: ../../../../main.php:944
 msgid "Date/Time"
 msgstr ""
 
-#: ../../../../main.php:972
+#: ../../../../main.php:976
 msgid "run"
 msgstr ""
 
-#: ../../../../main.php:972
+#: ../../../../main.php:976
 msgid "runs"
 msgstr ""
 
-#: ../../../../main.php:987 ../../../../main.php:1034
-#: ../../../../main.php:1081
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
 msgid "min"
 msgstr ""
 
-#: ../../../../main.php:987 ../../../../main.php:1034
-#: ../../../../main.php:1081
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
 msgid "mins"
 msgstr ""
 
-#: ../../../../main.php:987 ../../../../main.php:1034
-#: ../../../../main.php:1081
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
 msgid "D, d M Y H:i"
 msgstr ""
 
-#: ../../../../main.php:992 ../../../../main.php:1019
+#: ../../../../main.php:996 ../../../../main.php:1023
 msgid "Rain Sensor"
 msgstr ""
 
-#: ../../../../main.php:1019
+#: ../../../../main.php:1023
 msgid "switch"
 msgstr ""
 
-#: ../../../../main.php:1019
+#: ../../../../main.php:1023
 msgid "switches"
 msgstr ""
 
-#: ../../../../main.php:1039 ../../../../main.php:1066
+#: ../../../../main.php:1043 ../../../../main.php:1070
 msgid "Rain Delay"
 msgstr ""
 
-#: ../../../../main.php:1066
+#: ../../../../main.php:1070
 msgid "change"
 msgstr ""
 
-#: ../../../../main.php:1066
+#: ../../../../main.php:1070
 msgid "changes"
 msgstr ""
 
-#: ../../../../main.php:1100
+#: ../../../../main.php:1104
 msgid ""
 "Value is in minutes. Zero means the station will be excluded from the run-"
 "once program."
 msgstr ""
 
-#: ../../../../main.php:1109
+#: ../../../../main.php:1113
 msgid "Reset"
 msgstr ""
 
-#: ../../../../main.php:1129
+#: ../../../../main.php:1133
 msgid ""
 "You have no programs currently added. Tap the Add button on the top right "
 "corner to get started."
 msgstr ""
 
-#: ../../../../main.php:1135
+#: ../../../../main.php:1139
 msgid ""
 "Click any program below to expand/edit. Be sure to save changes by hitting "
 "submit below."
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "M"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "T"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "W"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "R"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "F"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "Sa"
 msgstr ""
 
-#: ../../../../main.php:1151
+#: ../../../../main.php:1155
 msgid "Su"
 msgstr ""
 
-#: ../../../../main.php:1163 ../../../../main.php:1566
-#: ../../../../js/main.js.php:828
-msgid "Program"
-msgstr ""
-
-#: ../../../../main.php:1164
+#: ../../../../main.php:1168
 msgid "Enabled"
 msgstr ""
 
-#: ../../../../main.php:1166
+#: ../../../../main.php:1170
 msgid "Weekly"
 msgstr ""
 
-#: ../../../../main.php:1167
+#: ../../../../main.php:1171
 msgid "Interval"
 msgstr ""
 
-#: ../../../../main.php:1170
+#: ../../../../main.php:1174
 msgid "Restrictions"
 msgstr ""
 
-#: ../../../../main.php:1171 ../../../../main.php:1422
-#: ../../../../sprinklers.php:184
+#: ../../../../main.php:1175 ../../../../main.php:1426
+#: ../../../../sprinklers.php:188
 msgid "None"
 msgstr ""
 
-#: ../../../../main.php:1172
+#: ../../../../main.php:1176
 msgid "Odd Days"
 msgstr ""
 
-#: ../../../../main.php:1173
+#: ../../../../main.php:1177
 msgid "Even Days"
 msgstr ""
 
-#: ../../../../main.php:1176
+#: ../../../../main.php:1180
 msgid "Days of the Week"
 msgstr ""
 
-#: ../../../../main.php:1185
+#: ../../../../main.php:1189
 msgid "Interval (Days)"
 msgstr ""
 
-#: ../../../../main.php:1186
+#: ../../../../main.php:1190
 msgid "Starting In"
 msgstr ""
 
-#: ../../../../main.php:1189
+#: ../../../../main.php:1193
 msgid "Stations:"
 msgstr ""
 
-#: ../../../../main.php:1198
+#: ../../../../main.php:1202
 msgid "Check All"
 msgstr ""
 
-#: ../../../../main.php:1199
+#: ../../../../main.php:1203
 msgid "Uncheck All"
 msgstr ""
 
-#: ../../../../main.php:1203
+#: ../../../../main.php:1207
 msgid "Start Time"
 msgstr ""
 
-#: ../../../../main.php:1204
+#: ../../../../main.php:1208
 msgid "End Time"
 msgstr ""
 
-#: ../../../../main.php:1207
+#: ../../../../main.php:1211
 msgid "Duration (minutes)"
 msgstr ""
 
-#: ../../../../main.php:1208
+#: ../../../../main.php:1212
 msgid "Interval (minutes)"
 msgstr ""
 
-#: ../../../../main.php:1210
+#: ../../../../main.php:1214
 msgid "Save New Program"
 msgstr ""
 
-#: ../../../../main.php:1212
+#: ../../../../main.php:1216
 msgid "Save Changes to Program"
 msgstr ""
 
-#: ../../../../main.php:1213
+#: ../../../../main.php:1217
 msgid "Run Program"
 msgstr ""
 
-#: ../../../../main.php:1214
+#: ../../../../main.php:1218
 msgid "Delete Program"
 msgstr ""
 
-#: ../../../../main.php:1221
+#: ../../../../main.php:1225
 msgid "Sprinkler Stations"
 msgstr ""
 
-#: ../../../../main.php:1242
+#: ../../../../main.php:1246
 msgid "System Disabled"
 msgstr ""
 
-#: ../../../../main.php:1247
+#: ../../../../main.php:1251
 msgid "Rain delay until"
 msgstr ""
 
-#: ../../../../main.php:1247 ../../../../main.php:1357
+#: ../../../../main.php:1251 ../../../../main.php:1361
 msgid "D, d M Y H:i:s"
 msgstr ""
 
-#: ../../../../main.php:1252
+#: ../../../../main.php:1256
 msgid "Rain detected"
 msgstr ""
 
-#: ../../../../main.php:1272
+#: ../../../../main.php:1276
 msgid "is running on"
 msgstr ""
 
-#: ../../../../main.php:1272
+#: ../../../../main.php:1276
 msgid "stations"
 msgstr ""
 
-#: ../../../../main.php:1273 ../../../../main.php:1286
-#: ../../../../main.php:1335 ../../../../main.php:1338
-#: ../../../../main.php:1567
+#: ../../../../main.php:1277 ../../../../main.php:1290
+#: ../../../../main.php:1339 ../../../../main.php:1342
+#: ../../../../main.php:1571
 msgid "Manual program"
 msgstr ""
 
-#: ../../../../main.php:1273 ../../../../main.php:1286
-#: ../../../../main.php:1338 ../../../../main.php:1368
-#: ../../../../js/main.js.php:311 ../../../../js/main.js.php:342
-msgid "remaining"
-msgstr ""
-
-#: ../../../../main.php:1285
+#: ../../../../main.php:1289
 msgid "is running on station"
 msgstr ""
 
-#: ../../../../main.php:1295
+#: ../../../../main.php:1299
 msgid "Manual mode enabled"
 msgstr ""
 
-#: ../../../../main.php:1324 ../../../../main.php:1468
+#: ../../../../main.php:1328 ../../../../main.php:1472
 msgid "(Master)"
 msgstr ""
 
-#: ../../../../main.php:1337
+#: ../../../../main.php:1341
 msgid "Running"
 msgstr ""
 
-#: ../../../../main.php:1337
+#: ../../../../main.php:1341
 msgid "Scheduled"
 msgstr ""
 
-#: ../../../../main.php:1357
+#: ../../../../main.php:1361
 msgid "last ran station"
 msgstr ""
 
-#: ../../../../main.php:1357
+#: ../../../../main.php:1361
 msgid "for"
 msgstr ""
 
-#: ../../../../main.php:1357
+#: ../../../../main.php:1361
 msgid "m"
 msgstr ""
 
-#: ../../../../main.php:1357
+#: ../../../../main.php:1361
 msgid "s on"
 msgstr ""
 
-#: ../../../../main.php:1367
+#: ../../../../main.php:1371
 msgid "are"
 msgstr ""
 
-#: ../../../../main.php:1367
+#: ../../../../main.php:1371
 msgid "is"
 msgstr ""
 
-#: ../../../../main.php:1367
+#: ../../../../main.php:1371
 msgid "running"
 msgstr ""
 
-#: ../../../../main.php:1396
+#: ../../../../main.php:1400
 msgid "Timezone"
 msgstr ""
 
-#: ../../../../main.php:1403
+#: ../../../../main.php:1407
 msgid "NTP Sync"
 msgstr ""
 
-#: ../../../../main.php:1410
+#: ../../../../main.php:1414
 msgid "Auto Reconnect"
 msgstr ""
 
-#: ../../../../main.php:1413
+#: ../../../../main.php:1417
 msgid "Extension Boards"
 msgstr ""
 
-#: ../../../../main.php:1416
+#: ../../../../main.php:1420
 msgid "Sequential"
 msgstr ""
 
-#: ../../../../main.php:1419
+#: ../../../../main.php:1423
 msgid "Station Delay (seconds)"
 msgstr ""
 
-#: ../../../../main.php:1422
+#: ../../../../main.php:1426
 msgid "Master Station"
 msgstr ""
 
-#: ../../../../main.php:1432
+#: ../../../../main.php:1436
 msgid "Master On Delay"
 msgstr ""
 
-#: ../../../../main.php:1435
+#: ../../../../main.php:1439
 msgid "Master Off Delay"
 msgstr ""
 
-#: ../../../../main.php:1438
+#: ../../../../main.php:1442
 msgid "Use Rain Sensor"
 msgstr ""
 
-#: ../../../../main.php:1441
+#: ../../../../main.php:1445
 msgid "Normally Open (Rain Sensor)"
 msgstr ""
 
-#: ../../../../main.php:1444
+#: ../../../../main.php:1448
 msgid "% Watering"
 msgstr ""
 
-#: ../../../../main.php:1447
+#: ../../../../main.php:1451
 msgid "Ignore Password"
 msgstr ""
 
-#: ../../../../main.php:1461
+#: ../../../../main.php:1465
 msgid "Station Name"
 msgstr ""
 
-#: ../../../../main.php:1461
+#: ../../../../main.php:1465
 msgid "Activate Master?"
 msgstr ""
 
-#: ../../../../main.php:1492
+#: ../../../../main.php:1496
 msgid "Change Password"
 msgstr ""
 
-#: ../../../../main.php:1493
+#: ../../../../main.php:1497
 msgid "Confirm Password"
 msgstr ""
 
-#: ../../../../main.php:1494
+#: ../../../../main.php:1498
 msgid "Save Changes to"
 msgstr ""
 
-#: ../../../../main.php:1495
+#: ../../../../main.php:1499
 msgid "Delete"
 msgstr ""
 
-#: ../../../../main.php:1515
+#: ../../../../main.php:1519
 msgid ""
 "Forecast data could not be retrieved. Please try again later and/or check "
 "location setting."
 msgstr ""
 
-#: ../../../../main.php:1518
+#: ../../../../main.php:1522
 msgid "d M Y"
 msgstr ""
 
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Jan"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Feb"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Mar"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Apr"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "May"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Jun"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Jul"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Aug"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Sep"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Oct"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Nov"
-msgstr ""
-
-#: ../../../../main.php:1519 ../../../../js/main.js.php:785
-msgid "Dec"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Mon"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Tue"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Wed"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Thr"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Fri"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Sat"
-msgstr ""
-
-#: ../../../../main.php:1520 ../../../../js/main.js.php:778
-msgid "Sun"
-msgstr ""
-
-#: ../../../../main.php:1523 ../../../../main.php:1553
+#: ../../../../main.php:1527 ../../../../main.php:1557
 msgid "Now"
 msgstr ""
 
-#: ../../../../main.php:1535 ../../../../main.php:1556
-#: ../../../../main.php:1558
+#: ../../../../main.php:1539 ../../../../main.php:1560
+#: ../../../../main.php:1562
 msgid "Low"
 msgstr ""
 
-#: ../../../../main.php:1535 ../../../../main.php:1556
-#: ../../../../main.php:1558
+#: ../../../../main.php:1539 ../../../../main.php:1560
+#: ../../../../main.php:1562
 msgid "High"
 msgstr ""
 
-#: ../../../../main.php:1541
+#: ../../../../main.php:1545
 msgid ""
 "Forecast data could not be retrieved. Please try again later and/or check "
 "location/api key settings."
 msgstr ""
 
-#: ../../../../main.php:1553 ../../../../main.php:1556
-#: ../../../../main.php:1558
+#: ../../../../main.php:1557 ../../../../main.php:1560
+#: ../../../../main.php:1562
 msgid "Precip"
 msgstr ""
 
-#: ../../../../main.php:1568
+#: ../../../../main.php:1572
 msgid "Run-once program"
 msgstr ""
 
-#: ../../../../main.php:1578
+#: ../../../../main.php:1582
 msgid "Y-m-d H:i:s"
 msgstr ""
 
-#: ../../../../sprinklers.php:24 ../../../../sprinklers.php:206
+#: ../../../../sprinklers.php:28 ../../../../sprinklers.php:210
 msgid "Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:31
+#: ../../../../sprinklers.php:35
 msgid "Update Available"
 msgstr ""
 
-#: ../../../../sprinklers.php:34
+#: ../../../../sprinklers.php:38
 msgid "Weather"
 msgstr ""
 
-#: ../../../../sprinklers.php:38
+#: ../../../../sprinklers.php:42
 msgid "Information"
 msgstr ""
 
-#: ../../../../sprinklers.php:39 ../../../../sprinklers.php:103
+#: ../../../../sprinklers.php:43 ../../../../sprinklers.php:107
 msgid "Current Status"
 msgstr ""
 
-#: ../../../../sprinklers.php:40
+#: ../../../../sprinklers.php:44
 msgid "Preview Programs"
 msgstr ""
 
-#: ../../../../sprinklers.php:41
+#: ../../../../sprinklers.php:45
 msgid "View Logs"
 msgstr ""
 
-#: ../../../../sprinklers.php:44
+#: ../../../../sprinklers.php:48
 msgid "Program Control"
 msgstr ""
 
-#: ../../../../sprinklers.php:45 ../../../../sprinklers.php:54
+#: ../../../../sprinklers.php:49 ../../../../sprinklers.php:58
 msgid "Change Rain Delay"
 msgstr ""
 
-#: ../../../../sprinklers.php:46
+#: ../../../../sprinklers.php:50
 msgid "Edit Programs"
 msgstr ""
 
-#: ../../../../sprinklers.php:47 ../../../../sprinklers.php:117
+#: ../../../../sprinklers.php:51 ../../../../sprinklers.php:121
 msgid "Manual Control"
 msgstr ""
 
-#: ../../../../sprinklers.php:48 ../../../../sprinklers.php:135
+#: ../../../../sprinklers.php:52 ../../../../sprinklers.php:139
 msgid "Run-Once Program"
 msgstr ""
 
-#: ../../../../sprinklers.php:49
+#: ../../../../sprinklers.php:53
 msgid "Stop All Stations"
 msgstr ""
 
-#: ../../../../sprinklers.php:56
+#: ../../../../sprinklers.php:60
 msgid ""
 "Enable manual rain delay by entering a value into the input below. To turn "
 "off a currently enabled rain delay use a value of 0."
 msgstr ""
 
-#: ../../../../sprinklers.php:59
+#: ../../../../sprinklers.php:63
 msgid "Duration (in hours):"
 msgstr ""
 
-#: ../../../../sprinklers.php:69
+#: ../../../../sprinklers.php:73
 msgid "Logged in as:"
 msgstr ""
 
-#: ../../../../sprinklers.php:73
+#: ../../../../sprinklers.php:77
 msgid "Auto Login"
 msgstr ""
 
-#: ../../../../sprinklers.php:76 ../../../../sprinklers.php:125
-#: ../../../../sprinklers.php:214 ../../../../sprinklers.php:218
-#: ../../../../sprinklers.php:228 ../../../../sprinklers.php:235
-#: ../../../../sprinklers.php:300
+#: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
+#: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
+#: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
+#: ../../../../sprinklers.php:304
 msgid "On"
 msgstr ""
 
-#: ../../../../sprinklers.php:76 ../../../../sprinklers.php:125
-#: ../../../../sprinklers.php:214 ../../../../sprinklers.php:218
-#: ../../../../sprinklers.php:228 ../../../../sprinklers.php:235
-#: ../../../../sprinklers.php:300
+#: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
+#: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
+#: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
+#: ../../../../sprinklers.php:304
 msgid "Off"
 msgstr ""
 
-#: ../../../../sprinklers.php:80
+#: ../../../../sprinklers.php:84
 msgid "Export Configuration"
 msgstr ""
 
-#: ../../../../sprinklers.php:81
+#: ../../../../sprinklers.php:85
 msgid "Import Configuration"
 msgstr ""
 
-#: ../../../../sprinklers.php:82
+#: ../../../../sprinklers.php:86
 msgid "Logout"
 msgstr ""
 
-#: ../../../../sprinklers.php:83 ../../../../sprinklers.php:372
+#: ../../../../sprinklers.php:87 ../../../../sprinklers.php:376
 msgid "About"
 msgstr ""
 
-#: ../../../../sprinklers.php:91
+#: ../../../../sprinklers.php:95
 msgid "Forecast"
 msgstr ""
 
-#: ../../../../sprinklers.php:92 ../../../../sprinklers.php:104
-#: ../../../../sprinklers.php:118 ../../../../sprinklers.php:136
-#: ../../../../sprinklers.php:146 ../../../../sprinklers.php:156
-#: ../../../../sprinklers.php:166 ../../../../sprinklers.php:207
-#: ../../../../sprinklers.php:263 ../../../../sprinklers.php:275
-#: ../../../../sprinklers.php:314 ../../../../sprinklers.php:340
-#: ../../../../sprinklers.php:352 ../../../../sprinklers.php:373
+#: ../../../../sprinklers.php:96 ../../../../sprinklers.php:108
+#: ../../../../sprinklers.php:122 ../../../../sprinklers.php:140
+#: ../../../../sprinklers.php:150 ../../../../sprinklers.php:160
+#: ../../../../sprinklers.php:170 ../../../../sprinklers.php:211
+#: ../../../../sprinklers.php:267 ../../../../sprinklers.php:279
+#: ../../../../sprinklers.php:318 ../../../../sprinklers.php:344
+#: ../../../../sprinklers.php:356 ../../../../sprinklers.php:377
 msgid "Back"
 msgstr ""
 
-#: ../../../../sprinklers.php:93 ../../../../sprinklers.php:105
-#: ../../../../sprinklers.php:167
+#: ../../../../sprinklers.php:97 ../../../../sprinklers.php:109
+#: ../../../../sprinklers.php:171
 msgid "Refresh"
 msgstr ""
 
-#: ../../../../sprinklers.php:121
+#: ../../../../sprinklers.php:125
 msgid "With manual mode turned on, tap a station to toggle it."
 msgstr ""
 
-#: ../../../../sprinklers.php:124 ../../../../sprinklers.php:213
+#: ../../../../sprinklers.php:128 ../../../../sprinklers.php:217
 msgid "Manual Mode"
 msgstr ""
 
-#: ../../../../sprinklers.php:145
+#: ../../../../sprinklers.php:149
 msgid "Programs"
 msgstr ""
 
-#: ../../../../sprinklers.php:147 ../../../../sprinklers.php:315
+#: ../../../../sprinklers.php:151 ../../../../sprinklers.php:319
 msgid "Add"
 msgstr ""
 
-#: ../../../../sprinklers.php:155
+#: ../../../../sprinklers.php:159
 msgid "Add Program"
 msgstr ""
 
-#: ../../../../sprinklers.php:165
+#: ../../../../sprinklers.php:169
 msgid "Logs"
 msgstr ""
 
-#: ../../../../sprinklers.php:172
+#: ../../../../sprinklers.php:176
 msgid "Graph"
 msgstr ""
 
-#: ../../../../sprinklers.php:174
+#: ../../../../sprinklers.php:178
 msgid "Table"
 msgstr ""
 
-#: ../../../../sprinklers.php:180
+#: ../../../../sprinklers.php:184
 msgid "Options"
 msgstr ""
 
-#: ../../../../sprinklers.php:182
+#: ../../../../sprinklers.php:186
 msgid "Grouping:"
 msgstr ""
 
-#: ../../../../sprinklers.php:186
+#: ../../../../sprinklers.php:190
 msgid "Hour"
 msgstr ""
 
-#: ../../../../sprinklers.php:188
+#: ../../../../sprinklers.php:192
 msgid "DOW"
 msgstr ""
 
-#: ../../../../sprinklers.php:190
+#: ../../../../sprinklers.php:194
 msgid "Month"
 msgstr ""
 
-#: ../../../../sprinklers.php:193
+#: ../../../../sprinklers.php:197
 msgid "Start:"
 msgstr ""
 
-#: ../../../../sprinklers.php:195
+#: ../../../../sprinklers.php:199
 msgid "End:"
 msgstr ""
 
-#: ../../../../sprinklers.php:211
+#: ../../../../sprinklers.php:215
 msgid "Device Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:217
+#: ../../../../sprinklers.php:221
 msgid "Operation"
 msgstr ""
 
-#: ../../../../sprinklers.php:220
+#: ../../../../sprinklers.php:224
 msgid "Device Options"
 msgstr ""
 
-#: ../../../../sprinklers.php:221 ../../../../sprinklers.php:339
+#: ../../../../sprinklers.php:225 ../../../../sprinklers.php:343
 msgid "Edit Stations"
 msgstr ""
 
-#: ../../../../sprinklers.php:222
+#: ../../../../sprinklers.php:226
 msgid "Reboot OpenSprinkler"
 msgstr ""
 
-#: ../../../../sprinklers.php:225
+#: ../../../../sprinklers.php:229
 msgid "Mobile Application Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:227
+#: ../../../../sprinklers.php:231
 msgid "Local Assets"
 msgstr ""
 
-#: ../../../../sprinklers.php:231
+#: ../../../../sprinklers.php:235
 msgid ""
 "Assets are javascript and CSS libraries that power the mobile web app. "
 "Choose between local assets or content distibution network (CDN) hosted "
 "assets."
 msgstr ""
 
-#: ../../../../sprinklers.php:234
+#: ../../../../sprinklers.php:238
 msgid "Manual Auto-Off"
 msgstr ""
 
-#: ../../../../sprinklers.php:238
+#: ../../../../sprinklers.php:242
 msgid ""
 "Automatically disable manual mode at midnight. Use this option to turn off "
 "manual mode and ensure programs run even if you forget manual mode enabled."
 msgstr ""
 
-#: ../../../../sprinklers.php:240
+#: ../../../../sprinklers.php:244
 msgid "Clear Configuration"
 msgstr ""
 
-#: ../../../../sprinklers.php:241
+#: ../../../../sprinklers.php:245
 msgid "Clear Logs"
 msgstr ""
 
-#: ../../../../sprinklers.php:242 ../../../../sprinklers.php:251
+#: ../../../../sprinklers.php:246 ../../../../sprinklers.php:255
 msgid "Localization"
 msgstr ""
 
-#: ../../../../sprinklers.php:243 ../../../../sprinklers.php:313
+#: ../../../../sprinklers.php:247 ../../../../sprinklers.php:317
 msgid "User Management"
 msgstr ""
 
-#: ../../../../sprinklers.php:244 ../../../../sprinklers.php:274
+#: ../../../../sprinklers.php:248 ../../../../sprinklers.php:278
 msgid "Weather Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:262
+#: ../../../../sprinklers.php:266
 msgid "OS Settings"
 msgstr ""
 
-#: ../../../../sprinklers.php:294
+#: ../../../../sprinklers.php:298
 msgid "Automatic Rain Delay"
 msgstr ""
 
-#: ../../../../sprinklers.php:296
+#: ../../../../sprinklers.php:300
 msgid ""
 "When automatic rain delay is enabled, the weather will be checked for rain "
 "every hour. If the weather reports any condition suggesting rain, a rain "
 "delay is automatically issued using the below set delay duration."
 msgstr ""
 
-#: ../../../../sprinklers.php:299
+#: ../../../../sprinklers.php:303
 msgid "Auto Rain Delay"
 msgstr ""
 
-#: ../../../../sprinklers.php:302
+#: ../../../../sprinklers.php:306
 msgid "Delay Duration (hours)"
 msgstr ""
 
-#: ../../../../sprinklers.php:351
+#: ../../../../sprinklers.php:355
 msgid "Program Preview"
 msgstr ""
 
-#: ../../../../sprinklers.php:362
+#: ../../../../sprinklers.php:366
 msgid "Zoom in"
 msgstr ""
 
-#: ../../../../sprinklers.php:363
+#: ../../../../sprinklers.php:367
 msgid "Zoom out"
 msgstr ""
 
-#: ../../../../sprinklers.php:364
+#: ../../../../sprinklers.php:368
 msgid "Move left"
 msgstr ""
 
-#: ../../../../sprinklers.php:365
+#: ../../../../sprinklers.php:369
 msgid "Move right"
-msgstr ""
-
-#: ../../../../js/auth.js.php:78 ../../../../js/main.js.php:374
-msgid "Invalid Login"
-msgstr ""
-
-#: ../../../../js/main.js.php:40
-msgid "Connection timed-out. Please try again."
-msgstr ""
-
-#: ../../../../js/main.js.php:149 ../../../../js/main.js.php:192
-msgid ""
-"Auto disable of manual mode was not changed. Check config.php permissions "
-"and try again."
-msgstr ""
-
-#: ../../../../js/main.js.php:159 ../../../../js/main.js.php:200
-msgid ""
-"Asset location was not changed. Check config.php permissions and try again."
-msgstr ""
-
-#: ../../../../js/main.js.php:220
-msgid ""
-"Error communicating with OpenSprinkler. Please check your password is "
-"correct."
-msgstr ""
-
-#: ../../../../js/main.js.php:333
-msgid "Station delay"
-msgstr ""
-
-#: ../../../../js/main.js.php:405
-msgid "Are you sure you want to logout?"
-msgstr ""
-
-#: ../../../../js/main.js.php:520
-msgid "Are you sure you want to delete "
-msgstr ""
-
-#: ../../../../js/main.js.php:550
-msgid "User already exists"
-msgstr ""
-
-#: ../../../../js/main.js.php:573
-msgid "Password for"
-msgstr ""
-
-#: ../../../../js/main.js.php:573
-msgid "has been updated"
-msgstr ""
-
-#: ../../../../js/main.js.php:644 ../../../../js/main.js.php:696
-msgid "No entries found in the selected date range"
-msgstr ""
-
-#: ../../../../js/main.js.php:817
-msgid "Quick Programs"
-msgstr ""
-
-#: ../../../../js/main.js.php:825
-msgid "Last Used Program"
-msgstr ""
-
-#: ../../../../js/main.js.php:866
-msgid "No stations set to run on this day."
-msgstr ""
-
-#: ../../../../js/main.js.php:1036
-msgid "Are you sure you want to delete program "
-msgstr ""
-
-#: ../../../../js/main.js.php:1063
-msgid "Error: Interval days must be between 2 and 128."
-msgstr ""
-
-#: ../../../../js/main.js.php:1065
-msgid "Error: Starting in days wrong."
-msgstr ""
-
-#: ../../../../js/main.js.php:1076
-msgid "Error: Start time must be prior to end time."
-msgstr ""
-
-#: ../../../../js/main.js.php:1096
-msgid "Error: You have not selected any stations."
-msgstr ""
-
-#: ../../../../js/main.js.php:1106
-msgid "Program added successfully"
-msgstr ""
-
-#: ../../../../js/main.js.php:1116
-msgid "Program has been updated"
-msgstr ""
-
-#: ../../../../js/main.js.php:1154
-msgid "Settings have been saved"
-msgstr ""
-
-#: ../../../../js/main.js.php:1170
-msgid "Station name must be 16 characters or less"
-msgstr ""
-
-#: ../../../../js/main.js.php:1196
-msgid "Stations have been updated"
-msgstr ""
-
-#: ../../../../js/main.js.php:1214
-msgid "Run-once program has been scheduled"
-msgstr ""
-
-#: ../../../../js/main.js.php:1232
-msgid ""
-"Weather settings were not saved. Check config.php permissions and try again."
-msgstr ""
-
-#: ../../../../js/main.js.php:1234
-msgid "Weather settings have been saved"
-msgstr ""
-
-#: ../../../../js/main.js.php:1250
-msgid "Localization settings have been saved"
-msgstr ""
-
-#: ../../../../js/main.js.php:1292
-msgid "Rain delay has been successfully set"
-msgstr ""
-
-#: ../../../../js/main.js.php:1308
-msgid ""
-"Auto-delay changes were not saved. Check config.php permissions and try "
-"again."
-msgstr ""
-
-#: ../../../../js/main.js.php:1310
-msgid "Auto-delay changes have been saved"
-msgstr ""
-
-#: ../../../../js/main.js.php:1316
-msgid ""
-"Are you sure you want to delete all settings and return to the default "
-"settings (this will delete the configuration file)?"
-msgstr ""
-
-#: ../../../../js/main.js.php:1323
-msgid ""
-"Configuration has been deleted. Please wait while you are redirected to the "
-"installer."
-msgstr ""
-
-#: ../../../../js/main.js.php:1331
-msgid "Are you sure you want to clear all your log data?"
-msgstr ""
-
-#: ../../../../js/main.js.php:1338
-msgid "Logs have been cleared"
-msgstr ""
-
-#: ../../../../js/main.js.php:1345
-msgid "Are you sure you want to reboot OpenSprinkler?"
-msgstr ""
-
-#: ../../../../js/main.js.php:1352
-msgid "OpenSprinkler is rebooting now"
-msgstr ""
-
-#: ../../../../js/main.js.php:1359
-msgid "Are you sure you want to stop all stations?"
-msgstr ""
-
-#: ../../../../js/main.js.php:1367
-msgid "All stations have been stopped"
-msgstr ""
-
-#: ../../../../js/main.js.php:1378 ../../../../js/main.js.php:1417
-msgid "File API is not supported by your browser"
-msgstr ""
-
-#: ../../../../js/main.js.php:1389
-msgid "Backup saved to your device"
-msgstr ""
-
-#: ../../../../js/main.js.php:1398
-msgid "No backup available on this device"
-msgstr ""
-
-#: ../../../../js/main.js.php:1402
-msgid "Are you sure you want to restore the configuration?"
-msgstr ""
-
-#: ../../../../js/main.js.php:1409
-msgid "Backup restored to your device"
-msgstr ""
-
-#: ../../../../js/main.js.php:1431
-msgid ""
-"Unable to read the configuration file. Please check the file and try again."
-msgstr ""
-
-#: ../../../../js/main.js.php:1442
-msgid "Yes"
-msgstr ""
-
-#: ../../../../js/main.js.php:1443
-msgid "No"
 msgstr ""
