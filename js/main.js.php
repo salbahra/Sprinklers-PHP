@@ -785,7 +785,7 @@ function get_runonce() {
             })
             window.rprogs["l"] = data;
             progs += "<option value='l' selected='selected'><?php echo _('Last Used Program'); ?></option>";
-        } catch(){}
+        } catch(e){}
         for (i=0; i<items.progs.length; i++) {
             progs += "<option value='"+i+"'><?php echo _('Program'); ?> "+(i+1)+"</option>";
         };
