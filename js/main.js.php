@@ -771,19 +771,21 @@ function get_runonce() {
     $.mobile.loading("show");
     $.getJSON("index.php","action=make_runonce",function(items){
         window.rprogs = items.progs;
-        var list = $("#runonce_list"), i=0;
+        var list = $("#runonce_list"),
+            data, i=0;
+
         list.html(items.page);
 
         var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'><?php echo _('Quick Programs'); ?></option>";
-        var data = JSON.parse(localStorage.getItem("runonce"));
-        if (data !== null) {
+        try {
+            var data = JSON.parse(localStorage.getItem("runonce"));
             list.find(":input[data-type='range']").each(function(a,b){
                 $(b).val(data[i]/60);
                 i++;
             })
             window.rprogs["l"] = data;
             progs += "<option value='l' selected='selected'><?php echo _('Last Used Program'); ?></option>";
-        }
+        } catch(){}
         for (i=0; i<items.progs.length; i++) {
             progs += "<option value='"+i+"'><?php echo _('Program'); ?> "+(i+1)+"</option>";
         };
