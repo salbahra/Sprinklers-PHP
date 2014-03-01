@@ -1,56 +1,56 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenSprinkler\n"
-"POT-Creation-Date: 2014-03-01 08:36-0600\n"
-"PO-Revision-Date: 2014-03-01 08:36-0600\n"
+"POT-Creation-Date: 2014-03-01 08:34-0600\n"
+"PO-Revision-Date: 2014-03-01 08:37-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: zh_CN\n"
+"Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.4\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../../../..\n"
 
 #: ../../../../index.php:18
 msgid "Sprinkler System"
-msgstr "阀门系统"
+msgstr ""
 
 #: ../../../../index.php:41
 msgid "Welcome"
-msgstr "欢迎，"
+msgstr ""
 
 #: ../../../../index.php:46 ../../../../install.php:240
 #: ../../../../sprinklers.php:328
 msgid "Username:"
-msgstr "用户名"
+msgstr ""
 
 #: ../../../../index.php:47
 msgid "username"
-msgstr "用户名"
+msgstr ""
 
 #: ../../../../index.php:48 ../../../../install.php:242
 #: ../../../../sprinklers.php:330
 msgid "Password:"
-msgstr "密码"
+msgstr ""
 
 #: ../../../../index.php:49
 msgid "password"
-msgstr "密码"
+msgstr ""
 
 #: ../../../../index.php:50
 msgid "Remember Me"
-msgstr "记住我"
+msgstr ""
 
 #: ../../../../index.php:51
 msgid "Sign in"
-msgstr "登入"
+msgstr ""
 
 #: ../../../../install.php:157 ../../../../install.php:230
 msgid "New Install"
-msgstr "新的安装"
+msgstr ""
 
 #: ../../../../install.php:199 ../../../../js/main.js.php:498
 #: ../../../../js/main.js.php:522
@@ -61,7 +61,7 @@ msgstr ""
 msgid ""
 "Settings have been saved. Please wait while your redirected to the login "
 "screen!"
-msgstr "设置被保存。请稍等，重新打开登录页面！"
+msgstr ""
 
 #: ../../../../install.php:211
 msgid ""
@@ -71,13 +71,13 @@ msgstr ""
 
 #: ../../../../install.php:216
 msgid "Settings have NOT been saved. Check IP and Port settings and try again."
-msgstr "设置没有被保存,请检查IP及端口设置，再重试。"
+msgstr ""
 
 #: ../../../../install.php:219
 msgid ""
 "Settings have NOT been saved. Check folder permissions and file paths then "
 "try again."
-msgstr "设置没有被保存,请检查文件夹权限和文件路径，再重试。"
+msgstr ""
 
 #: ../../../../install.php:231 ../../../../main.php:1113
 #: ../../../../sprinklers.php:66 ../../../../sprinklers.php:141
@@ -85,15 +85,15 @@ msgstr "设置没有被保存,请检查文件夹权限和文件路径，再重�
 #: ../../../../sprinklers.php:293 ../../../../sprinklers.php:308
 #: ../../../../sprinklers.php:334 ../../../../sprinklers.php:345
 msgid "Submit"
-msgstr "提交"
+msgstr ""
 
 #: ../../../../install.php:236 ../../../../sprinklers.php:325
 msgid "Add New User"
-msgstr "添加新用户"
+msgstr ""
 
 #: ../../../../install.php:238
 msgid "You can add additional users after logging in"
-msgstr "登录后，您可以增加新用户"
+msgstr ""
 
 #: ../../../../install.php:244 ../../../../sprinklers.php:332
 msgid "Confirm Password:"
@@ -101,27 +101,27 @@ msgstr ""
 
 #: ../../../../install.php:251
 msgid "Interval Program (detected)"
-msgstr "时间间隔程序（检测到的）"
+msgstr ""
 
 #: ../../../../install.php:251
 msgid "OpenSprinkler IP/password"
-msgstr "OpenSprinkler IP地址/密码"
+msgstr ""
 
 #: ../../../../install.php:253
 msgid "Open Sprinkler IP:"
-msgstr "OpenSprinkler IP地址"
+msgstr ""
 
 #: ../../../../install.php:255
 msgid "Open Sprinkler Password:"
-msgstr "OpenSprinkler 密码"
+msgstr ""
 
 #: ../../../../install.php:260
 msgid "Advanced Configuration"
-msgstr "高级设置"
+msgstr ""
 
 #: ../../../../install.php:261
 msgid "Localization:"
-msgstr "位置:"
+msgstr ""
 
 #: ../../../../install.php:262 ../../../../sprinklers.php:283
 #: ../../../../sprinklers.php:286
@@ -142,48 +142,48 @@ msgstr ""
 
 #: ../../../../install.php:269
 msgid "Pass File Location:"
-msgstr "通过文件位置:"
+msgstr ""
 
 #: ../../../../install.php:270
 msgid "Cache File Location:"
-msgstr "缓存文件位置:"
+msgstr ""
 
 #: ../../../../install.php:271
 msgid "Sprinkler Log File:"
-msgstr "Sprinkler 日志文件:"
+msgstr ""
 
 #: ../../../../install.php:273
 msgid "Force SSL"
-msgstr "强制SSL"
+msgstr ""
 
 #: ../../../../install.php:275
 msgid "Use Local Assets?"
-msgstr "使用本地资源？"
+msgstr ""
 
 #: ../../../../js/auth.js.php:77 ../../../../js/main.js.php:334
 msgid "Invalid Login"
-msgstr "无效登录"
+msgstr ""
 
 #: ../../../../js/main.js.php:39
 msgid "Connection timed-out. Please try again."
-msgstr "连接超时，请重试。"
+msgstr ""
 
 #: ../../../../js/main.js.php:166
 msgid ""
 "Auto disable of manual mode was not changed. Check config.php permissions "
 "and try again."
-msgstr "自动关闭手动模式未保存。请检查config.php的文件许可。"
+msgstr ""
 
 #: ../../../../js/main.js.php:169
 msgid ""
 "Asset location was not changed. Check config.php permissions and try again."
-msgstr "文件位置未能保存。请检查config.php的文件许可，然后重试。"
+msgstr ""
 
 #: ../../../../js/main.js.php:180
 msgid ""
 "Error communicating with OpenSprinkler. Please check your password is "
 "correct."
-msgstr "连接OpenSprinkler有误，请就按查输入的密码是否正确。"
+msgstr ""
 
 #: ../../../../js/main.js.php:271 ../../../../js/main.js.php:302
 #: ../../../../main.php:1277 ../../../../main.php:1290
@@ -193,115 +193,115 @@ msgstr ""
 
 #: ../../../../js/main.js.php:293
 msgid "Station delay"
-msgstr "阀门延迟"
+msgstr ""
 
 #: ../../../../js/main.js.php:365
 msgid "Are you sure you want to logout?"
-msgstr "是否确定要注销？"
+msgstr ""
 
 #: ../../../../js/main.js.php:480
 msgid "Are you sure you want to delete "
-msgstr "是否确定要删除？"
+msgstr ""
 
 #: ../../../../js/main.js.php:510
 msgid "User already exists"
-msgstr "用户已经存在"
+msgstr "משתמש קיים"
 
 #: ../../../../js/main.js.php:533
 msgid "Password for"
-msgstr "密码"
+msgstr "סיסמא"
 
 #: ../../../../js/main.js.php:533
 msgid "has been updated"
-msgstr "已经更新"
+msgstr ""
 
 #: ../../../../js/main.js.php:604 ../../../../js/main.js.php:656
 msgid "No entries found in the selected date range"
-msgstr "在选择的日期范围内没有找到任何记录"
+msgstr ""
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Sun"
-msgstr "周日"
+msgstr "יום א"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Mon"
-msgstr "周一"
+msgstr "יום ב"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Tue"
-msgstr "周二"
+msgstr "יום ג"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Wed"
-msgstr "周三"
+msgstr "יום ד"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Thr"
-msgstr "周四"
+msgstr "יום ה"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Fri"
-msgstr "周五"
+msgstr "יום ו"
 
 #: ../../../../js/main.js.php:738 ../../../../main.php:1524
 msgid "Sat"
-msgstr "周六"
+msgstr "שבת"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Jan"
-msgstr "一月"
+msgstr "ינואר"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Feb"
-msgstr "二月"
+msgstr "פברואר"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Mar"
-msgstr "三月"
+msgstr "מרץ"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Apr"
-msgstr "四月"
+msgstr "אפריל"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "May"
-msgstr "五月"
+msgstr "מאי"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Jun"
-msgstr "六月"
+msgstr "יוני"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Jul"
-msgstr "七月"
+msgstr "יולי"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Aug"
-msgstr "八月"
+msgstr "אוגוסט"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Sep"
-msgstr "九月"
+msgstr "ספטמבר"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Oct"
-msgstr "十月"
+msgstr "אוקטובר"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Nov"
-msgstr "十一月"
+msgstr "נובמבר"
 
 #: ../../../../js/main.js.php:745 ../../../../main.php:1523
 msgid "Dec"
-msgstr "十二月"
+msgstr "דצמבר"
 
 #: ../../../../js/main.js.php:777
 msgid "Quick Programs"
-msgstr "快速程序"
+msgstr ""
 
 #: ../../../../js/main.js.php:785
 msgid "Last Used Program"
-msgstr "上次使用的程序"
+msgstr ""
 
 #: ../../../../js/main.js.php:788 ../../../../main.php:1167
 #: ../../../../main.php:1570
@@ -310,56 +310,56 @@ msgstr ""
 
 #: ../../../../js/main.js.php:826
 msgid "No stations set to run on this day."
-msgstr "这天没有浇水站运行"
+msgstr ""
 
 #: ../../../../js/main.js.php:1002
 msgid "Are you sure you want to delete program "
-msgstr "是否确定要删除程序？"
+msgstr ""
 
 #: ../../../../js/main.js.php:1029
 msgid "Error: Interval days must be between 2 and 128."
-msgstr "错误：间隔天数必须在2到128之间。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1031
 msgid "Error: Starting in days wrong."
-msgstr "错误：开始日期不正确/"
+msgstr ""
 
 #: ../../../../js/main.js.php:1042
 msgid "Error: Start time must be prior to end time."
-msgstr "错误：开始时间不能晚于停止时间。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1062
 msgid "Error: You have not selected any stations."
-msgstr "错误：未选择任何浇水站。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1072
 msgid "Program added successfully"
-msgstr "成功添加程序。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1082
 msgid "Program has been updated"
-msgstr "程序已更新。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1120
 msgid "Settings have been saved"
-msgstr "配置以保存。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1136
 msgid "Station name must be 16 characters or less"
-msgstr "浇水站名称必须在16个字符以内。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1162
 msgid "Stations have been updated"
-msgstr "浇水站以更新。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1180
 msgid "Run-once program has been scheduled"
-msgstr "一次性程序以启动。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1198
 msgid ""
 "Weather settings were not saved. Check config.php permissions and try again."
-msgstr "天气预报设置未保存，请检查config.php的文件许可，然后重试。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1200
 msgid "Weather settings have been saved"
@@ -371,23 +371,23 @@ msgstr ""
 
 #: ../../../../js/main.js.php:1258
 msgid "Rain delay has been successfully set"
-msgstr "成功设置雨延迟"
+msgstr ""
 
 #: ../../../../js/main.js.php:1274
 msgid ""
 "Auto-delay changes were not saved. Check config.php permissions and try "
 "again."
-msgstr "自动延迟未保存，请检查config.php的文件许可，然后重试。"
+msgstr ""
 
 #: ../../../../js/main.js.php:1276
 msgid "Auto-delay changes have been saved"
-msgstr "自动延迟以保存"
+msgstr ""
 
 #: ../../../../js/main.js.php:1282
 msgid ""
 "Are you sure you want to delete all settings and return to the default "
 "settings (this will delete the configuration file)?"
-msgstr "你确定要删除所有配置并返回系统初始设定吗？（这将删除现有配置文件）"
+msgstr ""
 
 #: ../../../../js/main.js.php:1289
 msgid ""
@@ -397,76 +397,76 @@ msgstr ""
 
 #: ../../../../js/main.js.php:1297
 msgid "Are you sure you want to clear all your log data?"
-msgstr "是否确认清除所有的日志记录？"
+msgstr ""
 
 #: ../../../../js/main.js.php:1304
 msgid "Logs have been cleared"
-msgstr "日志记录被清除"
+msgstr ""
 
 #: ../../../../js/main.js.php:1311
 msgid "Are you sure you want to reboot OpenSprinkler?"
-msgstr "是否确认重新启动？"
+msgstr ""
 
 #: ../../../../js/main.js.php:1318
 msgid "OpenSprinkler is rebooting now"
-msgstr "OpenSprinkler正在重启..."
+msgstr ""
 
 #: ../../../../js/main.js.php:1325
 msgid "Are you sure you want to stop all stations?"
-msgstr "是否确认关闭所有阀门？"
+msgstr ""
 
 #: ../../../../js/main.js.php:1333
 msgid "All stations have been stopped"
-msgstr "所有阀门被停止"
+msgstr ""
 
 #: ../../../../js/main.js.php:1344 ../../../../js/main.js.php:1383
 msgid "File API is not supported by your browser"
-msgstr "你的浏览器不支持该文件API"
+msgstr ""
 
 #: ../../../../js/main.js.php:1355
 msgid "Backup saved to your device"
-msgstr "设备备份被保存"
+msgstr ""
 
 #: ../../../../js/main.js.php:1364
 msgid "No backup available on this device"
-msgstr "设备没有可用的备份"
+msgstr ""
 
 #: ../../../../js/main.js.php:1368
 msgid "Are you sure you want to restore the configuration?"
-msgstr "是否重新保存配置文件？"
+msgstr ""
 
 #: ../../../../js/main.js.php:1375
 msgid "Backup restored to your device"
-msgstr "设备备份被重新保存"
+msgstr ""
 
 #: ../../../../js/main.js.php:1397
 msgid ""
 "Unable to read the configuration file. Please check the file and try again."
-msgstr "不能读取配置文件。请检查配置文件并重试！"
+msgstr ""
 
 #: ../../../../js/main.js.php:1408
 msgid "Yes"
-msgstr "是"
+msgstr "כן"
 
 #: ../../../../js/main.js.php:1409
 msgid "No"
-msgstr "否"
+msgstr "לא"
 
 #: ../../../../main.php:555 ../../../../main.php:564
 msgid "Master"
-msgstr "主站"
+msgstr ""
 
 #: ../../../../main.php:897 ../../../../main.php:918 ../../../../main.php:940
 msgid "Running Now"
-msgstr "运行中"
+msgstr ""
 
 #: ../../../../main.php:944
 msgid "Runtime"
-msgstr "运行时间"
+msgstr ""
 
 #: ../../../../main.php:944
 msgid "Date/Time"
-msgstr "日期/时间"
+msgstr ""
 
 #: ../../../../main.php:976
 msgid "run"
@@ -571,7 +571,7 @@ msgstr ""
 
 #: ../../../../main.php:1170
 msgid "Weekly"
-msgstr ""
+msgstr "שבועי"
 
 #: ../../../../main.php:1171
 msgid "Interval"
@@ -644,7 +644,7 @@ msgstr ""
 
 #: ../../../../main.php:1217
 msgid "Run Program"
-msgstr "启动程序"
+msgstr ""
 
 #: ../../../../main.php:1218
 msgid "Delete Program"
@@ -816,21 +816,21 @@ msgstr ""
 
 #: ../../../../main.php:1522
 msgid "d M Y"
-msgstr "日月年"
+msgstr ""
 
 #: ../../../../main.php:1527 ../../../../main.php:1557
 msgid "Now"
-msgstr "现在"
+msgstr "עכשיו"
 
 #: ../../../../main.php:1539 ../../../../main.php:1560
 #: ../../../../main.php:1562
 msgid "Low"
-msgstr "低"
+msgstr "נמוך"
 
 #: ../../../../main.php:1539 ../../../../main.php:1560
 #: ../../../../main.php:1562
 msgid "High"
-msgstr "高"
+msgstr "גבוה"
 
 #: ../../../../main.php:1545
 msgid ""
@@ -845,7 +845,7 @@ msgstr ""
 
 #: ../../../../main.php:1572
 msgid "Run-once program"
-msgstr "一次性程序"
+msgstr ""
 
 #: ../../../../main.php:1582
 msgid "Y-m-d H:i:s"
@@ -853,35 +853,35 @@ msgstr ""
 
 #: ../../../../sprinklers.php:28 ../../../../sprinklers.php:210
 msgid "Settings"
-msgstr "配置"
+msgstr ""
 
 #: ../../../../sprinklers.php:35
 msgid "Update Available"
-msgstr "有更新可用"
+msgstr ""
 
 #: ../../../../sprinklers.php:38
 msgid "Weather"
-msgstr "天气"
+msgstr ""
 
 #: ../../../../sprinklers.php:42
 msgid "Information"
-msgstr "信息"
+msgstr ""
 
 #: ../../../../sprinklers.php:43 ../../../../sprinklers.php:107
 msgid "Current Status"
-msgstr "目前状态"
+msgstr ""
 
 #: ../../../../sprinklers.php:44
 msgid "Preview Programs"
-msgstr "预览程序"
+msgstr ""
 
 #: ../../../../sprinklers.php:45
 msgid "View Logs"
-msgstr "查看记录"
+msgstr ""
 
 #: ../../../../sprinklers.php:48
 msgid "Program Control"
-msgstr "程序控制"
+msgstr ""
 
 #: ../../../../sprinklers.php:49 ../../../../sprinklers.php:58
 msgid "Change Rain Delay"
@@ -889,29 +889,29 @@ msgstr ""
 
 #: ../../../../sprinklers.php:50
 msgid "Edit Programs"
-msgstr "编辑程序"
+msgstr ""
 
 #: ../../../../sprinklers.php:51 ../../../../sprinklers.php:121
 msgid "Manual Control"
-msgstr "手动控制"
+msgstr ""
 
 #: ../../../../sprinklers.php:52 ../../../../sprinklers.php:139
 msgid "Run-Once Program"
-msgstr "一次性程序"
+msgstr ""
 
 #: ../../../../sprinklers.php:53
 msgid "Stop All Stations"
-msgstr "关闭所有阀门"
+msgstr ""
 
 #: ../../../../sprinklers.php:60
 msgid ""
 "Enable manual rain delay by entering a value into the input below. To turn "
 "off a currently enabled rain delay use a value of 0."
-msgstr "在下面输入一个数字开启手动雨延迟。输入0以停止先前开启的雨延迟。"
+msgstr ""
 
 #: ../../../../sprinklers.php:63
 msgid "Duration (in hours):"
-msgstr "浇水时间（小时）："
+msgstr "משך (שעות)"
 
 #: ../../../../sprinklers.php:73
 msgid "Logged in as:"
@@ -919,41 +919,41 @@ msgstr ""
 
 #: ../../../../sprinklers.php:77
 msgid "Auto Login"
-msgstr "自动登录"
+msgstr ""
 
 #: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
 #: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
 #: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
 #: ../../../../sprinklers.php:304
 msgid "On"
-msgstr "开启"
+msgstr "פעיל"
 
 #: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
 #: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
 #: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
 #: ../../../../sprinklers.php:304
 msgid "Off"
-msgstr "关闭"
+msgstr ""
 
 #: ../../../../sprinklers.php:84
 msgid "Export Configuration"
-msgstr "导出配置"
+msgstr "ייצוא הגדרות"
 
 #: ../../../../sprinklers.php:85
 msgid "Import Configuration"
-msgstr "导入配置"
+msgstr "ייבא הגדרות"
 
 #: ../../../../sprinklers.php:86
 msgid "Logout"
-msgstr "登出"
+msgstr "צא"
 
 #: ../../../../sprinklers.php:87 ../../../../sprinklers.php:376
 msgid "About"
-msgstr "关于"
+msgstr "אודות"
 
 #: ../../../../sprinklers.php:95
 msgid "Forecast"
-msgstr "天气预测"
+msgstr "תחזית"
 
 #: ../../../../sprinklers.php:96 ../../../../sprinklers.php:108
 #: ../../../../sprinklers.php:122 ../../../../sprinklers.php:140
@@ -963,56 +963,56 @@ msgstr "天气预测"
 #: ../../../../sprinklers.php:318 ../../../../sprinklers.php:344
 #: ../../../../sprinklers.php:356 ../../../../sprinklers.php:377
 msgid "Back"
-msgstr "返回"
+msgstr "הקודם"
 
 #: ../../../../sprinklers.php:97 ../../../../sprinklers.php:109
 #: ../../../../sprinklers.php:171
 msgid "Refresh"
-msgstr "刷新"
+msgstr "רענן"
 
 #: ../../../../sprinklers.php:125
 msgid "With manual mode turned on, tap a station to toggle it."
-msgstr "在手动模式下，点击浇水站名称以打开或关闭该站。"
+msgstr ""
 
 #: ../../../../sprinklers.php:128 ../../../../sprinklers.php:217
 msgid "Manual Mode"
-msgstr "手动模式"
+msgstr ""
 
 #: ../../../../sprinklers.php:149
 msgid "Programs"
-msgstr "程序"
+msgstr "תוכניות"
 
 #: ../../../../sprinklers.php:151 ../../../../sprinklers.php:319
 msgid "Add"
-msgstr "添加"
+msgstr "הוסף"
 
 #: ../../../../sprinklers.php:159
 msgid "Add Program"
-msgstr "添加程序"
+msgstr "הוסף תוכנית"
 
 #: ../../../../sprinklers.php:169
 msgid "Logs"
-msgstr "日志"
+msgstr "יומנים"
 
 #: ../../../../sprinklers.php:176
 msgid "Graph"
-msgstr "图表"
+msgstr "גרף"
 
 #: ../../../../sprinklers.php:178
 msgid "Table"
-msgstr "表格"
+msgstr "טבלה"
 
 #: ../../../../sprinklers.php:184
 msgid "Options"
-msgstr "选项"
+msgstr "אפשרויות"
 
 #: ../../../../sprinklers.php:186
 msgid "Grouping:"
-msgstr "分组："
+msgstr "קיבוץ"
 
 #: ../../../../sprinklers.php:190
 msgid "Hour"
-msgstr "小时"
+msgstr "שעה"
 
 #: ../../../../sprinklers.php:192
 msgid "DOW"
@@ -1020,15 +1020,15 @@ msgstr ""
 
 #: ../../../../sprinklers.php:194
 msgid "Month"
-msgstr "月"
+msgstr "חודש"
 
 #: ../../../../sprinklers.php:197
 msgid "Start:"
-msgstr "开始时间："
+msgstr "התחלה"
 
 #: ../../../../sprinklers.php:199
 msgid "End:"
-msgstr "结束时间："
+msgstr "סיום"
 
 #: ../../../../sprinklers.php:215
 msgid "Device Settings"
@@ -1036,19 +1036,19 @@ msgstr ""
 
 #: ../../../../sprinklers.php:221
 msgid "Operation"
-msgstr "操作"
+msgstr "פעולה"
 
 #: ../../../../sprinklers.php:224
 msgid "Device Options"
-msgstr "设备选项"
+msgstr "אפשרויות"
 
 #: ../../../../sprinklers.php:225 ../../../../sprinklers.php:343
 msgid "Edit Stations"
-msgstr "编辑浇水站"
+msgstr "ערוך תחנות"
 
 #: ../../../../sprinklers.php:226
 msgid "Reboot OpenSprinkler"
-msgstr "重启OpenSprinkler"
+msgstr ""
 
 #: ../../../../sprinklers.php:229
 msgid "Mobile Application Settings"
@@ -1056,7 +1056,7 @@ msgstr ""
 
 #: ../../../../sprinklers.php:231
 msgid "Local Assets"
-msgstr "本地文件"
+msgstr ""
 
 #: ../../../../sprinklers.php:235
 msgid ""
@@ -1064,8 +1064,6 @@ msgid ""
 "Choose between local assets or content distibution network (CDN) hosted "
 "assets."
 msgstr ""
-"这里文件指的是移动应用程序所需的Javascript和CSS文件。请选择使用本地文件或者是"
-"网络上存储的文件。"
 
 #: ../../../../sprinklers.php:238
 msgid "Manual Auto-Off"
@@ -1076,16 +1074,14 @@ msgid ""
 "Automatically disable manual mode at midnight. Use this option to turn off "
 "manual mode and ensure programs run even if you forget manual mode enabled."
 msgstr ""
-"在午夜时自动关闭手动模式。打开此选项以保证控制器自动恢复到编程模式，即便你忘"
-"记了关闭手动模式。"
 
 #: ../../../../sprinklers.php:244
 msgid "Clear Configuration"
-msgstr "清除配置"
+msgstr ""
 
 #: ../../../../sprinklers.php:245
 msgid "Clear Logs"
-msgstr "清除日志"
+msgstr "נקה יומנים"
 
 #: ../../../../sprinklers.php:246 ../../../../sprinklers.php:255
 msgid "Localization"
@@ -1093,7 +1089,7 @@ msgstr ""
 
 #: ../../../../sprinklers.php:247 ../../../../sprinklers.php:317
 msgid "User Management"
-msgstr "用户管理"
+msgstr "ניהול משתמש"
 
 #: ../../../../sprinklers.php:248 ../../../../sprinklers.php:278
 msgid "Weather Settings"
@@ -1101,11 +1097,11 @@ msgstr ""
 
 #: ../../../../sprinklers.php:266
 msgid "OS Settings"
-msgstr "OS配置"
+msgstr ""
 
 #: ../../../../sprinklers.php:298
 msgid "Automatic Rain Delay"
-msgstr "自动雨延迟"
+msgstr ""
 
 #: ../../../../sprinklers.php:300
 msgid ""
@@ -1113,33 +1109,31 @@ msgid ""
 "every hour. If the weather reports any condition suggesting rain, a rain "
 "delay is automatically issued using the below set delay duration."
 msgstr ""
-"当自动雨延迟开启时，控制器将每小时查询一次天气预报。如果预报有雨，控制器将根"
-"据以下给定的时间自动延迟。"
 
 #: ../../../../sprinklers.php:303
 msgid "Auto Rain Delay"
-msgstr "自动雨延迟"
+msgstr ""
 
 #: ../../../../sprinklers.php:306
 msgid "Delay Duration (hours)"
-msgstr "延迟时间（小时）"
+msgstr ""
 
 #: ../../../../sprinklers.php:355
 msgid "Program Preview"
-msgstr "程序预览"
+msgstr ""
 
 #: ../../../../sprinklers.php:366
 msgid "Zoom in"
-msgstr "放大"
+msgstr ""
 
 #: ../../../../sprinklers.php:367
 msgid "Zoom out"
-msgstr "缩小"
+msgstr ""
 
 #: ../../../../sprinklers.php:368
 msgid "Move left"
-msgstr "左移"
+msgstr ""
 
 #: ../../../../sprinklers.php:369
 msgid "Move right"
-msgstr "右移"
+msgstr ""
