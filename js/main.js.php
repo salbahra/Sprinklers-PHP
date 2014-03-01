@@ -777,15 +777,16 @@ function get_runonce() {
         list.html(items.page);
 
         var progs = "<select data-mini='true' name='rprog' id='rprog'><option value='s'><?php echo _('Quick Programs'); ?></option>";
-        try {
-            var data = JSON.parse(localStorage.getItem("runonce"));
+        var data = localStorage.getItem("runonce");
+        if (data !== null) {
+            data = JSON.parse(data);
             list.find(":input[data-type='range']").each(function(a,b){
                 $(b).val(data[i]/60);
                 i++;
             })
             window.rprogs["l"] = data;
             progs += "<option value='l' selected='selected'><?php echo _('Last Used Program'); ?></option>";
-        } catch(e){}
+        }
         for (i=0; i<items.progs.length; i++) {
             progs += "<option value='"+i+"'><?php echo _('Program'); ?> "+(i+1)+"</option>";
         };
