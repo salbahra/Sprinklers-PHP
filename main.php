@@ -39,7 +39,7 @@ if (extension_loaded("gettext")) {
     }
 } else {
     function _($str) {
-        echo $str;
+        return $str;
     }
 }
 
