@@ -1759,7 +1759,8 @@ function login($tosend = "sprinklers") {
         if ($tosend == "token") {
             if (isset($_SESSION["token"])) echo $_SESSION["token"];
         } else {
-           include_once("sprinklers.php");
+            $_SESSION["data"] = start_data();
+            include_once("sprinklers.php");
         }
     }
 }
@@ -1852,6 +1853,7 @@ function is_ssl() {
 #Check if token is valid and if not reject
 function checktoken() {
     if (check_localstorage($_POST['token'])) {
+        $_SESSION["data"] = start_data();
         include_once("sprinklers.php");
     } else {
         echo 0;

@@ -17,9 +17,6 @@ if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_
 echo "<script>";
 include_once("js/main.js.php");
 echo "</script>";
-
-#Get data needed to render home page
-$_SESSION["data"] = start_data();
 ?>
 
 <div data-role="page" id="sprinklers">
