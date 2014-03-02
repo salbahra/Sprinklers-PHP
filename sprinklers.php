@@ -1,4 +1,4 @@
-<?
+<?php
 if(!defined('Sprinklers')) {
     #Start session
     if(!isset($_SESSION)) session_start();
@@ -12,6 +12,9 @@ if(!defined('Sprinklers')) {
 
 #Redirect if not authenticated or grabbing page directly
 if (!is_auth() || !isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {header('Location: '.$base_url); exit();}
+
+#Get controller settings
+$_SESSION["data"] = start_data();
 
 #Include the main javascript file
 echo "<script>";
