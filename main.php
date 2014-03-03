@@ -203,7 +203,7 @@ function get_forecast_data() {
     preg_match("/<yweather:location .*?country=\"(.*?)\"\/>/",$data,$region);
     preg_match("/<title>Yahoo! Weather - (.*)<\/title>/",$data,$loc);
     $region = $region[1];
-    $xml = simplexml_load_string($data); 
+    $xml = simplexml_load_string($data);
     $item_yweather = $xml->channel->item->children("http://xml.weather.yahoo.com/ns/rss/1.0");
     foreach($item_yweather as $x => $yw_item) {
         foreach($yw_item->attributes() as $k => $attr) {
@@ -214,7 +214,7 @@ function get_forecast_data() {
                         $yw_forecast[$x][$day . ''][$k] = $attr."&#176;F";
                     } else $yw_forecast[$x][$day . ''][$k] = intval(round(($attr-32)*(5/9)))."&#176;C";
                 } else $yw_forecast[$x][$day . ''][$k] = (string)$attr;
-            } else { 
+            } else {
                 if($k == 'temp') {
                     if ($region == "United States" || $region == "Bermuda" || $region == "Palau") $yw_forecast[$x][$k] = $attr."&#176;F";
                     else $yw_forecast[$x][$k] = intval(round(($attr-32)*(5/9)))."&#176;C";
@@ -250,7 +250,7 @@ function code_to_delay($code) {
         $reset_codes = array(36);
     } else {
         $adverse_codes = array("flurries","sleet","rain","sleet","snow","tstorms","nt_flurries","nt_sleet","nt_rain","nt_sleet","nt_snow","nt_tstorms");
-        $reset_codes = array("sunny","nt_sunny");        
+        $reset_codes = array("sunny","nt_sunny");
     }
     if (in_array($code, $adverse_codes)) return $auto_delay_duration;
     if (in_array($code, $reset_codes)) return 0;
@@ -308,7 +308,7 @@ function import_config() {
     $cs = "/cs?pw="; $co = "/co?pw="; $cp_start = "/cp?pw="; $i = 0;
     foreach ($data["options"] as $key => $value) {
         if (is_array($value)) {
-            if (in_array($key, array(2,14,16,21,22,25)) && $value["val"] == 0) continue; 
+            if (in_array($key, array(2,14,16,21,22,25)) && $value["val"] == 0) continue;
             $co .= "&".(($is_ospi) ? $keyNames[$key] : "o".$key)."=".$value["val"];
         } else if ($key == "loc") {
             $co .= "&".(($is_ospi) ? "o".$key : $key)."=".urlencode($value);
@@ -381,7 +381,7 @@ function get_programs() {
     foreach ($progs as $prog) {
         $tmp = explode("=", $prog);
         $tmp2 = str_replace("[", "", $tmp[1]);
-        $tmp2 = str_replace("]", "", $tmp2); 
+        $tmp2 = str_replace("]", "", $tmp2);
         $program = explode(",", $tmp2);
 
         #Reset variables
@@ -395,7 +395,7 @@ function get_programs() {
 
         for ($n=0; $n < $newdata["nboards"]; $n++) {
             $bits = $program[7+$n];
-            for ($s=0; $s < 8; $s++) { 
+            for ($s=0; $s < 8; $s++) {
                 $stations .= ($bits&(1<<$s)) ? "1" : "0";
             }
         }
@@ -406,7 +406,7 @@ function get_programs() {
             $days=array($days1,$days0&0x7f);
             $interval = true;
         } else {
-            #This is a weekly program 
+            #This is a weekly program
             for($d=0;$d<7;$d++) {
                 if ($days0&(1<<$d)) {
                     $days .= "1";
@@ -462,7 +462,7 @@ function process_programs($month,$day,$year) {
         $newdata["programs"][$i] = explode(",",$tmp2);
         $i++;
     }
-    
+
     $simminutes=0;
     $simt=strtotime($newdata["mm"]."/".$newdata["dd"]."/".$newdata["yy"]);
     $simdate=date(DATE_RSS,$simt);
@@ -587,9 +587,9 @@ function get_options() {
             if ($var === "") continue;
             $o = array_search("o".$var, $keyNames);
             $val = ($var == "nbrd") ? $opts[2][$i] - 1 : $opts[2][$i];
-            $newdata[$o] = array("en" => 1,"val" => $val,"var" => $var); 
+            $newdata[$o] = array("en" => 1,"val" => $val,"var" => $var);
             $i++;
-        } 
+        }
     } else {
         preg_match("/var opts=\[(.*)\];/", $data,$opts);
         $data = explode(",", $opts[1]);
@@ -759,7 +759,7 @@ function submit_stations() {
 
 #Submit run-once program
 function runonce() {
-    send_to_os("/cr?pw=&t=".$_REQUEST["data"]);    
+    send_to_os("/cr?pw=&t=".$_REQUEST["data"]);
 }
 
 #Submit rain delay
@@ -850,7 +850,7 @@ function auto_mm_on() {
 function make_list_logs() {
     #Adapted from the script written by David B. Gustavson, 20121021
     global $log_file;
-    
+
     $graphing = isset($_REQUEST["type"]) && $_REQUEST["type"] == "graph";
 
     if (!$graphing) $list = "";
@@ -988,7 +988,7 @@ function make_list_logs() {
                     $data[$j][] = array(($info+($mins*60))*1000,0);
                 }
             } else {
-                $list .= "<tr><td>".$mins." ".(($mins == 1) ? _("min") : _("mins"))."</td><td>".date(_('D, d M Y H:i'),$theTime).$ValveHistory[$j][$k][2]."</td></tr>";                    
+                $list .= "<tr><td>".$mins." ".(($mins == 1) ? _("min") : _("mins"))."</td><td>".date(_('D, d M Y H:i'),$theTime).$ValveHistory[$j][$k][2]."</td></tr>";
             }
         };
         if (!$graphing) $list .= "</tbody></table></div>";
@@ -1089,7 +1089,7 @@ function make_list_logs() {
     }
 
     if ($graphing) {
-        echo json_encode(array("data" => $data, "stations" => $ValveName));    
+        echo json_encode(array("data" => $data, "stations" => $ValveName));
     } else {
         if (empty($list)) {
             echo 0;
@@ -1116,7 +1116,7 @@ function make_runonce() {
         foreach ($data["programs"] as $program) {
             $prog = array();
             $set_stations = str_split($program["stations"]);
-            for ($i=0;$i<count($stations);$i++) { 
+            for ($i=0;$i<count($stations);$i++) {
                 $prog[] = (isset($set_stations[$i]) && $set_stations[$i]) ? $program["duration"] : 0;
             }
             $progs[] = $prog;
@@ -1178,7 +1178,7 @@ function make_program($n,$total,$stations,$program=array("en"=>0,"is_interval"=>
     $list .= "</fieldset>";
 
     $list .= "<fieldset data-type='horizontal' data-role='controlgroup' style='text-align: center'><p style='margin:0'>"._("Days of the Week")."</p>";
-    $j = 0;            
+    $j = 0;
     foreach ($week as $day) {
         $list .= "<input data-mini='true' type='checkbox' ".((!$program["is_interval"] && $days[$j]) ? "checked='checked'" : "")." name='d".$j."-".$n."' id='d".$j."-".$n."'><label for='d".$j."-".$n."'>".$day."</label>";
         $j++;
@@ -1314,7 +1314,7 @@ function make_list_status() {
 
     $list = "";$tz = $settings['tz']-48;
     $tz = (($tz>=0) ? "+" : "-").(abs($tz)/4>>0).":".((abs($tz)%4)*15/10>>0).((abs($tz)%4)*15%10);
-    
+
     $header = "<span id='clock-s' class='nobr'>".gmdate("D, d M Y H:i:s",$settings["devt"])."</span> GMT ".$tz;
     $runningTotal["c"] = $settings["devt"];
     $master = $settings["mas"]; $i = 0; $ptotal = 0;
@@ -1353,7 +1353,7 @@ function make_list_status() {
 
     $footer = "";
     $lrdur = $settings["lrun"][2];
-    
+
     if ($lrdur != 0) {
         $lrpid = $settings["lrun"][1];
         $pname= pidname($lrpid);
@@ -1384,7 +1384,7 @@ function get_weather_settings() {
 }
 
 #Generate settings page
-function make_settings_list() { 
+function make_settings_list() {
     $options = get_options();
     $settings = get_settings();
     $vs = get_stations();
@@ -1682,7 +1682,7 @@ function add_user() {
         exit();
     }
 
-    foreach($arr as $line) { 
+    foreach($arr as $line) {
         $line=preg_replace('`[\r\n]$`','',$line);
         fwrite($fp,$line."\n");
     }
@@ -1698,7 +1698,7 @@ function isValidUrl($url) {
 
     preg_match("/<script>.*?snames=/",$data,$test);
     if (empty($test)) return false;
-    
+
     return true;
 }
 
@@ -1750,7 +1750,7 @@ function gettoken() {
 #Authenticate user
 function login($tosend = "sprinklers") {
     if (!http_authenticate($_POST['username'],$_POST['password'])) {
-        echo 0; 
+        echo 0;
         exit();
     } else {
         $_SESSION['isauth'] = 1;
@@ -1835,7 +1835,7 @@ function check_localstorage($token) {
 function is_auth() {
     is_ssl();
     if (isset($_SESSION['isauth']) && $_SESSION['isauth'] === 1) { return TRUE; }
-    return FALSE;   
+    return FALSE;
 }
 
 #Check if protocol is SSL and redirect if not
@@ -1885,7 +1885,7 @@ function changeConfig($variable, $value, $type){
     else if ($type === "s") $value = filter_var($value, FILTER_SANITIZE_STRING);
 
     $found = false;
-    $arr = file("config.php");    
+    $arr = file("config.php");
     $fp = fopen("config.php", 'w+');
     if ($fp === false) return false;
     foreach($arr as $line) {
@@ -1922,7 +1922,7 @@ function readLastLine($f) {
         fseek($f, $cursor--, SEEK_END);
         $char = fgetc($f);
     }
-    
+
     return $line;
 }
 
@@ -1934,7 +1934,7 @@ function move_keys($keys,$array) {
         unset($array[$key]);
         $array[$key] = $t;
     }
-    return $array;    
+    return $array;
 }
 
 #Covert seconds to HH:MM:SS notation

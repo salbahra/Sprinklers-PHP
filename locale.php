@@ -252,17 +252,17 @@ function get_available_languages() {
 		'ZM' => 'Zambia',
 		'ZW' => 'Zimbabwe',
 	);
- 
+
 //End of country codes
 
 /**
     ISO 639-1 Language Codes
     Useful in Locale analysis
-     
+
     References :
     1. http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 */
- 
+
 	$language_codes = array(
 		 "aa" => "Afar",
 		 "ab" => "Abkhazian",
@@ -449,13 +449,13 @@ function get_available_languages() {
 		 "zh" => "Chinese",
 		 "zu" => "Zulu"
     );
-		
+
 	$locale_data = array();
-         
+
 	//Get locales from directory
 	$path = "./locale/";
 	$locales = scandir($path);
- 
+
 	foreach($locales as $c => $l) {
 	    if ($l === '.' or $l === '..') continue;
 	    if (is_dir($path . '/' . $l)) {
@@ -470,7 +470,7 @@ function get_available_languages() {
 			}
 	    }
 	}
-	
+
 	asort($locale_data);
 	return $locale_data;
 }

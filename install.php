@@ -75,13 +75,13 @@ function new_config() {
     if (isset($_REQUEST["force_ssl"])) {
         $config .= "\$force_ssl=1;\n";
     } else {
-        $config .= "\$force_ssl=0;\n";        
+        $config .= "\$force_ssl=0;\n";
     }
 
     if (isset($_REQUEST["local_assets"])) {
         $config .= "\$local_assets=1;\n";
     } else {
-        $config .= "\$local_assets=0;\n";        
+        $config .= "\$local_assets=0;\n";
     }
 
     #Attempt to open config.php for writing
@@ -104,7 +104,7 @@ function new_config() {
             exec('crontab /tmp/crontab.txt');
         }
     } catch (Exception $e) {
-        echo 3; exit();        
+        echo 3; exit();
     }
 
     #Tell javascript action was succesful
@@ -118,7 +118,7 @@ function isValidUrl($url) {
 
     preg_match("/<script>.*?snames=/",$data,$test);
     if (empty($test)) return false;
-    
+
     return true;
 }
 
@@ -131,7 +131,7 @@ function isOSPi($url) {
 function make_file($data) {
     $file = fopen($data, "w");
     if (!$file) fail();
-    fclose($file);    
+    fclose($file);
 }
 
 #Fail by returning error code 0
@@ -142,7 +142,7 @@ function fail() {
 
 function get_list_available_lang() {
 	$lang = 'en_US'; $list = "";
-	$locals = get_available_languages();			
+	$locals = get_available_languages();
 	foreach ($locals as $l=>$local) {
         $list .= "<option ".(($l == $lang) ? "selected" : "")." value='".$l."'>".$local."</option>";
 	}
@@ -154,7 +154,7 @@ function get_list_available_lang() {
 <!DOCTYPE html>
 <html>
 	<head>
-    	<title><?php echo _("New Install"); ?></title> 
+    	<title><?php echo _("New Install"); ?></title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
         <meta content="yes" name="apple-mobile-web-app-capable">
@@ -197,7 +197,7 @@ function get_list_available_lang() {
                 $.mobile.loading("show");
                 if ($("#password").val() != $("#password-confirm").val()) {
                     showerror("<?php echo _('Password confirmation doesn\'t match password.'); ?>");
-                    return;                    
+                    return;
                 }
                 //Submit form data to the server
                 $.get("install.php","action=new_config&"+$("#options").find(":input").serialize(),function(data){
@@ -218,12 +218,12 @@ function get_list_available_lang() {
                             //Probably permission error or required key not submitted
                             showerror("<?php echo _('Settings have NOT been saved. Check folder permissions and file paths then try again.'); ?>")
                         }
-                        setTimeout(function(){$.mobile.loading('hide')}, 2500);                    
+                        setTimeout(function(){$.mobile.loading('hide')}, 2500);
                     }
                 })
             }
         </script>
-    </head> 
+    </head>
     <body>
         <div data-role="page" id="install" data-close-btn="none">
         	<div data-theme="b" data-role="header" data-position="fixed">

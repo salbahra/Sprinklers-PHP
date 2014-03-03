@@ -1,6 +1,6 @@
 <?php
 #Start session
-session_start(); 
+session_start();
 
 #Tell main we are calling it
 define('Sprinklers', TRUE);
@@ -15,7 +15,7 @@ is_auth();
 <!DOCTYPE html>
 <html>
 	<head>
-    	<title><?php echo _("Sprinkler System"); ?></title> 
+    	<title><?php echo _("Sprinkler System"); ?></title>
     	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
     	<meta content="yes" name="apple-mobile-web-app-capable">
@@ -32,7 +32,7 @@ is_auth();
         ?>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="shortcut icon" href="img/favicon.ico">
-    </head> 
+    </head>
     <body style="display:none">
         <div data-role="page" id="start"></div>
 

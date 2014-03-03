@@ -2,14 +2,14 @@
 if(!defined('Sprinklers')) {
     #Start session
     if(!isset($_SESSION)) session_start();
-    
+
     #Tell main we are calling it
     define('Sprinklers', TRUE);
 
     #Required files
     require_once "../main.php";
 
-    #Set required header for javascript file    
+    #Set required header for javascript file
     header("Content-type: application/x-javascript");
 }
 ?>

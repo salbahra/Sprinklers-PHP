@@ -1,6 +1,6 @@
 /*
  * Flot plugin to order bars side by side.
- * 
+ *
  * Released under the MIT license by Benjamin BUFFET, 20-Sep-2010.
  *
  * This plugin is an alpha version.

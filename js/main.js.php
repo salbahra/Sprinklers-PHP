@@ -8,7 +8,7 @@ if(!defined('Sprinklers')) {
 
     #Required files
     require_once "../main.php";
-    
+
     header("Content-type: application/x-javascript");
 }
 
@@ -30,7 +30,7 @@ $(document).ajaxError(function(x,t,m) {
     }
     if(t.statusText==="timeout") {
         if (m.url.search("action=get_weather")) {
-            $("#weather-list").animate({ 
+            $("#weather-list").animate({
                 "margin-left": "-1000px"
             },1000,function(){
                 $(this).hide();
@@ -346,7 +346,7 @@ function update_weather() {
     $.get("index.php","action=get_weather",function(result){
         var weather = JSON.parse(result);
         if (weather["code"] == null) {
-            $("#weather-list").animate({ 
+            $("#weather-list").animate({
                 "margin-left": "-1000px"
             },1000,function(){
                 $(this).hide();
@@ -355,7 +355,7 @@ function update_weather() {
         }
         $weather.html("<div title='"+weather["text"]+"' class='wicon cond"+weather["code"]+"'></div><span>"+weather["temp"]+"</span><br><span class='location'>"+weather["location"]+"</span>");
         $("#weather").bind("click",get_forecast);
-        $("#weather-list").animate({ 
+        $("#weather-list").animate({
             "margin-left": "0"
         },1000).show()
     })
@@ -411,7 +411,7 @@ function show_settings() {
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
         changePage("#os-settings");
-    })    
+    })
 }
 
 function show_weather_settings() {
@@ -456,7 +456,7 @@ function show_stations() {
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
         changePage("#os-stations");
-    })    
+    })
 }
 
 function show_users() {
@@ -532,7 +532,7 @@ function change_user(id) {
         } else {
             showerror("<?php echo _("Password for"); ?> "+name+" <?php echo _("has been updated"); ?>")
         }
-    })    
+    })
 }
 
 function get_forecast() {
@@ -543,7 +543,7 @@ function get_forecast() {
         if (list.hasClass("ui-listview")) list.listview("refresh");
         $.mobile.loading("hide");
         changePage("#forecast");
-    })    
+    })
 }
 
 function get_status() {
@@ -734,7 +734,7 @@ function seriesChange() {
         $.plot($('#placeholder'), pData, {
             grid: { hoverable: true },
             yaxis: {min: 0, tickFormatter: function(val, axis) { return val < axis.max ? Math.round(val*100)/100 : "min";} },
-            xaxis: { tickDecimals: 0, min: -0.4, max: 6.4, 
+            xaxis: { tickDecimals: 0, min: -0.4, max: 6.4,
             tickFormatter: function(v) { var dow=["<?php echo _('Sun'); ?>","<?php echo _('Mon'); ?>","<?php echo _('Tue'); ?>","<?php echo _('Wed'); ?>","<?php echo _('Thr'); ?>","<?php echo _('Fri'); ?>","<?php echo _('Sat'); ?>"]; return dow[v]; } }
         });
     else if (grouping=='m')
@@ -998,7 +998,7 @@ function add_program() {
         changePage("#addprogram");
         $.mobile.loading("hide");
         $("#addprogram").enhanceWithin();
-    })    
+    })
 }
 
 function delete_program(id) {
@@ -1198,7 +1198,7 @@ function submit_weather_settings() {
         $.mobile.loading("hide");
         changePage("#settings");
         if (result == 2) {
-            showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");            
+            showerror("<?php echo _('Weather settings were not saved. Check config.php permissions and try again.'); ?>");
         } else {
             showerror("<?php echo _('Weather settings have been saved'); ?>");
             update_weather();
@@ -1218,7 +1218,7 @@ function submit_localization(locale) {
             if (lang.data("language") !== locale) location.reload();
             showerror("<?php echo _('Localization settings have been saved'); ?>")
         }
-    })    
+    })
 }
 
 function toggle(anchor) {
@@ -1293,7 +1293,7 @@ function clear_config() {
                 setTimeout(function(){location.reload()},2500);
             }
         });
-    });    
+    });
 }
 
 function clear_logs() {
@@ -1307,7 +1307,7 @@ function clear_logs() {
                 showerror("<?php echo _('Logs have been cleared'); ?>")
             }
         });
-    });    
+    });
 }
 
 function rbt() {
