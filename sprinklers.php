@@ -126,7 +126,7 @@ echo "</script>";
         <ul data-role="listview" data-inset="true">
             <li class="ui-field-contain">
                 <label for="mmm"><b><?php echo _("Manual Mode"); ?></b></label>
-                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="mmm" id="mmm">
+                <input type="checkbox" data-on-text="<?php echo _("On"); ?>" data-off-text="<?php echo _("Off"); ?>" data-role="flipswitch" name="mmm" id="mmm" <?php if ($_SESSION["data"]["mm"]) echo "checked"; ?>>
             </li>
         </ul>
         <ul data-role="listview" data-inset="true" id="mm_list">

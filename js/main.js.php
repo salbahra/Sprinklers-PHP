@@ -121,7 +121,7 @@ $("input[data-role='flipswitch']").change(function(){
 
     var type = this.name,
         slide = $(this),
-        defer;
+        defer, other;
 
     //Find out what the switch was changed to
     var changedTo = slide.is(":checked");
@@ -140,7 +140,12 @@ $("input[data-role='flipswitch']").change(function(){
         //Local assets
         if (type === "local_assets") defer = $.get("index.php","action=local_assets_on");
         //Manual mode, manual mode and settings page
-        if (type === "mm" || type === "mmm") defer = $.get("index.php","action=mm_on");
+        if (type === "mm" || type === "mmm") {
+            other = ((slide.attr("id") === "mm") ? $("#mmm") : $("#mm"));
+            defer = $.get("index.php","action=mm_on");
+            other.prop("checked",changedTo);
+            if (other.hasClass("ui-flipswitch-input")) other.flipswitch("refresh");
+        }
     } else {
         //If changed to off
         if (type === "autologin") localStorage.removeItem("token");
@@ -148,9 +153,12 @@ $("input[data-role='flipswitch']").change(function(){
         if (type === "auto_mm") defer = $.get("index.php","action=auto_mm_off");
         if (type === "local_assets") defer = $.get("index.php","action=local_assets_off");
         if (type === "mm" || type === "mmm") {
+            other = ((slide.attr("id") === "mm") ? $("#mmm") : $("#mm"));
             defer = $.get("index.php","action=mm_off").done(function(){
                 $("#manual a.green").removeClass("green");
             });
+            other.prop("checked",changedTo);
+            if (other.hasClass("ui-flipswitch-input")) other.flipswitch("refresh");
         }
     }
 
@@ -168,6 +176,12 @@ $("input[data-role='flipswitch']").change(function(){
                 case "local_assets":
                     showerror("<?php echo _("Asset location was not changed. Check config.php permissions and try again."); ?>");
                     break;
+                case "mm":
+                case "mmm":
+                    $.each([slide,other],function(i,m){
+                        m.prop("checked",!changedTo)
+                        if (m.hasClass("ui-flipswitch-input")) flipswitch("refresh");
+                    })
                 default:
                     comm_error();
                     break;
@@ -1222,7 +1236,10 @@ function submit_localization(locale) {
 }
 
 function toggle(anchor) {
-    if ($("#mm").val() == "off") return;
+    if (!$("#mm").is(":checked")) {
+        showerror("<?php echo _('Manual mode is not enabled. Please enable manual mode then try again.'); ?>");
+        return;
+    }
     var $list = $("#mm_list");
     var $anchor = $(anchor);
     var $listitems = $list.children("li:not(li.ui-li-divider)");
