@@ -1272,7 +1272,7 @@ function current_status() {
         }
         $sample = $open[0];
         $pname = pidname($settings["ps"][$sample][0]);
-        $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
+        $line = "<div id='running-icon'></div><p id='running-text'>";
         $line .= $pname." "._("is running on")." ".count($open)." "._("stations")." ";
         if ($pname != _("Manual program")) $line .= "<span id='countdown' class='nobr'>(".sec2hms($ptotal)." "._("remaining").")</span>";
         $line .= "</p>";
@@ -1285,7 +1285,7 @@ function current_status() {
         $info = "";
         if ($settings["ps"][$i][0] && $status[$i] && $settings["mas"] != $i+1) {
             $pname= pidname($settings["ps"][$i][0]);
-            $line = "<img id='running-icon' width='11px' height='11px' src='img/running.png' /><p id='running-text'>";
+            $line = "<div id='running-icon'></div><p id='running-text'>";
             $line .= $pname." "._("is running on station")." <span class='nobr'>".$station."</span> ";
             if ($pname != _("Manual program")) $line .= "<span id='countdown' class='nobr'>(".sec2hms($settings["ps"][$i][1])." "._("remaining").")</span>";
             $line .= "</p>";

@@ -26,7 +26,7 @@ echo "</script>";
     <div data-theme="b" data-role="header" data-position="fixed" data-tap-toggle="false">
         <a data-icon="bars" data-iconpos="notext" href="#sprinklers-settings"></a>
         <a data-icon="gear" data-iconpos="notext" href="#settings"><?php echo _("Settings"); ?></a>
-        <h3 style="padding:0"><img height="40px" width="159px" src="img/logo.png" /></h3>
+        <h3 style="padding:0"><div class="logo"></div></h3>
     </div>
     <div class="ui-content" role="main" style="padding-top:0px">
         <div id="footer-running">
