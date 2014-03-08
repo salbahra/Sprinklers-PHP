@@ -6,6 +6,11 @@
     background-repeat:no-repeat;
     margin: 1px auto;
 }
+#about p {
+    text-align:center;
+    overflow: visible;
+    white-space: normal;
+}
 #settings ul li {
     border: none;
 }

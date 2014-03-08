@@ -389,13 +389,10 @@ echo "</script>";
             </div>
             <div data-role="collapsible" data-collapsed="false">
                 <h3>Donate</h3>
-                    <p style="text-align:center;overflow: visible;white-space: normal;">This web app has been developed by Samer Albahra. If you enjoy it please donate by clicking the button below.</p>
-                    <form style='text-align:center' action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                        <input type="hidden" name="cmd" value="_s-xclick">
-                        <input type="hidden" name="hosted_button_id" value="89M484QR2TCFJ">
-                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                    </form>
+                    <p>
+                        This app has been developed by Samer Albahra. If you enjoy it please donate by clicking the button below.<br><br>
+                        <a href="javascript:window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=89M484QR2TCFJ','_blank')"><img src="img/btn_donateCC_LG.gif" alt="PayPal - The safer, easier way to pay online!"></a>
+                    </p>
             </div>
         </div>
         <p id='versions'>
