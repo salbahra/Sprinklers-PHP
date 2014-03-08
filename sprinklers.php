@@ -387,7 +387,7 @@ echo "</script>";
                 <p>I fully support every feature of the OpenSprinkler and also the OpenSprinkler Pi (using the interval program).</p>
                 <p>Changelog can be viewed on <a target="_blank" href="https://github.com/salbahra/OpenSprinkler-Controller/commits/master">Github</a>.</p>
             </div>
-            <div data-role="collapsible" data-collapsed="false">
+            <div data-role="collapsible" data-collapsed="false" id="donate">
                 <h3>Donate</h3>
                     <p>
                         This app has been developed by Samer Albahra. If you enjoy it please donate by clicking the button below.<br><br>
