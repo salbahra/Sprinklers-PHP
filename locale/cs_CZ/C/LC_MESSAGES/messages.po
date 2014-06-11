@@ -1,0 +1,1185 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenSprinkler\n"
+"POT-Creation-Date: 2014-03-31 15:54-0600\n"
+"PO-Revision-Date: 2014-06-10 20:36-0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ../../../..\n"
+
+#: ../../../../index.php:18
+msgid "Sprinkler System"
+msgstr "Zalévací systém"
+
+#: ../../../../index.php:41
+msgid "Welcome"
+msgstr "Vítejte"
+
+#: ../../../../index.php:46 ../../../../install.php:240
+#: ../../../../sprinklers.php:328
+msgid "Username:"
+msgstr "Uživatelské jméno:"
+
+#: ../../../../index.php:47
+msgid "username"
+msgstr "Uživatelské jméno:"
+
+#: ../../../../index.php:48 ../../../../install.php:242
+#: ../../../../sprinklers.php:330
+msgid "Password:"
+msgstr "Heslo:"
+
+#: ../../../../index.php:49
+msgid "password"
+msgstr "Heslo:"
+
+#: ../../../../index.php:50
+msgid "Remember Me"
+msgstr "Pamatuj si mě"
+
+#: ../../../../index.php:51
+msgid "Sign in"
+msgstr "Přihlášení"
+
+#: ../../../../install.php:157 ../../../../install.php:230
+msgid "New Install"
+msgstr "Nová instalace"
+
+#: ../../../../install.php:199 ../../../../js/main.js.php:514
+#: ../../../../js/main.js.php:538
+msgid "Password confirmation doesn't match password."
+msgstr "Potvrzení hesla není v pořádku."
+
+#: ../../../../install.php:207
+msgid ""
+"Settings have been saved. Please wait while your redirected to the login "
+"screen!"
+msgstr ""
+"Nastavení bylo uloženo. Počkejte prosím na přesměrování na stránku s "
+"přihlášením!"
+
+#: ../../../../install.php:211
+msgid ""
+"Settings have been saved. However, crontab was not added and must be added "
+"manually."
+msgstr ""
+"Nastavení bylo uloženo. Nicméně, crontabulka nebyla přidána a musí být "
+"přidána ručně."
+
+#: ../../../../install.php:216
+msgid "Settings have NOT been saved. Check IP and Port settings and try again."
+msgstr ""
+"Nastavení nebylo uloženo. Zkontrolujte IP adresu, port a zkuste to znovu."
+
+#: ../../../../install.php:219
+msgid ""
+"Settings have NOT been saved. Check folder permissions and file paths then "
+"try again."
+msgstr ""
+"Nastavení nebylo uloženo. Zkontrolujte nastavení práv souborů a zkuste to "
+"znovu."
+
+#: ../../../../install.php:231 ../../../../main.php:1113
+#: ../../../../sprinklers.php:66 ../../../../sprinklers.php:141
+#: ../../../../sprinklers.php:161 ../../../../sprinklers.php:268
+#: ../../../../sprinklers.php:293 ../../../../sprinklers.php:308
+#: ../../../../sprinklers.php:334 ../../../../sprinklers.php:345
+msgid "Submit"
+msgstr "Odeslat"
+
+#: ../../../../install.php:236 ../../../../sprinklers.php:325
+msgid "Add New User"
+msgstr "Přidat nového uživatele"
+
+#: ../../../../install.php:238
+msgid "You can add additional users after logging in"
+msgstr "Můžete přidat dalšího uživatele po přihlášení"
+
+#: ../../../../install.php:244 ../../../../sprinklers.php:332
+msgid "Confirm Password:"
+msgstr "Potvrzení hesla"
+
+#: ../../../../install.php:251
+msgid "Interval Program (detected)"
+msgstr "Detekován interval program"
+
+#: ../../../../install.php:251
+msgid "OpenSprinkler IP/password"
+msgstr "OpenSprinkler IP/heslo"
+
+#: ../../../../install.php:253
+msgid "Open Sprinkler IP:"
+msgstr "Open Sprinkler IP:"
+
+#: ../../../../install.php:255
+msgid "Open Sprinkler Password:"
+msgstr "Open Sprinkler heslo:"
+
+#: ../../../../install.php:260
+msgid "Advanced Configuration"
+msgstr "Rozšířená nastavení"
+
+#: ../../../../install.php:261
+msgid "Localization:"
+msgstr "Umístění ve světě"
+
+#: ../../../../install.php:262 ../../../../sprinklers.php:283
+#: ../../../../sprinklers.php:286
+msgid "Weather Provider"
+msgstr "Poskytovatel předpovědi počasí"
+
+#: ../../../../install.php:264 ../../../../sprinklers.php:288
+msgid "Yahoo!"
+msgstr "Yahoo!"
+
+#: ../../../../install.php:265 ../../../../sprinklers.php:289
+msgid "Wunderground"
+msgstr "Wunderground"
+
+#: ../../../../install.php:268 ../../../../sprinklers.php:292
+msgid "Wunderground API Key"
+msgstr "Wunderground API klíč"
+
+#: ../../../../install.php:269
+msgid "Pass File Location:"
+msgstr "Umístění souboru s heslem:"
+
+#: ../../../../install.php:270
+msgid "Cache File Location:"
+msgstr "Umístění Cache souboru:"
+
+#: ../../../../install.php:271
+msgid "Sprinkler Log File:"
+msgstr "Sprinkler soubor záznamu:"
+
+#: ../../../../install.php:273
+msgid "Force SSL"
+msgstr "Použít SSL"
+
+#: ../../../../install.php:275
+msgid "Use Local Assets?"
+msgstr "Použít místní Assets?"
+
+#: ../../../../js/auth.js.php:77 ../../../../js/main.js.php:350
+msgid "Invalid Login"
+msgstr "Chybné přihlášení"
+
+#: ../../../../js/main.js.php:39
+msgid "Connection timed-out. Please try again."
+msgstr "Čas spojení vypršel. Zkuste to prosím později."
+
+#: ../../../../js/main.js.php:174
+msgid ""
+"Auto disable of manual mode was not changed. Check config.php permissions "
+"and try again."
+msgstr ""
+"Automatické zakázání manuálního módu nebylo změněno. Zkontrolujte práva "
+"souboru config.php a zkuste to znovu."
+
+#: ../../../../js/main.js.php:177
+msgid ""
+"Asset location was not changed. Check config.php permissions and try again."
+msgstr ""
+"Umístění Assets nebylo změněno. Zkontrolujte práva souboru config.php a "
+"zkuste to znovu."
+
+#: ../../../../js/main.js.php:194
+msgid ""
+"Error communicating with OpenSprinkler. Please check your password is "
+"correct."
+msgstr ""
+"Chyba komunikace s OpenSprinklerem. Prosím zkontrolujte zda je heslo v "
+"pořádku."
+
+#: ../../../../js/main.js.php:285 ../../../../js/main.js.php:318
+#: ../../../../main.php:1277 ../../../../main.php:1290
+#: ../../../../main.php:1342 ../../../../main.php:1372
+msgid "remaining"
+msgstr "Zbývá"
+
+#: ../../../../js/main.js.php:309
+msgid "Station delay"
+msgstr "Zpoždění stanic "
+
+#: ../../../../js/main.js.php:381
+msgid "Are you sure you want to logout?"
+msgstr "Opravdu se chcete odhlásit?"
+
+#: ../../../../js/main.js.php:496
+msgid "Are you sure you want to delete "
+msgstr "Opravdu to chcete smazat?"
+
+#: ../../../../js/main.js.php:526
+msgid "User already exists"
+msgstr "Uživatelské jméno je již použito"
+
+#: ../../../../js/main.js.php:549
+msgid "Password for"
+msgstr "Heslo pro"
+
+#: ../../../../js/main.js.php:549
+msgid "has been updated"
+msgstr "bylo aktualizováno"
+
+#: ../../../../js/main.js.php:620 ../../../../js/main.js.php:672
+msgid "No entries found in the selected date range"
+msgstr "Žádná položka nebyla nalezena v tomto rozsahu"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Sun"
+msgstr "Ne"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Mon"
+msgstr "Po"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Tue"
+msgstr "Út"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Wed"
+msgstr "St"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Thr"
+msgstr "Čt"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Fri"
+msgstr "Pá"
+
+#: ../../../../js/main.js.php:754 ../../../../main.php:1524
+msgid "Sat"
+msgstr "So"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Jan"
+msgstr "Leden"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Feb"
+msgstr "Únor"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Mar"
+msgstr "Březen"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Apr"
+msgstr "Duben"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "May"
+msgstr "Květen"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Jun"
+msgstr "Červen"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Jul"
+msgstr "Červenec"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Aug"
+msgstr "Srpen"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Sep"
+msgstr "Září"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Oct"
+msgstr "Říjen"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Nov"
+msgstr "Listopad"
+
+#: ../../../../js/main.js.php:761 ../../../../main.php:1523
+msgid "Dec"
+msgstr "Prosinec"
+
+#: ../../../../js/main.js.php:795
+msgid "Quick Programs"
+msgstr "Rychlé programy"
+
+#: ../../../../js/main.js.php:804
+msgid "Last Used Program"
+msgstr "Naposledy použitý program"
+
+#: ../../../../js/main.js.php:807 ../../../../main.php:1167
+#: ../../../../main.php:1570
+msgid "Program"
+msgstr "Program"
+
+#: ../../../../js/main.js.php:845
+msgid "No stations set to run on this day."
+msgstr "Žádná stanice nemá pro tento den plán ke spuštění"
+
+#: ../../../../js/main.js.php:1021
+msgid "Are you sure you want to delete program "
+msgstr "Opravdu chcete smazat program?"
+
+#: ../../../../js/main.js.php:1048
+msgid "Error: Interval days must be between 2 and 128."
+msgstr "Chyba: Interval dnů musí být v rozmezí 2 až 128 dnů."
+
+#: ../../../../js/main.js.php:1050
+msgid "Error: Starting in days wrong."
+msgstr "Chyba: Start ve dnu."
+
+#: ../../../../js/main.js.php:1061
+msgid "Error: Start time must be prior to end time."
+msgstr "Chyba: Čas startu musí být před časem konce."
+
+#: ../../../../js/main.js.php:1081
+msgid "Error: You have not selected any stations."
+msgstr "Chyba: Není zvolena žádná stanice."
+
+#: ../../../../js/main.js.php:1091
+msgid "Program added successfully"
+msgstr "Program byl přidán"
+
+#: ../../../../js/main.js.php:1101
+msgid "Program has been updated"
+msgstr "Program byl aktualizován"
+
+#: ../../../../js/main.js.php:1139
+msgid "Settings have been saved"
+msgstr "Nastavení bylo uloženo"
+
+#: ../../../../js/main.js.php:1155
+msgid "Station name must be 16 characters or less"
+msgstr "Název stanic musí být kratší než 16 znaků"
+
+#: ../../../../js/main.js.php:1181
+msgid "Stations have been updated"
+msgstr "Stanice byla aktualizována"
+
+#: ../../../../js/main.js.php:1199
+msgid "Run-once program has been scheduled"
+msgstr "Jednorázový program čeká"
+
+#: ../../../../js/main.js.php:1217
+msgid ""
+"Weather settings were not saved. Check config.php permissions and try again."
+msgstr ""
+"Nastavení počasí nebylo uloženo. Zkontrolujte nastavení práv souborů a "
+"zkuste to znovu."
+
+#: ../../../../js/main.js.php:1219
+msgid "Weather settings have been saved"
+msgstr "Nastavení počasí bylo uloženo"
+
+#: ../../../../js/main.js.php:1235
+msgid "Localization settings have been saved"
+msgstr "Nastavení pozice bylo uloženo"
+
+#: ../../../../js/main.js.php:1242
+msgid "Manual mode is not enabled. Please enable manual mode then try again."
+msgstr "Manuální mód není povolen. Povolte prosím manuální mód a pokračujte. "
+
+#: ../../../../js/main.js.php:1280
+msgid "Rain delay has been successfully set"
+msgstr "Zpoždění při dešti bylo nastaveno"
+
+#: ../../../../js/main.js.php:1296
+msgid ""
+"Auto-delay changes were not saved. Check config.php permissions and try "
+"again."
+msgstr ""
+"Automatické zpoždění nebylo uloženo. Zkontrolujte nastavení práv souborů a "
+"zkuste to znovu."
+
+#: ../../../../js/main.js.php:1298
+msgid "Auto-delay changes have been saved"
+msgstr "Automatické zpoždění bylo uloženo"
+
+#: ../../../../js/main.js.php:1304
+msgid ""
+"Are you sure you want to delete all settings and return to the default "
+"settings (this will delete the configuration file)?"
+msgstr ""
+"Opravdu chcete smazat veškerá nastavení do výchozího nastavení (smaže se "
+"konfigurační soubor)?"
+
+#: ../../../../js/main.js.php:1311
+msgid ""
+"Configuration has been deleted. Please wait while you are redirected to the "
+"installer."
+msgstr ""
+"Všechna nastavení byla smazána. Počkejte prosím na přesměrování do instalace."
+
+#: ../../../../js/main.js.php:1319
+msgid "Are you sure you want to clear all your log data?"
+msgstr "Opravdu chcete smazat všechny záznamy v logu?"
+
+#: ../../../../js/main.js.php:1326
+msgid "Logs have been cleared"
+msgstr "Záznamy jsou smazány"
+
+#: ../../../../js/main.js.php:1333
+msgid "Are you sure you want to reboot OpenSprinkler?"
+msgstr "Opravdu chcete restartovat systém zalévače?"
+
+#: ../../../../js/main.js.php:1340
+msgid "OpenSprinkler is rebooting now"
+msgstr "OpenSprinkler se právě restartuje"
+
+#: ../../../../js/main.js.php:1347
+msgid "Are you sure you want to stop all stations?"
+msgstr "Opravdu chcete zastavit všechny stanice?"
+
+#: ../../../../js/main.js.php:1355
+msgid "All stations have been stopped"
+msgstr "Všechny stanice jsou zastaveny"
+
+#: ../../../../js/main.js.php:1366 ../../../../js/main.js.php:1405
+msgid "File API is not supported by your browser"
+msgstr "Soubor API není podporován vaším prohlížečem"
+
+#: ../../../../js/main.js.php:1377
+msgid "Backup saved to your device"
+msgstr "Záloha je uložena do vašeho zařízení"
+
+#: ../../../../js/main.js.php:1386
+msgid "No backup available on this device"
+msgstr "Není dostupná žádná záloha v zařízení"
+
+#: ../../../../js/main.js.php:1390
+msgid "Are you sure you want to restore the configuration?"
+msgstr "Opravdu chcete obnovit nastavení?"
+
+#: ../../../../js/main.js.php:1397
+msgid "Backup restored to your device"
+msgstr "Záloha byla obnovena v zařízení"
+
+#: ../../../../js/main.js.php:1419
+msgid ""
+"Unable to read the configuration file. Please check the file and try again."
+msgstr ""
+"Nelze načíst soubor s nastavením. Zkontrolujte prosím soubor a zkuste to "
+"znovu."
+
+#: ../../../../js/main.js.php:1430
+msgid "Yes"
+msgstr "Ano"
+
+#: ../../../../js/main.js.php:1431
+msgid "No"
+msgstr "Ne"
+
+#: ../../../../main.php:555 ../../../../main.php:564
+msgid "Master"
+msgstr "Master"
+
+#: ../../../../main.php:897 ../../../../main.php:918 ../../../../main.php:940
+msgid "Running Now"
+msgstr "Spustit ihned"
+
+#: ../../../../main.php:944
+msgid "Runtime"
+msgstr "Čas běhu"
+
+#: ../../../../main.php:944
+msgid "Date/Time"
+msgstr "Datum/čas"
+
+#: ../../../../main.php:976
+msgid "run"
+msgstr "běží"
+
+#: ../../../../main.php:976
+msgid "runs"
+msgstr "běží"
+
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
+msgid "min"
+msgstr "min"
+
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
+msgid "mins"
+msgstr "min"
+
+#: ../../../../main.php:991 ../../../../main.php:1038
+#: ../../../../main.php:1085
+msgid "D, d M Y H:i"
+msgstr "D, d M Y H:i"
+
+#: ../../../../main.php:996 ../../../../main.php:1023
+msgid "Rain Sensor"
+msgstr "Senzor deště"
+
+#: ../../../../main.php:1023
+msgid "switch"
+msgstr "Spínač"
+
+#: ../../../../main.php:1023
+msgid "switches"
+msgstr "Spínače"
+
+#: ../../../../main.php:1043 ../../../../main.php:1070
+msgid "Rain Delay"
+msgstr "Zpoždění při dešti"
+
+#: ../../../../main.php:1070
+msgid "change"
+msgstr "Změna"
+
+#: ../../../../main.php:1070
+msgid "changes"
+msgstr "Změny"
+
+#: ../../../../main.php:1104
+msgid ""
+"Value is in minutes. Zero means the station will be excluded from the run-"
+"once program."
+msgstr ""
+"Hodnota je v minutách. Nula znamená, že stanice bude vyloučena z "
+"jednorázového programu."
+
+#: ../../../../main.php:1113
+msgid "Reset"
+msgstr "Vynulování"
+
+#: ../../../../main.php:1133
+msgid ""
+"You have no programs currently added. Tap the Add button on the top right "
+"corner to get started."
+msgstr ""
+"Nemáte v současné době přidány žádné programy. Klepněte na tlačítko Přidat v "
+"pravém horním rohu, abyste mohli pokračovat."
+
+#: ../../../../main.php:1139
+msgid ""
+"Click any program below to expand/edit. Be sure to save changes by hitting "
+"submit below."
+msgstr ""
+"Klikněte na libovolný program pod rozšířením / úpravou. Ujistěte se, že "
+"proběhlo uložení změn."
+
+#: ../../../../main.php:1155
+msgid "M"
+msgstr "Po"
+
+#: ../../../../main.php:1155
+msgid "T"
+msgstr "Út"
+
+#: ../../../../main.php:1155
+msgid "W"
+msgstr "St"
+
+#: ../../../../main.php:1155
+msgid "R"
+msgstr "Čt"
+
+#: ../../../../main.php:1155
+msgid "F"
+msgstr "Pá"
+
+#: ../../../../main.php:1155
+msgid "Sa"
+msgstr "So"
+
+#: ../../../../main.php:1155
+msgid "Su"
+msgstr "Ne"
+
+#: ../../../../main.php:1168
+msgid "Enabled"
+msgstr "Povoleno"
+
+#: ../../../../main.php:1170
+msgid "Weekly"
+msgstr "Týdně"
+
+#: ../../../../main.php:1171
+msgid "Interval"
+msgstr "Interval"
+
+#: ../../../../main.php:1174
+msgid "Restrictions"
+msgstr "Omezení"
+
+#: ../../../../main.php:1175 ../../../../main.php:1426
+#: ../../../../sprinklers.php:188
+msgid "None"
+msgstr "žádné"
+
+#: ../../../../main.php:1176
+msgid "Odd Days"
+msgstr "Každý den"
+
+#: ../../../../main.php:1177
+msgid "Even Days"
+msgstr "Vybraný den"
+
+#: ../../../../main.php:1180
+msgid "Days of the Week"
+msgstr "Den v týdnu"
+
+#: ../../../../main.php:1189
+msgid "Interval (Days)"
+msgstr "Interval (dny)"
+
+#: ../../../../main.php:1190
+msgid "Starting In"
+msgstr "Začátek v"
+
+#: ../../../../main.php:1193
+msgid "Stations:"
+msgstr "Stanice:"
+
+#: ../../../../main.php:1202
+msgid "Check All"
+msgstr "Označit vše"
+
+#: ../../../../main.php:1203
+msgid "Uncheck All"
+msgstr "Odznačit vše"
+
+#: ../../../../main.php:1207
+msgid "Start Time"
+msgstr "Začátek"
+
+#: ../../../../main.php:1208
+msgid "End Time"
+msgstr "Konec"
+
+#: ../../../../main.php:1211
+msgid "Duration (minutes)"
+msgstr "Doba běhu (minuty)"
+
+#: ../../../../main.php:1212
+msgid "Interval (minutes)"
+msgstr "Interval (minuty)"
+
+#: ../../../../main.php:1214
+msgid "Save New Program"
+msgstr "Uložit nový program"
+
+#: ../../../../main.php:1216
+msgid "Save Changes to Program"
+msgstr "Uložit změny programu"
+
+#: ../../../../main.php:1217
+msgid "Run Program"
+msgstr "Spustit program"
+
+#: ../../../../main.php:1218
+msgid "Delete Program"
+msgstr "Smazat program"
+
+#: ../../../../main.php:1225
+msgid "Sprinkler Stations"
+msgstr "Stanice zalévače"
+
+#: ../../../../main.php:1246
+msgid "System Disabled"
+msgstr "Provoz je zakázán"
+
+#: ../../../../main.php:1251
+msgid "Rain delay until"
+msgstr "Zpoždění při dešti"
+
+#: ../../../../main.php:1251 ../../../../main.php:1361
+msgid "D, d M Y H:i:s"
+msgstr "D, d M Y H:i:s"
+
+#: ../../../../main.php:1256
+msgid "Rain detected"
+msgstr "Je detekován déšť"
+
+#: ../../../../main.php:1276
+msgid "is running on"
+msgstr "V provozu"
+
+#: ../../../../main.php:1276
+msgid "stations"
+msgstr "stanice"
+
+#: ../../../../main.php:1277 ../../../../main.php:1290
+#: ../../../../main.php:1339 ../../../../main.php:1342
+#: ../../../../main.php:1571
+msgid "Manual program"
+msgstr "Manuální program"
+
+#: ../../../../main.php:1289
+msgid "is running on station"
+msgstr "V provozu stanice"
+
+#: ../../../../main.php:1299
+msgid "Manual mode enabled"
+msgstr "Povolen manuální režim"
+
+#: ../../../../main.php:1328 ../../../../main.php:1472
+msgid "(Master)"
+msgstr "(Master)"
+
+#: ../../../../main.php:1341
+msgid "Running"
+msgstr "Běží"
+
+#: ../../../../main.php:1341
+msgid "Scheduled"
+msgstr "Časovač"
+
+#: ../../../../main.php:1361
+msgid "last ran station"
+msgstr "Naposledy spuštěná stanice"
+
+#: ../../../../main.php:1361
+msgid "for"
+msgstr "pro"
+
+#: ../../../../main.php:1361
+msgid "m"
+msgstr "m"
+
+#: ../../../../main.php:1361
+msgid "s on"
+msgstr "s"
+
+#: ../../../../main.php:1371
+msgid "are"
+msgstr "jsou"
+
+#: ../../../../main.php:1371
+msgid "is"
+msgstr "je"
+
+#: ../../../../main.php:1371
+msgid "running"
+msgstr "v běhu"
+
+#: ../../../../main.php:1400
+msgid "Timezone"
+msgstr "Časové pásmo"
+
+#: ../../../../main.php:1407
+msgid "NTP Sync"
+msgstr "NTP synchronizace"
+
+#: ../../../../main.php:1414
+msgid "Auto Reconnect"
+msgstr "Automatické připojení"
+
+#: ../../../../main.php:1417
+msgid "Extension Boards"
+msgstr "Rozšiřující desky"
+
+#: ../../../../main.php:1420
+msgid "Sequential"
+msgstr "Sekvence"
+
+#: ../../../../main.php:1423
+msgid "Station Delay (seconds)"
+msgstr "Zpoždění stanic (sec)"
+
+#: ../../../../main.php:1426
+msgid "Master Station"
+msgstr "Hlavní (master) stanice"
+
+#: ../../../../main.php:1436
+msgid "Master On Delay"
+msgstr "Zpožděné zapnutí hlavní stanice"
+
+#: ../../../../main.php:1439
+msgid "Master Off Delay"
+msgstr "Zpožděné vypnutí hlavní stanice"
+
+#: ../../../../main.php:1442
+msgid "Use Rain Sensor"
+msgstr "Používat dešťový senzor"
+
+#: ../../../../main.php:1445
+msgid "Normally Open (Rain Sensor)"
+msgstr "Senzor je bez dešťě rozpojen"
+
+#: ../../../../main.php:1448
+msgid "% Watering"
+msgstr "% zalévání"
+
+#: ../../../../main.php:1451
+msgid "Ignore Password"
+msgstr "Ignorovat heslo"
+
+#: ../../../../main.php:1465
+msgid "Station Name"
+msgstr "Název stanice"
+
+#: ../../../../main.php:1465
+msgid "Activate Master?"
+msgstr "Aktivovat master stanici?"
+
+#: ../../../../main.php:1496
+msgid "Change Password"
+msgstr "Změna hesla"
+
+#: ../../../../main.php:1497
+msgid "Confirm Password"
+msgstr "Potvrzení hesla"
+
+#: ../../../../main.php:1498
+msgid "Save Changes to"
+msgstr "Uložit změny"
+
+#: ../../../../main.php:1499
+msgid "Delete"
+msgstr "Smazat"
+
+#: ../../../../main.php:1519
+msgid ""
+"Forecast data could not be retrieved. Please try again later and/or check "
+"location setting."
+msgstr ""
+"Předpověď počasí se nepodařilo načíst. Zkuste to prosím znovu později nebo "
+"zkontrolujte nastavení vaší pozice."
+
+#: ../../../../main.php:1522
+msgid "d M Y"
+msgstr "d M Y"
+
+#: ../../../../main.php:1527 ../../../../main.php:1557
+msgid "Now"
+msgstr "Teď"
+
+#: ../../../../main.php:1539 ../../../../main.php:1560
+#: ../../../../main.php:1562
+msgid "Low"
+msgstr "Nízko"
+
+#: ../../../../main.php:1539 ../../../../main.php:1560
+#: ../../../../main.php:1562
+msgid "High"
+msgstr "Vysoko"
+
+#: ../../../../main.php:1545
+msgid ""
+"Forecast data could not be retrieved. Please try again later and/or check "
+"location/api key settings."
+msgstr ""
+"Předpověď počasí se nepodařilo načíst. Zkuste to prosím znovu později nebo "
+"zkontrolujte nastavení pozice / api."
+
+#: ../../../../main.php:1557 ../../../../main.php:1560
+#: ../../../../main.php:1562
+msgid "Precip"
+msgstr "Pravděpodobnost"
+
+#: ../../../../main.php:1572
+msgid "Run-once program"
+msgstr "Jednorázový program"
+
+#: ../../../../main.php:1582
+msgid "Y-m-d H:i:s"
+msgstr "Y-m-d H:i:s"
+
+#: ../../../../sprinklers.php:28 ../../../../sprinklers.php:210
+msgid "Settings"
+msgstr "Nastavení"
+
+#: ../../../../sprinklers.php:35
+msgid "Update Available"
+msgstr "Dostupná aktualizace"
+
+#: ../../../../sprinklers.php:38
+msgid "Weather"
+msgstr "Počasí"
+
+#: ../../../../sprinklers.php:42
+msgid "Information"
+msgstr "Informace"
+
+#: ../../../../sprinklers.php:43 ../../../../sprinklers.php:107
+msgid "Current Status"
+msgstr "Aktuální stav"
+
+#: ../../../../sprinklers.php:44
+msgid "Preview Programs"
+msgstr "Náhled programu"
+
+#: ../../../../sprinklers.php:45
+msgid "View Logs"
+msgstr "Prohlédnout log"
+
+#: ../../../../sprinklers.php:48
+msgid "Program Control"
+msgstr "Ovládání programu"
+
+#: ../../../../sprinklers.php:49 ../../../../sprinklers.php:58
+msgid "Change Rain Delay"
+msgstr "Změna zpoždění při dešti"
+
+#: ../../../../sprinklers.php:50
+msgid "Edit Programs"
+msgstr "Úprava programu"
+
+#: ../../../../sprinklers.php:51 ../../../../sprinklers.php:121
+msgid "Manual Control"
+msgstr "Manuální ovládání"
+
+#: ../../../../sprinklers.php:52 ../../../../sprinklers.php:139
+msgid "Run-Once Program"
+msgstr "Jednorázový program"
+
+#: ../../../../sprinklers.php:53
+msgid "Stop All Stations"
+msgstr "Zastavit všechny stanice"
+
+#: ../../../../sprinklers.php:60
+msgid ""
+"Enable manual rain delay by entering a value into the input below. To turn "
+"off a currently enabled rain delay use a value of 0."
+msgstr ""
+"Zpoždění při dešti se aktivuje zadáním hodnoty času. Vypnutí zpoždění se "
+"provede zadáním času = 0."
+
+#: ../../../../sprinklers.php:63
+msgid "Duration (in hours):"
+msgstr "Trvání"
+
+#: ../../../../sprinklers.php:73
+msgid "Logged in as:"
+msgstr "Přihlášen jako:"
+
+#: ../../../../sprinklers.php:77
+msgid "Auto Login"
+msgstr "Automatické přihlášení"
+
+#: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
+#: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
+#: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
+#: ../../../../sprinklers.php:304
+msgid "On"
+msgstr "Zap"
+
+#: ../../../../sprinklers.php:80 ../../../../sprinklers.php:129
+#: ../../../../sprinklers.php:218 ../../../../sprinklers.php:222
+#: ../../../../sprinklers.php:232 ../../../../sprinklers.php:239
+#: ../../../../sprinklers.php:304
+msgid "Off"
+msgstr "Vyp"
+
+#: ../../../../sprinklers.php:84
+msgid "Export Configuration"
+msgstr "Export nastavení"
+
+#: ../../../../sprinklers.php:85
+msgid "Import Configuration"
+msgstr "Import nastavení"
+
+#: ../../../../sprinklers.php:86
+msgid "Logout"
+msgstr "Odhlášení"
+
+#: ../../../../sprinklers.php:87 ../../../../sprinklers.php:376
+msgid "About"
+msgstr "O programu"
+
+#: ../../../../sprinklers.php:95
+msgid "Forecast"
+msgstr "Předpověď počasí"
+
+#: ../../../../sprinklers.php:96 ../../../../sprinklers.php:108
+#: ../../../../sprinklers.php:122 ../../../../sprinklers.php:140
+#: ../../../../sprinklers.php:150 ../../../../sprinklers.php:160
+#: ../../../../sprinklers.php:170 ../../../../sprinklers.php:211
+#: ../../../../sprinklers.php:267 ../../../../sprinklers.php:279
+#: ../../../../sprinklers.php:318 ../../../../sprinklers.php:344
+#: ../../../../sprinklers.php:356 ../../../../sprinklers.php:377
+msgid "Back"
+msgstr "Zpět"
+
+#: ../../../../sprinklers.php:97 ../../../../sprinklers.php:109
+#: ../../../../sprinklers.php:171
+msgid "Refresh"
+msgstr "Obnovit"
+
+#: ../../../../sprinklers.php:125
+msgid "With manual mode turned on, tap a station to toggle it."
+msgstr "V manuálním módu kliněte na stanici pro změnu jejího stavu."
+
+#: ../../../../sprinklers.php:128 ../../../../sprinklers.php:217
+msgid "Manual Mode"
+msgstr "Manuální mód"
+
+#: ../../../../sprinklers.php:149
+msgid "Programs"
+msgstr "Programy"
+
+#: ../../../../sprinklers.php:151 ../../../../sprinklers.php:319
+msgid "Add"
+msgstr "Přidat"
+
+#: ../../../../sprinklers.php:159
+msgid "Add Program"
+msgstr "Přidat program"
+
+#: ../../../../sprinklers.php:169
+msgid "Logs"
+msgstr "Záznam"
+
+#: ../../../../sprinklers.php:176
+msgid "Graph"
+msgstr "Graf"
+
+#: ../../../../sprinklers.php:178
+msgid "Table"
+msgstr "Tabulka"
+
+#: ../../../../sprinklers.php:184
+msgid "Options"
+msgstr "Nastavení"
+
+#: ../../../../sprinklers.php:186
+msgid "Grouping:"
+msgstr "Skupina:"
+
+#: ../../../../sprinklers.php:190
+msgid "Hour"
+msgstr "Hod"
+
+#: ../../../../sprinklers.php:192
+msgid "DOW"
+msgstr "DOW"
+
+#: ../../../../sprinklers.php:194
+msgid "Month"
+msgstr "Měsíc"
+
+#: ../../../../sprinklers.php:197
+msgid "Start:"
+msgstr "Začátek:"
+
+#: ../../../../sprinklers.php:199
+msgid "End:"
+msgstr "Konec:"
+
+#: ../../../../sprinklers.php:215
+msgid "Device Settings"
+msgstr "Nastavení zařízení"
+
+#: ../../../../sprinklers.php:221
+msgid "Operation"
+msgstr "Provozní stav"
+
+#: ../../../../sprinklers.php:224
+msgid "Device Options"
+msgstr "Nastavení zařízení"
+
+#: ../../../../sprinklers.php:225 ../../../../sprinklers.php:343
+msgid "Edit Stations"
+msgstr "Úprava stanic"
+
+#: ../../../../sprinklers.php:226
+msgid "Reboot OpenSprinkler"
+msgstr "Restarovat systém"
+
+#: ../../../../sprinklers.php:229
+msgid "Mobile Application Settings"
+msgstr "Nastavení mobilní aplikace"
+
+#: ../../../../sprinklers.php:231
+msgid "Local Assets"
+msgstr "Místní nastavení"
+
+#: ../../../../sprinklers.php:235
+msgid ""
+"Assets are javascript and CSS libraries that power the mobile web app. "
+"Choose between local assets or content distibution network (CDN) hosted "
+"assets."
+msgstr ""
+"Assets are javascript and CSS libraries that power the mobile web app. "
+"Choose between local assets or content distibution network (CDN) hosted "
+"assets."
+
+#: ../../../../sprinklers.php:238
+msgid "Manual Auto-Off"
+msgstr "Automatické vypnutí man. režimu"
+
+#: ../../../../sprinklers.php:242
+msgid ""
+"Automatically disable manual mode at midnight. Use this option to turn off "
+"manual mode and ensure programs run even if you forget manual mode enabled."
+msgstr ""
+"Automatické zakázání manuálního režimu o půlnoci. Použijte toto nastavení, "
+"pokud chcete později automaticky zakázat manuální režim."
+
+#: ../../../../sprinklers.php:244
+msgid "Clear Configuration"
+msgstr "Smazat nastavení"
+
+#: ../../../../sprinklers.php:245
+msgid "Clear Logs"
+msgstr "Smazat záznamy"
+
+#: ../../../../sprinklers.php:246 ../../../../sprinklers.php:255
+msgid "Localization"
+msgstr "Umístění ve světě"
+
+#: ../../../../sprinklers.php:247 ../../../../sprinklers.php:317
+msgid "User Management"
+msgstr "Nastavení uživatele"
+
+#: ../../../../sprinklers.php:248 ../../../../sprinklers.php:278
+msgid "Weather Settings"
+msgstr "Nastavení počasí"
+
+#: ../../../../sprinklers.php:266
+msgid "OS Settings"
+msgstr "Nastavení OS"
+
+#: ../../../../sprinklers.php:298
+msgid "Automatic Rain Delay"
+msgstr "Automatické zpoždění při dešti"
+
+#: ../../../../sprinklers.php:300
+msgid ""
+"When automatic rain delay is enabled, the weather will be checked for rain "
+"every hour. If the weather reports any condition suggesting rain, a rain "
+"delay is automatically issued using the below set delay duration."
+msgstr ""
+"When automatic rain delay is enabled, the weather will be checked for rain "
+"every hour. If the weather reports any condition suggesting rain, a rain "
+"delay is automatically issued using the below set delay duration."
+
+#: ../../../../sprinklers.php:303
+msgid "Auto Rain Delay"
+msgstr "Automatické zpoždění při dešti"
+
+#: ../../../../sprinklers.php:306
+msgid "Delay Duration (hours)"
+msgstr "Doba zpoždění (v hodinách)"
+
+#: ../../../../sprinklers.php:355
+msgid "Program Preview"
+msgstr "Náhled programu"
+
+#: ../../../../sprinklers.php:366
+msgid "Zoom in"
+msgstr "Přiblížení"
+
+#: ../../../../sprinklers.php:367
+msgid "Zoom out"
+msgstr "Oddálení"
+
+#: ../../../../sprinklers.php:368
+msgid "Move left"
+msgstr "Posun vlevo"
+
+#: ../../../../sprinklers.php:369
+msgid "Move right"
+msgstr "Posun vpravo"
