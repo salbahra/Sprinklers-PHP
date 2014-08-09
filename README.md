@@ -1,4 +1,4 @@
-[OpenSprinkler Controller](http://salbahra.github.io/OpenSprinkler-Controller)
+[Sprinklers-PHP](http://salbahra.github.io/OpenSprinkler-Controller)
 ========================
 
 A mobile interface for the OpenSprinkler irrigation device. Designed to allow manual control, program management (view, edit, delete and add), initiation of a run-once program, viewing device status, adjusting rain delay, viewing logs, and changing of OpenSprinkler settings. Screenshots available below.
